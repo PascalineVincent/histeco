@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Chapitre 7 — Le marginalisme – À la recherche de la valeur perdue</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-ff98d69c136e79b123368504bdb7637c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;family=Source+Sans+3:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<script>
+/* carrefour.js — moteur de navigation adaptative
+   Utilisé par tous les chapitres.
+   Expose: CarrefourEngine, DragDrop, DefiQCM, DefiImmersif */
+
+var CarrefourEngine = (function() {
+  /* ── Niveau depuis localStorage ── */
+  function getNiveau() {
+    var v = (localStorage.getItem('niveau') || '').toLowerCase();
+    if (v.includes('avan')) return 'avance';
+    if (v.includes('but') || v.includes('but')) return 'debutant';
+    return 'intermediaire';
+  }
+
+  /* ── Injecter la pastille niveau ── */
+  function renderNiveauPill(containerId) {
+    var el = document.getElementById(containerId);
+    if (!el) return;
+    var n = getNiveau();
+    var labels = { debutant: 'Niveau débutant', intermediaire: 'Niveau intermédiaire', avance: 'Niveau avancé' };
+    var cls    = { debutant: 'level-debutant',   intermediaire: 'level-intermediaire',   avance: 'level-avance' };
+    el.className = 'chapter-level-pill ' + cls[n];
+    el.textContent = labels[n];
+    el.style.display = 'inline-flex';
+  }
+
+  /* ── Choisir un chemin (afficher feedback + banner) ── */
+  function choisirChemin(btnEl, feedbackId, bannerId, texte, consoliderUrl) {
+    var type = btnEl.getAttribute('data-chemin');
+    // Marque le bouton
+    document.querySelectorAll('.carrefour-path').forEach(function(b) {
+      b.classList.remove('selected');
+    });
+    btnEl.classList.add('selected');
+
+    var fb = document.getElementById(feedbackId);
+    if (fb) {
+      fb.className = 'carrefour-feedback show fb-' + (texte.cls || 'info');
+      fb.innerHTML = texte.html;
+    }
+    if (type === 'consolider' && consoliderUrl) {
+      setTimeout(function() { window.location.href = consoliderUrl; }, 600);
+      return;
+    }
+    // Afficher bannière continuer
+    var ban = document.getElementById(bannerId);
+    if (ban) {
+      ban.style.display = 'block';
+      ban.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  /* ── Marquer chapitre lu ── */
+  function marquerLu(chapKey) {
+    var cr = JSON.parse(localStorage.getItem('chapRead') || '[]');
+    if (!cr.includes(chapKey)) { cr.push(chapKey); localStorage.setItem('chapRead', JSON.stringify(cr)); }
+  }
+
+  /* ── Afficher les voix selon avatar ── */
+  function initVoix() {
+    var av = localStorage.getItem('avatar') || 'none';
+    document.querySelectorAll('[data-voix]').forEach(function(el) {
+      el.style.display = (el.getAttribute('data-voix') === av || av === 'none') ? 'block' : 'none';
+    });
+  }
+
+  return { getNiveau: getNiveau, renderNiveauPill: renderNiveauPill, choisirChemin: choisirChemin, marquerLu: marquerLu, initVoix: initVoix };
+})();
+
+/* ── QCM standard ── */
+var DefiQCM = (function() {
+  var done = {};
+  function repondre(btnEl, defiId, estCorrect, feedbacks) {
+    if (done[defiId]) return;
+    done[defiId] = true;
+    var container = document.getElementById('defi-' + defiId);
+    container.querySelectorAll('.defi-option').forEach(function(b) { b.disabled = true; });
+    btnEl.classList.add(estCorrect ? 'correct' : 'wrong');
+    var fb = document.getElementById('fb-' + defiId);
+    if (fb) {
+      var f = estCorrect ? feedbacks.bon : feedbacks.mauvais;
+      fb.className = 'defi-feedback show ' + (estCorrect ? 'df-bon' : 'df-mal');
+      fb.innerHTML = f;
+    }
+    majScore(defiId, estCorrect);
+    return estCorrect;
+  }
+  function majScore(defiId, ok) {
+    var bar = document.getElementById('stars-' + defiId.split('-')[0]);
+    if (!bar) return;
+    // handled per-chapter
+  }
+  return { repondre: repondre };
+})();
+
+/* ── Drag & Drop générique ── */
+var DragDrop = (function() {
+  var currentDrag = null;
+  var slotData = {};
+  var done = false;
+
+  function init(containerId) {
+    slotData = {}; done = false;
+    var c = document.getElementById(containerId);
+    if (!c) return;
+    c.querySelectorAll('.dd-chip').forEach(function(chip) {
+      chip.addEventListener('dragstart', function() {
+        currentDrag = chip.dataset.key;
+        chip.classList.add('dragging');
+      });
+      chip.addEventListener('dragend', function() { chip.classList.remove('dragging'); });
+    });
+    c.querySelectorAll('.dd-slot').forEach(function(slot) {
+      slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('over'); });
+      slot.addEventListener('dragleave', function() { slot.classList.remove('over'); });
+      slot.addEventListener('drop', function(e) {
+        e.preventDefault(); slot.classList.remove('over');
+        if (!currentDrag || done) return;
+        // Remove chip from previous slot
+        Object.keys(slotData).forEach(function(sid) {
+          if (slotData[sid] === currentDrag && sid !== slot.id) {
+            var prev = document.getElementById(sid);
+            if (prev) { prev.innerHTML = prev.getAttribute('data-orig') || ''; prev.classList.remove('correct','wrong'); }
+            delete slotData[sid];
+            var prevChip = document.getElementById('chip-' + currentDrag);
+            if (prevChip) prevChip.classList.remove('placed');
+          }
+        });
+        var chipEl = document.getElementById('chip-' + currentDrag);
+        var label  = chipEl ? chipEl.textContent : currentDrag;
+        var orig   = slot.getAttribute('data-orig') || slot.textContent;
+        if (!slot.getAttribute('data-orig')) slot.setAttribute('data-orig', slot.textContent);
+        slot.innerHTML = '<strong>' + label + '</strong><br><span style="font-size:.8rem;color:#7A8FA0;">' + orig + '</span>';
+        slotData[slot.id] = currentDrag;
+        if (chipEl) chipEl.classList.add('placed');
+        currentDrag = null;
+      });
+    });
+  }
+
+  function verifier(containerId, correct, feedbackId) {
+    if (done) return 0;
+    var c = document.getElementById(containerId);
+    var ok = 0;
+    c.querySelectorAll('.dd-slot').forEach(function(slot) {
+      var val = slotData[slot.id];
+      if (!val) return;
+      var isOk = val === correct[slot.id];
+      slot.classList.add(isOk ? 'correct' : 'wrong');
+      if (isOk) ok++;
+    });
+    var total = Object.keys(correct).length;
+    var fb = document.getElementById(feedbackId);
+    if (fb) {
+      if (ok === total) {
+        fb.className = 'defi-feedback show df-bon';
+        fb.innerHTML = '<strong>Parfait ! ' + ok + '/' + total + '</strong> Toutes les associations sont correctes.';
+        done = true;
+      } else {
+        fb.className = 'defi-feedback show df-partiel';
+        fb.innerHTML = '<strong>' + ok + '/' + total + ' corrects.</strong> Certaines associations sont incorrectes — retirez-les et réessayez.';
+        c.querySelectorAll('.dd-slot.wrong').forEach(function(s) { s.classList.remove('wrong'); });
+      }
+    }
+    return done ? ok : 0;
+  }
+
+  return { init: init, verifier: verifier };
+})();
+
+</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">À la recherche de la valeur perdue</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Accueil</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapitres" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Chapitres</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-chapitres">    
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre1.html">
+ <span class="dropdown-text">Ch. 1 — Pensée antique et médiévale</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre2.html">
+ <span class="dropdown-text">Ch. 2 — Naissance de l’économie politique</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre3.html">
+ <span class="dropdown-text">Ch. 3 — Les Physiocrates</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre4.html">
+ <span class="dropdown-text">Ch. 4 — Les Classiques (I)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre5.html">
+ <span class="dropdown-text">Ch. 5 — Les Classiques (II)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre6.html">
+ <span class="dropdown-text">Ch. 6 — Marx et le socialisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre7.html">
+ <span class="dropdown-text">Ch. 7 — Le marginalisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre8.html">
+ <span class="dropdown-text">Ch. 8 — L’affirmation des néoclassiques</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre9.html">
+ <span class="dropdown-text">Ch. 9 — La révolution keynésienne</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre10.html">
+ <span class="dropdown-text">Ch. 10 — La synthèse de Samuelson</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre11.html">
+ <span class="dropdown-text">Ch. 11 — Le monétarisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre12.html">
+ <span class="dropdown-text">Ch. 12 — État des lieux</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../carte-debats.html"> 
+<span class="menu-text">Carte des débats</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../quiz.html"> 
+<span class="menu-text">Quiz</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../carnet.html"> 
+<span class="menu-text">Carnet de bord</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../apropos.html"> 
+<span class="menu-text">À propos</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../profil.html"> 
+<span class="menu-text">Mon profil</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#contexte-historique" id="toc-contexte-historique" class="nav-link active" data-scroll-target="#contexte-historique">Contexte historique</a></li>
+  <li><a href="#les-précurseurs-et-fondateurs" id="toc-les-précurseurs-et-fondateurs" class="nav-link" data-scroll-target="#les-précurseurs-et-fondateurs">Les précurseurs et fondateurs</a></li>
+  <li><a href="#les-idées-principales" id="toc-les-idées-principales" class="nav-link" data-scroll-target="#les-idées-principales">Les idées principales</a>
+  <ul class="collapse">
+  <li><a href="#lutilité-marginale-décroissante" id="toc-lutilité-marginale-décroissante" class="nav-link" data-scroll-target="#lutilité-marginale-décroissante">L’utilité marginale décroissante</a></li>
+  <li><a href="#classiques-vs-néoclassiques" id="toc-classiques-vs-néoclassiques" class="nav-link" data-scroll-target="#classiques-vs-néoclassiques">Classiques vs Néoclassiques</a></li>
+  <li><a href="#léquilibre-général-walras" id="toc-léquilibre-général-walras" class="nav-link" data-scroll-target="#léquilibre-général-walras">L’équilibre général (Walras)</a></li>
+  </ul></li>
+  <li><a href="#résonances-contemporaines" id="toc-résonances-contemporaines" class="nav-link" data-scroll-target="#résonances-contemporaines">Résonances contemporaines</a></li>
+  <li><a href="#questions-de-réflexion" id="toc-questions-de-réflexion" class="nav-link" data-scroll-target="#questions-de-réflexion">Questions de réflexion</a></li>
+  <li><a href="#question-flash" id="toc-question-flash" class="nav-link" data-scroll-target="#question-flash">Question flash</a></li>
+  <li><a href="#carrefour-décisionnel" id="toc-carrefour-décisionnel" class="nav-link" data-scroll-target="#carrefour-décisionnel">Carrefour décisionnel</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Chapitre 7 — Le marginalisme</h1>
+<p class="subtitle lead">La révolution de l’utilité marginale, 1870</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<script>
+let cr = JSON.parse(localStorage.getItem('chapRead') || []);
+if (!cr.includes('ch7')) { cr.push('ch7'); localStorage.setItem('chapRead', JSON.stringify(cr)); }
+document.addEventListener('DOMContentLoaded', function() {
+  const av = localStorage.getItem('avatar') || 'none';
+  document.querySelectorAll('[data-voix]').forEach(el => {
+    el.style.display = (el.getAttribute('data-voix') === av || av === 'none') ? 'block' : 'none';
+  });
+});
+</script>
+<section id="contexte-historique" class="level2">
+<h2 class="anchored" data-anchor-id="contexte-historique">Contexte historique</h2>
+<p>Après 1848, deux impasses de l’économie classique se font sentir :</p>
+<ol type="1">
+<li><strong>De forme</strong> : l’expression littéraire des raisonnements devient laborieuse → besoin de mathématiques</li>
+<li><strong>De fond</strong> : l’explication des prix par le travail incorporé est insatisfaisante</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>La réforme néoclassique</strong> : les économistes des années 1870 prolongent l’œuvre classique en changeant méthode et objet. Ils conservent l’individualisme et le marché, mais changent l’explication de la valeur : de la production (travail) vers la consommation (utilité).</p>
+</div>
+</div>
+<div style="background:#EAF1FA;border:1px solid #B8D0E8;border-left:4px solid #1A3A5C;border-radius:0 6px 6px 0;padding:1rem 1.3rem;margin:2rem 0 1.5rem;">
+  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#1A3A5C;margin-bottom:0.6rem;">🔗 Fils du débat</div>
+  <div style="font-size:0.87rem;color:#1E2E3A;line-height:1.7;">
+    <div style="margin-bottom:0.5rem;">**← Ch. 6** Marx fondait l'exploitation sur la valeur-travail. La révolution marginaliste détruit ce fondement : si la valeur est dans l'utilité subjective du consommateur, il n'y a pas d'exploitation — seulement des préférences.</div>
+    <div style="margin-bottom:0.6rem;">**→ Ch. 8** Marshall et Pareto opérationnalisent le marginalisme : courbes d'offre/demande, optimum de Pareto, externalités. L'économie devient une discipline mathématique appliquée. **→ Ch. 11** La théorie des anticipations rationnelles (Lucas) est l'héritière directe du marginalisme : les agents optimisent sous contrainte en utilisant toute l'information disponible.</div>
+    <div style="font-style:italic;color:#2E6DA4;border-top:1px solid #C8DCF0;padding-top:0.5rem;margin-top:0.3rem;">❓ La découverte simultanée de l'utilité marginale par Jevons, Menger et Walras en 1871 est-elle le signe d'un progrès scientifique cumulatif — ou d'une réponse idéologique à la montée du mouvement ouvrier ?</div>
+  </div>
+</div>
+<hr>
+</section>
+<section id="les-précurseurs-et-fondateurs" class="level2">
+<h2 class="anchored" data-anchor-id="les-précurseurs-et-fondateurs">Les précurseurs et fondateurs</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Antoine Augustin Cournot</strong> (1801–1877)</p>
+<p>Premier à introduire les mathématiques en économie. Modèle du duopole, courbe de demande.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>William Stanley Jevons</strong> (1835–1882) 🇬🇧</p>
+<p><em>Théorie de l’économie politique</em> (1871). La valeur est déterminée par l’<strong>utilité marginale</strong> — le plaisir procuré par la dernière unité consommée, décroissant à mesure qu’on consomme davantage.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Carl Menger</strong> (1840–1921) 🇦🇹 — École autrichienne</p>
+<p><em>Principes d’économie politique</em> (1871). La valeur est subjective et dépend de l’appréciation individuelle. Fondateur de l’école autrichienne (Böhm-Bawerk, Hayek).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Léon Walras</strong> (1834–1910) 🇫🇷 — École de Lausanne</p>
+<p><em>Éléments d’économie politique pure</em> (1874). Construit le modèle d’<strong>équilibre général</strong> : tous les marchés s’équilibrent simultanément via les prix. Le <em>tâtonnement walrasien</em> est le mécanisme d’ajustement.</p>
+</div>
+</div>
+<hr>
+<hr>
+<div class="voix-personnage marchand" data-voix="marchand" style="display:none">
+  <span class="voix-label">Votre regard de marchand</span>
+  La révolution marginaliste vous intéresse directement : elle déplace l'explication de la valeur de la production (le travail incorporé) vers la demande (l'utilité perçue par l'acheteur). Pour vous, c'est une bonne nouvelle : le prix n'est plus dicté par les conditions de production, il résulte de la rencontre entre ce que les acheteurs sont prêts à payer et ce que les vendeurs acceptent de recevoir. C'est une théorie qui légitime votre rôle dans la formation des prix — et qui annonce la microéconomie moderne.
+</div>
+<div class="voix-personnage philosophe" data-voix="philosophe" style="display:none">
+  <span class="voix-label">Votre regard de philosophe</span>
+  La « triple découverte simultanée » de 1871 (Jevons, Menger, Walras) est un cas d'école pour la sociologie des sciences. Que des chercheurs travaillant indépendamment arrivent aux mêmes conclusions au même moment suggère que le contexte intellectuel — les impasses des classiques, le positivisme ambiant, le développement des mathématiques — crée les conditions d'une rupture. Menger, en revanche, vous offre une position épistémologique différente : le subjectivisme autrichien refuse la mathématisation et insiste sur la connaissance dispersée dans la société.
+</div>
+<div class="voix-personnage ouvrier" data-voix="ouvrier" style="display:none">
+  <span class="voix-label">Votre regard d'ouvrier</span>
+  La révolution marginaliste a un effet politique important : elle efface le travail de la théorie de la valeur. Chez les classiques, et surtout chez Marx, c'est le travail qui crée la valeur — ce qui pose la question de sa répartition. Avec les marginalistes, la valeur est dans la tête des consommateurs. L'exploitation devient conceptuellement invisible : chaque facteur de production (capital, travail, terre) reçoit sa « productivité marginale ». Le conflit de classe se dissout dans le calcul d'optimisation.
+</div>
+<div class="voix-personnage entrepreneur" data-voix="entrepreneur" style="display:none">
+  <span class="voix-label">Votre regard d'entrepreneur</span>
+  Walras vous donne un outil puissant : le modèle d'équilibre général. Tous les marchés sont interdépendants, les prix s'ajustent simultanément pour équilibrer offre et demande. C'est une vision très optimiste du capitalisme : laissé à lui-même, le système converge vers un état optimal. Marshall, dans le chapitre suivant, vous fournira les outils plus pratiques — élasticités, courbes d'offre et de demande, surplus — que vous retrouverez dans toute analyse de marché concrète.
+</div>
+</section>
+<section id="les-idées-principales" class="level2">
+<h2 class="anchored" data-anchor-id="les-idées-principales">Les idées principales</h2>
+<section id="lutilité-marginale-décroissante" class="level3">
+<h3 class="anchored" data-anchor-id="lutilité-marginale-décroissante">L’utilité marginale décroissante</h3>
+<p>Plus on consomme d’un bien, moins l’unité supplémentaire apporte de satisfaction. Le <strong>prix d’équilibre</strong> est déterminé par l’utilité marginale de la dernière unité échangée.</p>
+<blockquote class="blockquote">
+<p>Le paradoxe de l’eau et du diamant d’Adam Smith est résolu : l’eau est abondante → utilité marginale faible → prix bas. Le diamant est rare → utilité marginale élevée → prix élevé.</p>
+</blockquote>
+</section>
+<section id="classiques-vs-néoclassiques" class="level3">
+<h3 class="anchored" data-anchor-id="classiques-vs-néoclassiques">Classiques vs Néoclassiques</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th>Classiques</th>
+<th>Néoclassiques</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Méthode</td>
+<td>Littéraire, historique</td>
+<td>Mathématique, déductive</td>
+</tr>
+<tr class="even">
+<td>Valeur</td>
+<td>Travail incorporé (offre)</td>
+<td>Utilité marginale (demande)</td>
+</tr>
+<tr class="odd">
+<td>Agent</td>
+<td>Classes sociales</td>
+<td>Individu rationnel</td>
+</tr>
+<tr class="even">
+<td>Objectif</td>
+<td>Comprendre la croissance</td>
+<td>Optimisation de l’allocation</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="léquilibre-général-walras" class="level3">
+<h3 class="anchored" data-anchor-id="léquilibre-général-walras">L’équilibre général (Walras)</h3>
+<p>Tous les marchés sont interdépendants. L’économie est un système d’équations simultanées. À l’équilibre : offre = demande sur chaque marché.</p>
+<hr>
+</section>
+</section>
+<section id="résonances-contemporaines" class="level2">
+<h2 class="anchored" data-anchor-id="résonances-contemporaines">Résonances contemporaines</h2>
+<div style="background:#F0F6FD;border:1px solid #B8D0E8;border-radius:6px;padding:1rem 1.3rem;margin-bottom:1.5rem;">
+  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#2E6DA4;margin-bottom:0.5rem;">🌐 Résonances contemporaines</div>
+  <div style="font-size:0.9rem;color:#1E2E3A;line-height:1.75;">L'**économie comportementale** (Kahneman, Thaler) a montré que l'utilité marginale ne se calcule pas comme Jevons le supposait : les agents ne maximisent pas rationnellement, ils ont des biais systématiques. Le projet walrasien d'équilibre général a été partiellement réhabilité par les **mécanismes d'enchères** (attribution des fréquences 5G, des droits à polluer) — l'idée qu'un système de prix peut allouer efficacement des ressources rares.</div>
+</div>
+</section>
+<section id="questions-de-réflexion" class="level2">
+<h2 class="anchored" data-anchor-id="questions-de-réflexion">Questions de réflexion</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>En quoi la révolution marginaliste constitue-t-elle une rupture par rapport aux Classiques ? Qu’est-ce qu’elle conserve ?</li>
+<li>Expliquez l’utilité marginale décroissante et comment elle résout le paradoxe de l’eau et du diamant.</li>
+<li>Jevons, Menger et Walras arrivent aux mêmes conclusions de façon indépendante en 1871. Que nous dit cette « découverte simultanée » sur la sociologie de la science ?</li>
+</ol>
+</div>
+</div>
+<hr>
+<hr>
+<details style="margin-top:0.6rem;margin-bottom:1.5rem;">
+  <summary style="cursor:pointer;font-size:0.82rem;font-weight:600;color:#2E6DA4;padding:0.4rem 0;list-style:none;display:flex;align-items:center;gap:6px;">
+    <span style="background:#EAF1FA;border:1px solid #B8D0E8;border-radius:4px;padding:2px 8px;font-size:0.72rem;">💡 Pistes de réponse</span>
+    <span style="color:#7A8FA0;font-size:0.78rem;font-weight:400;">(cliquer pour révéler — essayez d'abord par vous-même)</span>
+  </summary>
+  <div style="border:1px solid #D0DCE8;border-radius:0 0 6px 6px;border-top:none;padding:1rem 1.1rem;background:white;margin-top:0;">
+    
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ Révolution marginaliste — rupture et continuité…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">Rupture : abandon de la valeur-travail pour la valeur subjective (utilité marginale), mathématisation de l'économie, passage des classes sociales à l'agent individuel rationnel. Continuité : le marché reste le mécanisme central d'allocation, la concurrence reste le modèle de référence, la propriété privée n'est pas remise en cause. Le marginalisme *dépolitise* l'économie — il transforme une question de répartition en question d'efficacité.</div>
+    </div>
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ Utilité marginale décroissante et paradoxe eau/diamant…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">L'eau est abondante : sa *dernière* unité disponible a peu de valeur (on peut en gaspiller). Le diamant est rare : sa dernière unité disponible a beaucoup de valeur. C'est l'utilité *marginale* (de la dernière unité), et non l'utilité *totale* (de l'ensemble), qui détermine le prix. Implication : un bien peut être très précieux collectivement et peu cher (eau, air) — d'où la justification économique des biens communs.</div>
+    </div>
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ Découverte simultanée et sociologie de la science…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">Kuhn : les révolutions scientifiques se produisent quand le paradigme dominant accumule trop d'anomalies. En 1871 : la valeur-travail ne peut pas expliquer le paradoxe eau/diamant, ni les comportements du consommateur, ni les prix relatifs sans circularité. Les trois auteurs convergent *indépendamment* parce qu'ils répondent aux *mêmes impasses*. La simultanéité suggère que la découverte était *historiquement nécessaire* — pas contingente au génie individuel.</div>
+    </div>
+  </div>
+</details>
+</section>
+<section id="question-flash" class="level2">
+<h2 class="anchored" data-anchor-id="question-flash">Question flash</h2>
+<div style="background:#0D2137;border-radius:8px;padding:1.3rem 1.5rem;margin:1.5rem 0;">
+  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#4A90C4;margin-bottom:0.6rem;">⚡ Question flash — Retrieve Practice</div>
+  <div style="font-size:0.95rem;color:#EAF1F8;line-height:1.7;margin-bottom:0.8rem;">**Question flash :** Pourquoi l'eau est-elle moins chère que le diamant alors qu'elle est beaucoup plus utile ? Répondez avec le concept d'utilité marginale.</div>
+  <div style="font-size:0.72rem;color:#4A6A85;margin-bottom:0.8rem;">Ch. 7 · Concepts : utilité marginale décroissante / équilibre général / valeur subjective</div>
+  <button id="flash-btn" onclick="(function(){
+    var el=document.getElementById('flash-answer');
+    var btn=document.getElementById('flash-btn');
+    if(el.style.display==='none'){el.style.display='block';btn.textContent='▲ Masquer la réponse';}
+    else{el.style.display='none';btn.textContent='▼ Voir la réponse-modèle';}
+  })()" style="background:#2E6DA4;color:white;border:none;padding:0.5rem 1.1rem;border-radius:5px;cursor:pointer;font-size:0.82rem;font-weight:600;font-family:'Source Sans 3',sans-serif;">▼ Voir la réponse-modèle</button>
+  <div id="flash-answer" style="display:none;margin-top:0.8rem;background:#EAF1FA;border-radius:5px;padding:0.8rem 1rem;font-size:0.88rem;color:#0D2137;line-height:1.7;">L'eau est abondante : sa *dernière* unité disponible a peu de valeur (on peut en gaspiller sans manquer). Le diamant est rare : sa dernière unité disponible a beaucoup de valeur. C'est l'utilité *marginale* (de la dernière unité consommée), et non l'utilité *totale*, qui détermine le prix de marché.</div>
+</div>
+</section>
+<section id="carrefour-décisionnel" class="level2">
+<h2 class="anchored" data-anchor-id="carrefour-décisionnel">Carrefour décisionnel</h2>
+<div class="carrefour-wrap" id="carrefour-7">
+  <div class="carrefour-header">
+    <div class="carrefour-icon">⚡</div>
+    <h3 class="carrefour-title anchored">Carrefour — Chapitre 7</h3>
+    <span id="niveau-pill-7" class="chapter-level-pill level-intermediaire" style="display:none"></span>
+  </div>
+
+  <div class="carrefour-scenario">
+    Nous sommes en 1871. Jevons, Menger et Walras publient simultanément leurs travaux sur l'utilité marginale. Un partisan de Marx vous dit : « Cette révolution théorique n'est qu'une idéologie bourgeoise pour effacer la question de l'exploitation. » Est-il fondé ?
+  </div>
+
+  <div id="paths-7" class="carrefour-paths">
+    
+      <button class="carrefour-path" data-chemin="A" onclick="choisirChemin(this)">
+        <span class="path-letter">A</span>
+        <div>
+          <div>Oui : le marginalisme est idéologiquement motivé — il dépolitise l'économie</div>
+          <span class="path-tag tag-alternatif">Lecture critique (marxiste)</span>
+        </div>
+      </button>
+      <button class="carrefour-path" data-chemin="B" onclick="choisirChemin(this)">
+        <span class="path-letter">B</span>
+        <div>
+          <div>Non : le marginalisme résout des problèmes réels que les classiques ne pouvaient pas traiter</div>
+          <span class="path-tag tag-standard">Lecture analytique</span>
+        </div>
+      </button>
+      <button class="carrefour-path" data-chemin="defi" onclick="choisirChemin(this)">
+        <span class="path-letter">C</span>
+        <div>
+          <div>Relever le défi avant de décider</div>
+          <span class="path-tag tag-defi">Parcours renforcé</span>
+        </div>
+      </button>
+  </div>
+
+  <div id="fb-carrefour-7" class="carrefour-feedback"></div>
+
+  <!-- Défis (masqués jusqu'au choix "defi") -->
+  <div id="defis-7" style="display:none; margin-top:1.5rem; border-top:1px solid #D0DCE8; padding-top:1.2rem;">
+    <div style="font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#4A6A85;margin-bottom:1rem;">Trois défis — répondez avant de décider</div>
+    
+    <div class="defi-wrap">
+      <span class="defi-type-badge badge-cognitif">Cognitif</span>
+      <div class="defi-title">Utilité marginale décroissante</div>
+      <div class="defi-question">Le principe d'utilité marginale décroissante explique que :</div>
+      <div id="defi-d7-1">
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd7-1')" data-fb-bon="<strong>Correct.</strong> La 1ère bouchée est délicieuse, la 10ème moins — l'utilité <em>marginale</em> (celle de la dernière unité) décroît. Cela résout le paradoxe eau/diamant : l'eau est abondante → sa dernière unité a peu de valeur ; le diamant est rare → sa dernière unité a beaucoup de valeur." data-fb-mal="<strong>Non.</strong> L'utilité marginale décroissante signifie que chaque unité supplémentaire d'un bien apporte moins de satisfaction que la précédente (réponse B). C'est ce principe qui permet de résoudre le paradoxe eau/diamant et de fonder la théorie de la demande.">
+            <span class="opt-letter">A</span>
+            <span>Plus un bien est rare, plus il coûte cher à produire</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, true, 'd7-1')" data-fb-bon="<strong>Correct.</strong> La 1ère bouchée est délicieuse, la 10ème moins — l'utilité <em>marginale</em> (celle de la dernière unité) décroît. Cela résout le paradoxe eau/diamant : l'eau est abondante → sa dernière unité a peu de valeur ; le diamant est rare → sa dernière unité a beaucoup de valeur." data-fb-mal="<strong>Non.</strong> L'utilité marginale décroissante signifie que chaque unité supplémentaire d'un bien apporte moins de satisfaction que la précédente (réponse B). C'est ce principe qui permet de résoudre le paradoxe eau/diamant et de fonder la théorie de la demande.">
+            <span class="opt-letter">B</span>
+            <span>Le bonheur total augmente à chaque unité consommée, mais de moins en moins vite</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd7-1')" data-fb-bon="<strong>Correct.</strong> La 1ère bouchée est délicieuse, la 10ème moins — l'utilité <em>marginale</em> (celle de la dernière unité) décroît. Cela résout le paradoxe eau/diamant : l'eau est abondante → sa dernière unité a peu de valeur ; le diamant est rare → sa dernière unité a beaucoup de valeur." data-fb-mal="<strong>Non.</strong> L'utilité marginale décroissante signifie que chaque unité supplémentaire d'un bien apporte moins de satisfaction que la précédente (réponse B). C'est ce principe qui permet de résoudre le paradoxe eau/diamant et de fonder la théorie de la demande.">
+            <span class="opt-letter">C</span>
+            <span>Les firmes réduisent leur production à mesure qu'elles grandissent</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd7-1')" data-fb-bon="<strong>Correct.</strong> La 1ère bouchée est délicieuse, la 10ème moins — l'utilité <em>marginale</em> (celle de la dernière unité) décroît. Cela résout le paradoxe eau/diamant : l'eau est abondante → sa dernière unité a peu de valeur ; le diamant est rare → sa dernière unité a beaucoup de valeur." data-fb-mal="<strong>Non.</strong> L'utilité marginale décroissante signifie que chaque unité supplémentaire d'un bien apporte moins de satisfaction que la précédente (réponse B). C'est ce principe qui permet de résoudre le paradoxe eau/diamant et de fonder la théorie de la demande.">
+            <span class="opt-letter">D</span>
+            <span>Les salaires baissent quand le nombre de travailleurs augmente</span>
+          </button>
+      </div>
+      <div id="fb-d7-1" class="defi-feedback"></div>
+    </div>
+    <div class="defi-wrap">
+      <span class="defi-type-badge badge-pratique">Pratique</span>
+      <div class="defi-title">Walras et l'équilibre général</div>
+      <div class="defi-question">Dans le modèle walrasien, si le marché du blé est en déséquilibre (offre &gt; demande), que se passe-t-il selon la mécanique du tâtonnement ?</div>
+      <div id="defi-d7-2">
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd7-2')" data-fb-bon="<strong>Exact.</strong> Le « tâtonnement walrasien » : le commissaire-priseur appelle un prix fictif, observe les déséquilibres, ajuste le prix, et itère jusqu'à l'équilibre général. C'est une vision théorique très forte — et très irréaliste selon ses critiques, qui notent qu'il n'existe pas de commissaire-priseur dans une économie réelle." data-fb-mal="<strong>Non.</strong> La réponse C est correcte. Le tâtonnement walrasien est un mécanisme de prix : si l'offre excède la demande, le prix baisse, ce qui stimule la demande et réduit l'offre, jusqu'à l'équilibre. Pas d'intervention étatique dans ce cadre.">
+            <span class="opt-letter">A</span>
+            <span>L'État intervient pour fixer un prix plafond</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd7-2')" data-fb-bon="<strong>Exact.</strong> Le « tâtonnement walrasien » : le commissaire-priseur appelle un prix fictif, observe les déséquilibres, ajuste le prix, et itère jusqu'à l'équilibre général. C'est une vision théorique très forte — et très irréaliste selon ses critiques, qui notent qu'il n'existe pas de commissaire-priseur dans une économie réelle." data-fb-mal="<strong>Non.</strong> La réponse C est correcte. Le tâtonnement walrasien est un mécanisme de prix : si l'offre excède la demande, le prix baisse, ce qui stimule la demande et réduit l'offre, jusqu'à l'équilibre. Pas d'intervention étatique dans ce cadre.">
+            <span class="opt-letter">B</span>
+            <span>Les producteurs de blé abandonnent leurs terres</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, true, 'd7-2')" data-fb-bon="<strong>Exact.</strong> Le « tâtonnement walrasien » : le commissaire-priseur appelle un prix fictif, observe les déséquilibres, ajuste le prix, et itère jusqu'à l'équilibre général. C'est une vision théorique très forte — et très irréaliste selon ses critiques, qui notent qu'il n'existe pas de commissaire-priseur dans une économie réelle." data-fb-mal="<strong>Non.</strong> La réponse C est correcte. Le tâtonnement walrasien est un mécanisme de prix : si l'offre excède la demande, le prix baisse, ce qui stimule la demande et réduit l'offre, jusqu'à l'équilibre. Pas d'intervention étatique dans ce cadre.">
+            <span class="opt-letter">C</span>
+            <span>Le prix du blé baisse, la demande augmente, l'offre s'ajuste — jusqu'à l'équilibre</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd7-2')" data-fb-bon="<strong>Exact.</strong> Le « tâtonnement walrasien » : le commissaire-priseur appelle un prix fictif, observe les déséquilibres, ajuste le prix, et itère jusqu'à l'équilibre général. C'est une vision théorique très forte — et très irréaliste selon ses critiques, qui notent qu'il n'existe pas de commissaire-priseur dans une économie réelle." data-fb-mal="<strong>Non.</strong> La réponse C est correcte. Le tâtonnement walrasien est un mécanisme de prix : si l'offre excède la demande, le prix baisse, ce qui stimule la demande et réduit l'offre, jusqu'à l'équilibre. Pas d'intervention étatique dans ce cadre.">
+            <span class="opt-letter">D</span>
+            <span>La banque centrale crée de la monnaie pour absorber l'excès d'offre</span>
+          </button>
+      </div>
+      <div id="fb-d7-2" class="defi-feedback"></div>
+    </div>
+    <div class="defi-stars" id="stars-7" style="display:none;">
+      <span class="star-icon" id="st-7-1">☆</span>
+      <span class="star-icon" id="st-7-2">☆</span>
+      <span class="star-icon" id="st-7-3">☆</span>
+      <span style="font-size:.85rem;color:#4A6A85;margin-left:4px;">Défis complétés : <strong id="score-7">0</strong> / 2</span>
+    </div>
+  </div>
+
+  <!-- Bannière continuer -->
+  <div id="banner-7" class="continue-banner" style="display:none; margin-top:1.2rem;">
+    <h3 id="banner-titre-7" class="anchored">Votre verdict</h3>
+    <p id="banner-body-7"></p>
+    <a href="../chapitres/chapitre8.html" class="btn-continue-ch" id="btn-continue-7" style="display:none;">Ch. 8 — Les néoclassiques →</a>
+  </div>
+</div>
+
+<script>
+(function() {
+  CarrefourEngine.renderNiveauPill('niveau-pill-7');
+
+  var feedbacks = {
+  'A': {cls: 'fb-partiel', html: '<strong>Argument recevable.</strong> Certains historiens de la pensée économique notent que la révolution marginaliste intervient au moment où le mouvement ouvrier monte en puissance. Effacer la valeur-travail, c\'est effacer conceptuellement l\'exploitation. Mais le marginalisme a aussi des mérites analytiques réels — il résout des paradoxes que les classiques ne pouvaient pas expliquer.'},
+  'B': {cls: 'fb-bon', html: '<strong>Position équilibrée.</strong> Le marginalisme résout le paradoxe eau/diamant, fonde la théorie du consommateur et permet de modéliser l\'allocation optimale des ressources. Ces apports sont indépendants des positions politiques. Cela ne veut pas dire que la théorie est neutre — mais qu\'elle a une valeur analytique propre.'},
+  'defi': {cls: 'fb-info', html: ''},
+  };
+  var conclusions = {
+  'A': {titre: 'Vous lisez les néoclassiques en sociologue', body: 'Le ch.&nbsp;8 vous intéressera pour ses présupposés idéologiques autant que pour ses outils : l\'optimum de Pareto, neutre sur la distribution, et Pigou, qui tente de réconcilier efficacité et équité.'},
+  'B': {titre: 'Vous apprécierez les outils marshalliens', body: 'Le ch.&nbsp;8 est le vôtre : Marshall formalise l\'offre et la demande, les élasticités, les surplus. Des outils que vous retrouverez dans toute analyse économique appliquée contemporaine.'},
+  'defi': {titre: 'Verdict nuancé', body: 'Vous avez les deux outils : la critique idéologique et l\'analyse technique. Le ch.&nbsp;8 (Marshall, Pareto, Pigou) vous demandera de les combiner.'},
+  };
+  var numDefis = 2;
+  var defiScore = 0;
+  var defiDone = {};
+
+  window.choisirChemin = function(btn) {
+    var chemin = btn.getAttribute('data-chemin');
+    document.querySelectorAll('#paths-7 .carrefour-path').forEach(function(b) {
+      b.classList.remove('selected');
+    });
+    btn.classList.add('selected');
+
+    if (chemin === 'defi') {
+      document.getElementById('defis-7').style.display = 'block';
+      document.getElementById('fb-carrefour-7').className = 'carrefour-feedback';
+      document.getElementById('defis-7').scrollIntoView({behavior:'smooth', block:'nearest'});
+      return;
+    }
+
+    var fb = feedbacks[chemin];
+    var el = document.getElementById('fb-carrefour-7');
+    if (fb) {
+      el.className = 'carrefour-feedback show ' + fb.cls;
+      el.innerHTML = fb.html;
+    }
+    afficherConclusion(chemin);
+  };
+
+  window.repondreDefi = function(btn, correct, defiId) {
+    if (defiDone[defiId]) return;
+    defiDone[defiId] = true;
+    var container = document.getElementById('defi-' + defiId);
+    container.querySelectorAll('.defi-option').forEach(function(b) { b.disabled = true; });
+    btn.classList.add(correct ? 'correct' : 'wrong');
+    var fb = document.getElementById('fb-' + defiId);
+    if (fb) {
+      fb.className = 'defi-feedback show ' + (correct ? 'df-bon' : 'df-mal');
+      fb.innerHTML = correct ? btn.getAttribute('data-fb-bon') : btn.getAttribute('data-fb-mal');
+    }
+    defiScore++;
+    var starsBar = document.getElementById('stars-7');
+    starsBar.style.display = 'flex';
+    document.getElementById('score-7').textContent = defiScore;
+    for (var i = 1; i <= defiScore; i++) {
+      var s = document.getElementById('st-7-' + i);
+      if (s) { s.textContent = '★'; s.style.color = '#2E6DA4'; }
+    }
+    if (defiScore >= numDefis) {
+      setTimeout(function() { afficherConclusion('defi'); }, 600);
+    }
+  };
+
+  function afficherConclusion(chemin) {
+    var c = conclusions[chemin] || conclusions[Object.keys(conclusions)[0]];
+    document.getElementById('banner-titre-7').textContent = c.titre;
+    document.getElementById('banner-body-7').innerHTML = c.body;
+    var banner = document.getElementById('banner-7');
+    banner.style.display = 'block';
+    var btn = document.getElementById('btn-continue-7');
+    if (btn) btn.style.display = 'inline-block';
+    banner.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+})();
+</script>
+<div class="chap-nav">
+<p><a href="../chapitres/chapitre6.html">← Ch. 6</a></p>
+<p><a href="../chapitres/chapitre8.html">Ch. 8 — Les néoclassiques →</a></p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Histoire Économique — Pascaline Vincent, 2026</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Construit avec <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Chapitre 4 — Les Classiques (I) – À la recherche de la valeur perdue</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-ff98d69c136e79b123368504bdb7637c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;family=Source+Sans+3:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<script>
+/* carrefour.js — moteur de navigation adaptative
+   Utilisé par tous les chapitres.
+   Expose: CarrefourEngine, DragDrop, DefiQCM, DefiImmersif */
+
+var CarrefourEngine = (function() {
+  /* ── Niveau depuis localStorage ── */
+  function getNiveau() {
+    var v = (localStorage.getItem('niveau') || '').toLowerCase();
+    if (v.includes('avan')) return 'avance';
+    if (v.includes('but') || v.includes('but')) return 'debutant';
+    return 'intermediaire';
+  }
+
+  /* ── Injecter la pastille niveau ── */
+  function renderNiveauPill(containerId) {
+    var el = document.getElementById(containerId);
+    if (!el) return;
+    var n = getNiveau();
+    var labels = { debutant: 'Niveau débutant', intermediaire: 'Niveau intermédiaire', avance: 'Niveau avancé' };
+    var cls    = { debutant: 'level-debutant',   intermediaire: 'level-intermediaire',   avance: 'level-avance' };
+    el.className = 'chapter-level-pill ' + cls[n];
+    el.textContent = labels[n];
+    el.style.display = 'inline-flex';
+  }
+
+  /* ── Choisir un chemin (afficher feedback + banner) ── */
+  function choisirChemin(btnEl, feedbackId, bannerId, texte, consoliderUrl) {
+    var type = btnEl.getAttribute('data-chemin');
+    // Marque le bouton
+    document.querySelectorAll('.carrefour-path').forEach(function(b) {
+      b.classList.remove('selected');
+    });
+    btnEl.classList.add('selected');
+
+    var fb = document.getElementById(feedbackId);
+    if (fb) {
+      fb.className = 'carrefour-feedback show fb-' + (texte.cls || 'info');
+      fb.innerHTML = texte.html;
+    }
+    if (type === 'consolider' && consoliderUrl) {
+      setTimeout(function() { window.location.href = consoliderUrl; }, 600);
+      return;
+    }
+    // Afficher bannière continuer
+    var ban = document.getElementById(bannerId);
+    if (ban) {
+      ban.style.display = 'block';
+      ban.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  /* ── Marquer chapitre lu ── */
+  function marquerLu(chapKey) {
+    var cr = JSON.parse(localStorage.getItem('chapRead') || '[]');
+    if (!cr.includes(chapKey)) { cr.push(chapKey); localStorage.setItem('chapRead', JSON.stringify(cr)); }
+  }
+
+  /* ── Afficher les voix selon avatar ── */
+  function initVoix() {
+    var av = localStorage.getItem('avatar') || 'none';
+    document.querySelectorAll('[data-voix]').forEach(function(el) {
+      el.style.display = (el.getAttribute('data-voix') === av || av === 'none') ? 'block' : 'none';
+    });
+  }
+
+  return { getNiveau: getNiveau, renderNiveauPill: renderNiveauPill, choisirChemin: choisirChemin, marquerLu: marquerLu, initVoix: initVoix };
+})();
+
+/* ── QCM standard ── */
+var DefiQCM = (function() {
+  var done = {};
+  function repondre(btnEl, defiId, estCorrect, feedbacks) {
+    if (done[defiId]) return;
+    done[defiId] = true;
+    var container = document.getElementById('defi-' + defiId);
+    container.querySelectorAll('.defi-option').forEach(function(b) { b.disabled = true; });
+    btnEl.classList.add(estCorrect ? 'correct' : 'wrong');
+    var fb = document.getElementById('fb-' + defiId);
+    if (fb) {
+      var f = estCorrect ? feedbacks.bon : feedbacks.mauvais;
+      fb.className = 'defi-feedback show ' + (estCorrect ? 'df-bon' : 'df-mal');
+      fb.innerHTML = f;
+    }
+    majScore(defiId, estCorrect);
+    return estCorrect;
+  }
+  function majScore(defiId, ok) {
+    var bar = document.getElementById('stars-' + defiId.split('-')[0]);
+    if (!bar) return;
+    // handled per-chapter
+  }
+  return { repondre: repondre };
+})();
+
+/* ── Drag & Drop générique ── */
+var DragDrop = (function() {
+  var currentDrag = null;
+  var slotData = {};
+  var done = false;
+
+  function init(containerId) {
+    slotData = {}; done = false;
+    var c = document.getElementById(containerId);
+    if (!c) return;
+    c.querySelectorAll('.dd-chip').forEach(function(chip) {
+      chip.addEventListener('dragstart', function() {
+        currentDrag = chip.dataset.key;
+        chip.classList.add('dragging');
+      });
+      chip.addEventListener('dragend', function() { chip.classList.remove('dragging'); });
+    });
+    c.querySelectorAll('.dd-slot').forEach(function(slot) {
+      slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('over'); });
+      slot.addEventListener('dragleave', function() { slot.classList.remove('over'); });
+      slot.addEventListener('drop', function(e) {
+        e.preventDefault(); slot.classList.remove('over');
+        if (!currentDrag || done) return;
+        // Remove chip from previous slot
+        Object.keys(slotData).forEach(function(sid) {
+          if (slotData[sid] === currentDrag && sid !== slot.id) {
+            var prev = document.getElementById(sid);
+            if (prev) { prev.innerHTML = prev.getAttribute('data-orig') || ''; prev.classList.remove('correct','wrong'); }
+            delete slotData[sid];
+            var prevChip = document.getElementById('chip-' + currentDrag);
+            if (prevChip) prevChip.classList.remove('placed');
+          }
+        });
+        var chipEl = document.getElementById('chip-' + currentDrag);
+        var label  = chipEl ? chipEl.textContent : currentDrag;
+        var orig   = slot.getAttribute('data-orig') || slot.textContent;
+        if (!slot.getAttribute('data-orig')) slot.setAttribute('data-orig', slot.textContent);
+        slot.innerHTML = '<strong>' + label + '</strong><br><span style="font-size:.8rem;color:#7A8FA0;">' + orig + '</span>';
+        slotData[slot.id] = currentDrag;
+        if (chipEl) chipEl.classList.add('placed');
+        currentDrag = null;
+      });
+    });
+  }
+
+  function verifier(containerId, correct, feedbackId) {
+    if (done) return 0;
+    var c = document.getElementById(containerId);
+    var ok = 0;
+    c.querySelectorAll('.dd-slot').forEach(function(slot) {
+      var val = slotData[slot.id];
+      if (!val) return;
+      var isOk = val === correct[slot.id];
+      slot.classList.add(isOk ? 'correct' : 'wrong');
+      if (isOk) ok++;
+    });
+    var total = Object.keys(correct).length;
+    var fb = document.getElementById(feedbackId);
+    if (fb) {
+      if (ok === total) {
+        fb.className = 'defi-feedback show df-bon';
+        fb.innerHTML = '<strong>Parfait ! ' + ok + '/' + total + '</strong> Toutes les associations sont correctes.';
+        done = true;
+      } else {
+        fb.className = 'defi-feedback show df-partiel';
+        fb.innerHTML = '<strong>' + ok + '/' + total + ' corrects.</strong> Certaines associations sont incorrectes — retirez-les et réessayez.';
+        c.querySelectorAll('.dd-slot.wrong').forEach(function(s) { s.classList.remove('wrong'); });
+      }
+    }
+    return done ? ok : 0;
+  }
+
+  return { init: init, verifier: verifier };
+})();
+
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">À la recherche de la valeur perdue</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Accueil</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapitres" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Chapitres</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-chapitres">    
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre1.html">
+ <span class="dropdown-text">Ch. 1 — Pensée antique et médiévale</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre2.html">
+ <span class="dropdown-text">Ch. 2 — Naissance de l’économie politique</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre3.html">
+ <span class="dropdown-text">Ch. 3 — Les Physiocrates</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre4.html">
+ <span class="dropdown-text">Ch. 4 — Les Classiques (I)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre5.html">
+ <span class="dropdown-text">Ch. 5 — Les Classiques (II)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre6.html">
+ <span class="dropdown-text">Ch. 6 — Marx et le socialisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre7.html">
+ <span class="dropdown-text">Ch. 7 — Le marginalisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre8.html">
+ <span class="dropdown-text">Ch. 8 — L’affirmation des néoclassiques</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre9.html">
+ <span class="dropdown-text">Ch. 9 — La révolution keynésienne</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre10.html">
+ <span class="dropdown-text">Ch. 10 — La synthèse de Samuelson</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre11.html">
+ <span class="dropdown-text">Ch. 11 — Le monétarisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre12.html">
+ <span class="dropdown-text">Ch. 12 — État des lieux</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../carte-debats.html"> 
+<span class="menu-text">Carte des débats</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../quiz.html"> 
+<span class="menu-text">Quiz</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../carnet.html"> 
+<span class="menu-text">Carnet de bord</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../apropos.html"> 
+<span class="menu-text">À propos</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../profil.html"> 
+<span class="menu-text">Mon profil</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#contexte-économique" id="toc-contexte-économique" class="nav-link active" data-scroll-target="#contexte-économique">Contexte économique</a>
+  <ul class="collapse">
+  <li><a href="#la-révolution-industrielle" id="toc-la-révolution-industrielle" class="nav-link" data-scroll-target="#la-révolution-industrielle">La Révolution industrielle</a></li>
+  <li><a href="#transformations-sociales" id="toc-transformations-sociales" class="nav-link" data-scroll-target="#transformations-sociales">Transformations sociales</a></li>
+  </ul></li>
+  <li><a href="#les-auteurs" id="toc-les-auteurs" class="nav-link" data-scroll-target="#les-auteurs">Les auteurs</a></li>
+  <li><a href="#les-idées-principales" id="toc-les-idées-principales" class="nav-link" data-scroll-target="#les-idées-principales">Les idées principales</a>
+  <ul class="collapse">
+  <li><a href="#la-valeur-travail" id="toc-la-valeur-travail" class="nav-link" data-scroll-target="#la-valeur-travail">La valeur-travail</a></li>
+  <li><a href="#le-prix-naturel-vs-le-prix-de-marché" id="toc-le-prix-naturel-vs-le-prix-de-marché" class="nav-link" data-scroll-target="#le-prix-naturel-vs-le-prix-de-marché">Le prix naturel vs le prix de marché</a></li>
+  <li><a href="#les-avantages-comparatifs-ricardo" id="toc-les-avantages-comparatifs-ricardo" class="nav-link" data-scroll-target="#les-avantages-comparatifs-ricardo">Les avantages comparatifs (Ricardo)</a></li>
+  <li><a href="#les-trois-classes-sociales" id="toc-les-trois-classes-sociales" class="nav-link" data-scroll-target="#les-trois-classes-sociales">Les trois classes sociales</a></li>
+  </ul></li>
+  <li><a href="#résonances-contemporaines" id="toc-résonances-contemporaines" class="nav-link" data-scroll-target="#résonances-contemporaines">Résonances contemporaines</a></li>
+  <li><a href="#questions-de-réflexion" id="toc-questions-de-réflexion" class="nav-link" data-scroll-target="#questions-de-réflexion">Questions de réflexion</a></li>
+  <li><a href="#question-flash" id="toc-question-flash" class="nav-link" data-scroll-target="#question-flash">Question flash</a></li>
+  <li><a href="#carrefour-décisionnel" id="toc-carrefour-décisionnel" class="nav-link" data-scroll-target="#carrefour-décisionnel">Carrefour décisionnel</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Chapitre 4 — Les Classiques (I)</h1>
+<p class="subtitle lead">Adam Smith et David Ricardo — Révolution industrielle</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<script>
+let cr = JSON.parse(localStorage.getItem('chapRead') || []);
+if (!cr.includes('ch4')) { cr.push('ch4'); localStorage.setItem('chapRead', JSON.stringify(cr)); }
+document.addEventListener('DOMContentLoaded', function() {
+  const av = localStorage.getItem('avatar') || 'none';
+  document.querySelectorAll('[data-voix]').forEach(el => {
+    el.style.display = (el.getAttribute('data-voix') === av || av === 'none') ? 'block' : 'none';
+  });
+});
+</script>
+<section id="contexte-économique" class="level2">
+<h2 class="anchored" data-anchor-id="contexte-économique">Contexte économique</h2>
+<section id="la-révolution-industrielle" class="level3">
+<h3 class="anchored" data-anchor-id="la-révolution-industrielle">La Révolution industrielle</h3>
+<ul>
+<li>1ère Révolution industrielle en Angleterre au XVIIIe siècle, culminant au milieu du XIXe</li>
+<li>Élévation considérable du volume de production industrielle (métallurgie, textile)</li>
+<li>Source d’énergie : la vapeur (charbon)</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Période</th>
+<th>Produit/habitant</th>
+<th>Produit industriel</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1700–1760</td>
+<td>+0,31%/an</td>
+<td>+0,7%/an</td>
+</tr>
+<tr class="even">
+<td>1760–1780</td>
+<td>+0,01%/an</td>
+<td>+1,3%/an</td>
+</tr>
+<tr class="odd">
+<td>1780–1800</td>
+<td>+0,35%/an</td>
+<td>+2,0%/an</td>
+</tr>
+<tr class="even">
+<td>1800–1831</td>
+<td>+0,52%/an</td>
+<td>+2,8%/an</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="transformations-sociales" class="level3">
+<h3 class="anchored" data-anchor-id="transformations-sociales">Transformations sociales</h3>
+<ul>
+<li>Mécanisation et travail en usine</li>
+<li>Recours au travail des femmes et des enfants</li>
+<li>Conditions de travail très dures</li>
+<li>Salaires proches du minimum vital, augmentent peu jusqu’en 1850</li>
+</ul>
+<div style="background:#EAF1FA;border:1px solid #B8D0E8;border-left:4px solid #1A3A5C;border-radius:0 6px 6px 0;padding:1rem 1.3rem;margin:2rem 0 1.5rem;">
+  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#1A3A5C;margin-bottom:0.6rem;">🔗 Fils du débat</div>
+  <div style="font-size:0.87rem;color:#1E2E3A;line-height:1.7;">
+    <div style="margin-bottom:0.5rem;">**← Ch. 3** Les Physiocrates voyaient la valeur dans la terre. Smith déplace la source de valeur vers le *travail* — et Ricardo radicalise cette intuition.</div>
+    <div style="margin-bottom:0.6rem;">**→ Ch. 5** Malthus conteste la loi de Say que les Classiques tiennent pour évidente : l'offre crée-t-elle vraiment toujours sa demande ? Ce débat durera un siècle. **→ Ch. 6** Marx lit Ricardo attentivement et retourne la valeur-travail en théorie de l'exploitation : si le travail crée toute la valeur, pourquoi le travailleur n'en reçoit-il qu'une fraction ? **→ Ch. 7** Les marginalistes abandonnent la valeur-travail pour fonder la valeur sur l'utilité — rendant conceptuellement invisible la question de l'exploitation.</div>
+    <div style="font-style:italic;color:#2E6DA4;border-top:1px solid #C8DCF0;padding-top:0.5rem;margin-top:0.3rem;">❓ La théorie des avantages comparatifs de Ricardo est-elle encore valide dans une économie où le capital, les données et les technologies se déplacent librement — et pas seulement les biens ?</div>
+  </div>
+</div>
+<hr>
+</section>
+</section>
+<section id="les-auteurs" class="level2">
+<h2 class="anchored" data-anchor-id="les-auteurs">Les auteurs</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Adam Smith</strong> (1723–1790) ⭐ Père fondateur</p>
+<p><em>La Richesse des Nations</em> (1776). Concepts clés :</p>
+<ul>
+<li><strong>La main invisible</strong> : chaque individu poursuivant son intérêt privé contribue sans le vouloir à l’intérêt général</li>
+<li><strong>La division du travail</strong> : spécialisation source de gains de productivité (épingle de Smith)</li>
+<li><strong>La valeur</strong> : oscille entre valeur d’usage et valeur d’échange (paradoxe de l’eau et du diamant)</li>
+<li><strong>Le libre-échange</strong> : critique le mercantilisme, défend la liberté des marchés</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>David Ricardo</strong> (1772–1823) ⭐ Théoricien rigoureux</p>
+<p><em>Principes d’économie politique et de l’impôt</em> (1817). Apports majeurs :</p>
+<ul>
+<li><strong>Théorie de la valeur-travail</strong> : la valeur d’un bien est déterminée par le <strong>travail incorporé</strong> (direct + indirect)</li>
+<li><strong>Le travail social moyen</strong> : c’est la norme sociale, pas le travail individuel, qui fixe la valeur</li>
+<li><strong>La rente différentielle</strong> : les terres les moins fertiles fixent le prix agricole</li>
+<li><strong>Les avantages comparatifs</strong> : même sans avantage absolu, tout pays gagne au libre-échange</li>
+</ul>
+</div>
+</div>
+<hr>
+<hr>
+<div class="voix-personnage marchand" data-voix="marchand" style="display:none">
+  <span class="voix-label">Votre regard de marchand</span>
+  Smith vous réhabilite : contrairement aux Physiocrates, il ne vous relègue pas dans une « classe stérile ». Le commerce est productif, les marchands participent à la division du travail et à la création de richesses. La « main invisible » est au fond votre justification théorique : en cherchant votre profit, vous coordonnez l'activité économique sans le vouloir. Mais Ricardo vous complique la vie : si la valeur vient du travail incorporé, qu'est-ce que votre profit de négociant ? Un simple écart de prix, ou quelque chose de plus ?
+</div>
+<div class="voix-personnage philosophe" data-voix="philosophe" style="display:none">
+  <span class="voix-label">Votre regard de philosophe</span>
+  Smith est d'abord un philosophe moral — son premier livre s'intitule <em>Théorie des sentiments moraux</em>. La <em>Richesse des Nations</em> est une suite logique : comment une société d'individus poursuivant leur intérêt peut-elle être stable et prospère ? La « main invisible » est une réponse qui n'exclut pas la morale : elle suppose la confiance, les contrats, les institutions. Notez la tension chez Ricardo : la rigueur déductive le rapproche des mathématiques, mais son système achoppe sur le problème de la mesure invariable de la valeur.
+</div>
+<div class="voix-personnage ouvrier" data-voix="ouvrier" style="display:none">
+  <span class="voix-label">Votre regard d'ouvrier</span>
+  La théorie de la valeur-travail est pour vous une arme à double tranchant. D'un côté, elle reconnaît que c'est le travail qui crée la valeur — une reconnaissance que les Physiocrates n'accordaient pas aux artisans et aux ouvriers. De l'autre, Ricardo ne tire pas les conclusions politiques de cette thèse : si la valeur vient du travail, pourquoi les salaires restent-ils proches du minimum vital ? C'est la question que Marx se posera explicitement en lisant Ricardo, et la réponse le conduira à la théorie de l'exploitation.
+</div>
+<div class="voix-personnage entrepreneur" data-voix="entrepreneur" style="display:none">
+  <span class="voix-label">Votre regard d'entrepreneur</span>
+  Smith est votre allié naturel. La division du travail — son exemple de la manufacture d'épingles est resté dans tous les manuels — est la source première des gains de productivité. La spécialisation, la concurrence, le libre-échange : voilà votre programme. Ricardo affine le tableau avec les avantages comparatifs : même si vous êtes moins efficace que vos concurrents dans tous les domaines, vous pouvez toujours trouver une niche. Ce principe fonde encore aujourd'hui la justification économique de la mondialisation.
+</div>
+</section>
+<section id="les-idées-principales" class="level2">
+<h2 class="anchored" data-anchor-id="les-idées-principales">Les idées principales</h2>
+<section id="la-valeur-travail" class="level3">
+<h3 class="anchored" data-anchor-id="la-valeur-travail">La valeur-travail</h3>
+<p>La valeur d’un bien provient du travail nécessaire à sa production :</p>
+<p><span class="math display">\[\text{Valeur} = \text{Travail direct} + \text{Travail indirect (capital)}\]</span></p>
+<p><strong>Problème soulevé par Ricardo</strong> : si les salaires changent, la valeur change → raisonnement circulaire. Ricardo précise que la théorie ne s’applique qu’aux biens <strong>reproductibles</strong> (exclut l’air, la Joconde, les biens rares).</p>
+</section>
+<section id="le-prix-naturel-vs-le-prix-de-marché" class="level3">
+<h3 class="anchored" data-anchor-id="le-prix-naturel-vs-le-prix-de-marché">Le prix naturel vs le prix de marché</h3>
+<ul>
+<li><strong>Prix naturel</strong> = coût de production (travail incorporé en monnaie)</li>
+<li><strong>Prix de marché</strong> = prix d’équilibre offre/demande (gravitant autour du prix naturel)</li>
+</ul>
+</section>
+<section id="les-avantages-comparatifs-ricardo" class="level3">
+<h3 class="anchored" data-anchor-id="les-avantages-comparatifs-ricardo">Les avantages comparatifs (Ricardo)</h3>
+<p>Même si le Portugal est meilleur que l’Angleterre dans <em>tous</em> les secteurs, il gagne à se spécialiser dans ce qu’il fait <strong>relativement</strong> mieux → fondement du libre-échange international.</p>
+</section>
+<section id="les-trois-classes-sociales" class="level3">
+<h3 class="anchored" data-anchor-id="les-trois-classes-sociales">Les trois classes sociales</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Classe</th>
+<th>Revenu</th>
+<th>Rôle</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Capitalistes</td>
+<td>Profit</td>
+<td>Investissement, accumulation</td>
+</tr>
+<tr class="even">
+<td>Propriétaires fonciers</td>
+<td>Rente</td>
+<td>Propriété de la terre</td>
+</tr>
+<tr class="odd">
+<td>Travailleurs</td>
+<td>Salaires</td>
+<td>Force de travail</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="résonances-contemporaines" class="level2">
+<h2 class="anchored" data-anchor-id="résonances-contemporaines">Résonances contemporaines</h2>
+<div style="background:#F0F6FD;border:1px solid #B8D0E8;border-radius:6px;padding:1rem 1.3rem;margin-bottom:1.5rem;">
+  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#2E6DA4;margin-bottom:0.5rem;">🌐 Résonances contemporaines</div>
+  <div style="font-size:0.9rem;color:#1E2E3A;line-height:1.75;">Les **avantages comparatifs** de Ricardo fondent encore la justification économique de la mondialisation — mais ils supposent que les facteurs de production (capital, travail) restent *dans* chaque pays. Quand les usines et les capitaux se déplacent librement, l'argument s'effondre. La **rente différentielle** trouve un écho saisissant dans la rente numérique : Google, Amazon et Meta captent une rente sur des « terres » virtuelles (les données, les algorithmes, les effets de réseau) que personne n'a vraiment produites.</div>
+</div>
+</section>
+<section id="questions-de-réflexion" class="level2">
+<h2 class="anchored" data-anchor-id="questions-de-réflexion">Questions de réflexion</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><strong>Commerce international chez les classiques</strong> : expliquez la théorie des avantages comparatifs de Ricardo avec un exemple chiffré.</li>
+<li><strong>Croissance économique et état stationnaire</strong> : selon Ricardo, vers quoi tend l’économie capitaliste à long terme ?</li>
+<li><strong>Répartition des revenus et classes sociales</strong> : comment Smith et Ricardo conçoivent-ils les intérêts des trois classes ?</li>
+<li><strong>La théorie de la valeur chez les Classiques</strong> : en quoi est-elle à la fois innovante et problématique ?</li>
+</ol>
+</div>
+</div>
+<hr>
+<hr>
+<details style="margin-top:0.6rem;margin-bottom:1.5rem;">
+  <summary style="cursor:pointer;font-size:0.82rem;font-weight:600;color:#2E6DA4;padding:0.4rem 0;list-style:none;display:flex;align-items:center;gap:6px;">
+    <span style="background:#EAF1FA;border:1px solid #B8D0E8;border-radius:4px;padding:2px 8px;font-size:0.72rem;">💡 Pistes de réponse</span>
+    <span style="color:#7A8FA0;font-size:0.78rem;font-weight:400;">(cliquer pour révéler — essayez d'abord par vous-même)</span>
+  </summary>
+  <div style="border:1px solid #D0DCE8;border-radius:0 0 6px 6px;border-top:none;padding:1rem 1.1rem;background:white;margin-top:0;">
+    
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ Avantages comparatifs — exemple chiffré…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">Portugal : 80h pour du vin, 90h pour du drap. Angleterre : 120h pour du vin, 100h pour du drap. Portugal a l'avantage absolu dans les deux. Mais : Portugal a l'avantage *comparatif* dans le vin (80/90 &lt; 120/100). Spécialisation → les deux pays produisent plus au total. Piste contemporaine : ce raisonnement tient si les facteurs restent dans chaque pays — ce qui n'est plus vrai avec la délocalisation du capital.</div>
+    </div>
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ État stationnaire chez Ricardo…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">Logique des rendements décroissants : population ↑ → terres marginales cultivées → prix blé ↑ → salaires ↑ (salaire de subsistance) → profits ↓ → investissement s'arrête → croissance nulle. Ricardo y voyait une fatalité. Marx y voit la contradiction du capitalisme. Solow le résoudra en 1956 : le progrès technique exogène peut contrecarrer les rendements décroissants indéfiniment.</div>
+    </div>
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ Répartition et classes sociales…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">Smith : les trois classes ont des intérêts parfois convergents (croissance), parfois divergents (répartition). Ricardo : tension fondamentale entre capitalistes (veulent des profits) et propriétaires fonciers (captent la rente via les Corn Laws). Marx : les deux premières classes exploitent la troisième. La question : qui capte le surplus de la croissance ?</div>
+    </div>
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ La valeur-travail — innovante et problématique…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">Innovante : fonde la richesse sur la *production* humaine, pas sur l'échange ou la nature. Problématique : le paradoxe eau/diamant (l'eau est très utile mais peu chère), le problème de la mesure invariable (Ricardo cherche une unité de valeur stable — et échoue), la circularité (la valeur du blé dépend du salaire, qui dépend du prix du blé).</div>
+    </div>
+  </div>
+</details>
+</section>
+<section id="question-flash" class="level2">
+<h2 class="anchored" data-anchor-id="question-flash">Question flash</h2>
+<div style="background:#0D2137;border-radius:8px;padding:1.3rem 1.5rem;margin:1.5rem 0;">
+  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#4A90C4;margin-bottom:0.6rem;">⚡ Question flash — Retrieve Practice</div>
+  <div style="font-size:0.95rem;color:#EAF1F8;line-height:1.7;margin-bottom:0.8rem;">**Question flash :** Complétez : « Selon Ricardo, si le Portugal met 80h pour produire du vin et 90h pour du drap, tandis que l'Angleterre met 120h pour le vin et 100h pour le drap, chaque pays devrait se spécialiser dans ______ car ______ »</div>
+  <div style="font-size:0.72rem;color:#4A6A85;margin-bottom:0.8rem;">Ch. 4 · Concepts : avantages comparatifs / rente différentielle / valeur-travail</div>
+  <button id="flash-btn" onclick="(function(){
+    var el=document.getElementById('flash-answer');
+    var btn=document.getElementById('flash-btn');
+    if(el.style.display==='none'){el.style.display='block';btn.textContent='▲ Masquer la réponse';}
+    else{el.style.display='none';btn.textContent='▼ Voir la réponse-modèle';}
+  })()" style="background:#2E6DA4;color:white;border:none;padding:0.5rem 1.1rem;border-radius:5px;cursor:pointer;font-size:0.82rem;font-weight:600;font-family:'Source Sans 3',sans-serif;">▼ Voir la réponse-modèle</button>
+  <div id="flash-answer" style="display:none;margin-top:0.8rem;background:#EAF1FA;border-radius:5px;padding:0.8rem 1rem;font-size:0.88rem;color:#0D2137;line-height:1.7;">Portugal dans le *vin* (avantage comparatif : 80/90 &lt; 120/100), Angleterre dans le *drap* (100/120 &lt; 90/80). Même si le Portugal est plus efficace dans les deux, la spécialisation crée un gain mutuel : la production totale mondiale augmente.</div>
+</div>
+</section>
+<section id="carrefour-décisionnel" class="level2">
+<h2 class="anchored" data-anchor-id="carrefour-décisionnel">Carrefour décisionnel</h2>
+<div class="carrefour-wrap" id="carrefour-4">
+  <div class="carrefour-header">
+    <div class="carrefour-icon">⚡</div>
+    <h3 class="carrefour-title anchored">Carrefour — Chapitre 4</h3>
+    <span id="niveau-pill-4" class="chapter-level-pill level-intermediaire" style="display:none"></span>
+  </div>
+
+  <div class="carrefour-scenario">
+    Nous sommes en 1820. Ricardo vient de publier ses <em>Principes</em>. Un industriel vous consulte : doit-il soutenir l'abrogation des <em>Corn Laws</em> — les tarifs douaniers sur le blé qui maintiennent élevées les rentes des propriétaires fonciers, au détriment des profits industriels ?
+  </div>
+
+  <div id="paths-4" class="carrefour-paths">
+    
+      <button class="carrefour-path" data-chemin="A" onclick="choisirChemin(this)">
+        <span class="path-letter">A</span>
+        <div>
+          <div>Oui : le libre-échange profite à tous — les avantages comparatifs priment</div>
+          <span class="path-tag tag-standard">Ch. 5 · angle Say–Mill</span>
+        </div>
+      </button>
+      <button class="carrefour-path" data-chemin="B" onclick="choisirChemin(this)">
+        <span class="path-letter">B</span>
+        <div>
+          <div>Prudence : Malthus prédit une crise de demande si l'on ruine les fermiers</div>
+          <span class="path-tag tag-alternatif">Ch. 5 · angle Malthus</span>
+        </div>
+      </button>
+      <button class="carrefour-path" data-chemin="defi" onclick="choisirChemin(this)">
+        <span class="path-letter">C</span>
+        <div>
+          <div>Relever les trois défis avant de décider</div>
+          <span class="path-tag tag-defi">Parcours renforcé +25 min</span>
+        </div>
+      </button>
+  </div>
+
+  <div id="fb-carrefour-4" class="carrefour-feedback"></div>
+
+  <!-- Défis (masqués jusqu'au choix "defi") -->
+  <div id="defis-4" style="display:none; margin-top:1.5rem; border-top:1px solid #D0DCE8; padding-top:1.2rem;">
+    <div style="font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#4A6A85;margin-bottom:1rem;">Trois défis — répondez avant de décider</div>
+    
+    <div class="defi-wrap">
+      <span class="defi-type-badge badge-cognitif">Cognitif</span>
+      <div class="defi-title">Relier économiste et thèse</div>
+      <div class="defi-question">Associez chaque auteur à sa contribution principale. (Défi drag &amp; drop — version textuelle : quelle thèse appartient à Ricardo ?)</div>
+      <div id="defi-d4-1">
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd4-1')" data-fb-bon="<strong>Correct.</strong> Les avantages comparatifs sont de Ricardo. La main invisible est de Smith, la loi de la population de Malthus, la loi des débouchés de Say. Ce sera votre grille de lecture pour tout le ch.&nbsp;5." data-fb-mal="<strong>Non.</strong> La thèse de Ricardo est celle des avantages <em>comparatifs</em> (réponse B). La main invisible est de Smith, la loi des débouchés de Say, la population de Malthus.">
+            <span class="opt-letter">A</span>
+            <span>La main invisible : l'intérêt individuel coordonne l'économie sans planification centrale</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, true, 'd4-1')" data-fb-bon="<strong>Correct.</strong> Les avantages comparatifs sont de Ricardo. La main invisible est de Smith, la loi de la population de Malthus, la loi des débouchés de Say. Ce sera votre grille de lecture pour tout le ch.&nbsp;5." data-fb-mal="<strong>Non.</strong> La thèse de Ricardo est celle des avantages <em>comparatifs</em> (réponse B). La main invisible est de Smith, la loi des débouchés de Say, la population de Malthus.">
+            <span class="opt-letter">B</span>
+            <span>Les avantages comparatifs : même sans avantage absolu, tout pays gagne au libre-échange en se spécialisant relativement</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd4-1')" data-fb-bon="<strong>Correct.</strong> Les avantages comparatifs sont de Ricardo. La main invisible est de Smith, la loi de la population de Malthus, la loi des débouchés de Say. Ce sera votre grille de lecture pour tout le ch.&nbsp;5." data-fb-mal="<strong>Non.</strong> La thèse de Ricardo est celle des avantages <em>comparatifs</em> (réponse B). La main invisible est de Smith, la loi des débouchés de Say, la population de Malthus.">
+            <span class="opt-letter">C</span>
+            <span>La population croît plus vite que les subsistances → misère inévitable</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd4-1')" data-fb-bon="<strong>Correct.</strong> Les avantages comparatifs sont de Ricardo. La main invisible est de Smith, la loi de la population de Malthus, la loi des débouchés de Say. Ce sera votre grille de lecture pour tout le ch.&nbsp;5." data-fb-mal="<strong>Non.</strong> La thèse de Ricardo est celle des avantages <em>comparatifs</em> (réponse B). La main invisible est de Smith, la loi des débouchés de Say, la population de Malthus.">
+            <span class="opt-letter">D</span>
+            <span>L'offre crée sa propre demande — pas de surproduction générale durable</span>
+          </button>
+      </div>
+      <div id="fb-d4-1" class="defi-feedback"></div>
+    </div>
+    <div class="defi-wrap">
+      <span class="defi-type-badge badge-pratique">Pratique</span>
+      <div class="defi-title">Rente différentielle</div>
+      <div class="defi-question">Selon Ricardo, pourquoi la rente différentielle monte-t-elle quand la population croît ?</div>
+      <div id="defi-d4-2">
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd4-2')" data-fb-bon="<strong>Exact.</strong> C'est la logique des rendements décroissants : on cultive d'abord les meilleures terres, puis les moins fertiles. Le prix du blé est fixé par le coût de production sur les terres marginales — et les meilleures terres captent la différence comme rente pure. D'où le pessimisme ricardien : la rente monte, les profits baissent, la croissance s'arrête." data-fb-mal="<strong>Incorrect.</strong> La réponse B est juste. La rente différentielle naît des rendements décroissants : le prix du blé est fixé par les terres les moins fertiles, et les bonnes terres captent la différence sans effort supplémentaire.">
+            <span class="opt-letter">A</span>
+            <span>Les propriétaires fonciers investissent davantage et améliorent leurs terres</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, true, 'd4-2')" data-fb-bon="<strong>Exact.</strong> C'est la logique des rendements décroissants : on cultive d'abord les meilleures terres, puis les moins fertiles. Le prix du blé est fixé par le coût de production sur les terres marginales — et les meilleures terres captent la différence comme rente pure. D'où le pessimisme ricardien : la rente monte, les profits baissent, la croissance s'arrête." data-fb-mal="<strong>Incorrect.</strong> La réponse B est juste. La rente différentielle naît des rendements décroissants : le prix du blé est fixé par les terres les moins fertiles, et les bonnes terres captent la différence sans effort supplémentaire.">
+            <span class="opt-letter">B</span>
+            <span>On cultive des terres de moins en moins fertiles → le prix du blé monte → la rente des bonnes terres augmente par différentiel</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd4-2')" data-fb-bon="<strong>Exact.</strong> C'est la logique des rendements décroissants : on cultive d'abord les meilleures terres, puis les moins fertiles. Le prix du blé est fixé par le coût de production sur les terres marginales — et les meilleures terres captent la différence comme rente pure. D'où le pessimisme ricardien : la rente monte, les profits baissent, la croissance s'arrête." data-fb-mal="<strong>Incorrect.</strong> La réponse B est juste. La rente différentielle naît des rendements décroissants : le prix du blé est fixé par les terres les moins fertiles, et les bonnes terres captent la différence sans effort supplémentaire.">
+            <span class="opt-letter">C</span>
+            <span>L'État taxe davantage l'agriculture pour financer les guerres napoléoniennes</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd4-2')" data-fb-bon="<strong>Exact.</strong> C'est la logique des rendements décroissants : on cultive d'abord les meilleures terres, puis les moins fertiles. Le prix du blé est fixé par le coût de production sur les terres marginales — et les meilleures terres captent la différence comme rente pure. D'où le pessimisme ricardien : la rente monte, les profits baissent, la croissance s'arrête." data-fb-mal="<strong>Incorrect.</strong> La réponse B est juste. La rente différentielle naît des rendements décroissants : le prix du blé est fixé par les terres les moins fertiles, et les bonnes terres captent la différence sans effort supplémentaire.">
+            <span class="opt-letter">D</span>
+            <span>Les capitalistes préfèrent investir dans la terre plutôt que dans les manufactures</span>
+          </button>
+      </div>
+      <div id="fb-d4-2" class="defi-feedback"></div>
+    </div>
+    <div class="defi-wrap">
+      <span class="defi-type-badge badge-immersif">Immersif</span>
+      <div class="defi-title">Débat avec Ricardo</div>
+      <div class="defi-question">Ricardo vous dit : « Toute offre crée sa propre demande — il ne peut y avoir de surproduction générale. L'abrogation des Corn Laws ne peut donc qu'enrichir. » Que lui répondez-vous ?</div>
+      <div id="defi-d4-3">
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd4-3')" data-fb-bon="<strong>Ricardo vous pousse dans vos retranchements.</strong> « Mais Malthus se trompe — l'épargne des propriétaires sera investie, et nourrira la demande autrement. » Ce débat est exactement celui que vous lirez dans le ch.&nbsp;5 — et Keynes tranchera un siècle plus tard en faveur de Malthus." data-fb-mal="<strong>Réponse B attendue.</strong> La contre-objection malthusienne est la plus fertile historiquement : elle anticipe Keynes. La loi de Say (réponse A) sera réfutée empiriquement par la Grande Dépression de 1929.">
+            <span class="opt-letter">A</span>
+            <span>« Vous avez raison, les marchés s'équilibrent toujours. La loi de Say est irréfutable. »</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, true, 'd4-3')" data-fb-bon="<strong>Ricardo vous pousse dans vos retranchements.</strong> « Mais Malthus se trompe — l'épargne des propriétaires sera investie, et nourrira la demande autrement. » Ce débat est exactement celui que vous lirez dans le ch.&nbsp;5 — et Keynes tranchera un siècle plus tard en faveur de Malthus." data-fb-mal="<strong>Réponse B attendue.</strong> La contre-objection malthusienne est la plus fertile historiquement : elle anticipe Keynes. La loi de Say (réponse A) sera réfutée empiriquement par la Grande Dépression de 1929.">
+            <span class="opt-letter">B</span>
+            <span>« Malthus objecterait que les fermiers appauvris réduisent leur demande — et que l'industrie manquera de débouchés. »</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd4-3')" data-fb-bon="<strong>Ricardo vous pousse dans vos retranchements.</strong> « Mais Malthus se trompe — l'épargne des propriétaires sera investie, et nourrira la demande autrement. » Ce débat est exactement celui que vous lirez dans le ch.&nbsp;5 — et Keynes tranchera un siècle plus tard en faveur de Malthus." data-fb-mal="<strong>Réponse B attendue.</strong> La contre-objection malthusienne est la plus fertile historiquement : elle anticipe Keynes. La loi de Say (réponse A) sera réfutée empiriquement par la Grande Dépression de 1929.">
+            <span class="opt-letter">C</span>
+            <span>« Je préfère ne pas prendre position — la question est trop complexe. »</span>
+          </button>
+      </div>
+      <div id="fb-d4-3" class="defi-feedback"></div>
+    </div>
+    <div class="defi-stars" id="stars-4" style="display:none;">
+      <span class="star-icon" id="st-4-1">☆</span>
+      <span class="star-icon" id="st-4-2">☆</span>
+      <span class="star-icon" id="st-4-3">☆</span>
+      <span style="font-size:.85rem;color:#4A6A85;margin-left:4px;">Défis complétés : <strong id="score-4">0</strong> / 3</span>
+    </div>
+  </div>
+
+  <!-- Bannière continuer -->
+  <div id="banner-4" class="continue-banner" style="display:none; margin-top:1.2rem;">
+    <h3 id="banner-titre-4" class="anchored">Votre verdict</h3>
+    <p id="banner-body-4"></p>
+    <a href="../chapitres/chapitre5.html" class="btn-continue-ch" id="btn-continue-4" style="display:none;">Ch. 5 — Les Classiques (II) →</a>
+  </div>
+</div>
+
+<script>
+(function() {
+  CarrefourEngine.renderNiveauPill('niveau-pill-4');
+
+  var feedbacks = {
+  'A': {cls: 'fb-bon', html: '<strong>Position ricardienne.</strong> La rente différentielle est un transfert vers les propriétaires fonciers qui freine l\'accumulation. Abrogation = profits qui reviennent aux capitalistes = investissement = croissance. Vous entrez dans le ch.&nbsp;5 par l\'angle <strong>loi de Say</strong> : l\'offre crée sa propre demande, le libre-échange ne peut qu\'enrichir.'},
+  'B': {cls: 'fb-partiel', html: '<strong>Position malthusienne.</strong> Les fermiers sont des acheteurs pour l\'industrie. Les appauvrir crée une insuffisance de débouchés. Keynes dira que Malthus avait raison un siècle plus tôt. Vous entrez dans le ch.&nbsp;5 par l\'angle <strong>demande effective</strong>.'},
+  'defi': {cls: 'fb-info', html: ''},
+  };
+  var conclusions = {
+  'A': {titre: 'Vous conseillez la libéralisation', body: 'Vous suivez Ricardo : la rente est parasitaire, le libre-échange profite au capitaliste et, à terme, au travailleur. Entrée dans le ch.&nbsp;5 par la loi de Say et Mill.'},
+  'B': {titre: 'La demande effective vous préoccupe', body: 'Vous suivez la logique de Malthus. Entrée dans le ch.&nbsp;5 par la critique de la loi de Say — et l\'anticipation du keynésianisme deux siècles plus tard.'},
+  'defi': {titre: 'Verdict éclairé par les trois défis', body: 'Vous maîtrisez rente différentielle, avantages comparatifs et débat Say-Malthus. Le ch.&nbsp;5 développera ces tensions et Mill vous offrira une synthèse partielle.'},
+  };
+  var numDefis = 3;
+  var defiScore = 0;
+  var defiDone = {};
+
+  window.choisirChemin = function(btn) {
+    var chemin = btn.getAttribute('data-chemin');
+    document.querySelectorAll('#paths-4 .carrefour-path').forEach(function(b) {
+      b.classList.remove('selected');
+    });
+    btn.classList.add('selected');
+
+    if (chemin === 'defi') {
+      document.getElementById('defis-4').style.display = 'block';
+      document.getElementById('fb-carrefour-4').className = 'carrefour-feedback';
+      document.getElementById('defis-4').scrollIntoView({behavior:'smooth', block:'nearest'});
+      return;
+    }
+
+    var fb = feedbacks[chemin];
+    var el = document.getElementById('fb-carrefour-4');
+    if (fb) {
+      el.className = 'carrefour-feedback show ' + fb.cls;
+      el.innerHTML = fb.html;
+    }
+    afficherConclusion(chemin);
+  };
+
+  window.repondreDefi = function(btn, correct, defiId) {
+    if (defiDone[defiId]) return;
+    defiDone[defiId] = true;
+    var container = document.getElementById('defi-' + defiId);
+    container.querySelectorAll('.defi-option').forEach(function(b) { b.disabled = true; });
+    btn.classList.add(correct ? 'correct' : 'wrong');
+    var fb = document.getElementById('fb-' + defiId);
+    if (fb) {
+      fb.className = 'defi-feedback show ' + (correct ? 'df-bon' : 'df-mal');
+      fb.innerHTML = correct ? btn.getAttribute('data-fb-bon') : btn.getAttribute('data-fb-mal');
+    }
+    defiScore++;
+    var starsBar = document.getElementById('stars-4');
+    starsBar.style.display = 'flex';
+    document.getElementById('score-4').textContent = defiScore;
+    for (var i = 1; i <= defiScore; i++) {
+      var s = document.getElementById('st-4-' + i);
+      if (s) { s.textContent = '★'; s.style.color = '#2E6DA4'; }
+    }
+    if (defiScore >= numDefis) {
+      setTimeout(function() { afficherConclusion('defi'); }, 600);
+    }
+  };
+
+  function afficherConclusion(chemin) {
+    var c = conclusions[chemin] || conclusions[Object.keys(conclusions)[0]];
+    document.getElementById('banner-titre-4').textContent = c.titre;
+    document.getElementById('banner-body-4').innerHTML = c.body;
+    var banner = document.getElementById('banner-4');
+    banner.style.display = 'block';
+    var btn = document.getElementById('btn-continue-4');
+    if (btn) btn.style.display = 'inline-block';
+    banner.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+})();
+</script>
+<div class="chap-nav">
+<p><a href="../chapitres/chapitre3.html">← Ch. 3</a></p>
+<p><a href="../chapitres/chapitre5.html">Ch. 5 — Les Classiques (II) →</a></p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Histoire Économique — Pascaline Vincent, 2026</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Construit avec <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

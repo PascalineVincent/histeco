@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Ch. 5 — Les Classiques (II) – À la recherche de la valeur perdue</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-ff98d69c136e79b123368504bdb7637c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;family=Source+Sans+3:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<script>
+/* carrefour.js — moteur de navigation adaptative
+   Utilisé par tous les chapitres.
+   Expose: CarrefourEngine, DragDrop, DefiQCM, DefiImmersif */
+
+var CarrefourEngine = (function() {
+  /* ── Niveau depuis localStorage ── */
+  function getNiveau() {
+    var v = (localStorage.getItem('niveau') || '').toLowerCase();
+    if (v.includes('avan')) return 'avance';
+    if (v.includes('but') || v.includes('but')) return 'debutant';
+    return 'intermediaire';
+  }
+
+  /* ── Injecter la pastille niveau ── */
+  function renderNiveauPill(containerId) {
+    var el = document.getElementById(containerId);
+    if (!el) return;
+    var n = getNiveau();
+    var labels = { debutant: 'Niveau débutant', intermediaire: 'Niveau intermédiaire', avance: 'Niveau avancé' };
+    var cls    = { debutant: 'level-debutant',   intermediaire: 'level-intermediaire',   avance: 'level-avance' };
+    el.className = 'chapter-level-pill ' + cls[n];
+    el.textContent = labels[n];
+    el.style.display = 'inline-flex';
+  }
+
+  /* ── Choisir un chemin (afficher feedback + banner) ── */
+  function choisirChemin(btnEl, feedbackId, bannerId, texte, consoliderUrl) {
+    var type = btnEl.getAttribute('data-chemin');
+    // Marque le bouton
+    document.querySelectorAll('.carrefour-path').forEach(function(b) {
+      b.classList.remove('selected');
+    });
+    btnEl.classList.add('selected');
+
+    var fb = document.getElementById(feedbackId);
+    if (fb) {
+      fb.className = 'carrefour-feedback show fb-' + (texte.cls || 'info');
+      fb.innerHTML = texte.html;
+    }
+    if (type === 'consolider' && consoliderUrl) {
+      setTimeout(function() { window.location.href = consoliderUrl; }, 600);
+      return;
+    }
+    // Afficher bannière continuer
+    var ban = document.getElementById(bannerId);
+    if (ban) {
+      ban.style.display = 'block';
+      ban.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  /* ── Marquer chapitre lu ── */
+  function marquerLu(chapKey) {
+    var cr = JSON.parse(localStorage.getItem('chapRead') || '[]');
+    if (!cr.includes(chapKey)) { cr.push(chapKey); localStorage.setItem('chapRead', JSON.stringify(cr)); }
+  }
+
+  /* ── Afficher les voix selon avatar ── */
+  function initVoix() {
+    var av = localStorage.getItem('avatar') || 'none';
+    document.querySelectorAll('[data-voix]').forEach(function(el) {
+      el.style.display = (el.getAttribute('data-voix') === av || av === 'none') ? 'block' : 'none';
+    });
+  }
+
+  return { getNiveau: getNiveau, renderNiveauPill: renderNiveauPill, choisirChemin: choisirChemin, marquerLu: marquerLu, initVoix: initVoix };
+})();
+
+/* ── QCM standard ── */
+var DefiQCM = (function() {
+  var done = {};
+  function repondre(btnEl, defiId, estCorrect, feedbacks) {
+    if (done[defiId]) return;
+    done[defiId] = true;
+    var container = document.getElementById('defi-' + defiId);
+    container.querySelectorAll('.defi-option').forEach(function(b) { b.disabled = true; });
+    btnEl.classList.add(estCorrect ? 'correct' : 'wrong');
+    var fb = document.getElementById('fb-' + defiId);
+    if (fb) {
+      var f = estCorrect ? feedbacks.bon : feedbacks.mauvais;
+      fb.className = 'defi-feedback show ' + (estCorrect ? 'df-bon' : 'df-mal');
+      fb.innerHTML = f;
+    }
+    majScore(defiId, estCorrect);
+    return estCorrect;
+  }
+  function majScore(defiId, ok) {
+    var bar = document.getElementById('stars-' + defiId.split('-')[0]);
+    if (!bar) return;
+    // handled per-chapter
+  }
+  return { repondre: repondre };
+})();
+
+/* ── Drag & Drop générique ── */
+var DragDrop = (function() {
+  var currentDrag = null;
+  var slotData = {};
+  var done = false;
+
+  function init(containerId) {
+    slotData = {}; done = false;
+    var c = document.getElementById(containerId);
+    if (!c) return;
+    c.querySelectorAll('.dd-chip').forEach(function(chip) {
+      chip.addEventListener('dragstart', function() {
+        currentDrag = chip.dataset.key;
+        chip.classList.add('dragging');
+      });
+      chip.addEventListener('dragend', function() { chip.classList.remove('dragging'); });
+    });
+    c.querySelectorAll('.dd-slot').forEach(function(slot) {
+      slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('over'); });
+      slot.addEventListener('dragleave', function() { slot.classList.remove('over'); });
+      slot.addEventListener('drop', function(e) {
+        e.preventDefault(); slot.classList.remove('over');
+        if (!currentDrag || done) return;
+        // Remove chip from previous slot
+        Object.keys(slotData).forEach(function(sid) {
+          if (slotData[sid] === currentDrag && sid !== slot.id) {
+            var prev = document.getElementById(sid);
+            if (prev) { prev.innerHTML = prev.getAttribute('data-orig') || ''; prev.classList.remove('correct','wrong'); }
+            delete slotData[sid];
+            var prevChip = document.getElementById('chip-' + currentDrag);
+            if (prevChip) prevChip.classList.remove('placed');
+          }
+        });
+        var chipEl = document.getElementById('chip-' + currentDrag);
+        var label  = chipEl ? chipEl.textContent : currentDrag;
+        var orig   = slot.getAttribute('data-orig') || slot.textContent;
+        if (!slot.getAttribute('data-orig')) slot.setAttribute('data-orig', slot.textContent);
+        slot.innerHTML = '<strong>' + label + '</strong><br><span style="font-size:.8rem;color:#7A8FA0;">' + orig + '</span>';
+        slotData[slot.id] = currentDrag;
+        if (chipEl) chipEl.classList.add('placed');
+        currentDrag = null;
+      });
+    });
+  }
+
+  function verifier(containerId, correct, feedbackId) {
+    if (done) return 0;
+    var c = document.getElementById(containerId);
+    var ok = 0;
+    c.querySelectorAll('.dd-slot').forEach(function(slot) {
+      var val = slotData[slot.id];
+      if (!val) return;
+      var isOk = val === correct[slot.id];
+      slot.classList.add(isOk ? 'correct' : 'wrong');
+      if (isOk) ok++;
+    });
+    var total = Object.keys(correct).length;
+    var fb = document.getElementById(feedbackId);
+    if (fb) {
+      if (ok === total) {
+        fb.className = 'defi-feedback show df-bon';
+        fb.innerHTML = '<strong>Parfait ! ' + ok + '/' + total + '</strong> Toutes les associations sont correctes.';
+        done = true;
+      } else {
+        fb.className = 'defi-feedback show df-partiel';
+        fb.innerHTML = '<strong>' + ok + '/' + total + ' corrects.</strong> Certaines associations sont incorrectes — retirez-les et réessayez.';
+        c.querySelectorAll('.dd-slot.wrong').forEach(function(s) { s.classList.remove('wrong'); });
+      }
+    }
+    return done ? ok : 0;
+  }
+
+  return { init: init, verifier: verifier };
+})();
+
+</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">À la recherche de la valeur perdue</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Accueil</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapitres" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Chapitres</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-chapitres">    
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre1.html">
+ <span class="dropdown-text">Ch. 1 — Pensée antique et médiévale</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre2.html">
+ <span class="dropdown-text">Ch. 2 — Naissance de l’économie politique</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre3.html">
+ <span class="dropdown-text">Ch. 3 — Les Physiocrates</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre4.html">
+ <span class="dropdown-text">Ch. 4 — Les Classiques (I)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre5.html">
+ <span class="dropdown-text">Ch. 5 — Les Classiques (II)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre6.html">
+ <span class="dropdown-text">Ch. 6 — Marx et le socialisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre7.html">
+ <span class="dropdown-text">Ch. 7 — Le marginalisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre8.html">
+ <span class="dropdown-text">Ch. 8 — L’affirmation des néoclassiques</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre9.html">
+ <span class="dropdown-text">Ch. 9 — La révolution keynésienne</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre10.html">
+ <span class="dropdown-text">Ch. 10 — La synthèse de Samuelson</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre11.html">
+ <span class="dropdown-text">Ch. 11 — Le monétarisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre12.html">
+ <span class="dropdown-text">Ch. 12 — État des lieux</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../carte-debats.html"> 
+<span class="menu-text">Carte des débats</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../quiz.html"> 
+<span class="menu-text">Quiz</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../carnet.html"> 
+<span class="menu-text">Carnet de bord</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../apropos.html"> 
+<span class="menu-text">À propos</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../profil.html"> 
+<span class="menu-text">Mon profil</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#contexte" id="toc-contexte" class="nav-link active" data-scroll-target="#contexte">Contexte</a></li>
+  <li><a href="#les-auteurs" id="toc-les-auteurs" class="nav-link" data-scroll-target="#les-auteurs">Les auteurs</a>
+  <ul class="collapse">
+  <li><a href="#auteurs-anglais" id="toc-auteurs-anglais" class="nav-link" data-scroll-target="#auteurs-anglais">Auteurs anglais</a></li>
+  <li><a href="#auteurs-continentaux" id="toc-auteurs-continentaux" class="nav-link" data-scroll-target="#auteurs-continentaux">Auteurs continentaux</a></li>
+  <li><a href="#lécole-historique-allemande" id="toc-lécole-historique-allemande" class="nav-link" data-scroll-target="#lécole-historique-allemande">L’école historique allemande</a></li>
+  </ul></li>
+  <li><a href="#les-grands-débats" id="toc-les-grands-débats" class="nav-link" data-scroll-target="#les-grands-débats">Les grands débats</a>
+  <ul class="collapse">
+  <li><a href="#la-controverse-sur-les-débouchés" id="toc-la-controverse-sur-les-débouchés" class="nav-link" data-scroll-target="#la-controverse-sur-les-débouchés">La controverse sur les débouchés</a></li>
+  <li><a href="#la-théorie-de-la-valeur" id="toc-la-théorie-de-la-valeur" class="nav-link" data-scroll-target="#la-théorie-de-la-valeur">La théorie de la valeur</a></li>
+  <li><a href="#le-débat-sur-les-poor-laws" id="toc-le-débat-sur-les-poor-laws" class="nav-link" data-scroll-target="#le-débat-sur-les-poor-laws">Le débat sur les Poor Laws</a></li>
+  </ul></li>
+  <li><a href="#résonances-contemporaines" id="toc-résonances-contemporaines" class="nav-link" data-scroll-target="#résonances-contemporaines">Résonances contemporaines</a></li>
+  <li><a href="#questions-de-réflexion" id="toc-questions-de-réflexion" class="nav-link" data-scroll-target="#questions-de-réflexion">Questions de réflexion</a></li>
+  <li><a href="#question-flash" id="toc-question-flash" class="nav-link" data-scroll-target="#question-flash">Question flash</a></li>
+  <li><a href="#carrefour-décisionnel" id="toc-carrefour-décisionnel" class="nav-link" data-scroll-target="#carrefour-décisionnel">Carrefour décisionnel</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Ch. 5 — Les Classiques (II)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="chapter-meta">XIX<sup>e</sup> siècle · Héritiers et dissidences</div>
+<script>
+let cr = JSON.parse(localStorage.getItem('chapRead') || '[]');
+if (!cr.includes('ch5')) { cr.push('ch5'); localStorage.setItem('chapRead', JSON.stringify(cr)); }
+document.addEventListener('DOMContentLoaded', function() {
+  const av = localStorage.getItem('avatar') || 'none';
+  document.querySelectorAll('[data-voix]').forEach(el => {
+    el.style.display = (el.getAttribute('data-voix') === av || av === 'none') ? 'block' : 'none';
+  });
+});
+</script>
+<p>Smith et Ricardo ont posé les fondations. Leurs successeurs vont les habiter, les étendre — et les fragiliser. Ce chapitre est celui des tensions internes au paradigme classique : tensions sur la population (Malthus), sur les débouchés (Say vs Malthus), sur la valeur, et sur la méthode elle-même avec l’école historique allemande.</p>
+<div style="background:#EAF1FA;border:1px solid #B8D0E8;border-left:4px solid #1A3A5C;border-radius:0 6px 6px 0;padding:1rem 1.3rem;margin:2rem 0 1.5rem;">
+  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#1A3A5C;margin-bottom:0.6rem;">🔗 Fils du débat</div>
+  <div style="font-size:0.87rem;color:#1E2E3A;line-height:1.7;">
+    <div style="margin-bottom:0.5rem;">**← Ch. 4** Ricardo et Smith posent les bases : valeur-travail, avantages comparatifs, classes sociales. Ce chapitre explore les fractures internes à cette école.</div>
+    <div style="margin-bottom:0.6rem;">**→ Ch. 6** Marx synthétise et radicalise : il prend la valeur-travail des Classiques et en tire une théorie de l'exploitation que Mill refusait. **→ Ch. 9** Keynes réhabilitera Malthus : la demande effective insuffisante est bien la cause des crises — Say avait tort. Il faudra un siècle pour le reconnaître.</div>
+    <div style="font-style:italic;color:#2E6DA4;border-top:1px solid #C8DCF0;padding-top:0.5rem;margin-top:0.3rem;">❓ Mill distingue lois de production (naturelles, invariables) et lois de distribution (sociales, modifiables). Cette distinction est-elle tenable ? Quelles politiques autorise-t-elle — et lesquelles interdit-elle ?</div>
+  </div>
+</div>
+<hr>
+<section id="contexte" class="level2">
+<h2 class="anchored" data-anchor-id="contexte">Contexte</h2>
+<p>La révolution industrielle, dans sa deuxième phase, multiplie les usines et les villes. La misère ouvrière s’étale au grand jour et pose une question que Smith et Ricardo avaient en partie esquivée : la croissance profite-t-elle à tous ? Les <em>Poor Laws</em> anglaises — ancêtre du système d’assistance — font débat : aident-elles les pauvres ou les reproduisent-elles ?</p>
+<div class="voix-personnage marchand" data-voix="marchand" style="display:none">
+  <span class="voix-label">Votre regard de marchand</span>
+  La loi de Say est votre alliée naturelle. Si toute offre crée sa propre demande, il n'y a pas de crise de surproduction durable : le marché s'équilibre toujours. Ce principe justifie la confiance dans le marché et minore le rôle de la demande dans les crises. Mais la Grande Dépression de 1929, que vous lirez au chapitre 9, fera voler cet optimisme en éclats.
+</div>
+<div class="voix-personnage philosophe" data-voix="philosophe" style="display:none">
+  <span class="voix-label">Votre regard de philosophe</span>
+  L'école historique allemande est votre allié dans ce chapitre. Elle refuse l'universalisme des Classiques : les lois économiques ne sont pas des vérités éternelles mais des constructions historiques et culturelles. C'est une position épistémologique forte — et une critique de la méthode hypothético-déductive que les économistes mathématiques généraliseront au XX<sup>e</sup> siècle.
+</div>
+<div class="voix-personnage ouvrier" data-voix="ouvrier" style="display:none">
+  <span class="voix-label">Votre regard d'ouvrier</span>
+  Malthus est votre adversaire. Sa critique des Poor Laws revient à dire que l'assistance aux pauvres aggrave leur condition en encourageant leur fécondité. C'est un argument que vous retrouverez, sous des formes modernisées, dans tous les débats sur l'État-providence. Mill est plus nuancé : il distingue les lois de production (naturelles) des lois de distribution (sociales, donc modifiables). C'est une porte ouverte vers la réforme.
+</div>
+<div class="voix-personnage entrepreneur" data-voix="entrepreneur" style="display:none">
+  <span class="voix-label">Votre regard d'entrepreneur</span>
+  Malthus préoccupe les entrepreneurs de son époque : si la population croît plus vite que les ressources, les salaires baissent (plus de travailleurs disponibles) mais la demande intérieure stagne. Say vous rassure : produire, c'est créer les revenus qui permettront d'acheter. Ces deux logiques sont en tension constante. L'économiste américain contemporain Larry Summers, avec sa thèse de la « stagnation séculaire », a réactivé ce débat en 2013.
+</div>
+<hr>
+</section>
+<section id="les-auteurs" class="level2">
+<h2 class="anchored" data-anchor-id="les-auteurs">Les auteurs</h2>
+<section id="auteurs-anglais" class="level3">
+<h3 class="anchored" data-anchor-id="auteurs-anglais">Auteurs anglais</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Thomas Robert Malthus (1766–1834)">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Thomas Robert Malthus (1766–1834)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pasteur anglican et premier professeur d’économie en Angleterre. Son <em>Essai sur le principe de population</em> (1798) énonce la thèse la plus pessimiste de l’économie classique.</p>
+<p>La population croît selon une <strong>progression géométrique</strong> (2, 4, 8…), les ressources alimentaires selon une <strong>progression arithmétique</strong> (1, 2, 3…). Il en résulte une misère structurelle que seuls des freins <em>préventifs</em> (mariage tardif, continence) ou <em>répressifs</em> (famines, épidémies, guerres) peuvent corriger.</p>
+<p>Malthus s’oppose à la loi de Say : une demande globale insuffisante peut produire une dépression durable. Il juge les <em>Poor Laws</em> contre-productives : elles augmentent les revenus disponibles des pauvres, qui en font plus d’enfants, ce qui finit par aggraver leur situation.</p>
+</div>
+</div>
+<p><strong>John Stuart Mill</strong> (1806–1873) est le classique le plus ouvert aux réformes sociales. Sa distinction fondamentale : les lois de <strong>production</strong> sont naturelles et immuables ; les lois de <strong>distribution</strong> sont sociales et donc modifiables par la politique. Il est libéral, mais d’un libéralisme qui admet l’intervention correctrice.</p>
+</section>
+<section id="auteurs-continentaux" class="level3">
+<h3 class="anchored" data-anchor-id="auteurs-continentaux">Auteurs continentaux</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Jean-Baptiste Say (1767–1832)">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Jean-Baptiste Say (1767–1832)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Économiste français, auteur du <em>Traité d’économie politique</em> (1803).</p>
+<p><strong>Loi de Say</strong> : « Les produits s’échangent contre des produits. » Toute production crée un revenu du même montant — salaires, profits, rentes — qui permet d’acheter la production. Il ne peut donc pas y avoir de surproduction générale durable. Les crises sont des déséquilibres <em>sectoriels</em>, pas des effondrements de la demande globale.</p>
+<p>Cette loi est le socle de l’optimisme classique dans les marchés. Keynes la réfutera explicitement en 1936.</p>
+</div>
+</div>
+<p><strong>Frédéric Bastiat</strong> (1801–1850) porte le libéralisme à son extrême. Sa <em>Pétition des fabricants de chandelles</em> — demandant au gouvernement de boucher les fenêtres pour protéger leur industrie contre la concurrence déloyale du soleil — est l’une des satires les plus célèbres en économie.</p>
+</section>
+<section id="lécole-historique-allemande" class="level3">
+<h3 class="anchored" data-anchor-id="lécole-historique-allemande">L’école historique allemande</h3>
+<p>Wilhelm Roscher, Bruno Hildebrand, Karl Knies : contre l’universalisme et le déductivisme des Classiques anglais, ils affirment que les phénomènes économiques sont historiquement situés et culturellement déterminés. Les lois économiques ne peuvent pas être abstraites hors de leur contexte national et temporel. Cette position anticipe la sociologie économique et l’institutionnalisme du XX<sup>e</sup> siècle.</p>
+<hr>
+</section>
+</section>
+<section id="les-grands-débats" class="level2">
+<h2 class="anchored" data-anchor-id="les-grands-débats">Les grands débats</h2>
+<section id="la-controverse-sur-les-débouchés" class="level3">
+<h3 class="anchored" data-anchor-id="la-controverse-sur-les-débouchés">La controverse sur les débouchés</h3>
+<p><strong>Say</strong> : l’offre crée sa propre demande. Pas de surproduction durable.<br>
+<strong>Malthus</strong> : une épargne excessive peut créer une insuffisance de débouchés et une stagnation durable.</p>
+<p>Ce débat oppose Ricardo (qui suit Say) à Malthus. Keynes dira que Malthus avait raison, et qu’on a mis un siècle à le comprendre.</p>
+</section>
+<section id="la-théorie-de-la-valeur" class="level3">
+<h3 class="anchored" data-anchor-id="la-théorie-de-la-valeur">La théorie de la valeur</h3>
+<p>Smith oscille entre valeur d’usage et valeur d’échange (paradoxe eau/diamant). Ricardo tente de la fonder sur le travail incorporé, mais tombe dans un raisonnement circulaire : la valeur du blé dépend du travail qu’il permet d’acheter, qui dépend du salaire, qui dépend du prix du blé. La résolution viendra du marginalisme (chapitre 7).</p>
+</section>
+<section id="le-débat-sur-les-poor-laws" class="level3">
+<h3 class="anchored" data-anchor-id="le-débat-sur-les-poor-laws">Le débat sur les Poor Laws</h3>
+<p>Malthus y est hostile (elles entretiennent la pauvreté). Mill y est plus favorable (la distribution est modifiable). Ce débat annonce deux siècles de controverses sur l’État-providence.</p>
+<hr>
+</section>
+</section>
+<section id="résonances-contemporaines" class="level2">
+<h2 class="anchored" data-anchor-id="résonances-contemporaines">Résonances contemporaines</h2>
+<div style="background:#F0F6FD;border:1px solid #B8D0E8;border-radius:6px;padding:1rem 1.3rem;margin-bottom:1.5rem;">
+  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#2E6DA4;margin-bottom:0.5rem;">🌐 Résonances contemporaines</div>
+  <div style="font-size:0.9rem;color:#1E2E3A;line-height:1.75;">La controverse Say-Malthus sur la demande effective est revenue en force avec les **plans de relance post-COVID** (2020–21) : stimuler la demande ou attendre l'ajustement spontané des marchés ? Et la loi de population de Malthus, longtemps ridiculisée, inspire discrètement les débats sur les **limites planétaires** : la Terre peut-elle supporter une population de 10 milliards consommant comme les Européens d'aujourd'hui ?</div>
+</div>
+</section>
+<section id="questions-de-réflexion" class="level2">
+<h2 class="anchored" data-anchor-id="questions-de-réflexion">Questions de réflexion</h2>
+<ol type="1">
+<li>La loi de Malthus est-elle toujours pertinente ? Discutez à la lumière de la transition démographique et des débats contemporains sur les ressources naturelles.</li>
+<li>Expliquez la loi de Say. En quoi Keynes la réfute-t-il ?</li>
+<li>En quoi l’école historique allemande anticipe-t-elle la sociologie économique contemporaine ?</li>
+<li>Mill distingue lois de production et lois de distribution. Quelle politique économique cela autorise-t-il ?</li>
+</ol>
+<hr>
+<hr>
+<details style="margin-top:0.6rem;margin-bottom:1.5rem;">
+  <summary style="cursor:pointer;font-size:0.82rem;font-weight:600;color:#2E6DA4;padding:0.4rem 0;list-style:none;display:flex;align-items:center;gap:6px;">
+    <span style="background:#EAF1FA;border:1px solid #B8D0E8;border-radius:4px;padding:2px 8px;font-size:0.72rem;">💡 Pistes de réponse</span>
+    <span style="color:#7A8FA0;font-size:0.78rem;font-weight:400;">(cliquer pour révéler — essayez d'abord par vous-même)</span>
+  </summary>
+  <div style="border:1px solid #D0DCE8;border-radius:0 0 6px 6px;border-top:none;padding:1rem 1.1rem;background:white;margin-top:0;">
+    
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ La loi de Malthus est-elle pertinente…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">Elle a empiriquement *échoué* dans les pays développés : la transition démographique (urbanisation + éducation → natalité en baisse) a brisé la spirale malthusienne. Elle *reste pertinente* dans certaines régions (Sahel) et dans le débat sur les *limites planétaires* (ressources finies, réchauffement). Nuance : Malthus ignorait le progrès technique. La vraie question est : le progrès peut-il toujours compenser la pression démographique ?</div>
+    </div>
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ Loi de Say et réfutation keynésienne…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">Say : toute production distribue des revenus (salaires + profits + rentes) qui reviennent sur les marchés → pas de surproduction durable. Keynes : les agents peuvent épargner (préférence pour la liquidité) → la demande peut être chroniquement insuffisante. Preuve empirique : la Grande Dépression — l'économie est restée en sous-emploi pendant 10 ans sans s'auto-corriger.</div>
+    </div>
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ École historique allemande et sociologie économique…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">Schmoller refuse les lois universelles : les comportements économiques sont *historiquement* et *culturellement* situés. Cette intuition fonde la sociologie économique de Weber (L'Éthique protestante) et inspira plus tard Polanyi (La Grande Transformation) et les institutionnalistes. L'économie n'est pas une physique sociale — c'est une discipline historique.</div>
+    </div>
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ Mill : production vs distribution…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">Les lois de production (rendements décroissants, division du travail) sont contraintes par la nature — on ne peut pas les modifier. Les lois de distribution (salaires, profits, rentes) sont des *constructions sociales* : elles dépendent des droits de propriété, des institutions, des rapports de force. Mill en déduit : on peut redistribuer sans briser la production. Marx répondra : non, les lois de distribution *sont* les lois de production capitalistes.</div>
+    </div>
+  </div>
+</details>
+</section>
+<section id="question-flash" class="level2">
+<h2 class="anchored" data-anchor-id="question-flash">Question flash</h2>
+<div style="background:#0D2137;border-radius:8px;padding:1.3rem 1.5rem;margin:1.5rem 0;">
+  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#4A90C4;margin-bottom:0.6rem;">⚡ Question flash — Retrieve Practice</div>
+  <div style="font-size:0.95rem;color:#EAF1F8;line-height:1.7;margin-bottom:0.8rem;">**Question flash :** Que répond Say à Malthus quand ce dernier affirme qu'une épargne excessive peut provoquer une crise de demande ?</div>
+  <div style="font-size:0.72rem;color:#4A6A85;margin-bottom:0.8rem;">Ch. 5 · Concepts : loi de Say / demande effective / Poor Laws</div>
+  <button id="flash-btn" onclick="(function(){
+    var el=document.getElementById('flash-answer');
+    var btn=document.getElementById('flash-btn');
+    if(el.style.display==='none'){el.style.display='block';btn.textContent='▲ Masquer la réponse';}
+    else{el.style.display='none';btn.textContent='▼ Voir la réponse-modèle';}
+  })()" style="background:#2E6DA4;color:white;border:none;padding:0.5rem 1.1rem;border-radius:5px;cursor:pointer;font-size:0.82rem;font-weight:600;font-family:'Source Sans 3',sans-serif;">▼ Voir la réponse-modèle</button>
+  <div id="flash-answer" style="display:none;margin-top:0.8rem;background:#EAF1FA;border-radius:5px;padding:0.8rem 1rem;font-size:0.88rem;color:#0D2137;line-height:1.7;">Say répond que l'épargne est immédiatement investie — via le système financier — et revient donc sur les marchés sous forme de demande d'investissement. Il ne peut pas y avoir d'excès d'épargne global. Keynes donnera raison à Malthus : l'épargne peut rester thésaurisée (préférence pour la liquidité) et créer une insuffisance de demande.</div>
+</div>
+</section>
+<section id="carrefour-décisionnel" class="level2">
+<h2 class="anchored" data-anchor-id="carrefour-décisionnel">Carrefour décisionnel</h2>
+<div class="carrefour-wrap" id="carrefour-5">
+  <div class="carrefour-header">
+    <div class="carrefour-icon">⚡</div>
+    <h3 class="carrefour-title anchored">Carrefour — Chapitre 5</h3>
+    <span id="niveau-pill-5" class="chapter-level-pill level-intermediaire" style="display:none"></span>
+  </div>
+
+  <div class="carrefour-scenario">
+    John Stuart Mill vous interroge en 1848 : « Les lois de la production sont naturelles — rien ne peut changer le fait que la terre a des rendements décroissants. Mais les lois de la distribution sont sociales — on peut choisir comment répartir ce qui est produit. Quelle réforme proposez-vous ? »
+  </div>
+
+  <div id="paths-5" class="carrefour-paths">
+    
+      <button class="carrefour-path" data-chemin="A" onclick="choisirChemin(this)">
+        <span class="path-letter">A</span>
+        <div>
+          <div>Réformer par l'éducation et les coopératives, sans toucher à la propriété privée</div>
+          <span class="path-tag tag-standard">Libéralisme réformiste (Mill)</span>
+        </div>
+      </button>
+      <button class="carrefour-path" data-chemin="B" onclick="choisirChemin(this)">
+        <span class="path-letter">B</span>
+        <div>
+          <div>Les lois de production ET de distribution sont sociales — tout peut être réformé</div>
+          <span class="path-tag tag-alternatif">Anticipation marxiste</span>
+        </div>
+      </button>
+      <button class="carrefour-path" data-chemin="defi" onclick="choisirChemin(this)">
+        <span class="path-letter">C</span>
+        <div>
+          <div>Relever le défi avant de décider</div>
+          <span class="path-tag tag-defi">Parcours renforcé</span>
+        </div>
+      </button>
+  </div>
+
+  <div id="fb-carrefour-5" class="carrefour-feedback"></div>
+
+  <!-- Défis (masqués jusqu'au choix "defi") -->
+  <div id="defis-5" style="display:none; margin-top:1.5rem; border-top:1px solid #D0DCE8; padding-top:1.2rem;">
+    <div style="font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#4A6A85;margin-bottom:1rem;">Trois défis — répondez avant de décider</div>
+    
+    <div class="defi-wrap">
+      <span class="defi-type-badge badge-cognitif">Cognitif</span>
+      <div class="defi-title">Loi de Say</div>
+      <div class="defi-question">La loi de Say (« l'offre crée sa propre demande ») implique que :</div>
+      <div id="defi-d5-1">
+          <button class="defi-option" onclick="repondreDefi(this, true, 'd5-1')" data-fb-bon="<strong>Correct.</strong> Si toute production crée un revenu équivalent (salaires + profits + rentes), il ne peut y avoir de manque global de demande. Malthus conteste cette thèse : l'épargne peut sortir du circuit et créer une insuffisance de débouchés. Keynes donnera raison à Malthus lors de la Grande Dépression." data-fb-mal="<strong>Non.</strong> La loi de Say implique que toute offre crée sa demande correspondante : pas de surproduction générale durable. C'est la réponse A. L'intervention de l'État pour soutenir la demande est au contraire l'idée keynésienne — critique de Say.">
+            <span class="opt-letter">A</span>
+            <span>Les crises de surproduction générales sont impossibles à long terme</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd5-1')" data-fb-bon="<strong>Correct.</strong> Si toute production crée un revenu équivalent (salaires + profits + rentes), il ne peut y avoir de manque global de demande. Malthus conteste cette thèse : l'épargne peut sortir du circuit et créer une insuffisance de débouchés. Keynes donnera raison à Malthus lors de la Grande Dépression." data-fb-mal="<strong>Non.</strong> La loi de Say implique que toute offre crée sa demande correspondante : pas de surproduction générale durable. C'est la réponse A. L'intervention de l'État pour soutenir la demande est au contraire l'idée keynésienne — critique de Say.">
+            <span class="opt-letter">B</span>
+            <span>L'État doit soutenir la demande en cas de récession</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd5-1')" data-fb-bon="<strong>Correct.</strong> Si toute production crée un revenu équivalent (salaires + profits + rentes), il ne peut y avoir de manque global de demande. Malthus conteste cette thèse : l'épargne peut sortir du circuit et créer une insuffisance de débouchés. Keynes donnera raison à Malthus lors de la Grande Dépression." data-fb-mal="<strong>Non.</strong> La loi de Say implique que toute offre crée sa demande correspondante : pas de surproduction générale durable. C'est la réponse A. L'intervention de l'État pour soutenir la demande est au contraire l'idée keynésienne — critique de Say.">
+            <span class="opt-letter">C</span>
+            <span>Le salaire réel détermine toujours le niveau de l'emploi</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd5-1')" data-fb-bon="<strong>Correct.</strong> Si toute production crée un revenu équivalent (salaires + profits + rentes), il ne peut y avoir de manque global de demande. Malthus conteste cette thèse : l'épargne peut sortir du circuit et créer une insuffisance de débouchés. Keynes donnera raison à Malthus lors de la Grande Dépression." data-fb-mal="<strong>Non.</strong> La loi de Say implique que toute offre crée sa demande correspondante : pas de surproduction générale durable. C'est la réponse A. L'intervention de l'État pour soutenir la demande est au contraire l'idée keynésienne — critique de Say.">
+            <span class="opt-letter">D</span>
+            <span>La monnaie crée de l'inflation si elle est trop abondante</span>
+          </button>
+      </div>
+      <div id="fb-d5-1" class="defi-feedback"></div>
+    </div>
+    <div class="defi-wrap">
+      <span class="defi-type-badge badge-pratique">Pratique</span>
+      <div class="defi-title">La controverse des Poor Laws</div>
+      <div class="defi-question">Malthus s'oppose aux Poor Laws (aides aux pauvres) car selon lui elles :</div>
+      <div id="defi-d5-2">
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd5-2')" data-fb-bon="<strong>Exact.</strong> Malthus pense que aider les pauvres encourage la natalité, ce qui augmente la population plus vite que les subsistances — perpétuant la misère. Mill répondra que les lois de distribution sont sociales et modifiables sans ces effets pervers." data-fb-mal="<strong>Non.</strong> La bonne réponse est B. Pour Malthus, les Poor Laws sont contre-productives : elles poussent les pauvres à avoir plus d'enfants, aggravant la surpopulation. C'est un argument démographique, pas budgétaire.">
+            <span class="opt-letter">A</span>
+            <span>Coûtent trop cher à l'État et creusent le déficit public</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, true, 'd5-2')" data-fb-bon="<strong>Exact.</strong> Malthus pense que aider les pauvres encourage la natalité, ce qui augmente la population plus vite que les subsistances — perpétuant la misère. Mill répondra que les lois de distribution sont sociales et modifiables sans ces effets pervers." data-fb-mal="<strong>Non.</strong> La bonne réponse est B. Pour Malthus, les Poor Laws sont contre-productives : elles poussent les pauvres à avoir plus d'enfants, aggravant la surpopulation. C'est un argument démographique, pas budgétaire.">
+            <span class="opt-letter">B</span>
+            <span>Incitent les pauvres à avoir plus d'enfants, aggravant la surpopulation et la misère à long terme</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd5-2')" data-fb-bon="<strong>Exact.</strong> Malthus pense que aider les pauvres encourage la natalité, ce qui augmente la population plus vite que les subsistances — perpétuant la misère. Mill répondra que les lois de distribution sont sociales et modifiables sans ces effets pervers." data-fb-mal="<strong>Non.</strong> La bonne réponse est B. Pour Malthus, les Poor Laws sont contre-productives : elles poussent les pauvres à avoir plus d'enfants, aggravant la surpopulation. C'est un argument démographique, pas budgétaire.">
+            <span class="opt-letter">C</span>
+            <span>Favorisent les propriétaires fonciers au détriment des capitalistes</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd5-2')" data-fb-bon="<strong>Exact.</strong> Malthus pense que aider les pauvres encourage la natalité, ce qui augmente la population plus vite que les subsistances — perpétuant la misère. Mill répondra que les lois de distribution sont sociales et modifiables sans ces effets pervers." data-fb-mal="<strong>Non.</strong> La bonne réponse est B. Pour Malthus, les Poor Laws sont contre-productives : elles poussent les pauvres à avoir plus d'enfants, aggravant la surpopulation. C'est un argument démographique, pas budgétaire.">
+            <span class="opt-letter">D</span>
+            <span>Empêchent les salaires de baisser et bloquent l'ajustement du marché du travail</span>
+          </button>
+      </div>
+      <div id="fb-d5-2" class="defi-feedback"></div>
+    </div>
+    <div class="defi-stars" id="stars-5" style="display:none;">
+      <span class="star-icon" id="st-5-1">☆</span>
+      <span class="star-icon" id="st-5-2">☆</span>
+      <span class="star-icon" id="st-5-3">☆</span>
+      <span style="font-size:.85rem;color:#4A6A85;margin-left:4px;">Défis complétés : <strong id="score-5">0</strong> / 2</span>
+    </div>
+  </div>
+
+  <!-- Bannière continuer -->
+  <div id="banner-5" class="continue-banner" style="display:none; margin-top:1.2rem;">
+    <h3 id="banner-titre-5" class="anchored">Votre verdict</h3>
+    <p id="banner-body-5"></p>
+    <a href="../chapitres/chapitre6.html" class="btn-continue-ch" id="btn-continue-5" style="display:none;">Ch. 6 — Marx et le socialisme →</a>
+  </div>
+</div>
+
+<script>
+(function() {
+  CarrefourEngine.renderNiveauPill('niveau-pill-5');
+
+  var feedbacks = {
+  'A': {cls: 'fb-bon', html: '<strong>Position millienne.</strong> Mill croit que le progrès social passe par l\'éducation du peuple et l\'émergence de coopératives ouvrières — pas par la révolution. Marx (ch.&nbsp;6) jugera cette position insuffisante : les rapports de production ne se réforment pas de l\'intérieur du capitalisme.'},
+  'B': {cls: 'fb-partiel', html: '<strong>Position radicale.</strong> Vous avez déjà la posture marxiste. Marx ira plus loin que Mill : non seulement la distribution, mais les <em>rapports de production</em> eux-mêmes sont des constructions sociales à dépasser. Le ch.&nbsp;6 développera cette critique.'},
+  'defi': {cls: 'fb-info', html: ''},
+  };
+  var conclusions = {
+  'A': {titre: 'Le réformisme libéral de Mill', body: 'Vous entrez dans le ch.&nbsp;6 avec la question de Mill en tête : si la distribution peut être réformée, pourquoi Marx dit-il que cela ne suffit pas ? La réponse est dans la notion d\'aliénation et de rapports de production.'},
+  'B': {titre: 'La radicalité vous attire', body: 'Le ch.&nbsp;6 sera votre chapitre : Marx reprend exactement votre intuition — les rapports de production sont des constructions sociales à dépasser, pas à réformer de l\'intérieur.'},
+  'defi': {titre: 'Verdict construit', body: 'Vous maîtrisez la loi de Say et le débat sur les Poor Laws. Le ch.&nbsp;6 confrontera ces intuitions à la critique marxiste — qui parte des mêmes constats classiques pour en tirer des conclusions radicalement différentes.'},
+  };
+  var numDefis = 2;
+  var defiScore = 0;
+  var defiDone = {};
+
+  window.choisirChemin = function(btn) {
+    var chemin = btn.getAttribute('data-chemin');
+    document.querySelectorAll('#paths-5 .carrefour-path').forEach(function(b) {
+      b.classList.remove('selected');
+    });
+    btn.classList.add('selected');
+
+    if (chemin === 'defi') {
+      document.getElementById('defis-5').style.display = 'block';
+      document.getElementById('fb-carrefour-5').className = 'carrefour-feedback';
+      document.getElementById('defis-5').scrollIntoView({behavior:'smooth', block:'nearest'});
+      return;
+    }
+
+    var fb = feedbacks[chemin];
+    var el = document.getElementById('fb-carrefour-5');
+    if (fb) {
+      el.className = 'carrefour-feedback show ' + fb.cls;
+      el.innerHTML = fb.html;
+    }
+    afficherConclusion(chemin);
+  };
+
+  window.repondreDefi = function(btn, correct, defiId) {
+    if (defiDone[defiId]) return;
+    defiDone[defiId] = true;
+    var container = document.getElementById('defi-' + defiId);
+    container.querySelectorAll('.defi-option').forEach(function(b) { b.disabled = true; });
+    btn.classList.add(correct ? 'correct' : 'wrong');
+    var fb = document.getElementById('fb-' + defiId);
+    if (fb) {
+      fb.className = 'defi-feedback show ' + (correct ? 'df-bon' : 'df-mal');
+      fb.innerHTML = correct ? btn.getAttribute('data-fb-bon') : btn.getAttribute('data-fb-mal');
+    }
+    defiScore++;
+    var starsBar = document.getElementById('stars-5');
+    starsBar.style.display = 'flex';
+    document.getElementById('score-5').textContent = defiScore;
+    for (var i = 1; i <= defiScore; i++) {
+      var s = document.getElementById('st-5-' + i);
+      if (s) { s.textContent = '★'; s.style.color = '#2E6DA4'; }
+    }
+    if (defiScore >= numDefis) {
+      setTimeout(function() { afficherConclusion('defi'); }, 600);
+    }
+  };
+
+  function afficherConclusion(chemin) {
+    var c = conclusions[chemin] || conclusions[Object.keys(conclusions)[0]];
+    document.getElementById('banner-titre-5').textContent = c.titre;
+    document.getElementById('banner-body-5').innerHTML = c.body;
+    var banner = document.getElementById('banner-5');
+    banner.style.display = 'block';
+    var btn = document.getElementById('btn-continue-5');
+    if (btn) btn.style.display = 'inline-block';
+    banner.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+})();
+</script>
+<div class="chap-nav">
+<p><a href="../chapitres/chapitre4.html">← Ch. 4</a></p>
+<p><a href="../chapitres/chapitre6.html">Ch. 6 — Marx et le socialisme →</a></p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Histoire Économique — Pascaline Vincent, 2026</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Construit avec <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

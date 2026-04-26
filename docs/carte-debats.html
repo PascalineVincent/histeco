@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Carte des débats – À la recherche de la valeur perdue</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ff98d69c136e79b123368504bdb7637c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;family=Source+Sans+3:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<script>
+/* carrefour.js — moteur de navigation adaptative
+   Utilisé par tous les chapitres.
+   Expose: CarrefourEngine, DragDrop, DefiQCM, DefiImmersif */
+
+var CarrefourEngine = (function() {
+  /* ── Niveau depuis localStorage ── */
+  function getNiveau() {
+    var v = (localStorage.getItem('niveau') || '').toLowerCase();
+    if (v.includes('avan')) return 'avance';
+    if (v.includes('but') || v.includes('but')) return 'debutant';
+    return 'intermediaire';
+  }
+
+  /* ── Injecter la pastille niveau ── */
+  function renderNiveauPill(containerId) {
+    var el = document.getElementById(containerId);
+    if (!el) return;
+    var n = getNiveau();
+    var labels = { debutant: 'Niveau débutant', intermediaire: 'Niveau intermédiaire', avance: 'Niveau avancé' };
+    var cls    = { debutant: 'level-debutant',   intermediaire: 'level-intermediaire',   avance: 'level-avance' };
+    el.className = 'chapter-level-pill ' + cls[n];
+    el.textContent = labels[n];
+    el.style.display = 'inline-flex';
+  }
+
+  /* ── Choisir un chemin (afficher feedback + banner) ── */
+  function choisirChemin(btnEl, feedbackId, bannerId, texte, consoliderUrl) {
+    var type = btnEl.getAttribute('data-chemin');
+    // Marque le bouton
+    document.querySelectorAll('.carrefour-path').forEach(function(b) {
+      b.classList.remove('selected');
+    });
+    btnEl.classList.add('selected');
+
+    var fb = document.getElementById(feedbackId);
+    if (fb) {
+      fb.className = 'carrefour-feedback show fb-' + (texte.cls || 'info');
+      fb.innerHTML = texte.html;
+    }
+    if (type === 'consolider' && consoliderUrl) {
+      setTimeout(function() { window.location.href = consoliderUrl; }, 600);
+      return;
+    }
+    // Afficher bannière continuer
+    var ban = document.getElementById(bannerId);
+    if (ban) {
+      ban.style.display = 'block';
+      ban.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  /* ── Marquer chapitre lu ── */
+  function marquerLu(chapKey) {
+    var cr = JSON.parse(localStorage.getItem('chapRead') || '[]');
+    if (!cr.includes(chapKey)) { cr.push(chapKey); localStorage.setItem('chapRead', JSON.stringify(cr)); }
+  }
+
+  /* ── Afficher les voix selon avatar ── */
+  function initVoix() {
+    var av = localStorage.getItem('avatar') || 'none';
+    document.querySelectorAll('[data-voix]').forEach(function(el) {
+      el.style.display = (el.getAttribute('data-voix') === av || av === 'none') ? 'block' : 'none';
+    });
+  }
+
+  return { getNiveau: getNiveau, renderNiveauPill: renderNiveauPill, choisirChemin: choisirChemin, marquerLu: marquerLu, initVoix: initVoix };
+})();
+
+/* ── QCM standard ── */
+var DefiQCM = (function() {
+  var done = {};
+  function repondre(btnEl, defiId, estCorrect, feedbacks) {
+    if (done[defiId]) return;
+    done[defiId] = true;
+    var container = document.getElementById('defi-' + defiId);
+    container.querySelectorAll('.defi-option').forEach(function(b) { b.disabled = true; });
+    btnEl.classList.add(estCorrect ? 'correct' : 'wrong');
+    var fb = document.getElementById('fb-' + defiId);
+    if (fb) {
+      var f = estCorrect ? feedbacks.bon : feedbacks.mauvais;
+      fb.className = 'defi-feedback show ' + (estCorrect ? 'df-bon' : 'df-mal');
+      fb.innerHTML = f;
+    }
+    majScore(defiId, estCorrect);
+    return estCorrect;
+  }
+  function majScore(defiId, ok) {
+    var bar = document.getElementById('stars-' + defiId.split('-')[0]);
+    if (!bar) return;
+    // handled per-chapter
+  }
+  return { repondre: repondre };
+})();
+
+/* ── Drag & Drop générique ── */
+var DragDrop = (function() {
+  var currentDrag = null;
+  var slotData = {};
+  var done = false;
+
+  function init(containerId) {
+    slotData = {}; done = false;
+    var c = document.getElementById(containerId);
+    if (!c) return;
+    c.querySelectorAll('.dd-chip').forEach(function(chip) {
+      chip.addEventListener('dragstart', function() {
+        currentDrag = chip.dataset.key;
+        chip.classList.add('dragging');
+      });
+      chip.addEventListener('dragend', function() { chip.classList.remove('dragging'); });
+    });
+    c.querySelectorAll('.dd-slot').forEach(function(slot) {
+      slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('over'); });
+      slot.addEventListener('dragleave', function() { slot.classList.remove('over'); });
+      slot.addEventListener('drop', function(e) {
+        e.preventDefault(); slot.classList.remove('over');
+        if (!currentDrag || done) return;
+        // Remove chip from previous slot
+        Object.keys(slotData).forEach(function(sid) {
+          if (slotData[sid] === currentDrag && sid !== slot.id) {
+            var prev = document.getElementById(sid);
+            if (prev) { prev.innerHTML = prev.getAttribute('data-orig') || ''; prev.classList.remove('correct','wrong'); }
+            delete slotData[sid];
+            var prevChip = document.getElementById('chip-' + currentDrag);
+            if (prevChip) prevChip.classList.remove('placed');
+          }
+        });
+        var chipEl = document.getElementById('chip-' + currentDrag);
+        var label  = chipEl ? chipEl.textContent : currentDrag;
+        var orig   = slot.getAttribute('data-orig') || slot.textContent;
+        if (!slot.getAttribute('data-orig')) slot.setAttribute('data-orig', slot.textContent);
+        slot.innerHTML = '<strong>' + label + '</strong><br><span style="font-size:.8rem;color:#7A8FA0;">' + orig + '</span>';
+        slotData[slot.id] = currentDrag;
+        if (chipEl) chipEl.classList.add('placed');
+        currentDrag = null;
+      });
+    });
+  }
+
+  function verifier(containerId, correct, feedbackId) {
+    if (done) return 0;
+    var c = document.getElementById(containerId);
+    var ok = 0;
+    c.querySelectorAll('.dd-slot').forEach(function(slot) {
+      var val = slotData[slot.id];
+      if (!val) return;
+      var isOk = val === correct[slot.id];
+      slot.classList.add(isOk ? 'correct' : 'wrong');
+      if (isOk) ok++;
+    });
+    var total = Object.keys(correct).length;
+    var fb = document.getElementById(feedbackId);
+    if (fb) {
+      if (ok === total) {
+        fb.className = 'defi-feedback show df-bon';
+        fb.innerHTML = '<strong>Parfait ! ' + ok + '/' + total + '</strong> Toutes les associations sont correctes.';
+        done = true;
+      } else {
+        fb.className = 'defi-feedback show df-partiel';
+        fb.innerHTML = '<strong>' + ok + '/' + total + ' corrects.</strong> Certaines associations sont incorrectes — retirez-les et réessayez.';
+        c.querySelectorAll('.dd-slot.wrong').forEach(function(s) { s.classList.remove('wrong'); });
+      }
+    }
+    return done ? ok : 0;
+  }
+
+  return { init: init, verifier: verifier };
+})();
+
+</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">À la recherche de la valeur perdue</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Accueil</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapitres" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Chapitres</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-chapitres">    
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre1.html">
+ <span class="dropdown-text">Ch. 1 — Pensée antique et médiévale</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre2.html">
+ <span class="dropdown-text">Ch. 2 — Naissance de l’économie politique</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre3.html">
+ <span class="dropdown-text">Ch. 3 — Les Physiocrates</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre4.html">
+ <span class="dropdown-text">Ch. 4 — Les Classiques (I)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre5.html">
+ <span class="dropdown-text">Ch. 5 — Les Classiques (II)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre6.html">
+ <span class="dropdown-text">Ch. 6 — Marx et le socialisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre7.html">
+ <span class="dropdown-text">Ch. 7 — Le marginalisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre8.html">
+ <span class="dropdown-text">Ch. 8 — L’affirmation des néoclassiques</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre9.html">
+ <span class="dropdown-text">Ch. 9 — La révolution keynésienne</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre10.html">
+ <span class="dropdown-text">Ch. 10 — La synthèse de Samuelson</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre11.html">
+ <span class="dropdown-text">Ch. 11 — Le monétarisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre12.html">
+ <span class="dropdown-text">Ch. 12 — État des lieux</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="./carte-debats.html" aria-current="page"> 
+<span class="menu-text">Carte des débats</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./quiz.html"> 
+<span class="menu-text">Quiz</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./carnet.html"> 
+<span class="menu-text">Carnet de bord</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./apropos.html"> 
+<span class="menu-text">À propos</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./profil.html"> 
+<span class="menu-text">Mon profil</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content column-page" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Carte des débats</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<style>
+.carte-wrap { max-width: 1100px; margin: 0 auto; }
+
+.carte-intro {
+  background: linear-gradient(135deg, #0D2137, #1A3A5C);
+  border-radius: 8px; padding: 1.4rem 1.8rem;
+  color: #B8D4EE; margin-bottom: 1.8rem;
+}
+.carte-intro h2 {
+  font-family: 'Playfair Display', serif;
+  color: #EAF1F8; font-size: 1.25rem; margin-bottom: 0.5rem;
+}
+.carte-intro p { font-size: 0.88rem; line-height: 1.65; margin: 0; }
+
+/* Filter tabs */
+.filtre-nav {
+  display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.4rem;
+}
+.filtre-btn {
+  padding: 0.4rem 1rem;
+  border: 1.5px solid #D0DCE8; border-radius: 20px;
+  background: white; color: #4A6A85;
+  cursor: pointer; font-size: 0.82rem; font-weight: 600;
+  font-family: 'Source Sans 3', sans-serif;
+  transition: all 0.18s;
+}
+.filtre-btn:hover, .filtre-btn.active {
+  background: #1A3A5C; color: white; border-color: #1A3A5C;
+}
+.filtre-btn.valeur  { border-color: #B22222; }
+.filtre-btn.valeur.active  { background: #B22222; border-color: #B22222; }
+.filtre-btn.demande { border-color: #2A7D4F; }
+.filtre-btn.demande.active { background: #2A7D4F; border-color: #2A7D4F; }
+.filtre-btn.monnaie { border-color: #B8860B; }
+.filtre-btn.monnaie.active { background: #B8860B; border-color: #B8860B; }
+.filtre-btn.ineg    { border-color: #5B21B6; }
+.filtre-btn.ineg.active    { background: #5B21B6; border-color: #5B21B6; }
+
+/* SVG map container */
+.map-container {
+  background: white; border: 1px solid #D0DCE8; border-radius: 8px;
+  overflow: hidden; margin-bottom: 1.5rem; position: relative;
+}
+
+/* Detail panel */
+.detail-panel {
+  border: 1px solid #D0DCE8; border-radius: 8px;
+  background: white; padding: 1.3rem 1.5rem;
+  display: none; margin-bottom: 1.5rem;
+  animation: slideIn .2s ease;
+}
+.detail-panel.show { display: block; }
+@keyframes slideIn { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
+
+.dp-meta { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: #4A90C4; margin-bottom: 0.4rem; }
+.dp-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: #0D2137; margin-bottom: 0.7rem; }
+.dp-body { font-size: 0.9rem; color: #2A3D50; line-height: 1.72; margin-bottom: 0.9rem; }
+.dp-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 0.9rem; }
+.dp-tag {
+  font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 20px;
+}
+.tag-valeur  { background: #FEE2E2; color: #B22222; }
+.tag-demande { background: #D1FAE5; color: #2A7D4F; }
+.tag-monnaie { background: #FEF3C7; color: #B8860B; }
+.tag-ineg    { background: #EDE9FE; color: #5B21B6; }
+.tag-methode { background: #EAF1FA; color: #1A3A5C; }
+
+.dp-liens { margin-top: 0.5rem; }
+.dp-liens-title { font-size: 0.75rem; font-weight: 700; color: #4A6A85; margin-bottom: 0.4rem; }
+.dp-lien {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.8rem; color: #2E6DA4; margin-right: 0.7rem;
+  text-decoration: none;
+}
+.dp-lien:hover { text-decoration: underline; }
+
+/* Legend */
+.legende {
+  display: flex; flex-wrap: wrap; gap: 1rem;
+  font-size: 0.78rem; color: #4A6A85;
+  padding: 0.8rem 1rem; background: #F8FAFD;
+  border-top: 1px solid #D0DCE8;
+}
+.leg-item { display: flex; align-items: center; gap: 5px; }
+.leg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.leg-line { width: 24px; height: 2px; flex-shrink: 0; }
+</style>
+
+<div class="carte-wrap">
+
+<div class="carte-intro">
+  <h2 class="anchored">📍 Carte des débats économiques</h2>
+  <p>L'histoire de la pensée économique est une longue conversation — pas une succession de découvertes. Cliquez sur un nœud pour voir le débat, ses participants, et son écho contemporain. Filtrez par thème pour suivre un fil sur les 12 chapitres.</p>
+</div>
+
+<div class="filtre-nav">
+  <button class="filtre-btn active" data-filtre="tous">Tous les débats</button>
+  <button class="filtre-btn valeur" data-filtre="valeur">🔴 Valeur &amp; profit</button>
+  <button class="filtre-btn demande" data-filtre="demande">🟢 Demande &amp; crises</button>
+  <button class="filtre-btn monnaie" data-filtre="monnaie">🟡 Monnaie &amp; inflation</button>
+  <button class="filtre-btn ineg" data-filtre="ineg">🟣 Inégalités &amp; répartition</button>
+</div>
+
+<!-- SVG Map -->
+<div class="map-container">
+<svg id="debate-map" viewbox="0 0 1060 560" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;cursor:default;">
+  <defs>
+    <marker id="arr" viewbox="0 0 10 10" refx="8" refy="5" markerwidth="5" markerheight="5" orient="auto">
+      <path d="M2 2L8 5L2 8" fill="none" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+    </marker>
+    <marker id="arr-r" viewbox="0 0 10 10" refx="8" refy="5" markerwidth="5" markerheight="5" orient="auto">
+      <path d="M2 2L8 5L2 8" fill="none" stroke="#B22222" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+    </marker>
+    <marker id="arr-g" viewbox="0 0 10 10" refx="8" refy="5" markerwidth="5" markerheight="5" orient="auto">
+      <path d="M2 2L8 5L2 8" fill="none" stroke="#2A7D4F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+    </marker>
+    <marker id="arr-y" viewbox="0 0 10 10" refx="8" refy="5" markerwidth="5" markerheight="5" orient="auto">
+      <path d="M2 2L8 5L2 8" fill="none" stroke="#B8860B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+    </marker>
+    <marker id="arr-p" viewbox="0 0 10 10" refx="8" refy="5" markerwidth="5" markerheight="5" orient="auto">
+      <path d="M2 2L8 5L2 8" fill="none" stroke="#5B21B6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <fedropshadow dx="0" dy="2" stddeviation="3" flood-color="#1A3A5C" flood-opacity="0.15"></fedropshadow>
+    </filter>
+  </defs>
+
+  <!-- Background eras -->
+  <rect x="10" y="10" width="155" height="540" rx="6" fill="#F8FAFD" stroke="#E2E8F0" stroke-width="1"></rect>
+  <text x="87" y="30" text-anchor="middle" font-size="9" fill="#94A3B8" font-weight="600" letter-spacing="1">ANTIQUE / MÉDIÉVAL</text>
+  <rect x="175" y="10" width="155" height="540" rx="6" fill="#F8FAFD" stroke="#E2E8F0" stroke-width="1"></rect>
+  <text x="252" y="30" text-anchor="middle" font-size="9" fill="#94A3B8" font-weight="600" letter-spacing="1">CLASSIQUES</text>
+  <rect x="340" y="10" width="155" height="540" rx="6" fill="#F8FAFD" stroke="#E2E8F0" stroke-width="1"></rect>
+  <text x="417" y="30" text-anchor="middle" font-size="9" fill="#94A3B8" font-weight="600" letter-spacing="1">MARGINALISME</text>
+  <rect x="505" y="10" width="165" height="540" rx="6" fill="#F8FAFD" stroke="#E2E8F0" stroke-width="1"></rect>
+  <text x="587" y="30" text-anchor="middle" font-size="9" fill="#94A3B8" font-weight="600" letter-spacing="1">KEYNES / SYNTHÈSE</text>
+  <rect x="680" y="10" width="175" height="540" rx="6" fill="#F8FAFD" stroke="#E2E8F0" stroke-width="1"></rect>
+  <text x="767" y="30" text-anchor="middle" font-size="9" fill="#94A3B8" font-weight="600" letter-spacing="1">MONÉTARISME / NMC</text>
+  <rect x="865" y="10" width="185" height="540" rx="6" fill="#F8FAFD" stroke="#E2E8F0" stroke-width="1"></rect>
+  <text x="957" y="30" text-anchor="middle" font-size="9" fill="#94A3B8" font-weight="600" letter-spacing="1">CONTEMPORAIN</text>
+
+  <!-- ── EDGES (arrows) ── drawn before nodes so nodes appear on top -->
+
+  <!-- Valeur-travail thread (red) -->
+  <line x1="88" y1="120" x2="215" y2="120" stroke="#B22222" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-r)" opacity="0.7" class="edge valeur"></line>
+  <line x1="252" y1="120" x2="380" y2="200" stroke="#B22222" stroke-width="1.5" marker-end="url(#arr-r)" opacity="0.7" class="edge valeur"></line>
+  <line x1="380" y1="200" x2="390" y2="280" stroke="#B22222" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-r)" opacity="0.7" class="edge valeur"></line>
+
+  <!-- Smith → Ricardo → Marx thread -->
+  <line x1="232" y1="155" x2="232" y2="195" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr)" class="edge valeur"></line>
+  <line x1="252" y1="220" x2="390" y2="270" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr)" class="edge valeur"></line>
+  
+  <!-- Say-Malthus thread (green) -->
+  <line x1="270" y1="310" x2="540" y2="310" stroke="#2A7D4F" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-g)" opacity="0.7" class="edge demande"></line>
+  <line x1="540" y1="310" x2="700" y2="400" stroke="#2A7D4F" stroke-width="1.5" marker-end="url(#arr-g)" opacity="0.7" class="edge demande"></line>
+
+  <!-- Marginalisme → Néoclassiques -->
+  <line x1="417" y1="165" x2="505" y2="165" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr)" class="edge valeur"></line>
+
+  <!-- Keynes threads -->
+  <line x1="555" y1="200" x2="555" y2="240" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr)" class="edge demande"></line>
+  <line x1="600" y1="200" x2="720" y2="200" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr)" class="edge demande"></line>
+
+  <!-- Friedman responds to Keynes -->
+  <path d="M 720 200 Q 650 130 600 165" stroke="#B8860B" stroke-width="1.8" fill="none" stroke-dasharray="5,3" marker-end="url(#arr-y)" class="edge monnaie"></path>
+
+  <!-- Monetary thread -->
+  <line x1="88" y1="400" x2="220" y2="400" stroke="#B8860B" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-y)" opacity="0.7" class="edge monnaie"></line>
+  <line x1="280" y1="400" x2="700" y2="200" stroke="#B8860B" stroke-width="1.5" marker-end="url(#arr-y)" opacity="0.7" class="edge monnaie"></line>
+  <line x1="720" y1="230" x2="880" y2="280" stroke="#B8860B" stroke-width="1.5" marker-end="url(#arr-y)" class="edge monnaie"></line>
+
+  <!-- Inequality thread (purple) -->
+  <line x1="270" y1="430" x2="390" y2="350" stroke="#5B21B6" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr-p)" opacity="0.7" class="edge ineg"></line>
+  <line x1="390" y1="350" x2="880" y2="400" stroke="#5B21B6" stroke-width="1.5" marker-end="url(#arr-p)" opacity="0.7" class="edge ineg"></line>
+  <line x1="880" y1="400" x2="900" y2="450" stroke="#5B21B6" stroke-width="1.5" marker-end="url(#arr-p)" class="edge ineg"></line>
+
+  <!-- Lucas critique → DSGE -->
+  <line x1="770" y1="310" x2="880" y2="200" stroke="#94A3B8" stroke-width="1.5" marker-end="url(#arr)" class="edge methode"></line>
+
+  <!-- Piketty responds to Ricardo -->
+  <path d="M 957 400 Q 800 480 270 430" stroke="#5B21B6" stroke-width="1" fill="none" stroke-dasharray="3,4" marker-end="url(#arr-p)" opacity="0.5" class="edge ineg"></path>
+
+  <!-- ── NODES ── -->
+
+  <!-- Ch1: Aristote -->
+  <g class="node" data-id="aristote" data-themes="valeur monnaie" transform="translate(88,100)" style="cursor:pointer;">
+    <circle r="28" fill="#B22222" filter="url(#shadow)"></circle>
+    <text y="-2" text-anchor="middle" font-size="9.5" fill="white" font-weight="700">Aristote</text>
+    <text y="10" text-anchor="middle" font-size="8" fill="#FFCCCC">valeur / monnaie</text>
+    <text y="-38" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.1</text>
+  </g>
+
+  <!-- Ch1: Ibn Khaldoun -->
+  <g class="node" data-id="ibkhaldoun" data-themes="valeur demande" transform="translate(88,200)" style="cursor:pointer;">
+    <circle r="22" fill="#7C3AED" filter="url(#shadow)"></circle>
+    <text y="-2" text-anchor="middle" font-size="8.5" fill="white" font-weight="700">Ibn Khaldoun</text>
+    <text y="9" text-anchor="middle" font-size="7.5" fill="#DDD6FE">cycles / travail</text>
+    <text y="-32" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.1</text>
+  </g>
+
+  <!-- Ch2: Mercantilisme -->
+  <g class="node" data-id="mercantilisme" data-themes="monnaie ineg" transform="translate(252,100)" style="cursor:pointer;">
+    <circle r="24" fill="#B8860B" filter="url(#shadow)"></circle>
+    <text y="-1" text-anchor="middle" font-size="8.5" fill="white" font-weight="700">Mercantilisme</text>
+    <text y="10" text-anchor="middle" font-size="7.5" fill="#FEF3C7">Mun / Colbert</text>
+    <text y="-34" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.2</text>
+  </g>
+
+  <!-- Ch3: Physiocrates -->
+  <g class="node" data-id="physiocrates" data-themes="valeur ineg" transform="translate(232,210)" style="cursor:pointer;">
+    <circle r="24" fill="#2A7D4F" filter="url(#shadow)"></circle>
+    <text y="-1" text-anchor="middle" font-size="8.5" fill="white" font-weight="700">Physiocrates</text>
+    <text y="10" text-anchor="middle" font-size="7.5" fill="#BBF7D0">Quesnay / Turgot</text>
+    <text y="-34" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.3</text>
+  </g>
+
+  <!-- Ch4: Smith -->
+  <g class="node" data-id="smith" data-themes="valeur ineg" transform="translate(232,310)" style="cursor:pointer;">
+    <circle r="26" fill="#1A3A5C" filter="url(#shadow)"></circle>
+    <text y="-2" text-anchor="middle" font-size="9" fill="white" font-weight="700">Adam Smith</text>
+    <text y="9" text-anchor="middle" font-size="7.5" fill="#93C5FD">main invisible</text>
+    <text y="-36" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.4</text>
+  </g>
+
+  <!-- Ch4: Ricardo -->
+  <g class="node" data-id="ricardo" data-themes="valeur ineg" transform="translate(270,420)" style="cursor:pointer;">
+    <circle r="25" fill="#B22222" filter="url(#shadow)"></circle>
+    <text y="-2" text-anchor="middle" font-size="9" fill="white" font-weight="700">Ricardo</text>
+    <text y="9" text-anchor="middle" font-size="7.5" fill="#FFCCCC">rente / avantages comp.</text>
+    <text y="-36" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.4</text>
+  </g>
+
+  <!-- Ch5: Say vs Malthus -->
+  <g class="node" data-id="say" data-themes="demande" transform="translate(270,310)" style="cursor:pointer;">
+    <circle r="21" fill="#2A7D4F" filter="url(#shadow)"></circle>
+    <text y="-1" text-anchor="middle" font-size="8.5" fill="white" font-weight="700">Say</text>
+    <text y="10" text-anchor="middle" font-size="7.5" fill="#BBF7D0">loi des débouchés</text>
+    <text y="-31" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.5</text>
+  </g>
+
+  <!-- Ch6: Marx -->
+  <g class="node" data-id="marx" data-themes="valeur ineg demande" transform="translate(390,280)" style="cursor:pointer;">
+    <circle r="30" fill="#B22222" filter="url(#shadow)"></circle>
+    <text y="-3" text-anchor="middle" font-size="10" fill="white" font-weight="700">Marx</text>
+    <text y="10" text-anchor="middle" font-size="7.5" fill="#FFCCCC">plus-value / aliénation</text>
+    <text y="-41" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.6</text>
+  </g>
+
+  <!-- Ch6: Rosa Luxemburg -->
+  <g class="node" data-id="luxemburg" data-themes="demande ineg" transform="translate(390,380)" style="cursor:pointer;">
+    <circle r="20" fill="#7C3AED" filter="url(#shadow)"></circle>
+    <text y="-1" text-anchor="middle" font-size="8" fill="white" font-weight="700">Luxemburg</text>
+    <text y="10" text-anchor="middle" font-size="7" fill="#DDD6FE">débouchés extérieurs</text>
+    <text y="-30" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.6</text>
+  </g>
+
+  <!-- Ch7-8: Marginalistes -->
+  <g class="node" data-id="marginalisme" data-themes="valeur" transform="translate(417,150)" style="cursor:pointer;">
+    <circle r="26" fill="#1A3A5C" filter="url(#shadow)"></circle>
+    <text y="-2" text-anchor="middle" font-size="8.5" fill="white" font-weight="700">Jevons / Walras</text>
+    <text y="9" text-anchor="middle" font-size="7.5" fill="#93C5FD">utilité marginale</text>
+    <text y="-36" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.7</text>
+  </g>
+
+  <!-- Ch8: Marshall / Pigou -->
+  <g class="node" data-id="marshall" data-themes="valeur ineg" transform="translate(555,150)" style="cursor:pointer;">
+    <circle r="24" fill="#2E6DA4" filter="url(#shadow)"></circle>
+    <text y="-2" text-anchor="middle" font-size="8.5" fill="white" font-weight="700">Marshall / Pigou</text>
+    <text y="9" text-anchor="middle" font-size="7.5" fill="#BAE6FD">offre-demande / externalités</text>
+    <text y="-34" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.8</text>
+  </g>
+
+  <!-- Ch9: Keynes -->
+  <g class="node" data-id="keynes" data-themes="demande monnaie" transform="translate(580,230)" style="cursor:pointer;">
+    <circle r="32" fill="#1A3A5C" filter="url(#shadow)"></circle>
+    <text y="-3" text-anchor="middle" font-size="10" fill="white" font-weight="700">Keynes</text>
+    <text y="10" text-anchor="middle" font-size="7.5" fill="#93C5FD">demande effective</text>
+    <text y="-44" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.9</text>
+  </g>
+
+  <!-- Ch9: Joan Robinson -->
+  <g class="node" data-id="robinson" data-themes="demande valeur" transform="translate(540,330)" style="cursor:pointer;">
+    <circle r="20" fill="#7C3AED" filter="url(#shadow)"></circle>
+    <text y="-1" text-anchor="middle" font-size="8" fill="white" font-weight="700">J. Robinson</text>
+    <text y="10" text-anchor="middle" font-size="7" fill="#DDD6FE">conc. imparfaite</text>
+    <text y="-30" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.9</text>
+  </g>
+
+  <!-- Ch10: Samuelson / IS-LM -->
+  <g class="node" data-id="samuelson" data-themes="demande monnaie" transform="translate(720,180)" style="cursor:pointer;">
+    <circle r="24" fill="#2E6DA4" filter="url(#shadow)"></circle>
+    <text y="-2" text-anchor="middle" font-size="8.5" fill="white" font-weight="700">Samuelson</text>
+    <text y="9" text-anchor="middle" font-size="7.5" fill="#BAE6FD">synthèse IS-LM</text>
+    <text y="-34" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.10</text>
+  </g>
+
+  <!-- Ch11: Friedman -->
+  <g class="node" data-id="friedman" data-themes="monnaie demande" transform="translate(755,300)" style="cursor:pointer;">
+    <circle r="28" fill="#B8860B" filter="url(#shadow)"></circle>
+    <text y="-3" text-anchor="middle" font-size="9.5" fill="white" font-weight="700">Friedman</text>
+    <text y="9" text-anchor="middle" font-size="7.5" fill="#FEF3C7">monétarisme / NAIRU</text>
+    <text y="-40" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.11</text>
+  </g>
+
+  <!-- Ch11: Lucas -->
+  <g class="node" data-id="lucas" data-themes="monnaie" transform="translate(770,410)" style="cursor:pointer;">
+    <circle r="22" fill="#B8860B" filter="url(#shadow)"></circle>
+    <text y="-1" text-anchor="middle" font-size="8.5" fill="white" font-weight="700">Lucas</text>
+    <text y="10" text-anchor="middle" font-size="7.5" fill="#FEF3C7">anticipations rationnelles</text>
+    <text y="-32" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.11</text>
+  </g>
+
+  <!-- Ch12: Piketty -->
+  <g class="node" data-id="piketty" data-themes="ineg valeur" transform="translate(920,410)" style="cursor:pointer;">
+    <circle r="26" fill="#5B21B6" filter="url(#shadow)"></circle>
+    <text y="-2" text-anchor="middle" font-size="9" fill="white" font-weight="700">Piketty</text>
+    <text y="9" text-anchor="middle" font-size="7.5" fill="#DDD6FE">r &gt; g / inégalités</text>
+    <text y="-38" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.12</text>
+  </g>
+
+  <!-- Ch12: Romer / croissance endogène -->
+  <g class="node" data-id="romer" data-themes="valeur" transform="translate(940,280)" style="cursor:pointer;">
+    <circle r="22" fill="#2E6DA4" filter="url(#shadow)"></circle>
+    <text y="-1" text-anchor="middle" font-size="8.5" fill="white" font-weight="700">Romer</text>
+    <text y="10" text-anchor="middle" font-size="7.5" fill="#BAE6FD">croissance endogène</text>
+    <text y="-32" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.12</text>
+  </g>
+
+  <!-- Ch12: Ostrom / Duflo -->
+  <g class="node" data-id="ostrom" data-themes="ineg demande" transform="translate(940,170)" style="cursor:pointer;">
+    <circle r="22" fill="#7C3AED" filter="url(#shadow)"></circle>
+    <text y="-1" text-anchor="middle" font-size="8" fill="white" font-weight="700">Ostrom / Duflo</text>
+    <text y="10" text-anchor="middle" font-size="7.5" fill="#DDD6FE">biens communs / RCT</text>
+    <text y="-32" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.12</text>
+  </g>
+
+  <!-- Ch11: Kydland-Prescott -->
+  <g class="node" data-id="kydland" data-themes="monnaie" transform="translate(880,200)" style="cursor:pointer;">
+    <circle r="20" fill="#B8860B" filter="url(#shadow)"></circle>
+    <text y="-1" text-anchor="middle" font-size="7.5" fill="white" font-weight="700">Kydland-Prescott</text>
+    <text y="10" text-anchor="middle" font-size="7" fill="#FEF3C7">incohérence temporelle</text>
+    <text y="-30" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.11</text>
+  </g>
+
+  <!-- Oresme / monnaie médiévale -->
+  <g class="node" data-id="oresme" data-themes="monnaie" transform="translate(88,390)" style="cursor:pointer;">
+    <circle r="20" fill="#B8860B" filter="url(#shadow)"></circle>
+    <text y="-1" text-anchor="middle" font-size="8.5" fill="white" font-weight="700">Oresme</text>
+    <text y="10" text-anchor="middle" font-size="7.5" fill="#FEF3C7">monnaie / souverain</text>
+    <text y="-30" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.1</text>
+  </g>
+
+  <!-- Mill -->
+  <g class="node" data-id="mill" data-themes="ineg valeur" transform="translate(390,480)" style="cursor:pointer;">
+    <circle r="21" fill="#2A7D4F" filter="url(#shadow)"></circle>
+    <text y="-1" text-anchor="middle" font-size="8.5" fill="white" font-weight="700">J.S. Mill</text>
+    <text y="10" text-anchor="middle" font-size="7.5" fill="#BBF7D0">distribution / réforme</text>
+    <text y="-31" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.5</text>
+  </g>
+
+  <!-- Schumpeter -->
+  <g class="node" data-id="schumpeter" data-themes="demande valeur" transform="translate(620,420)" style="cursor:pointer;">
+    <circle r="23" fill="#1A3A5C" filter="url(#shadow)"></circle>
+    <text y="-2" text-anchor="middle" font-size="8.5" fill="white" font-weight="700">Schumpeter</text>
+    <text y="9" text-anchor="middle" font-size="7.5" fill="#93C5FD">destruction créatrice</text>
+    <text y="-33" text-anchor="middle" font-size="8" fill="#1A3A5C" font-weight="600">Ch.9</text>
+  </g>
+
+</svg>
+
+<!-- Legend -->
+<div class="legende">
+  <span class="leg-item"><span class="leg-dot" style="background:#B22222;"></span> Valeur &amp; profit</span>
+  <span class="leg-item"><span class="leg-dot" style="background:#2A7D4F;"></span> Demande &amp; crises</span>
+  <span class="leg-item"><span class="leg-dot" style="background:#B8860B;"></span> Monnaie &amp; inflation</span>
+  <span class="leg-item"><span class="leg-dot" style="background:#5B21B6;"></span> Inégalités &amp; répartition</span>
+  <span class="leg-item"><span class="leg-dot" style="background:#7C3AED;"></span> Voix non-canoniques</span>
+  <span class="leg-item"><span class="leg-line" style="background:#94A3B8;"></span> Influence directe</span>
+  <span class="leg-item"><span class="leg-line" style="background:#94A3B8;border-top:2px dashed #94A3B8;background:none;height:0;"></span> Influence indirecte</span>
+</div>
+</div>
+
+<!-- Detail panel -->
+<div class="detail-panel" id="detail-panel">
+  <div class="dp-meta" id="dp-meta"></div>
+  <div class="dp-title" id="dp-title"></div>
+  <div class="dp-tags" id="dp-tags"></div>
+  <div class="dp-body" id="dp-body"></div>
+  <div class="dp-liens" id="dp-liens"></div>
+</div>
+
+</div><!-- carte-wrap -->
+
+<script>
+var NODES = {
+  aristote: {
+    meta: 'Ch. 1 · Antiquité (384–322 av. J.-C.)',
+    titre: 'Aristote — valeur d\'usage vs valeur d\'échange',
+    themes: ['valeur','monnaie'],
+    body: 'Aristote est le premier à distinguer systématiquement la <strong>valeur d\'usage</strong> (utilité pratique) et la <strong>valeur d\'échange</strong> (rapport d\'échange marchand). Il condamne la <em>chrématistique mercantile</em> — l\'accumulation monétaire sans limite — et le prêt à intérêt. Cette distinction traversera toute l\'histoire économique : Ricardo en fait une tension, Marx en fait le fondement de sa théorie de l\'exploitation, et les marginalistes la dissolvent en 1871 en fondant la valeur uniquement sur l\'utilité subjective.',
+    liens: [{ label:'→ Ch. 1', href:'chapitres/chapitre1.qmd' }]
+  },
+  ibkhaldoun: {
+    meta: 'Ch. 1 · Maghreb médiéval (1332–1406)',
+    titre: 'Ibn Khaldoun — division du travail, cycles et théorie quantitative',
+    themes: ['valeur','demande'],
+    body: 'Dans sa <em>Muqaddima</em> (1377), Ibn Khaldoun anticipe avec deux siècles d\'avance la division du travail (Smith, 1776), la théorie quantitative de la monnaie (Bodin, 1568) et les cycles économiques liés à la dynamique sociale des empires. Sa théorie de l\'<em>asabiyya</em> (cohésion sociale) comme moteur de la prospérité préfigure les approches institutionnalistes contemporaines. Il n\'est traduit en Occident qu\'au XIXe siècle — trop tard pour influencer directement les Classiques.',
+    liens: [{ label:'→ Ch. 1', href:'chapitres/chapitre1.qmd' }]
+  },
+  oresme: {
+    meta: 'Ch. 1 · Moyen Âge (1320–1382)',
+    titre: 'Nicolas Oresme — la monnaie comme bien commun',
+    themes: ['monnaie'],
+    body: 'Oresme rédige en 1355 le premier traité européen sur la monnaie. Sa thèse centrale : la monnaie appartient à la collectivité, pas au prince. Dévaluer les pièces (rogner l\'or) revient à voler les sujets. Ce raisonnement est l\'ancêtre de la théorie quantitative de la monnaie et des arguments pour l\'indépendance des banques centrales. Il anticipe de 600 ans les travaux de Kydland et Prescott sur l\'incohérence temporelle.',
+    liens: [{ label:'→ Ch. 1', href:'chapitres/chapitre1.qmd' }]
+  },
+  mercantilisme: {
+    meta: 'Ch. 2 · XVIe–XVIIe s.',
+    titre: 'Mercantilisme — la balance commerciale comme richesse',
+    themes: ['monnaie','ineg'],
+    body: 'Le mercantilisme est la première <em>doctrine</em> économique d\'État : la richesse nationale s\'accumule par l\'excédent commercial. Exportez plus qu\'importez → l\'or afflue. Mun en Angleterre, Colbert en France : protéger les manufactures nationales, taxer les importations. Smith démolira cette logique de jeu à somme nulle : l\'échange international enrichit les deux partenaires. Mais la logique mercantiliste revient dans les politiques industrielles contemporaines (IRA américain, politique industrielle européenne).',
+    liens: [{ label:'→ Ch. 2', href:'chapitres/chapitre2.qmd' }]
+  },
+  physiocrates: {
+    meta: 'Ch. 3 · France, XVIIIe s.',
+    titre: 'Physiocrates — seule la terre crée de la valeur',
+    themes: ['valeur','ineg'],
+    body: 'Quesnay (médecin de Louis XV) applique la physiologie à l\'économie : le <em>produit net</em> circule entre classes comme le sang dans un organisme. Seule l\'agriculture est productive ; commerce et industrie sont <em>stériles</em>. Le Tableau économique (1758) est le premier modèle de flux circulaires — ancêtre de la comptabilité nationale et des tableaux de Leontief. Smith héritera de l\'intuition (flux, surplus) mais généralisera la source de richesse au travail en général.',
+    liens: [{ label:'→ Ch. 3', href:'chapitres/chapitre3.qmd' }]
+  },
+  smith: {
+    meta: 'Ch. 4 · Révolution industrielle',
+    titre: 'Adam Smith — la main invisible et la division du travail',
+    themes: ['valeur','ineg'],
+    body: 'Smith est le premier à montrer que la <strong>division du travail</strong> est la source principale de productivité. Sa <em>main invisible</em> : en poursuivant leur intérêt, les agents servent involontairement l\'intérêt général via le marché. La valeur-travail fonde la richesse sur le travail humain — mais Smith bute sur le paradoxe eau/diamant. Il est déjà critique du mercantilisme : l\'échange international est à somme positive. Ricardo systématisera, Marx retournera, les marginalistes reformuleront.',
+    liens: [{ label:'→ Ch. 4', href:'chapitres/chapitre4.qmd' }]
+  },
+  ricardo: {
+    meta: 'Ch. 4 · Angleterre, 1817',
+    titre: 'Ricardo — rente différentielle et avantages comparatifs',
+    themes: ['valeur','ineg'],
+    body: 'Ricardo radicalise Smith : la <strong>rente différentielle</strong> capte le surplus des bonnes terres sans contrepartie productive — un transfert des capitalistes vers les propriétaires fonciers. Les <strong>avantages comparatifs</strong> montrent que même sans avantage absolu, tout pays gagne au libre-échange. Mais Ricardo bute sur le problème de la mesure invariable de la valeur. Marx lira Ricardo et retournera la valeur-travail en théorie de l\'exploitation. Piketty montrera deux siècles plus tard que r > g perpétue la logique ricardienne.',
+    liens: [{ label:'→ Ch. 4', href:'chapitres/chapitre4.qmd' }]
+  },
+  say: {
+    meta: 'Ch. 5 · France, 1803',
+    titre: 'Loi de Say — l\'offre crée sa propre demande',
+    themes: ['demande'],
+    body: 'La loi de Say affirme que toute production distribue des revenus qui reviennent sur les marchés : pas de surproduction générale possible. Malthus conteste : l\'épargne peut sortir du circuit et créer une insuffisance de débouchés. Ce débat dormira un siècle. Keynes le réveillera en 1936 en donnant raison à Malthus : la Grande Dépression prouve que l\'économie peut rester durablement en sous-emploi. La loi de Say est encore au cœur du débat entre keynésiens et libéraux sur l\'efficacité des plans de relance.',
+    liens: [{ label:'→ Ch. 5', href:'chapitres/chapitre5.qmd' }]
+  },
+  mill: {
+    meta: 'Ch. 5 · Angleterre, 1848',
+    titre: 'J.S. Mill — lois de production vs lois de distribution',
+    themes: ['ineg','valeur'],
+    body: 'Mill introduit une distinction fondatrice : les <strong>lois de production</strong> (rendements décroissants, division du travail) sont naturelles et invariables. Les <strong>lois de distribution</strong> (salaires, profits, rentes) sont des constructions sociales, donc modifiables par la politique. Cette distinction fonde le réformisme libéral : on peut redistribuer sans briser la production. Marx répondra que cette séparation est illusoire — les rapports de production <em>sont</em> les rapports de distribution dans le capitalisme.',
+    liens: [{ label:'→ Ch. 5', href:'chapitres/chapitre5.qmd' }]
+  },
+  marx: {
+    meta: 'Ch. 6 · 1867 — Le Capital',
+    titre: 'Marx — plus-value, aliénation et contradictions du capitalisme',
+    themes: ['valeur','ineg','demande'],
+    body: 'Marx reprend la valeur-travail des Classiques et en tire une théorie de l\'<strong>exploitation</strong> : le travailleur produit plus que son salaire — la différence est la <strong>plus-value</strong>, captée par le capitaliste. L\'<strong>aliénation</strong> désigne la dépossession du travailleur de son produit, de son activité, de son humanité. La <strong>baisse tendancielle du taux de profit</strong> crée des crises inévitables. Schumpeter lira Marx attentivement (la destruction créatrice) ; Piketty mesurera empiriquement des inégalités que Marx avait théorisées.',
+    liens: [{ label:'→ Ch. 6', href:'chapitres/chapitre6.qmd' }]
+  },
+  luxemburg: {
+    meta: 'Ch. 6 · Allemagne, 1913',
+    titre: 'Rosa Luxemburg — les débouchés extérieurs comme condition du capitalisme',
+    themes: ['demande','ineg'],
+    body: 'Luxemburg pose une question que Marx n\'avait pas résolue : à qui vend-on si les salaires ne permettent d\'acheter qu\'une partie de la production ? Sa réponse : le capitalisme a besoin de marchés extérieurs (colonies, économies précapitalistes). Quand ces débouchés s\'épuisent, la crise est inévitable. Cette thèse anticipe les théories contemporaines sur les inégalités comme frein à la demande (Stiglitz, Piketty) — et renouvelle l\'argument de Malthus dans un cadre marxiste.',
+    liens: [{ label:'→ Ch. 6', href:'chapitres/chapitre6.qmd' }]
+  },
+  marginalisme: {
+    meta: 'Ch. 7 · 1871 — Triple découverte simultanée',
+    titre: 'Jevons, Menger, Walras — la révolution de l\'utilité marginale',
+    themes: ['valeur'],
+    body: 'En 1871, trois économistes publient indépendamment la même intuition : la <strong>valeur est subjective</strong> et marginale — c\'est la dernière unité consommée qui fixe le prix, pas le travail incorporé. Cette révolution résout le paradoxe eau/diamant, fonde la théorie du consommateur et permet de mathématiser l\'économie. Elle efface aussi conceptuellement la plus-value : chaque facteur reçoit sa productivité marginale, le profit n\'est plus du vol. Walras construit l\'équilibre général — l\'idéal théorique que Lucas reformulera un siècle plus tard.',
+    liens: [{ label:'→ Ch. 7', href:'chapitres/chapitre7.qmd' }]
+  },
+  marshall: {
+    meta: 'Ch. 8 · Belle Époque',
+    titre: 'Marshall & Pigou — microéconomie appliquée et externalités',
+    themes: ['valeur','ineg'],
+    body: 'Marshall opérationnalise le marginalisme : courbes d\'offre et de demande, élasticités, surplus du consommateur et du producteur. L\'économie devient une discipline appliquée. Pigou va plus loin : les externalités (pollution, congestio) créent des divergences entre coût privé et coût social — l\'État doit corriger via des taxes ou des subventions. La <strong>taxe pigouvienne</strong> est l\'ancêtre direct de la taxe carbone. L\'<strong>optimum de Pareto</strong> (1906) pose un critère d\'efficacité — neutre sur la justice.',
+    liens: [{ label:'→ Ch. 8', href:'chapitres/chapitre8.qmd' }]
+  },
+  keynes: {
+    meta: 'Ch. 9 · 1936 — Théorie générale',
+    titre: 'Keynes — demande effective, multiplicateur, trappe à liquidité',
+    themes: ['demande','monnaie'],
+    body: 'Keynes brise la loi de Say : l\'économie peut se stabiliser <strong>durablement en dessous du plein emploi</strong> si la demande effective est insuffisante. Le <strong>multiplicateur</strong> montre que 1€ de dépense publique génère plus de 1€ de PIB. La <strong>trappe à liquidité</strong> explique pourquoi la politique monétaire peut devenir inefficace (taux à zéro, agents thésaurisent). L\'incertitude radicale est au cœur de sa vision : on ne peut pas calculer le futur, on peut seulement le juger. Friedman répondra en 1968 que la politique keynésienne est inefficace à long terme.',
+    liens: [{ label:'→ Ch. 9', href:'chapitres/chapitre9.qmd' }]
+  },
+  robinson: {
+    meta: 'Ch. 9 · Cambridge, 1933–1983',
+    titre: 'Joan Robinson — concurrence imparfaite et post-keynésianisme',
+    themes: ['demande','valeur'],
+    body: 'Robinson montre en 1933 que la plupart des marchés réels sont en <strong>concurrence imparfaite</strong> (oligopoles, produits différenciés) — ce qui invalide la théorie néoclassique des marchés efficients. Proche de Keynes, elle développe le post-keynésianisme : l\'IS-LM de Hicks trahit Keynes en le formalisant dans un cadre d\'équilibre statique. Elle initie la <em>Cambridge Capital Controversy</em> : comment mesurer le capital en dehors de la valeur marchande — un débat dont la résolution formelle reste incomplète.',
+    liens: [{ label:'→ Ch. 9', href:'chapitres/chapitre9.qmd' }]
+  },
+  schumpeter: {
+    meta: 'Ch. 9 · 1942',
+    titre: 'Schumpeter — destruction créatrice et cycles longs',
+    themes: ['demande','valeur'],
+    body: 'Schumpeter lit Marx et en inverse le signe : les <strong>contradictions internes du capitalisme</strong> ne mènent pas à l\'effondrement mais à l\'innovation permanente. La <strong>destruction créatrice</strong> est le moteur : chaque vague technologique détruit l\'ancien paradigme et en crée un nouveau (machines à vapeur → électricité → TIC → IA ?). L\'entrepreneur est la figure centrale — pas la classe ouvrière ni les marchés. Les cycles de Kondratieff (~50 ans) structurent l\'histoire économique autour des grandes innovations.',
+    liens: [{ label:'→ Ch. 9', href:'chapitres/chapitre9.qmd' }]
+  },
+  samuelson: {
+    meta: 'Ch. 10 · 1948–1973 — Trente Glorieuses',
+    titre: 'Samuelson — la synthèse néoclassique et l\'IS-LM',
+    themes: ['demande','monnaie'],
+    body: 'Samuelson réconcilie Keynes et les néoclassiques dans le modèle IS-LM : keynésianisme à court terme (l\'État doit soutenir la demande), néoclassicisme à long terme (les marchés s\'équilibrent). Son manuel <em>Economics</em> (1948) unifie la discipline et forme trois générations d\'économistes. La <strong>courbe de Phillips</strong> offre un menu de politique économique : arbitrer entre chômage et inflation. Ce consensus volera en éclats avec la stagflation de 1973 — Friedman l\'avait prévu dès 1968.',
+    liens: [{ label:'→ Ch. 10', href:'chapitres/chapitre10.qmd' }]
+  },
+  friedman: {
+    meta: 'Ch. 11 · Chicago, 1956–1980',
+    titre: 'Friedman — monétarisme, NAIRU et règles vs discrétion',
+    themes: ['monnaie','demande'],
+    body: 'Friedman démontre que la politique budgétaire est inefficace à long terme (effet d\'éviction) et que seule la politique monétaire compte. La <strong>théorie quantitative renouvelée</strong> (MV = PT, V stable) implique qu\'un excès de monnaie crée de l\'inflation. Son concept de <strong>NAIRU</strong> (taux de chômage naturel) montre que la courbe de Phillips est instable : les anticipations adaptatives la déplacent vers le haut. La <strong>règle k%</strong> : mieux vaut une règle prévisible que le pouvoir discrétionnaire. Lucas formalisera cela.',
+    liens: [{ label:'→ Ch. 11', href:'chapitres/chapitre11.qmd' }]
+  },
+  lucas: {
+    meta: 'Ch. 11 · Chicago, 1976',
+    titre: 'Lucas — critique, anticipations rationnelles et modèles DSGE',
+    themes: ['monnaie'],
+    body: 'La <strong>critique de Lucas</strong> (1976) invalide les modèles économétriques keynésiens : leurs paramètres changent quand la politique économique change, car les agents adaptent leurs comportements. Solution : fonder les modèles sur des <strong>microfondations</strong> (comportements optimisateurs stables). Les modèles DSGE en découlent. Ironie : ces modèles DSGE n\'ont pas prévu la crise de 2008 — précisément parce qu\'ils excluaient par construction le secteur financier et les dynamiques d\'instabilité.',
+    liens: [{ label:'→ Ch. 11', href:'chapitres/chapitre11.qmd' }]
+  },
+  kydland: {
+    meta: 'Ch. 11 · 1977 — Prix Nobel 2004',
+    titre: 'Kydland & Prescott — incohérence temporelle et règles monétaires',
+    themes: ['monnaie'],
+    body: 'Kydland et Prescott montrent que les politiques discrétionnaires souffrent d\'<strong>incohérence temporelle</strong> : ce qui est optimal à long terme (ne pas renflouer les banques, ne pas créer d\'inflation) n\'est pas crédible à court terme si le gouvernement peut toujours revenir sur ses promesses. Solution : des <strong>règles contraignantes</strong> (Maastricht, statuts de la BCE) qui rendent le revirement impossible. L\'indépendance des banques centrales modernes est directement issue de cette analyse.',
+    liens: [{ label:'→ Ch. 11', href:'chapitres/chapitre11.qmd' }]
+  },
+  piketty: {
+    meta: 'Ch. 12 · 2013 — Le Capital au XXIe siècle',
+    titre: 'Piketty — r > g et l\'accumulation patrimoniale',
+    themes: ['ineg','valeur'],
+    body: 'Piketty mesure sur deux siècles la concentration du patrimoine dans les économies développées. Sa thèse : quand le rendement du capital (r) dépasse la croissance économique (g), les patrimoines s\'accumulent plus vite que les revenus du travail — les inégalités patrimoniales croissent tendanciellement. Ce mécanisme est structurellement similaire à la rente ricardienne. Piketty propose un <strong>impôt mondial progressif sur le capital</strong> — qu\'il qualifie lui-même d\'utopie utile pour orienter le débat.',
+    liens: [{ label:'→ Ch. 12', href:'chapitres/chapitre12.qmd' }]
+  },
+  romer: {
+    meta: 'Ch. 12 · 1990 — Croissance endogène',
+    titre: 'Romer — le progrès technique comme résultat de l\'investissement',
+    themes: ['valeur'],
+    body: 'Solow supposait que le progrès technique "tombe du ciel" — il est exogène. Romer l\'endogénéise : investir en R&D et en capital humain crée du <strong>savoir</strong>, qui a des <strong>externalités positives</strong> (une découverte bénéficie à d\'autres) et des rendements croissants. Le capital humain ne souffre pas de rendements décroissants. Implication de politique économique : financer l\'éducation et la recherche fondamentale est <em>le</em> levier de croissance à long terme — et justifie les politiques industrielles technologiques.',
+    liens: [{ label:'→ Ch. 12', href:'chapitres/chapitre12.qmd' }]
+  },
+  ostrom: {
+    meta: 'Ch. 12 · Nobels 2009 et 2019',
+    titre: 'Ostrom & Duflo — biens communs et économie expérimentale',
+    themes: ['ineg','demande'],
+    body: '<strong>Elinor Ostrom</strong> (Nobel 2009, première femme) démontre que les biens communs peuvent être gérés collectivement sans privatisation ni État — si les communautés développent des règles appropriées. Elle réfute la "tragédie des communs" de Hardin. <strong>Esther Duflo</strong> (Nobel 2019) révolutionne l\'économie du développement par les RCT (expériences contrôlées randomisées) : mesurer empiriquement l\'efficacité des politiques de lutte contre la pauvreté plutôt que la déduire de modèles théoriques.',
+    liens: [{ label:'→ Ch. 12', href:'chapitres/chapitre12.qmd' }]
+  }
+};
+
+var TAG_LABELS = { valeur:'Valeur & profit', demande:'Demande & crises', monnaie:'Monnaie & inflation', ineg:'Inégalités', methode:'Méthode' };
+var TAG_CLS    = { valeur:'tag-valeur', demande:'tag-demande', monnaie:'tag-monnaie', ineg:'tag-ineg', methode:'tag-methode' };
+
+// Node click
+document.querySelectorAll('.node').forEach(function(node) {
+  node.addEventListener('click', function() {
+    var id = node.getAttribute('data-id');
+    var data = NODES[id];
+    if (!data) return;
+    // Highlight
+    document.querySelectorAll('.node circle').forEach(function(c) { c.setAttribute('opacity','0.4'); });
+    node.querySelector('circle').setAttribute('opacity','1');
+    // Fill panel
+    document.getElementById('dp-meta').textContent = data.meta;
+    document.getElementById('dp-title').textContent = data.titre;
+    document.getElementById('dp-body').innerHTML = data.body;
+    document.getElementById('dp-tags').innerHTML = data.themes.map(function(t) {
+      return '<span class="dp-tag ' + (TAG_CLS[t]||'') + '">' + (TAG_LABELS[t]||t) + '</span>';
+    }).join('');
+    var liens = document.getElementById('dp-liens');
+    liens.innerHTML = '<div class="dp-liens-title">Aller au chapitre :</div>'
+      + data.liens.map(function(l) {
+          return '<a class="dp-lien" href="' + l.href + '">' + l.label + ' →</a>';
+        }).join('');
+    var panel = document.getElementById('detail-panel');
+    panel.classList.add('show');
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+  // Hover effect
+  node.addEventListener('mouseenter', function() {
+    node.querySelector('circle').style.transform = 'scale(1.12)';
+    node.querySelector('circle').style.transformOrigin = 'center';
+    node.querySelector('circle').style.transition = 'transform .15s';
+  });
+  node.addEventListener('mouseleave', function() {
+    node.querySelector('circle').style.transform = 'scale(1)';
+  });
+});
+
+// Filter buttons
+document.querySelectorAll('.filtre-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filtre-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    var f = btn.getAttribute('data-filtre');
+    document.querySelectorAll('.node').forEach(function(node) {
+      var themes = (node.getAttribute('data-themes') || '').split(' ');
+      var show = f === 'tous' || themes.indexOf(f) > -1;
+      node.setAttribute('opacity', show ? '1' : '0.15');
+    });
+    document.querySelectorAll('.edge').forEach(function(edge) {
+      var cls = edge.getAttribute('class') || '';
+      var show = f === 'tous' || cls.indexOf(f) > -1;
+      edge.setAttribute('opacity', show ? '0.7' : '0.07');
+    });
+    // Reset panel
+    document.querySelectorAll('.node circle').forEach(function(c) { c.setAttribute('opacity','1'); });
+    document.getElementById('detail-panel').classList.remove('show');
+  });
+});
+</script>
+<hr>
+<section id="les-quatre-grands-fils-du-débat" class="level2">
+<h2 class="anchored" data-anchor-id="les-quatre-grands-fils-du-débat">Les quatre grands fils du débat</h2>
+<p><strong>🔴 Valeur &amp; profit</strong> — <em>D’où vient la valeur ?</em> Aristote (valeur d’usage vs d’échange) → Classiques (valeur-travail) → Marx (plus-value) → Marginalistes (utilité subjective) → Piketty (r &gt; g). Un débat de 2 500 ans qui n’est pas clos.</p>
+<p><strong>🟢 Demande &amp; crises</strong> — <em>Le marché s’auto-équilibre-t-il ?</em> Say (oui) vs Malthus (non) → Keynes (non, et l’État doit intervenir) → Friedman (oui à long terme) → Crise 2008 (les deux avaient partiellement tort).</p>
+<p><strong>🟡 Monnaie &amp; inflation</strong> — <em>Qui doit contrôler la monnaie ?</em> Oresme (le prince ne peut pas) → Bodin (l’or crée l’inflation) → Friedman (règle k%) → Kydland-Prescott (indépendance banque centrale) → Kelton/TMM (l’État qui émet sa monnaie ne peut pas faire défaut).</p>
+<p><strong>🟣 Inégalités &amp; répartition</strong> — <em>Qui capte le surplus ?</em> Quesnay (les propriétaires via la rente) → Ricardo (idem) → Marx (le capital via la plus-value) → Mill (la distribution est politique) → Piketty (le patrimoine s’auto-amplifie quand r &gt; g).</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Histoire Économique — Pascaline Vincent, 2026</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Construit avec <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

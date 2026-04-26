@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Mon Carnet de Bord – À la recherche de la valeur perdue</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-ff98d69c136e79b123368504bdb7637c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;family=Source+Sans+3:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<script>
+/* carrefour.js — moteur de navigation adaptative
+   Utilisé par tous les chapitres.
+   Expose: CarrefourEngine, DragDrop, DefiQCM, DefiImmersif */
+
+var CarrefourEngine = (function() {
+  /* ── Niveau depuis localStorage ── */
+  function getNiveau() {
+    var v = (localStorage.getItem('niveau') || '').toLowerCase();
+    if (v.includes('avan')) return 'avance';
+    if (v.includes('but') || v.includes('but')) return 'debutant';
+    return 'intermediaire';
+  }
+
+  /* ── Injecter la pastille niveau ── */
+  function renderNiveauPill(containerId) {
+    var el = document.getElementById(containerId);
+    if (!el) return;
+    var n = getNiveau();
+    var labels = { debutant: 'Niveau débutant', intermediaire: 'Niveau intermédiaire', avance: 'Niveau avancé' };
+    var cls    = { debutant: 'level-debutant',   intermediaire: 'level-intermediaire',   avance: 'level-avance' };
+    el.className = 'chapter-level-pill ' + cls[n];
+    el.textContent = labels[n];
+    el.style.display = 'inline-flex';
+  }
+
+  /* ── Choisir un chemin (afficher feedback + banner) ── */
+  function choisirChemin(btnEl, feedbackId, bannerId, texte, consoliderUrl) {
+    var type = btnEl.getAttribute('data-chemin');
+    // Marque le bouton
+    document.querySelectorAll('.carrefour-path').forEach(function(b) {
+      b.classList.remove('selected');
+    });
+    btnEl.classList.add('selected');
+
+    var fb = document.getElementById(feedbackId);
+    if (fb) {
+      fb.className = 'carrefour-feedback show fb-' + (texte.cls || 'info');
+      fb.innerHTML = texte.html;
+    }
+    if (type === 'consolider' && consoliderUrl) {
+      setTimeout(function() { window.location.href = consoliderUrl; }, 600);
+      return;
+    }
+    // Afficher bannière continuer
+    var ban = document.getElementById(bannerId);
+    if (ban) {
+      ban.style.display = 'block';
+      ban.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  /* ── Marquer chapitre lu ── */
+  function marquerLu(chapKey) {
+    var cr = JSON.parse(localStorage.getItem('chapRead') || '[]');
+    if (!cr.includes(chapKey)) { cr.push(chapKey); localStorage.setItem('chapRead', JSON.stringify(cr)); }
+  }
+
+  /* ── Afficher les voix selon avatar ── */
+  function initVoix() {
+    var av = localStorage.getItem('avatar') || 'none';
+    document.querySelectorAll('[data-voix]').forEach(function(el) {
+      el.style.display = (el.getAttribute('data-voix') === av || av === 'none') ? 'block' : 'none';
+    });
+  }
+
+  return { getNiveau: getNiveau, renderNiveauPill: renderNiveauPill, choisirChemin: choisirChemin, marquerLu: marquerLu, initVoix: initVoix };
+})();
+
+/* ── QCM standard ── */
+var DefiQCM = (function() {
+  var done = {};
+  function repondre(btnEl, defiId, estCorrect, feedbacks) {
+    if (done[defiId]) return;
+    done[defiId] = true;
+    var container = document.getElementById('defi-' + defiId);
+    container.querySelectorAll('.defi-option').forEach(function(b) { b.disabled = true; });
+    btnEl.classList.add(estCorrect ? 'correct' : 'wrong');
+    var fb = document.getElementById('fb-' + defiId);
+    if (fb) {
+      var f = estCorrect ? feedbacks.bon : feedbacks.mauvais;
+      fb.className = 'defi-feedback show ' + (estCorrect ? 'df-bon' : 'df-mal');
+      fb.innerHTML = f;
+    }
+    majScore(defiId, estCorrect);
+    return estCorrect;
+  }
+  function majScore(defiId, ok) {
+    var bar = document.getElementById('stars-' + defiId.split('-')[0]);
+    if (!bar) return;
+    // handled per-chapter
+  }
+  return { repondre: repondre };
+})();
+
+/* ── Drag & Drop générique ── */
+var DragDrop = (function() {
+  var currentDrag = null;
+  var slotData = {};
+  var done = false;
+
+  function init(containerId) {
+    slotData = {}; done = false;
+    var c = document.getElementById(containerId);
+    if (!c) return;
+    c.querySelectorAll('.dd-chip').forEach(function(chip) {
+      chip.addEventListener('dragstart', function() {
+        currentDrag = chip.dataset.key;
+        chip.classList.add('dragging');
+      });
+      chip.addEventListener('dragend', function() { chip.classList.remove('dragging'); });
+    });
+    c.querySelectorAll('.dd-slot').forEach(function(slot) {
+      slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('over'); });
+      slot.addEventListener('dragleave', function() { slot.classList.remove('over'); });
+      slot.addEventListener('drop', function(e) {
+        e.preventDefault(); slot.classList.remove('over');
+        if (!currentDrag || done) return;
+        // Remove chip from previous slot
+        Object.keys(slotData).forEach(function(sid) {
+          if (slotData[sid] === currentDrag && sid !== slot.id) {
+            var prev = document.getElementById(sid);
+            if (prev) { prev.innerHTML = prev.getAttribute('data-orig') || ''; prev.classList.remove('correct','wrong'); }
+            delete slotData[sid];
+            var prevChip = document.getElementById('chip-' + currentDrag);
+            if (prevChip) prevChip.classList.remove('placed');
+          }
+        });
+        var chipEl = document.getElementById('chip-' + currentDrag);
+        var label  = chipEl ? chipEl.textContent : currentDrag;
+        var orig   = slot.getAttribute('data-orig') || slot.textContent;
+        if (!slot.getAttribute('data-orig')) slot.setAttribute('data-orig', slot.textContent);
+        slot.innerHTML = '<strong>' + label + '</strong><br><span style="font-size:.8rem;color:#7A8FA0;">' + orig + '</span>';
+        slotData[slot.id] = currentDrag;
+        if (chipEl) chipEl.classList.add('placed');
+        currentDrag = null;
+      });
+    });
+  }
+
+  function verifier(containerId, correct, feedbackId) {
+    if (done) return 0;
+    var c = document.getElementById(containerId);
+    var ok = 0;
+    c.querySelectorAll('.dd-slot').forEach(function(slot) {
+      var val = slotData[slot.id];
+      if (!val) return;
+      var isOk = val === correct[slot.id];
+      slot.classList.add(isOk ? 'correct' : 'wrong');
+      if (isOk) ok++;
+    });
+    var total = Object.keys(correct).length;
+    var fb = document.getElementById(feedbackId);
+    if (fb) {
+      if (ok === total) {
+        fb.className = 'defi-feedback show df-bon';
+        fb.innerHTML = '<strong>Parfait ! ' + ok + '/' + total + '</strong> Toutes les associations sont correctes.';
+        done = true;
+      } else {
+        fb.className = 'defi-feedback show df-partiel';
+        fb.innerHTML = '<strong>' + ok + '/' + total + ' corrects.</strong> Certaines associations sont incorrectes — retirez-les et réessayez.';
+        c.querySelectorAll('.dd-slot.wrong').forEach(function(s) { s.classList.remove('wrong'); });
+      }
+    }
+    return done ? ok : 0;
+  }
+
+  return { init: init, verifier: verifier };
+})();
+
+</script>
+
+
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">À la recherche de la valeur perdue</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Accueil</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapitres" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Chapitres</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-chapitres">    
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre1.html">
+ <span class="dropdown-text">Ch. 1 — Pensée antique et médiévale</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre2.html">
+ <span class="dropdown-text">Ch. 2 — Naissance de l’économie politique</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre3.html">
+ <span class="dropdown-text">Ch. 3 — Les Physiocrates</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre4.html">
+ <span class="dropdown-text">Ch. 4 — Les Classiques (I)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre5.html">
+ <span class="dropdown-text">Ch. 5 — Les Classiques (II)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre6.html">
+ <span class="dropdown-text">Ch. 6 — Marx et le socialisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre7.html">
+ <span class="dropdown-text">Ch. 7 — Le marginalisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre8.html">
+ <span class="dropdown-text">Ch. 8 — L’affirmation des néoclassiques</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre9.html">
+ <span class="dropdown-text">Ch. 9 — La révolution keynésienne</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre10.html">
+ <span class="dropdown-text">Ch. 10 — La synthèse de Samuelson</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre11.html">
+ <span class="dropdown-text">Ch. 11 — Le monétarisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./chapitres/chapitre12.html">
+ <span class="dropdown-text">Ch. 12 — État des lieux</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./carte-debats.html"> 
+<span class="menu-text">Carte des débats</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./quiz.html"> 
+<span class="menu-text">Quiz</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./carnet.html" aria-current="page"> 
+<span class="menu-text">Carnet de bord</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./apropos.html"> 
+<span class="menu-text">À propos</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./profil.html"> 
+<span class="menu-text">Mon profil</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Mon Carnet de Bord</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<style>
+.carnet-wrap { max-width: 860px; margin: 0 auto; }
+
+/* Tab navigation */
+.tab-nav {
+  display: flex; gap: 0.5rem; flex-wrap: wrap;
+  margin-bottom: 1.5rem; border-bottom: 2px solid #D0DCE8; padding-bottom: 0.8rem;
+}
+.tab-btn {
+  padding: 0.55rem 1.1rem;
+  border: 1.5px solid #1A3A5C;
+  background: white; color: #1A3A5C;
+  border-radius: 20px; cursor: pointer;
+  font-weight: 600; font-size: 0.86rem;
+  transition: all 0.18s;
+  font-family: 'Source Sans 3', sans-serif;
+}
+.tab-btn:hover, .tab-btn.active { background: #1A3A5C; color: white; }
+
+/* Sections */
+.tab-section { display: none; }
+.tab-section.active { display: block; }
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem; color: #0D2137;
+  margin: 0 0 1.2rem; padding-bottom: 0.5rem;
+  border-bottom: 1px solid #D0DCE8;
+}
+
+/* Notes */
+.note-input-wrap { margin-bottom: 1rem; }
+.note-input-wrap label { display: block; font-weight: 600; font-size: 0.85rem; color: #1A3A5C; margin-bottom: 0.3rem; }
+.note-input-wrap input,
+.note-input-wrap textarea {
+  width: 100%; box-sizing: border-box;
+  border: 1.5px solid #B8D0E8; border-radius: 6px;
+  padding: 0.65rem 0.9rem; font-size: 0.92rem;
+  font-family: Georgia, serif; background: #F8FAFD;
+  transition: border-color 0.2s;
+}
+.note-input-wrap input:focus,
+.note-input-wrap textarea:focus { outline: none; border-color: #2E6DA4; background: white; }
+.note-input-wrap textarea { min-height: 110px; resize: vertical; }
+
+.note-card {
+  background: white; border: 1px solid #D0DCE8; border-radius: 6px;
+  padding: 0.9rem 1.1rem; margin-bottom: 0.7rem; position: relative;
+}
+.note-meta { font-size: 0.74rem; color: #7A8FA0; margin-bottom: 0.35rem; }
+.note-text { margin: 0; font-size: 0.92rem; white-space: pre-wrap; color: #1E2E3A; }
+.btn-delete {
+  position: absolute; top: 0.65rem; right: 0.75rem;
+  background: none; border: none; cursor: pointer; color: #B8C8D8; font-size: 0.9rem;
+}
+.btn-delete:hover { color: #8B2222; }
+
+/* Artefacts */
+.arts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.85rem; margin-bottom: 1.5rem;
+}
+.art-card {
+  background: #F4F7FA; border: 1px solid #D0DCE8; border-radius: 8px;
+  padding: 0.9rem; font-size: 0.86rem; position: relative;
+}
+.art-card .art-icon { font-size: 1.6rem; margin-bottom: 0.35rem; display: block; }
+.art-card strong { display: block; color: #0D2137; margin-bottom: 0.3rem; }
+.art-card .art-ch { font-size: 0.72rem; color: #4A90C4; margin-top: 0.4rem; display: block; }
+.art-card p { margin: 0; color: #4A6A85; line-height: 1.5; }
+.art-card .btn-delete { top: 0.5rem; right: 0.5rem; }
+
+.art-add-wrap {
+  border-top: 1px solid #D0DCE8; padding-top: 1.2rem; margin-top: 0.5rem;
+}
+.art-add-wrap h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem; color: #0D2137; margin: 0 0 0.8rem;
+}
+
+/* Questions ouvertes */
+.qo-block { margin-bottom: 1.8rem; }
+.qo-block h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem; color: #0D2137; margin-bottom: 0.5rem;
+}
+.qo-block textarea {
+  width: 100%; box-sizing: border-box;
+  border: 1.5px solid #B8D0E8; border-radius: 6px;
+  padding: 0.75rem 0.9rem; font-size: 0.92rem; font-family: Georgia, serif;
+  min-height: 100px; resize: vertical; background: #F8FAFD;
+  transition: border-color 0.2s;
+}
+.qo-block textarea:focus { outline: none; border-color: #2E6DA4; background: white; }
+
+/* Progression */
+.prog-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.7rem; margin: 1rem 0 1.5rem;
+}
+@media (max-width:600px) { .prog-grid { grid-template-columns: repeat(3, 1fr); } }
+.prog-item {
+  text-align: center; padding: 0.75rem 0.4rem;
+  background: #F4F7FA; border: 1.5px solid #D0DCE8; border-radius: 6px;
+}
+.prog-item.done { border-color: #2A7D4F; background: #E0F5E9; }
+.prog-num { font-size: 1.2rem; font-weight: 700; color: #1A3A5C; }
+.prog-item.done .prog-num { color: #2A7D4F; }
+.prog-label { font-size: 0.72rem; color: #7A8FA0; margin-top: 0.2rem; }
+
+.pistes-box {
+  background: #EAF1FA; border: 1px solid #B8D0E8; border-radius: 6px;
+  padding: 1rem 1.2rem; margin-top: 1rem;
+}
+.pistes-box h4 { font-size: 0.9rem; font-weight: 700; color: #1A3A5C; margin: 0 0 0.5rem; }
+.pistes-box p { font-size: 0.88rem; color: #2A3D50; margin: 0.35rem 0; line-height: 1.6; }
+
+/* Shared button */
+.btn-save {
+  display: inline-block; padding: 0.6rem 1.4rem;
+  background: #1A3A5C; color: white; border: none;
+  border-radius: 5px; font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; font-family: 'Source Sans 3', sans-serif;
+  transition: background 0.2s; margin-top: 0.6rem;
+}
+.btn-save:hover { background: #0D2137; }
+.toast {
+  position: fixed; bottom: 1.5rem; right: 1.5rem;
+  background: #1A3A5C; color: white;
+  padding: 0.7rem 1.2rem; border-radius: 6px;
+  font-size: 0.88rem; font-weight: 600;
+  opacity: 0; transition: opacity 0.3s; pointer-events: none;
+  z-index: 9999;
+}
+.toast.show { opacity: 1; }
+</style>
+
+<div class="carnet-wrap">
+
+  <!-- Header -->
+  <div style="background:linear-gradient(135deg,#0D2137,#1A3A5C);border-radius:8px;padding:1.5rem 1.8rem;color:#EAF1FA;margin-bottom:1.8rem;display:flex;align-items:center;gap:1.2rem;">
+    <span style="font-size:2.5rem;">📓</span>
+    <div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#7BC4E8;font-style:italic;">Mon Carnet de Bord</div>
+      <div style="font-size:0.85rem;color:#8AAFC8;margin-top:0.2rem;">Notes · Artéfacts · Réflexions · Progression</div>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="notes">📝 Mes notes</button>
+    <button class="tab-btn" data-tab="artefacts">🏺 Artéfacts</button>
+    <button class="tab-btn" data-tab="questions">💭 Questions ouvertes</button>
+    <button class="tab-btn" data-tab="progression">📊 Progression</button>
+  </div>
+
+  <!-- NOTES -->
+  <div id="section-notes" class="tab-section active">
+    <div class="section-title">📝 Mes notes personnelles</div>
+    <div class="note-input-wrap">
+      <label for="note-sujet">Sujet (optionnel)</label>
+      <input type="text" id="note-sujet" placeholder="Ex : Main invisible, Rente différentielle…">
+    </div>
+    <div class="note-input-wrap">
+      <label for="note-content">Note</label>
+      <textarea id="note-content" placeholder="Résumez un concept, notez une question, citez un passage…"></textarea>
+    </div>
+    <button class="btn-save" id="btn-save-note">💾 Enregistrer</button>
+    <hr style="border:none;border-top:1px solid #D0DCE8;margin:1.4rem 0;">
+    <div id="notes-list"></div>
+  </div>
+
+  <!-- ARTEFACTS -->
+  <div id="section-artefacts" class="tab-section">
+    <div class="section-title">🏺 Artéfacts collectés</div>
+    <p style="font-size:0.87rem;color:#7A8FA0;margin-bottom:1rem;">Les concepts-clés, citations et schémas à garder en mémoire au fil du cours.</p>
+    <div class="arts-grid" id="arts-grid">
+      <!-- Default artefacts injected by JS -->
+    </div>
+    <div class="art-add-wrap">
+      <h4 class="anchored">➕ Ajouter un artéfact</h4>
+      <div class="note-input-wrap">
+        <label>Titre</label>
+        <input type="text" id="art-titre" placeholder="Ex : Loi de Say, Utilité marginale…">
+      </div>
+      <div class="note-input-wrap">
+        <label>Description</label>
+        <textarea id="art-content" style="min-height:75px;" placeholder="Citation, définition ou explication…"></textarea>
+      </div>
+      <div class="note-input-wrap">
+        <label>📷 Image (optionnelle)</label>
+        <input type="file" id="art-image" accept="image/*" style="font-size:0.85rem;">
+        <div id="art-preview" style="margin-top:0.4rem;"></div>
+      </div>
+      <button class="btn-save" id="btn-save-art">➕ Ajouter</button>
+    </div>
+  </div>
+
+  <!-- QUESTIONS OUVERTES -->
+  <div id="section-questions" class="tab-section">
+    <div class="section-title">💭 Questions ouvertes de réflexion</div>
+    <div class="qo-block">
+      <h4 class="anchored">1. Comment la notion de valeur a-t-elle évolué depuis l'Antiquité jusqu'à aujourd'hui ?</h4>
+      <textarea id="qo1" placeholder="Votre réflexion…"></textarea>
+    </div>
+    <div class="qo-block">
+      <h4 class="anchored">2. Le marché est-il toujours le meilleur mécanisme d'allocation des ressources ?</h4>
+      <textarea id="qo2" placeholder="Votre réflexion…"></textarea>
+    </div>
+    <div class="qo-block">
+      <h4 class="anchored">3. En quoi la crise de 2008 remet-elle en question les certitudes des économistes ?</h4>
+      <textarea id="qo3" placeholder="Votre réflexion…"></textarea>
+    </div>
+    <div class="qo-block">
+      <h4 class="anchored">4. Comment les économistes hétérodoxes (Marx, Veblen, Keynes) ont-ils enrichi la discipline ?</h4>
+      <textarea id="qo4" placeholder="Votre réflexion…"></textarea>
+    </div>
+    <button class="btn-save" id="btn-save-qo">💾 Sauvegarder mes réflexions</button>
+  </div>
+
+  <!-- PROGRESSION -->
+  <div id="section-progression" class="tab-section">
+    <div class="section-title">📊 Ma progression</div>
+    <div id="niveau-display" style="margin-bottom:1.2rem;"></div>
+    <div class="prog-grid" id="prog-grid"></div>
+    <div class="pistes-box">
+      <h4 class="anchored">📚 Pistes de lecture personnalisées</h4>
+      <div id="pistes-content"></div>
+    </div>
+  </div>
+
+</div><!-- carnet-wrap -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function() {
+
+/* ── TABS ── */
+var TABS = ['notes','artefacts','questions','progression'];
+document.querySelectorAll('.tab-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var tab = btn.getAttribute('data-tab');
+    TABS.forEach(function(t) {
+      var s = document.getElementById('section-' + t);
+      if (s) s.className = 'tab-section' + (t === tab ? ' active' : '');
+    });
+    document.querySelectorAll('.tab-btn').forEach(function(b) {
+      b.classList.toggle('active', b.getAttribute('data-tab') === tab);
+    });
+    if (tab === 'progression') loadProgression();
+    if (tab === 'artefacts') renderArts();
+  });
+});
+
+/* ── TOAST ── */
+function toast(msg) {
+  var el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(function() { el.classList.remove('show'); }, 2200);
+}
+
+/* ── NOTES ── */
+document.getElementById('btn-save-note').addEventListener('click', function() {
+  var sujet = document.getElementById('note-sujet').value.trim();
+  var content = document.getElementById('note-content').value.trim();
+  if (!content) return;
+  var notes = JSON.parse(localStorage.getItem('carnetNotes') || '[]');
+  notes.unshift({ sujet: sujet, content: content, date: new Date().toLocaleDateString('fr-FR') });
+  localStorage.setItem('carnetNotes', JSON.stringify(notes));
+  document.getElementById('note-sujet').value = '';
+  document.getElementById('note-content').value = '';
+  renderNotes();
+  toast('✅ Note enregistrée');
+});
+
+function renderNotes() {
+  var notes = JSON.parse(localStorage.getItem('carnetNotes') || '[]');
+  var list = document.getElementById('notes-list');
+  if (!notes.length) {
+    list.innerHTML = '<p style="color:#7A8FA0;font-style:italic;">Vos notes apparaîtront ici.</p>';
+    return;
+  }
+  list.innerHTML = notes.map(function(n, i) {
+    return '<div class="note-card">'
+      + '<div class="note-meta">📅 ' + n.date + (n.sujet ? ' · ' + n.sujet : '') + '</div>'
+      + '<p class="note-text">' + n.content + '</p>'
+      + '<button class="btn-delete" data-i="' + i + '">🗑️</button>'
+      + '</div>';
+  }).join('');
+  list.querySelectorAll('.btn-delete').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var idx = parseInt(btn.getAttribute('data-i'));
+      var ns = JSON.parse(localStorage.getItem('carnetNotes') || '[]');
+      ns.splice(idx, 1);
+      localStorage.setItem('carnetNotes', JSON.stringify(ns));
+      renderNotes();
+    });
+  });
+}
+
+/* ── ARTEFACTS ── */
+var DEFAULT_ARTS = [
+  { icon:'💬', titre:"Citation d'Aristote", content:"L'échange doit s'effectuer de telle sorte que l'acheteur soit libre de son choix.", ch:'Ch.1', fixed:true },
+  { icon:'💡', titre:"Main invisible (Smith)", content:"L'intérêt individuel → intérêt général via le marché, sans coordination centrale.", ch:'Ch.4', fixed:true },
+  { icon:'⚡', titre:"Plus-value (Marx)", content:"PV = Valeur produite − Salaire versé. Mécanisme d'exploitation au cœur du capitalisme.", ch:'Ch.6', fixed:true },
+  { icon:'📉', titre:"Multiplicateur keynésien", content:"k = 1/(1−c). Un euro de dépense publique génère plus d'un euro de PIB.", ch:'Ch.9', fixed:true },
+  { icon:'🏛️', titre:"Optimum de Pareto", content:"Impossible d'améliorer une situation sans détériorer celle d'au moins un autre.", ch:'Ch.8', fixed:true },
+  { icon:'🔥', titre:"Stagflation 1970s", content:"Chômage + inflation simultanés → invalidation empirique de la courbe de Phillips originale.", ch:'Ch.11', fixed:true },
+];
+
+function renderArts() {
+  var userArts = JSON.parse(localStorage.getItem('carnetArtefacts') || '[]');
+  var grid = document.getElementById('arts-grid');
+  var html = '';
+  DEFAULT_ARTS.forEach(function(a) {
+    html += '<div class="art-card">'
+      + '<span class="art-icon">' + a.icon + '</span>'
+      + '<strong>' + a.titre + '</strong>'
+      + '<p>' + a.content + '</p>'
+      + '<span class="art-ch">📖 ' + a.ch + '</span>'
+      + '</div>';
+  });
+  userArts.forEach(function(a, i) {
+    html += '<div class="art-card" style="position:relative;">';
+    if (a.image) {
+      html += '<img src="' + a.image + '" style="width:100%;max-height:100px;object-fit:cover;border-radius:5px;margin-bottom:0.4rem;">';
+    } else {
+      html += '<span class="art-icon">📌</span>';
+    }
+    html += '<strong>' + (a.titre || 'Artéfact') + '</strong>';
+    if (a.content) html += '<p>' + a.content + '</p>';
+    html += '<button class="btn-delete" data-ai="' + i + '" style="position:absolute;top:0.5rem;right:0.5rem;">🗑️</button>'
+      + '</div>';
+  });
+  grid.innerHTML = html;
+  grid.querySelectorAll('.btn-delete[data-ai]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var idx = parseInt(btn.getAttribute('data-ai'));
+      var arts = JSON.parse(localStorage.getItem('carnetArtefacts') || '[]');
+      arts.splice(idx, 1);
+      localStorage.setItem('carnetArtefacts', JSON.stringify(arts));
+      renderArts();
+    });
+  });
+}
+
+/* Image preview */
+document.getElementById('art-image').addEventListener('change', function() {
+  var file = this.files[0];
+  var prev = document.getElementById('art-preview');
+  if (!file) { prev.innerHTML = ''; return; }
+  var r = new FileReader();
+  r.onload = function(e) {
+    prev.innerHTML = '<img src="' + e.target.result + '" style="max-width:100%;max-height:120px;border-radius:5px;border:1px solid #D0DCE8;margin-top:0.3rem;">';
+  };
+  r.readAsDataURL(file);
+});
+
+document.getElementById('btn-save-art').addEventListener('click', function() {
+  var titre = document.getElementById('art-titre').value.trim();
+  var content = document.getElementById('art-content').value.trim();
+  var file = document.getElementById('art-image').files[0];
+  if (!titre && !content) return;
+
+  function doSave(img) {
+    var arts = JSON.parse(localStorage.getItem('carnetArtefacts') || '[]');
+    arts.push({ titre: titre, content: content, image: img || null });
+    localStorage.setItem('carnetArtefacts', JSON.stringify(arts));
+    document.getElementById('art-titre').value = '';
+    document.getElementById('art-content').value = '';
+    document.getElementById('art-image').value = '';
+    document.getElementById('art-preview').innerHTML = '';
+    renderArts();
+    toast('✅ Artéfact ajouté');
+  }
+
+  if (file) {
+    var r = new FileReader();
+    r.onload = function(e) { doSave(e.target.result); };
+    r.readAsDataURL(file);
+  } else {
+    doSave(null);
+  }
+});
+
+/* ── QUESTIONS OUVERTES ── */
+['1','2','3','4'].forEach(function(n) {
+  var el = document.getElementById('qo' + n);
+  if (el) {
+    el.value = localStorage.getItem('carnetQO_q' + n) || '';
+    el.addEventListener('change', function() {
+      localStorage.setItem('carnetQO_q' + n, el.value);
+    });
+  }
+});
+document.getElementById('btn-save-qo').addEventListener('click', function() {
+  ['1','2','3','4'].forEach(function(n) {
+    var el = document.getElementById('qo' + n);
+    if (el) localStorage.setItem('carnetQO_q' + n, el.value);
+  });
+  toast('✅ Réflexions sauvegardées');
+});
+
+/* ── PROGRESSION ── */
+var CHAP_LABELS = [
+  ['ch1','Pensée antique'],['ch2','Mercantilisme'],['ch3','Physiocrates'],
+  ['ch4','Classiques I'],['ch5','Classiques II'],['ch6','Marx'],
+  ['ch7','Marginalisme'],['ch8','Néoclassiques'],['ch9','Keynes'],
+  ['ch10','Samuelson'],['ch11','Monétarisme'],['ch12','Bilan']
+];
+
+var PISTES = {
+  marchand: [
+    ['<strong>Brasseul J.</strong> — <em>Petite histoire des faits économiques</em>, Armand Colin, 2016.',
+     'Podcast <em>Entendez-vous l\'éco ?</em> (France Culture) — mercantilisme et Physiocrates.'],
+    ['<strong>Kindleberger C.</strong> — <em>Histoire mondiale de la spéculation financière</em>, Valor.',
+     '<strong>Ferguson N.</strong> — <em>L\'Irrésistible Ascension de l\'argent</em>, Saint-Simon.'],
+    ['<strong>Galbraith J.K.</strong> — <em>L\'Argent</em>, Gallimard.',
+     '<strong>Reinhart C. & Rogoff K.</strong> — <em>Cette fois, c\'est différent</em>, Pearson.']
+  ],
+  philosophe: [
+    ['<strong>Heilbroner R.</strong> — <em>Les Grands Économistes</em>, Seuil.',
+     'Podcast <em>La Méthode scientifique</em> (France Culture) — épistémologie.'],
+    ['<strong>Kuhn T.</strong> — <em>La Structure des révolutions scientifiques</em>, Flammarion.',
+     '<strong>Blaug M.</strong> — <em>La Pensée économique</em>, Economica.'],
+    ['<strong>Blaug M.</strong> — <em>La Pensée économique</em>, Economica.',
+     '<strong>Popper K.</strong> — <em>La Logique de la découverte scientifique</em>, Payot.']
+  ],
+  ouvrier: [
+    ['<strong>Goodwin M.</strong> — <em>Economix</em> (BD), 2019.',
+     'Podcast <em>L\'Économie en questions</em> (France Culture).'],
+    ['<strong>Thompson E.P.</strong> — <em>La Formation de la classe ouvrière anglaise</em>, Seuil.',
+     '<strong>Castel R.</strong> — <em>Les Métamorphoses de la question sociale</em>, Fayard.'],
+    ['<strong>Piketty T.</strong> — <em>Le Capital au XXIe siècle</em>, Seuil.',
+     '<strong>Mazzucato M.</strong> — <em>La Valeur de tout</em>, Fayard.']
+  ],
+  entrepreneur: [
+    ['<strong>Brasseul J.</strong> — <em>Petite histoire des faits économiques</em>, Armand Colin.',
+     'Podcast <em>Génération Do It Yourself</em>.'],
+    ['<strong>Schumpeter J.A.</strong> — <em>Capitalisme, Socialisme et Démocratie</em>, Payot.',
+     '<strong>Acemoglu D. & Robinson J.</strong> — <em>Pourquoi les nations échouent</em>, Pearson.'],
+    ['<strong>Tirole J.</strong> — <em>Économie du bien commun</em>, PUF.',
+     '<strong>Christensen C.</strong> — <em>Le Dilemme de l\'innovateur</em>.']
+  ]
+};
+
+function loadProgression() {
+  var chapRead = JSON.parse(localStorage.getItem('chapRead') || '[]');
+  var done = chapRead.length;
+  var niveau = localStorage.getItem('niveau') || '';
+  var score = localStorage.getItem('quizScore');
+  var avatar = localStorage.getItem('avatar') || '';
+
+  /* Niveau badge */
+  var nd = document.getElementById('niveau-display');
+  if (niveau) {
+    nd.innerHTML = '<span style="background:#1A3A5C;color:white;padding:0.35rem 1rem;border-radius:20px;font-weight:600;font-size:0.88rem;">'
+      + niveau + '</span>'
+      + (score !== null ? '<span style="color:#7A8FA0;font-size:0.85rem;margin-left:0.8rem;">Score quiz : ' + score + '/7</span>' : '');
+  } else {
+    nd.innerHTML = '<a href="quiz.qmd" style="color:#2E6DA4;font-weight:600;">🎯 Faire le quiz pour obtenir votre niveau</a>';
+  }
+
+  /* Progress grid */
+  var grid = document.getElementById('prog-grid');
+  grid.innerHTML = CHAP_LABELS.map(function(pair) {
+    var k = pair[0], label = pair[1];
+    var lu = chapRead.indexOf(k) > -1;
+    return '<div class="prog-item ' + (lu ? 'done' : '') + '">'
+      + '<div class="prog-num">' + (lu ? '✓' : k.replace('ch','')) + '</div>'
+      + '<div class="prog-label">' + label + '</div>'
+      + '</div>';
+  }).join('');
+
+  /* Pistes */
+  var pEl = document.getElementById('pistes-content');
+  var av = PISTES[avatar] ? avatar : 'ouvrier';
+  var lvl = done < 4 ? 0 : done < 8 ? 1 : 2;
+  pEl.innerHTML = PISTES[av][lvl].map(function(p) {
+    return '<p>' + p + '</p>';
+  }).join('');
+}
+
+/* ── INIT ── */
+renderNotes();
+renderArts();
+
+})(); // end IIFE
+</script>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Histoire Économique — Pascaline Vincent, 2026</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Construit avec <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

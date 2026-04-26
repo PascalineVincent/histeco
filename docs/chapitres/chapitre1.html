@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Ch. 1 — La pensée antique et médiévale – À la recherche de la valeur perdue</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-ff98d69c136e79b123368504bdb7637c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;family=Source+Sans+3:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<script>
+/* carrefour.js — moteur de navigation adaptative
+   Utilisé par tous les chapitres.
+   Expose: CarrefourEngine, DragDrop, DefiQCM, DefiImmersif */
+
+var CarrefourEngine = (function() {
+  /* ── Niveau depuis localStorage ── */
+  function getNiveau() {
+    var v = (localStorage.getItem('niveau') || '').toLowerCase();
+    if (v.includes('avan')) return 'avance';
+    if (v.includes('but') || v.includes('but')) return 'debutant';
+    return 'intermediaire';
+  }
+
+  /* ── Injecter la pastille niveau ── */
+  function renderNiveauPill(containerId) {
+    var el = document.getElementById(containerId);
+    if (!el) return;
+    var n = getNiveau();
+    var labels = { debutant: 'Niveau débutant', intermediaire: 'Niveau intermédiaire', avance: 'Niveau avancé' };
+    var cls    = { debutant: 'level-debutant',   intermediaire: 'level-intermediaire',   avance: 'level-avance' };
+    el.className = 'chapter-level-pill ' + cls[n];
+    el.textContent = labels[n];
+    el.style.display = 'inline-flex';
+  }
+
+  /* ── Choisir un chemin (afficher feedback + banner) ── */
+  function choisirChemin(btnEl, feedbackId, bannerId, texte, consoliderUrl) {
+    var type = btnEl.getAttribute('data-chemin');
+    // Marque le bouton
+    document.querySelectorAll('.carrefour-path').forEach(function(b) {
+      b.classList.remove('selected');
+    });
+    btnEl.classList.add('selected');
+
+    var fb = document.getElementById(feedbackId);
+    if (fb) {
+      fb.className = 'carrefour-feedback show fb-' + (texte.cls || 'info');
+      fb.innerHTML = texte.html;
+    }
+    if (type === 'consolider' && consoliderUrl) {
+      setTimeout(function() { window.location.href = consoliderUrl; }, 600);
+      return;
+    }
+    // Afficher bannière continuer
+    var ban = document.getElementById(bannerId);
+    if (ban) {
+      ban.style.display = 'block';
+      ban.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  /* ── Marquer chapitre lu ── */
+  function marquerLu(chapKey) {
+    var cr = JSON.parse(localStorage.getItem('chapRead') || '[]');
+    if (!cr.includes(chapKey)) { cr.push(chapKey); localStorage.setItem('chapRead', JSON.stringify(cr)); }
+  }
+
+  /* ── Afficher les voix selon avatar ── */
+  function initVoix() {
+    var av = localStorage.getItem('avatar') || 'none';
+    document.querySelectorAll('[data-voix]').forEach(function(el) {
+      el.style.display = (el.getAttribute('data-voix') === av || av === 'none') ? 'block' : 'none';
+    });
+  }
+
+  return { getNiveau: getNiveau, renderNiveauPill: renderNiveauPill, choisirChemin: choisirChemin, marquerLu: marquerLu, initVoix: initVoix };
+})();
+
+/* ── QCM standard ── */
+var DefiQCM = (function() {
+  var done = {};
+  function repondre(btnEl, defiId, estCorrect, feedbacks) {
+    if (done[defiId]) return;
+    done[defiId] = true;
+    var container = document.getElementById('defi-' + defiId);
+    container.querySelectorAll('.defi-option').forEach(function(b) { b.disabled = true; });
+    btnEl.classList.add(estCorrect ? 'correct' : 'wrong');
+    var fb = document.getElementById('fb-' + defiId);
+    if (fb) {
+      var f = estCorrect ? feedbacks.bon : feedbacks.mauvais;
+      fb.className = 'defi-feedback show ' + (estCorrect ? 'df-bon' : 'df-mal');
+      fb.innerHTML = f;
+    }
+    majScore(defiId, estCorrect);
+    return estCorrect;
+  }
+  function majScore(defiId, ok) {
+    var bar = document.getElementById('stars-' + defiId.split('-')[0]);
+    if (!bar) return;
+    // handled per-chapter
+  }
+  return { repondre: repondre };
+})();
+
+/* ── Drag & Drop générique ── */
+var DragDrop = (function() {
+  var currentDrag = null;
+  var slotData = {};
+  var done = false;
+
+  function init(containerId) {
+    slotData = {}; done = false;
+    var c = document.getElementById(containerId);
+    if (!c) return;
+    c.querySelectorAll('.dd-chip').forEach(function(chip) {
+      chip.addEventListener('dragstart', function() {
+        currentDrag = chip.dataset.key;
+        chip.classList.add('dragging');
+      });
+      chip.addEventListener('dragend', function() { chip.classList.remove('dragging'); });
+    });
+    c.querySelectorAll('.dd-slot').forEach(function(slot) {
+      slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('over'); });
+      slot.addEventListener('dragleave', function() { slot.classList.remove('over'); });
+      slot.addEventListener('drop', function(e) {
+        e.preventDefault(); slot.classList.remove('over');
+        if (!currentDrag || done) return;
+        // Remove chip from previous slot
+        Object.keys(slotData).forEach(function(sid) {
+          if (slotData[sid] === currentDrag && sid !== slot.id) {
+            var prev = document.getElementById(sid);
+            if (prev) { prev.innerHTML = prev.getAttribute('data-orig') || ''; prev.classList.remove('correct','wrong'); }
+            delete slotData[sid];
+            var prevChip = document.getElementById('chip-' + currentDrag);
+            if (prevChip) prevChip.classList.remove('placed');
+          }
+        });
+        var chipEl = document.getElementById('chip-' + currentDrag);
+        var label  = chipEl ? chipEl.textContent : currentDrag;
+        var orig   = slot.getAttribute('data-orig') || slot.textContent;
+        if (!slot.getAttribute('data-orig')) slot.setAttribute('data-orig', slot.textContent);
+        slot.innerHTML = '<strong>' + label + '</strong><br><span style="font-size:.8rem;color:#7A8FA0;">' + orig + '</span>';
+        slotData[slot.id] = currentDrag;
+        if (chipEl) chipEl.classList.add('placed');
+        currentDrag = null;
+      });
+    });
+  }
+
+  function verifier(containerId, correct, feedbackId) {
+    if (done) return 0;
+    var c = document.getElementById(containerId);
+    var ok = 0;
+    c.querySelectorAll('.dd-slot').forEach(function(slot) {
+      var val = slotData[slot.id];
+      if (!val) return;
+      var isOk = val === correct[slot.id];
+      slot.classList.add(isOk ? 'correct' : 'wrong');
+      if (isOk) ok++;
+    });
+    var total = Object.keys(correct).length;
+    var fb = document.getElementById(feedbackId);
+    if (fb) {
+      if (ok === total) {
+        fb.className = 'defi-feedback show df-bon';
+        fb.innerHTML = '<strong>Parfait ! ' + ok + '/' + total + '</strong> Toutes les associations sont correctes.';
+        done = true;
+      } else {
+        fb.className = 'defi-feedback show df-partiel';
+        fb.innerHTML = '<strong>' + ok + '/' + total + ' corrects.</strong> Certaines associations sont incorrectes — retirez-les et réessayez.';
+        c.querySelectorAll('.dd-slot.wrong').forEach(function(s) { s.classList.remove('wrong'); });
+      }
+    }
+    return done ? ok : 0;
+  }
+
+  return { init: init, verifier: verifier };
+})();
+
+</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">À la recherche de la valeur perdue</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Accueil</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapitres" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Chapitres</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-chapitres">    
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre1.html">
+ <span class="dropdown-text">Ch. 1 — Pensée antique et médiévale</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre2.html">
+ <span class="dropdown-text">Ch. 2 — Naissance de l’économie politique</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre3.html">
+ <span class="dropdown-text">Ch. 3 — Les Physiocrates</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre4.html">
+ <span class="dropdown-text">Ch. 4 — Les Classiques (I)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre5.html">
+ <span class="dropdown-text">Ch. 5 — Les Classiques (II)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre6.html">
+ <span class="dropdown-text">Ch. 6 — Marx et le socialisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre7.html">
+ <span class="dropdown-text">Ch. 7 — Le marginalisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre8.html">
+ <span class="dropdown-text">Ch. 8 — L’affirmation des néoclassiques</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre9.html">
+ <span class="dropdown-text">Ch. 9 — La révolution keynésienne</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre10.html">
+ <span class="dropdown-text">Ch. 10 — La synthèse de Samuelson</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre11.html">
+ <span class="dropdown-text">Ch. 11 — Le monétarisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre12.html">
+ <span class="dropdown-text">Ch. 12 — État des lieux</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../carte-debats.html"> 
+<span class="menu-text">Carte des débats</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../quiz.html"> 
+<span class="menu-text">Quiz</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../carnet.html"> 
+<span class="menu-text">Carnet de bord</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../apropos.html"> 
+<span class="menu-text">À propos</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../profil.html"> 
+<span class="menu-text">Mon profil</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#contexte-économique" id="toc-contexte-économique" class="nav-link active" data-scroll-target="#contexte-économique">Contexte économique</a>
+  <ul class="collapse">
+  <li><a href="#les-civilisations-du-bassin-méditerranéen" id="toc-les-civilisations-du-bassin-méditerranéen" class="nav-link" data-scroll-target="#les-civilisations-du-bassin-méditerranéen">Les civilisations du bassin méditerranéen</a></li>
+  </ul></li>
+  <li><a href="#les-auteurs" id="toc-les-auteurs" class="nav-link" data-scroll-target="#les-auteurs">Les auteurs</a>
+  <ul class="collapse">
+  <li><a href="#antiquité" id="toc-antiquité" class="nav-link" data-scroll-target="#antiquité">Antiquité</a></li>
+  <li><a href="#moyen-âge" id="toc-moyen-âge" class="nav-link" data-scroll-target="#moyen-âge">Moyen Âge</a></li>
+  </ul></li>
+  <li><a href="#les-idées-principales" id="toc-les-idées-principales" class="nav-link" data-scroll-target="#les-idées-principales">Les idées principales</a>
+  <ul class="collapse">
+  <li><a href="#la-valeur-usage-ou-échange" id="toc-la-valeur-usage-ou-échange" class="nav-link" data-scroll-target="#la-valeur-usage-ou-échange">La valeur : usage ou échange ?</a></li>
+  <li><a href="#la-bonne-monnaie" id="toc-la-bonne-monnaie" class="nav-link" data-scroll-target="#la-bonne-monnaie">La bonne monnaie</a></li>
+  <li><a href="#le-juste-prix-et-le-prêt-à-intérêt" id="toc-le-juste-prix-et-le-prêt-à-intérêt" class="nav-link" data-scroll-target="#le-juste-prix-et-le-prêt-à-intérêt">Le juste prix et le prêt à intérêt</a></li>
+  </ul></li>
+  <li><a href="#résonances-contemporaines" id="toc-résonances-contemporaines" class="nav-link" data-scroll-target="#résonances-contemporaines">Résonances contemporaines</a></li>
+  <li><a href="#questions-de-réflexion" id="toc-questions-de-réflexion" class="nav-link" data-scroll-target="#questions-de-réflexion">Questions de réflexion</a></li>
+  <li><a href="#pour-aller-plus-loin" id="toc-pour-aller-plus-loin" class="nav-link" data-scroll-target="#pour-aller-plus-loin">Pour aller plus loin</a></li>
+  <li><a href="#question-flash" id="toc-question-flash" class="nav-link" data-scroll-target="#question-flash">Question flash</a></li>
+  <li><a href="#carrefour-décisionnel" id="toc-carrefour-décisionnel" class="nav-link" data-scroll-target="#carrefour-décisionnel">Carrefour décisionnel</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Ch. 1 — La pensée antique et médiévale</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="chapter-meta">Antiquité (3500 av. J.-C. — 476) · Moyen Âge (476 — 1453)</div>
+<script>
+let cr = JSON.parse(localStorage.getItem('chapRead') || '[]');
+if (!cr.includes('ch1')) { cr.push('ch1'); localStorage.setItem('chapRead', JSON.stringify(cr)); }
+document.addEventListener('DOMContentLoaded', function() {
+  const av = localStorage.getItem('avatar') || 'none';
+  document.querySelectorAll('[data-voix]').forEach(el => {
+    el.style.display = (el.getAttribute('data-voix') === av || av === 'none') ? 'block' : 'none';
+  });
+});
+</script>
+<p>Avant qu’il existe des économistes, il existait des marchands, des philosophes et des princes. Les premières réflexions sur la valeur, la monnaie et l’échange ne naissent pas dans des universités mais dans la gestion concrète des cités, des temples et des domaines. Ce chapitre couvre une période immense — trois millénaires — en retenant deux lignes directrices : comment les Anciens ont pensé la <em>valeur</em> d’un bien, et quel rôle ils ont assigné à la <em>monnaie</em>.</p>
+<div style="background:#EAF1FA;border:1px solid #B8D0E8;border-left:4px solid #1A3A5C;border-radius:0 6px 6px 0;padding:1rem 1.3rem;margin:2rem 0 1.5rem;">
+  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#1A3A5C;margin-bottom:0.6rem;">🔗 Fils du débat</div>
+  <div style="font-size:0.87rem;color:#1E2E3A;line-height:1.7;">
+    <div style="margin-bottom:0.5rem;">C'est ici que tout commence : la question de la *valeur* (Aristote) et la méfiance envers la monnaie accumulative fondent un cadre moral que les siècles suivants vont progressivement déconstruire.</div>
+    <div style="margin-bottom:0.6rem;">**→ Ch. 2** Le mercantilisme renverse la condamnation aristotélicienne de l'accumulation : accumuler de l'or devient une *vertu nationale*. **→ Ch. 4** Smith reprend la distinction valeur d'usage / valeur d'échange pour en faire le *paradoxe* que les marginalistes résoudront au Ch. 7.</div>
+    <div style="font-style:italic;color:#2E6DA4;border-top:1px solid #C8DCF0;padding-top:0.5rem;margin-top:0.3rem;">❓ La condamnation du prêt à intérêt par Aristote et l'Église médiévale disparaît-elle vraiment avec le capitalisme — ou se déplace-t-elle dans d'autres formes de critique de la finance ?</div>
+  </div>
+</div>
+<hr>
+<section id="contexte-économique" class="level2">
+<h2 class="anchored" data-anchor-id="contexte-économique">Contexte économique</h2>
+<section id="les-civilisations-du-bassin-méditerranéen" class="level3">
+<h3 class="anchored" data-anchor-id="les-civilisations-du-bassin-méditerranéen">Les civilisations du bassin méditerranéen</h3>
+<p>On distingue deux types d’empires selon leur rapport à l’espace et à l’échange.</p>
+<p>Les <strong>empires de la Terre</strong> — Mésopotamie, Égypte — reposent sur l’agriculture irriguée des grandes plaines fluviales. Leurs innovations économiques sont avant tout organisationnelles : gestion collective de l’eau, stockage des céréales, premiers contrats de prêt. Le code d’Hammourabi (XVIII<sup>e</sup> s. av. J.-C.) codifie déjà des règles de commerce et de crédit.</p>
+<p>Les <strong>empires de la Mer</strong> — Phénicie, Grèce, Carthage — vivent du commerce à longue distance. Ils inventent la monnaie frappée (VII<sup>e</sup> s. av. J.-C., en Lydie), les lettres de change et les comptoirs commerciaux. La drachme athénienne devient la première monnaie internationale du monde méditerranéen.</p>
+<p>Rome combine les deux modèles : empire territorial fondé sur le droit et les infrastructures, mais aussi grand consommateur de produits venus de toutes ses provinces. Son déclin illustre un paradoxe que Marx relèvera bien plus tard : l’esclavage, en supprimant le coût du travail, décourage le progrès technique et finit par scléroser l’économie.</p>
+<div class="voix-personnage marchand" data-voix="marchand" style="display:none">
+  <span class="voix-label">Votre regard de marchand</span>
+  Ce qui vous intéresse dans l'Antiquité, c'est l'émergence de la monnaie comme instrument d'échange impersonnel. Avant la drachme ou le sesterce, chaque transaction exigeait une double coïncidence des besoins. La monnaie résout ce problème — et avec elle apparaissent les marchands professionnels, les taux d'intérêt, les lettres de change. Mais Aristote vous regarde de travers : pour lui, votre activité relève de la chrématistique mercantile, c'est-à-dire de l'accumulation sans limite ni finalité naturelle.
+</div>
+<div class="voix-personnage philosophe" data-voix="philosophe" style="display:none">
+  <span class="voix-label">Votre regard de philosophe</span>
+  Ce chapitre est votre territoire. La question de la valeur est d'abord philosophique : qu'est-ce qui fait qu'une chose vaut ? Aristote distingue la valeur d'usage (ce qu'un bien permet de faire) et la valeur d'échange (ce contre quoi il peut s'échanger). Ce clivage traversera toute l'histoire de la pensée économique, de Ricardo à Marx en passant par les marginalistes. Notez aussi que la condamnation du prêt à intérêt — l'argent qui engendre de l'argent — est une position métaphysique autant qu'économique.
+</div>
+<div class="voix-personnage ouvrier" data-voix="ouvrier" style="display:none">
+  <span class="voix-label">Votre regard d'ouvrier</span>
+  L'économie antique repose sur le travail des esclaves. Cela a une conséquence directe : les Anciens ne théorisent pas le travail comme source de valeur — comment le feraient-ils, quand le travail est précisément ce que font ceux qui ne comptent pas ? Il faudra attendre les classiques du XVIII^e^ siècle pour que le travail humain devienne le pivot de la théorie économique. Ce silence antique est éloquent.
+</div>
+<div class="voix-personnage entrepreneur" data-voix="entrepreneur" style="display:none">
+  <span class="voix-label">Votre regard d'entrepreneur</span>
+  Rome vous offre un cas d'école en matière de croissance et de déclin. Pendant deux siècles de Pax Romana, les droits de propriété, les infrastructures et la spécialisation régionale permettent une expansion considérable. Puis l'Empire se referme sur lui-même, les échanges se grippent, la monnaie est dévaluée. Le déclin romain illustre que la croissance ne va pas de soi : elle requiert des institutions stables, des droits garantis et un réseau commercial fonctionnel.
+</div>
+<hr>
+</section>
+</section>
+<section id="les-auteurs" class="level2">
+<h2 class="anchored" data-anchor-id="les-auteurs">Les auteurs</h2>
+<section id="antiquité" class="level3">
+<h3 class="anchored" data-anchor-id="antiquité">Antiquité</h3>
+<p><strong>Xénophon</strong> (426–354 av. J.-C.) est le premier à employer le mot <em>oikonomia</em> — la gestion du domaine domestique. Ses écrits sont des conseils pratiques, pas une théorie abstraite.</p>
+<p><strong>Platon</strong> (428–348 av. J.-C.) conçoit la cité idéale comme une organisation rigoureusement hiérarchisée en trois castes. La monnaie, pour lui, n’a de valeur que par convention et décision politique — position qui le rend parfois proche des partisans de la monnaie fiduciaire contemporaine.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Aristote (384–322 av. J.-C.) — l'auteur central">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Aristote (384–322 av. J.-C.) — l’auteur central
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Aristote est le premier à proposer une théorie cohérente de la valeur et de la monnaie. Il distingue :</p>
+<ul>
+<li>La <strong>chrématistique naturelle</strong> : l’activité économique orientée vers la satisfaction des besoins (agriculture, artisanat). Elle a une limite naturelle.</li>
+<li>La <strong>chrématistique mercantile</strong> : l’accumulation monétaire pour elle-même, sans limite. Aristote la condamne moralement.</li>
+</ul>
+<p>Cette distinction entre économie des besoins et économie de l’accumulation traversera toute la pensée économique, jusqu’à Marx et au-delà.</p>
+<p>Aristote pose aussi deux conditions au <strong>juste prix</strong> : l’acheteur doit être libre de son choix, et le vendeur ne doit pas être en position de force. Ce sont, en termes modernes, les conditions d’un marché concurrentiel sans asymétrie de pouvoir.</p>
+<p>Il condamne enfin le <strong>prêt à intérêt</strong> : la monnaie ne devrait pas engendrer de la monnaie, car elle n’est qu’un instrument d’échange, pas une marchandise productive.</p>
+</div>
+</div>
+</section>
+<section id="moyen-âge" class="level3">
+<h3 class="anchored" data-anchor-id="moyen-âge">Moyen Âge</h3>
+<div class="callout callout-style-default callout-tip callout-titled" title="Ibn Khaldoun (1332–1406) — une voix non-occidentale">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Ibn Khaldoun (1332–1406) — une voix non-occidentale
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Contemporain de Nicolas Oresme, le penseur tunisien Ibn Khaldoun publie sa <em>Muqaddima</em> (1377) — une théorie générale de l’histoire et de l’économie d’une modernité saisissante.</p>
+<p>Il anticipe plusieurs concepts que l’Occident formalisera deux siècles plus tard :</p>
+<ul>
+<li><strong>La division du travail</strong> : la coopération sociale permet une production bien supérieure à l’effort individuel — Adam Smith en fera le fondement de <em>La Richesse des nations</em> en 1776.</li>
+<li><strong>La théorie quantitative de la monnaie</strong> : l’afflux de métaux précieux entraîne la hausse des prix — Bodin reprendra cette idée au XVIe siècle.</li>
+<li><strong>Les cycles dynastiques</strong> : les empires naissent de la <em>asabiyya</em> (cohésion sociale), s’enrichissent par la production, se corrompent dans le luxe et la fiscalité excessive, et déclinent. La fiscalité optimale, dit Ibn Khaldoun, est celle qui ne décourage pas l’activité productive — ce que Arthur Laffer formalisera… en 1974.</li>
+<li><strong>La valeur-travail</strong> : la richesse vient du travail humain appliqué aux ressources — Smith et Ricardo en feront la pierre angulaire de l’économie classique.</li>
+</ul>
+<p>Ibn Khaldoun écrit en arabe, dans le Maghreb médiéval, pour un public de princes et de lettrés. Il n’est traduit en français qu’au XIXe siècle — trop tard pour influencer les Classiques, qui ont réinventé en partie ce qu’il avait déjà formulé.</p>
+</div>
+</div>
+<p><strong>Saint Thomas d’Aquin</strong> (1225–1274) hérite d’Aristote en le lisant à travers le prisme chrétien. Sa question centrale : comment concilier foi et commerce ? Il défend la propriété privée (mieux gérée que la propriété commune) et théorise le <em>juste prix</em> — non pas un prix fixé par l’État mais un prix tel que ni l’acheteur ni le vendeur ne se sent lésé.</p>
+<p><strong>Nicolas Oresme</strong> (1320–1382) anticipe, au XIV<sup>e</sup> siècle, ce qui deviendra la théorie quantitative de la monnaie : quand le prince rogne les pièces d’or pour s’enrichir, il crée de l’inflation et sape la confiance dans la monnaie. La monnaie appartient à la collectivité ; le prince n’en est que le gardien.</p>
+<hr>
+</section>
+</section>
+<section id="les-idées-principales" class="level2">
+<h2 class="anchored" data-anchor-id="les-idées-principales">Les idées principales</h2>
+<section id="la-valeur-usage-ou-échange" class="level3">
+<h3 class="anchored" data-anchor-id="la-valeur-usage-ou-échange">La valeur : usage ou échange ?</h3>
+<p>La tension posée par Aristote entre valeur d’usage et valeur d’échange ne sera « résolue » qu’en 1871 par les marginalistes, qui montreront que c’est l’<em>utilité marginale</em> — et non la quantité de travail incorporée — qui détermine le prix. En attendant, le paradoxe de l’eau et du diamant (très utile mais bon marché ; peu utile mais très cher) hantera les classiques pendant deux siècles.</p>
+</section>
+<section id="la-bonne-monnaie" class="level3">
+<h3 class="anchored" data-anchor-id="la-bonne-monnaie">La bonne monnaie</h3>
+<p>Aristote et Oresme convergent : la monnaie est un <em>instrument</em>, pas une fin. Toute dérive — accumulation mercantile chez Aristote, dévaluation souveraine chez Oresme — est une perversion de sa fonction sociale. Cette intuition resurgira dans les débats sur l’inflation aux XX<sup>e</sup> et XXI<sup>e</sup> siècles.</p>
+</section>
+<section id="le-juste-prix-et-le-prêt-à-intérêt" class="level3">
+<h3 class="anchored" data-anchor-id="le-juste-prix-et-le-prêt-à-intérêt">Le juste prix et le prêt à intérêt</h3>
+<p>L’Église médiévale condamne l’usure. Cette prohibition freine le développement du crédit en Europe chrétienne pendant des siècles — et pousse les fonctions bancaires vers les communautés juives, exemptées de cet interdit. La levée progressive de cette interdiction, à partir du XVI<sup>e</sup> siècle, est une condition de la révolution commerciale.</p>
+<hr>
+</section>
+</section>
+<section id="résonances-contemporaines" class="level2">
+<h2 class="anchored" data-anchor-id="résonances-contemporaines">Résonances contemporaines</h2>
+<div style="background:#F0F6FD;border:1px solid #B8D0E8;border-radius:6px;padding:1rem 1.3rem;margin-bottom:1.5rem;">
+  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#2E6DA4;margin-bottom:0.5rem;">🌐 Résonances contemporaines</div>
+  <div style="font-size:0.9rem;color:#1E2E3A;line-height:1.75;">La condamnation aristotélicienne de la chrématistique mercantile résonne dans les débats actuels sur la **financiarisation** de l'économie et la taxation des super-profits. La question du « juste prix » revient dans les controverses sur les marges de la grande distribution pendant les crises inflationnistes de 2021–23. Et l'interdiction médiévale du prêt à intérêt trouve un écho inattendu dans le développement de la **finance islamique**, qui représente aujourd'hui plus de 3 500 milliards de dollars d'actifs mondiaux.</div>
+</div>
+</section>
+<section id="questions-de-réflexion" class="level2">
+<h2 class="anchored" data-anchor-id="questions-de-réflexion">Questions de réflexion</h2>
+<ol type="1">
+<li>En quoi la distinction aristotélicienne entre chrématistique naturelle et chrématistique mercantile préfigure-t-elle des débats contemporains (finance, spéculation) ?</li>
+<li>Qu’est-ce que le « juste prix » dans la pensée antique et médiévale ? Ce concept est-il économique ou moral ?</li>
+<li>En quoi la condamnation du prêt à intérêt a-t-elle eu des effets économiques durables ?</li>
+<li>Montrez que la réflexion d’Oresme sur la manipulation monétaire anticipe des problèmes très actuels.</li>
+</ol>
+<hr>
+</section>
+<section id="pour-aller-plus-loin" class="level2">
+<h2 class="anchored" data-anchor-id="pour-aller-plus-loin">Pour aller plus loin</h2>
+<p>Podcast <em>Entendez-vous l’éco ?</em> (France Culture) — « L’économie selon les penseurs de l’antiquité ». Textes originaux : <a href="https://classiques.uqam.ca/">classiques.uqam.ca</a></p>
+<hr>
+<hr>
+<details style="margin-top:0.6rem;margin-bottom:1.5rem;">
+  <summary style="cursor:pointer;font-size:0.82rem;font-weight:600;color:#2E6DA4;padding:0.4rem 0;list-style:none;display:flex;align-items:center;gap:6px;">
+    <span style="background:#EAF1FA;border:1px solid #B8D0E8;border-radius:4px;padding:2px 8px;font-size:0.72rem;">💡 Pistes de réponse</span>
+    <span style="color:#7A8FA0;font-size:0.78rem;font-weight:400;">(cliquer pour révéler — essayez d'abord par vous-même)</span>
+  </summary>
+  <div style="border:1px solid #D0DCE8;border-radius:0 0 6px 6px;border-top:none;padding:1rem 1.1rem;background:white;margin-top:0;">
+    
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ La distinction aristotélicienne…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">Partez de la définition : *chrématistique naturelle* = satisfaire les besoins réels, *mercantile* = accumuler sans limite. Montrez comment la finance moderne (trading haute fréquence, fonds spéculatifs) incarne exactement la seconde. La question-clé : y a-t-il une limite *naturelle* à l'accumulation financière — ou faut-il une limite *légale* ?</div>
+    </div>
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ Le juste prix…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">Distinguez deux acceptions : prix *équitable* (ni lésion pour l'acheteur ni pour le vendeur) chez Thomas d'Aquin ; prix de *marché concurrentiel* chez les néoclassiques. Montrez que ce sont deux critères différents — l'un moral, l'autre technique. Le prix du médicament vitale vendu à marge maximale est-il « juste » au sens néoclassique ? Au sens aristotélicien ?</div>
+    </div>
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ La condamnation du prêt à intérêt…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">Montrez l'effet concret : les banquiers juifs se spécialisent dans le crédit parce qu'ils ne sont pas soumis à l'interdit. Cela concentre le capital financier dans des communautés minoritaires — avec les conséquences sociales et politiques que l'on connaît. La levée de l'interdit (XVIe s.) est une *condition* de la révolution commerciale et industrielle.</div>
+    </div>
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ Oresme et la manipulation monétaire…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">La dévaluation d'Oresme = la planche à billets moderne. Dans les deux cas : le détenteur d'épargne est spolié silencieusement. Illustrez avec l'hyperinflation allemande de 1923 (économies d'une vie effacées) ou l'inflation turque de 2022 (−80% de la livre en 2 ans). La différence : Oresme avait un *prince* qui décidait seul. Aujourd'hui, c'est une banque centrale — en principe indépendante.</div>
+    </div>
+  </div>
+</details>
+</section>
+<section id="question-flash" class="level2">
+<h2 class="anchored" data-anchor-id="question-flash">Question flash</h2>
+<div style="background:#0D2137;border-radius:8px;padding:1.3rem 1.5rem;margin:1.5rem 0;">
+  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#4A90C4;margin-bottom:0.6rem;">⚡ Question flash — Retrieve Practice</div>
+  <div style="font-size:0.95rem;color:#EAF1F8;line-height:1.7;margin-bottom:0.8rem;">**Question flash :** Aristote condamne deux formes d'activité économique liée à la monnaie. Laquelle condamne-t-il et pourquoi ?</div>
+  <div style="font-size:0.72rem;color:#4A6A85;margin-bottom:0.8rem;">Ch. 1 · Concepts : chrématistique / juste prix / monnaie</div>
+  <button id="flash-btn" onclick="(function(){
+    var el=document.getElementById('flash-answer');
+    var btn=document.getElementById('flash-btn');
+    if(el.style.display==='none'){el.style.display='block';btn.textContent='▲ Masquer la réponse';}
+    else{el.style.display='none';btn.textContent='▼ Voir la réponse-modèle';}
+  })()" style="background:#2E6DA4;color:white;border:none;padding:0.5rem 1.1rem;border-radius:5px;cursor:pointer;font-size:0.82rem;font-weight:600;font-family:'Source Sans 3',sans-serif;">▼ Voir la réponse-modèle</button>
+  <div id="flash-answer" style="display:none;margin-top:0.8rem;background:#EAF1FA;border-radius:5px;padding:0.8rem 1rem;font-size:0.88rem;color:#0D2137;line-height:1.7;">La *chrématistique mercantile* (accumulation monétaire sans limite) et le *prêt à intérêt* (l'argent qui engendre de l'argent). Il les condamne car ils n'ont pas de fin naturelle — contrairement à la chrématistique naturelle, qui vise à satisfaire des besoins réels.</div>
+</div>
+</section>
+<section id="carrefour-décisionnel" class="level2">
+<h2 class="anchored" data-anchor-id="carrefour-décisionnel">Carrefour décisionnel</h2>
+<div class="carrefour-wrap" id="carrefour-1">
+  <div class="carrefour-header">
+    <div class="carrefour-icon">⚡</div>
+    <h3 class="carrefour-title anchored">Carrefour — Chapitre 1</h3>
+    <span id="niveau-pill-1" class="chapter-level-pill level-intermediaire" style="display:none"></span>
+  </div>
+
+  <div class="carrefour-scenario">
+    Un marchand de Corinthe vous interroge : « Aristote condamne mon activité — il dit que j'accumule de la monnaie sans limite, que c'est non naturel. Mais sans moi, comment les citoyens auraient-ils accès aux biens venus d'ailleurs ? » Comment lui répondez-vous ?
+  </div>
+
+  <div id="paths-1" class="carrefour-paths">
+    
+      <button class="carrefour-path" data-chemin="A" onclick="choisirChemin(this)">
+        <span class="path-letter">A</span>
+        <div>
+          <div>Aristote a raison : seule la chrématistique naturelle est légitime</div>
+          <span class="path-tag tag-alternatif">Parcours philosophique</span>
+        </div>
+      </button>
+      <button class="carrefour-path" data-chemin="B" onclick="choisirChemin(this)">
+        <span class="path-letter">B</span>
+        <div>
+          <div>L'échange enrichit tout le monde — Aristote ignore les bénéfices du commerce</div>
+          <span class="path-tag tag-standard">Parcours libéral</span>
+        </div>
+      </button>
+      <button class="carrefour-path" data-chemin="defi" onclick="choisirChemin(this)">
+        <span class="path-letter">C</span>
+        <div>
+          <div>Relever le défi avant de décider</div>
+          <span class="path-tag tag-defi">Parcours renforcé +15 min</span>
+        </div>
+      </button>
+  </div>
+
+  <div id="fb-carrefour-1" class="carrefour-feedback"></div>
+
+  <!-- Défis (masqués jusqu'au choix "defi") -->
+  <div id="defis-1" style="display:none; margin-top:1.5rem; border-top:1px solid #D0DCE8; padding-top:1.2rem;">
+    <div style="font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#4A6A85;margin-bottom:1rem;">Trois défis — répondez avant de décider</div>
+    
+    <div class="defi-wrap">
+      <span class="defi-type-badge badge-cognitif">Cognitif</span>
+      <div class="defi-title">Valeur d'usage ou valeur d'échange ?</div>
+      <div class="defi-question">Le paradoxe de l'eau et du diamant illustre que :</div>
+      <div id="defi-d1-1">
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd1-1')" data-fb-bon="<strong>Correct.</strong> C'est précisément cette tension que Smith nommera « paradoxe eau/diamant » et que les marginalistes résoudront en 1871 avec l'utilité marginale : c'est la dernière unité disponible d'un bien qui fixe son prix, pas son utilité totale." data-fb-mal="<strong>Pas tout à fait.</strong> Le paradoxe montre que valeur d'usage et valeur d'échange divergent : l'eau, très utile, est peu chère ; le diamant, peu utile, est très cher. La réponse B est correcte.">
+            <span class="opt-letter">A</span>
+            <span>L'utilité pratique détermine toujours le prix de marché</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, true, 'd1-1')" data-fb-bon="<strong>Correct.</strong> C'est précisément cette tension que Smith nommera « paradoxe eau/diamant » et que les marginalistes résoudront en 1871 avec l'utilité marginale : c'est la dernière unité disponible d'un bien qui fixe son prix, pas son utilité totale." data-fb-mal="<strong>Pas tout à fait.</strong> Le paradoxe montre que valeur d'usage et valeur d'échange divergent : l'eau, très utile, est peu chère ; le diamant, peu utile, est très cher. La réponse B est correcte.">
+            <span class="opt-letter">B</span>
+            <span>Un bien très utile peut avoir un faible prix, et un bien peu utile un prix élevé — la valeur d'usage ne détermine pas la valeur d'échange</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd1-1')" data-fb-bon="<strong>Correct.</strong> C'est précisément cette tension que Smith nommera « paradoxe eau/diamant » et que les marginalistes résoudront en 1871 avec l'utilité marginale : c'est la dernière unité disponible d'un bien qui fixe son prix, pas son utilité totale." data-fb-mal="<strong>Pas tout à fait.</strong> Le paradoxe montre que valeur d'usage et valeur d'échange divergent : l'eau, très utile, est peu chère ; le diamant, peu utile, est très cher. La réponse B est correcte.">
+            <span class="opt-letter">C</span>
+            <span>La rareté seule explique le prix de tous les biens</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd1-1')" data-fb-bon="<strong>Correct.</strong> C'est précisément cette tension que Smith nommera « paradoxe eau/diamant » et que les marginalistes résoudront en 1871 avec l'utilité marginale : c'est la dernière unité disponible d'un bien qui fixe son prix, pas son utilité totale." data-fb-mal="<strong>Pas tout à fait.</strong> Le paradoxe montre que valeur d'usage et valeur d'échange divergent : l'eau, très utile, est peu chère ; le diamant, peu utile, est très cher. La réponse B est correcte.">
+            <span class="opt-letter">D</span>
+            <span>La monnaie n'a aucun rôle dans la formation des prix</span>
+          </button>
+      </div>
+      <div id="fb-d1-1" class="defi-feedback"></div>
+    </div>
+    <div class="defi-wrap">
+      <span class="defi-type-badge badge-immersif">Immersif</span>
+      <div class="defi-title">Vous êtes Nicolas Oresme (1360)</div>
+      <div class="defi-question">Le roi vous consulte. Il veut rogner les pièces d'or pour financer ses guerres. Comment lui répondez-vous ?</div>
+      <div id="defi-d1-2">
+          <button class="defi-option" onclick="repondreDefi(this, true, 'd1-2')" data-fb-bon="<strong>Oresme approuve.</strong> Vous avez compris son argument : rogner les pièces revient à une dévaluation cachée qui ruine ceux qui ont épargné. Cette intuition préfigure la théorie quantitative de la monnaie (Bodin, ch.&nbsp;2) et les débats modernes sur la banque centrale." data-fb-mal="<strong>Oresme vous corrigerait.</strong> La bonne réponse est A. Pour Oresme, la monnaie est un bien commun dont le prince n'est que le gardien — en la dévaluant, il vole ses sujets et crée de l'inflation. C'est l'un des premiers raisonnements économiques formels de l'Europe médiévale.">
+            <span class="opt-letter">A</span>
+            <span>« Sire, la monnaie appartient à la collectivité — vous n'en êtes que le gardien. La dévaluer trahit la confiance et provoque la hausse des prix. »</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd1-2')" data-fb-bon="<strong>Oresme approuve.</strong> Vous avez compris son argument : rogner les pièces revient à une dévaluation cachée qui ruine ceux qui ont épargné. Cette intuition préfigure la théorie quantitative de la monnaie (Bodin, ch.&nbsp;2) et les débats modernes sur la banque centrale." data-fb-mal="<strong>Oresme vous corrigerait.</strong> La bonne réponse est A. Pour Oresme, la monnaie est un bien commun dont le prince n'est que le gardien — en la dévaluant, il vole ses sujets et crée de l'inflation. C'est l'un des premiers raisonnements économiques formels de l'Europe médiévale.">
+            <span class="opt-letter">B</span>
+            <span>« Sire, plus de monnaie stimule le commerce — c'est une bonne politique. »</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd1-2')" data-fb-bon="<strong>Oresme approuve.</strong> Vous avez compris son argument : rogner les pièces revient à une dévaluation cachée qui ruine ceux qui ont épargné. Cette intuition préfigure la théorie quantitative de la monnaie (Bodin, ch.&nbsp;2) et les débats modernes sur la banque centrale." data-fb-mal="<strong>Oresme vous corrigerait.</strong> La bonne réponse est A. Pour Oresme, la monnaie est un bien commun dont le prince n'est que le gardien — en la dévaluant, il vole ses sujets et crée de l'inflation. C'est l'un des premiers raisonnements économiques formels de l'Europe médiévale.">
+            <span class="opt-letter">C</span>
+            <span>« Sire, peu importe la teneur en or — c'est l'État qui fixe la valeur de la monnaie. »</span>
+          </button>
+      </div>
+      <div id="fb-d1-2" class="defi-feedback"></div>
+    </div>
+    <div class="defi-stars" id="stars-1" style="display:none;">
+      <span class="star-icon" id="st-1-1">☆</span>
+      <span class="star-icon" id="st-1-2">☆</span>
+      <span class="star-icon" id="st-1-3">☆</span>
+      <span style="font-size:.85rem;color:#4A6A85;margin-left:4px;">Défis complétés : <strong id="score-1">0</strong> / 2</span>
+    </div>
+  </div>
+
+  <!-- Bannière continuer -->
+  <div id="banner-1" class="continue-banner" style="display:none; margin-top:1.2rem;">
+    <h3 id="banner-titre-1" class="anchored">Votre verdict</h3>
+    <p id="banner-body-1"></p>
+    <a href="../chapitres/chapitre2.html" class="btn-continue-ch" id="btn-continue-1" style="display:none;">Ch. 2 — Naissance de l'économie politique →</a>
+  </div>
+</div>
+
+<script>
+(function() {
+  CarrefourEngine.renderNiveauPill('niveau-pill-1');
+
+  var feedbacks = {
+  'A': {cls: 'fb-partiel', html: '<strong>Position aristotélicienne.</strong> Vous restez dans le cadre de la pensée antique — l\'échange a une limite naturelle, celle des besoins. Cela prépare bien le ch.&nbsp;2 : vous verrez comment le mercantilisme <em>inverse</em> cette logique en faisant de l\'accumulation une vertu nationale.'},
+  'B': {cls: 'fb-bon', html: '<strong>Intuition smithienne avant l\'heure.</strong> Vous anticipez la critique classique du mercantilisme et de la morale aristotélicienne. Smith dira que le commerçant, en cherchant son profit, sert l\'intérêt général. Mais attention : Aristote vous répondrait que l\'accumulation sans fin détruit le lien social.'},
+  'defi': {cls: 'fb-info', html: ''},
+  };
+  var conclusions = {
+  'A': {titre: 'Vous pensez avec Aristote', body: 'La limite naturelle de l\'échange est votre boussole. En entrant dans le ch.&nbsp;2, vous verrez le mercantilisme comme une <em>transgression</em> de cet ordre naturel — une accumulation sans fin que les Classiques critiques ront eux aussi, mais pour d\'autres raisons.'},
+  'B': {titre: 'Vous anticipez la liberté commerciale', body: 'Votre intuition rejoint Smith (ch.&nbsp;4) avant la lettre. Le ch.&nbsp;2 vous présentera le mercantilisme — que vous lirez avec un œil critique. Comment passe-t-on de la condamnation du commerce à sa glorification ?'},
+  'defi': {titre: 'Verdict éclairé par les défis', body: 'Vous avez travaillé les paradoxes de la valeur et la question monétaire chez Oresme. Le ch.&nbsp;2 sera l\'occasion de voir comment ces intuitions médiévales se transforment en première <em>politique économique</em> : le mercantilisme.'},
+  };
+  var numDefis = 2;
+  var defiScore = 0;
+  var defiDone = {};
+
+  window.choisirChemin = function(btn) {
+    var chemin = btn.getAttribute('data-chemin');
+    document.querySelectorAll('#paths-1 .carrefour-path').forEach(function(b) {
+      b.classList.remove('selected');
+    });
+    btn.classList.add('selected');
+
+    if (chemin === 'defi') {
+      document.getElementById('defis-1').style.display = 'block';
+      document.getElementById('fb-carrefour-1').className = 'carrefour-feedback';
+      document.getElementById('defis-1').scrollIntoView({behavior:'smooth', block:'nearest'});
+      return;
+    }
+
+    var fb = feedbacks[chemin];
+    var el = document.getElementById('fb-carrefour-1');
+    if (fb) {
+      el.className = 'carrefour-feedback show ' + fb.cls;
+      el.innerHTML = fb.html;
+    }
+    afficherConclusion(chemin);
+  };
+
+  window.repondreDefi = function(btn, correct, defiId) {
+    if (defiDone[defiId]) return;
+    defiDone[defiId] = true;
+    var container = document.getElementById('defi-' + defiId);
+    container.querySelectorAll('.defi-option').forEach(function(b) { b.disabled = true; });
+    btn.classList.add(correct ? 'correct' : 'wrong');
+    var fb = document.getElementById('fb-' + defiId);
+    if (fb) {
+      fb.className = 'defi-feedback show ' + (correct ? 'df-bon' : 'df-mal');
+      fb.innerHTML = correct ? btn.getAttribute('data-fb-bon') : btn.getAttribute('data-fb-mal');
+    }
+    defiScore++;
+    var starsBar = document.getElementById('stars-1');
+    starsBar.style.display = 'flex';
+    document.getElementById('score-1').textContent = defiScore;
+    for (var i = 1; i <= defiScore; i++) {
+      var s = document.getElementById('st-1-' + i);
+      if (s) { s.textContent = '★'; s.style.color = '#2E6DA4'; }
+    }
+    if (defiScore >= numDefis) {
+      setTimeout(function() { afficherConclusion('defi'); }, 600);
+    }
+  };
+
+  function afficherConclusion(chemin) {
+    var c = conclusions[chemin] || conclusions[Object.keys(conclusions)[0]];
+    document.getElementById('banner-titre-1').textContent = c.titre;
+    document.getElementById('banner-body-1').innerHTML = c.body;
+    var banner = document.getElementById('banner-1');
+    banner.style.display = 'block';
+    var btn = document.getElementById('btn-continue-1');
+    if (btn) btn.style.display = 'inline-block';
+    banner.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+})();
+</script>
+<div class="chap-nav">
+<p><a href="../index.html">← Accueil</a></p>
+<p><a href="../chapitres/chapitre2.html">Ch. 2 — Naissance de l’économie politique →</a></p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Histoire Économique — Pascaline Vincent, 2026</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Construit avec <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Chapitre 10 — La synthèse de Samuelson – À la recherche de la valeur perdue</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-ff98d69c136e79b123368504bdb7637c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;family=Source+Sans+3:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<script>
+/* carrefour.js — moteur de navigation adaptative
+   Utilisé par tous les chapitres.
+   Expose: CarrefourEngine, DragDrop, DefiQCM, DefiImmersif */
+
+var CarrefourEngine = (function() {
+  /* ── Niveau depuis localStorage ── */
+  function getNiveau() {
+    var v = (localStorage.getItem('niveau') || '').toLowerCase();
+    if (v.includes('avan')) return 'avance';
+    if (v.includes('but') || v.includes('but')) return 'debutant';
+    return 'intermediaire';
+  }
+
+  /* ── Injecter la pastille niveau ── */
+  function renderNiveauPill(containerId) {
+    var el = document.getElementById(containerId);
+    if (!el) return;
+    var n = getNiveau();
+    var labels = { debutant: 'Niveau débutant', intermediaire: 'Niveau intermédiaire', avance: 'Niveau avancé' };
+    var cls    = { debutant: 'level-debutant',   intermediaire: 'level-intermediaire',   avance: 'level-avance' };
+    el.className = 'chapter-level-pill ' + cls[n];
+    el.textContent = labels[n];
+    el.style.display = 'inline-flex';
+  }
+
+  /* ── Choisir un chemin (afficher feedback + banner) ── */
+  function choisirChemin(btnEl, feedbackId, bannerId, texte, consoliderUrl) {
+    var type = btnEl.getAttribute('data-chemin');
+    // Marque le bouton
+    document.querySelectorAll('.carrefour-path').forEach(function(b) {
+      b.classList.remove('selected');
+    });
+    btnEl.classList.add('selected');
+
+    var fb = document.getElementById(feedbackId);
+    if (fb) {
+      fb.className = 'carrefour-feedback show fb-' + (texte.cls || 'info');
+      fb.innerHTML = texte.html;
+    }
+    if (type === 'consolider' && consoliderUrl) {
+      setTimeout(function() { window.location.href = consoliderUrl; }, 600);
+      return;
+    }
+    // Afficher bannière continuer
+    var ban = document.getElementById(bannerId);
+    if (ban) {
+      ban.style.display = 'block';
+      ban.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  /* ── Marquer chapitre lu ── */
+  function marquerLu(chapKey) {
+    var cr = JSON.parse(localStorage.getItem('chapRead') || '[]');
+    if (!cr.includes(chapKey)) { cr.push(chapKey); localStorage.setItem('chapRead', JSON.stringify(cr)); }
+  }
+
+  /* ── Afficher les voix selon avatar ── */
+  function initVoix() {
+    var av = localStorage.getItem('avatar') || 'none';
+    document.querySelectorAll('[data-voix]').forEach(function(el) {
+      el.style.display = (el.getAttribute('data-voix') === av || av === 'none') ? 'block' : 'none';
+    });
+  }
+
+  return { getNiveau: getNiveau, renderNiveauPill: renderNiveauPill, choisirChemin: choisirChemin, marquerLu: marquerLu, initVoix: initVoix };
+})();
+
+/* ── QCM standard ── */
+var DefiQCM = (function() {
+  var done = {};
+  function repondre(btnEl, defiId, estCorrect, feedbacks) {
+    if (done[defiId]) return;
+    done[defiId] = true;
+    var container = document.getElementById('defi-' + defiId);
+    container.querySelectorAll('.defi-option').forEach(function(b) { b.disabled = true; });
+    btnEl.classList.add(estCorrect ? 'correct' : 'wrong');
+    var fb = document.getElementById('fb-' + defiId);
+    if (fb) {
+      var f = estCorrect ? feedbacks.bon : feedbacks.mauvais;
+      fb.className = 'defi-feedback show ' + (estCorrect ? 'df-bon' : 'df-mal');
+      fb.innerHTML = f;
+    }
+    majScore(defiId, estCorrect);
+    return estCorrect;
+  }
+  function majScore(defiId, ok) {
+    var bar = document.getElementById('stars-' + defiId.split('-')[0]);
+    if (!bar) return;
+    // handled per-chapter
+  }
+  return { repondre: repondre };
+})();
+
+/* ── Drag & Drop générique ── */
+var DragDrop = (function() {
+  var currentDrag = null;
+  var slotData = {};
+  var done = false;
+
+  function init(containerId) {
+    slotData = {}; done = false;
+    var c = document.getElementById(containerId);
+    if (!c) return;
+    c.querySelectorAll('.dd-chip').forEach(function(chip) {
+      chip.addEventListener('dragstart', function() {
+        currentDrag = chip.dataset.key;
+        chip.classList.add('dragging');
+      });
+      chip.addEventListener('dragend', function() { chip.classList.remove('dragging'); });
+    });
+    c.querySelectorAll('.dd-slot').forEach(function(slot) {
+      slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('over'); });
+      slot.addEventListener('dragleave', function() { slot.classList.remove('over'); });
+      slot.addEventListener('drop', function(e) {
+        e.preventDefault(); slot.classList.remove('over');
+        if (!currentDrag || done) return;
+        // Remove chip from previous slot
+        Object.keys(slotData).forEach(function(sid) {
+          if (slotData[sid] === currentDrag && sid !== slot.id) {
+            var prev = document.getElementById(sid);
+            if (prev) { prev.innerHTML = prev.getAttribute('data-orig') || ''; prev.classList.remove('correct','wrong'); }
+            delete slotData[sid];
+            var prevChip = document.getElementById('chip-' + currentDrag);
+            if (prevChip) prevChip.classList.remove('placed');
+          }
+        });
+        var chipEl = document.getElementById('chip-' + currentDrag);
+        var label  = chipEl ? chipEl.textContent : currentDrag;
+        var orig   = slot.getAttribute('data-orig') || slot.textContent;
+        if (!slot.getAttribute('data-orig')) slot.setAttribute('data-orig', slot.textContent);
+        slot.innerHTML = '<strong>' + label + '</strong><br><span style="font-size:.8rem;color:#7A8FA0;">' + orig + '</span>';
+        slotData[slot.id] = currentDrag;
+        if (chipEl) chipEl.classList.add('placed');
+        currentDrag = null;
+      });
+    });
+  }
+
+  function verifier(containerId, correct, feedbackId) {
+    if (done) return 0;
+    var c = document.getElementById(containerId);
+    var ok = 0;
+    c.querySelectorAll('.dd-slot').forEach(function(slot) {
+      var val = slotData[slot.id];
+      if (!val) return;
+      var isOk = val === correct[slot.id];
+      slot.classList.add(isOk ? 'correct' : 'wrong');
+      if (isOk) ok++;
+    });
+    var total = Object.keys(correct).length;
+    var fb = document.getElementById(feedbackId);
+    if (fb) {
+      if (ok === total) {
+        fb.className = 'defi-feedback show df-bon';
+        fb.innerHTML = '<strong>Parfait ! ' + ok + '/' + total + '</strong> Toutes les associations sont correctes.';
+        done = true;
+      } else {
+        fb.className = 'defi-feedback show df-partiel';
+        fb.innerHTML = '<strong>' + ok + '/' + total + ' corrects.</strong> Certaines associations sont incorrectes — retirez-les et réessayez.';
+        c.querySelectorAll('.dd-slot.wrong').forEach(function(s) { s.classList.remove('wrong'); });
+      }
+    }
+    return done ? ok : 0;
+  }
+
+  return { init: init, verifier: verifier };
+})();
+
+</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">À la recherche de la valeur perdue</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Accueil</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapitres" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Chapitres</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-chapitres">    
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre1.html">
+ <span class="dropdown-text">Ch. 1 — Pensée antique et médiévale</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre2.html">
+ <span class="dropdown-text">Ch. 2 — Naissance de l’économie politique</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre3.html">
+ <span class="dropdown-text">Ch. 3 — Les Physiocrates</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre4.html">
+ <span class="dropdown-text">Ch. 4 — Les Classiques (I)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre5.html">
+ <span class="dropdown-text">Ch. 5 — Les Classiques (II)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre6.html">
+ <span class="dropdown-text">Ch. 6 — Marx et le socialisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre7.html">
+ <span class="dropdown-text">Ch. 7 — Le marginalisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre8.html">
+ <span class="dropdown-text">Ch. 8 — L’affirmation des néoclassiques</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre9.html">
+ <span class="dropdown-text">Ch. 9 — La révolution keynésienne</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre10.html">
+ <span class="dropdown-text">Ch. 10 — La synthèse de Samuelson</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre11.html">
+ <span class="dropdown-text">Ch. 11 — Le monétarisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre12.html">
+ <span class="dropdown-text">Ch. 12 — État des lieux</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../carte-debats.html"> 
+<span class="menu-text">Carte des débats</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../quiz.html"> 
+<span class="menu-text">Quiz</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../carnet.html"> 
+<span class="menu-text">Carnet de bord</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../apropos.html"> 
+<span class="menu-text">À propos</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../profil.html"> 
+<span class="menu-text">Mon profil</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#contexte-laprès-1945" id="toc-contexte-laprès-1945" class="nav-link active" data-scroll-target="#contexte-laprès-1945">Contexte : l’après-1945</a></li>
+  <li><a href="#paul-samuelson-19152009" id="toc-paul-samuelson-19152009" class="nav-link" data-scroll-target="#paul-samuelson-19152009">Paul Samuelson (1915–2009)</a></li>
+  <li><a href="#les-idées-principales" id="toc-les-idées-principales" class="nav-link" data-scroll-target="#les-idées-principales">Les idées principales</a>
+  <ul class="collapse">
+  <li><a href="#la-synthèse-néoclassique" id="toc-la-synthèse-néoclassique" class="nav-link" data-scroll-target="#la-synthèse-néoclassique">La synthèse néoclassique</a></li>
+  <li><a href="#la-courbe-de-phillips-1958" id="toc-la-courbe-de-phillips-1958" class="nav-link" data-scroll-target="#la-courbe-de-phillips-1958">La courbe de Phillips (1958)</a></li>
+  <li><a href="#la-croissance-tendancielle" id="toc-la-croissance-tendancielle" class="nav-link" data-scroll-target="#la-croissance-tendancielle">La croissance tendancielle</a></li>
+  </ul></li>
+  <li><a href="#résonances-contemporaines" id="toc-résonances-contemporaines" class="nav-link" data-scroll-target="#résonances-contemporaines">Résonances contemporaines</a></li>
+  <li><a href="#questions-de-réflexion" id="toc-questions-de-réflexion" class="nav-link" data-scroll-target="#questions-de-réflexion">Questions de réflexion</a></li>
+  <li><a href="#question-flash" id="toc-question-flash" class="nav-link" data-scroll-target="#question-flash">Question flash</a></li>
+  <li><a href="#carrefour-décisionnel" id="toc-carrefour-décisionnel" class="nav-link" data-scroll-target="#carrefour-décisionnel">Carrefour décisionnel</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Chapitre 10 — La synthèse de Samuelson</h1>
+<p class="subtitle lead">Les Trente Glorieuses, 1950–1979</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<script>
+let cr = JSON.parse(localStorage.getItem('chapRead') || []);
+if (!cr.includes('ch10')) { cr.push('ch10'); localStorage.setItem('chapRead', JSON.stringify(cr)); }
+document.addEventListener('DOMContentLoaded', function() {
+  const av = localStorage.getItem('avatar') || 'none';
+  document.querySelectorAll('[data-voix]').forEach(el => {
+    el.style.display = (el.getAttribute('data-voix') === av || av === 'none') ? 'block' : 'none';
+  });
+});
+</script>
+<section id="contexte-laprès-1945" class="level2">
+<h2 class="anchored" data-anchor-id="contexte-laprès-1945">Contexte : l’après-1945</h2>
+<ul>
+<li>Dette publique du Royaume-Uni en 1946 : 300% du PIB</li>
+<li>PIB per capita européen en 1945 : −30% par rapport à 1938</li>
+<li>Plan Marshall : aide américaine à la reconstruction européenne</li>
+<li>Création des institutions de Bretton Woods (FMI, Banque mondiale, accords de changes fixes)</li>
+</ul>
+<hr>
+<div class="voix-personnage marchand" data-voix="marchand" style="display:none">
+  <span class="voix-label">Votre regard de marchand</span>
+  Les Trente Glorieuses sont votre âge d'or : croissance forte, commerce international en expansion, système de Bretton Woods qui garantit des taux de change stables. Le théorème de Stolper-Samuelson vous concerne directement : le libre-échange avantage le facteur de production abondant dans chaque pays. Pour les pays riches, c'est le capital — ce qui soutient les profits. Mais il pénalise le travail non qualifié, ce qui alimentera, des décennies plus tard, les critiques de la mondialisation.
+</div>
+<div class="voix-personnage philosophe" data-voix="philosophe" style="display:none">
+  <span class="voix-label">Votre regard de philosophe</span>
+  Samuelson vous intéresse comme stratège de la scientificité. Son manuel <em>Economics</em> a unifié une discipline fragmentée en lui donnant un langage commun — mathématique, cumulatif, prétendument neutre. C'est une construction rhétorique autant que scientifique. La synthèse néoclassique est une « paix des braves » entre Keynes et les néoclassiques, mais elle résout les tensions en les subsumant plutôt qu'en les tranchant. La stagflation des années 1970 révélera que ces tensions n'avaient pas disparu.
+</div>
+<div class="voix-personnage ouvrier" data-voix="ouvrier" style="display:none">
+  <span class="voix-label">Votre regard d'ouvrier</span>
+  Les Trente Glorieuses sont votre période de référence : salaires réels en hausse, État-providence en construction, syndicats puissants, courbe de Phillips favorable (faible chômage possible sans inflation excessive). La croissance est alors partagée d'une manière inédite dans l'histoire du capitalisme. La courbe de Phillips vous donne un levier : un gouvernement soucieux de l'emploi peut arbitrer en faveur du plein emploi au prix d'une légère inflation. Ce compromis fordiste volera en éclats avec les chocs pétroliers.
+</div>
+<div class="voix-personnage entrepreneur" data-voix="entrepreneur" style="display:none">
+  <span class="voix-label">Votre regard d'entrepreneur</span>
+  Solow vous offre un cadre fondamental : à long terme, ni le capital ni le travail ne peuvent soutenir indéfiniment la croissance (rendements décroissants). Seul le progrès technique le peut — et dans le modèle de Solow, il tombe du ciel comme la manne. La croissance endogène (Romer, Lucas Jr.), que vous verrez au chapitre 12, corrige ce point : le progrès technique est le résultat de l'investissement en R&amp;D et en capital humain. Votre stratégie d'innovation est donc, dans ce cadre, littéralement le moteur de la croissance.
+</div>
+</section>
+<section id="paul-samuelson-19152009" class="level2">
+<h2 class="anchored" data-anchor-id="paul-samuelson-19152009">Paul Samuelson (1915–2009)</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Paul Samuelson</strong> ⭐ — Prix Nobel 1970</p>
+<p><em>Economics</em> (1948) : manuel de référence mondial pendant des décennies. Tente de réconcilier microéconomie néoclassique et macroéconomie keynésienne.</p>
+<ul>
+<li><strong>L’oscillateur Hansen-Samuelson</strong> : modélisation des cycles économiques</li>
+<li><strong>L’effet Balassa-Samuelson</strong> : différences de productivité expliquent les taux de change réels</li>
+<li><strong>Théorème Heckscher-Ohlin-Samuelson</strong> : le commerce international s’explique par les dotations factorielles</li>
+<li><strong>L’effet Stolper-Samuelson</strong> : le libre-échange réduit la rémunération du facteur rare</li>
+</ul>
+</div>
+</div>
+<div style="background:#EAF1FA;border:1px solid #B8D0E8;border-left:4px solid #1A3A5C;border-radius:0 6px 6px 0;padding:1rem 1.3rem;margin:2rem 0 1.5rem;">
+  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#1A3A5C;margin-bottom:0.6rem;">🔗 Fils du débat</div>
+  <div style="font-size:0.87rem;color:#1E2E3A;line-height:1.7;">
+    <div style="margin-bottom:0.5rem;">**← Ch. 9** Keynes avait montré la possibilité d'un équilibre de sous-emploi. Ce chapitre raconte comment son œuvre est formalisée, édulcorée — et comment le consensus ainsi construit finit par craquer.</div>
+    <div style="margin-bottom:0.6rem;">**→ Ch. 11** La stagflation de 1973 détruit la courbe de Phillips sur laquelle repose tout le consensus keynésien. Friedman avait prévu cet effondrement dès 1968. **→ Ch. 12** Le modèle de Solow inspire la théorie de la croissance endogène (Romer) : et si le progrès technique n'était pas exogène mais le résultat de choix d'investissement ?</div>
+    <div style="font-style:italic;color:#2E6DA4;border-top:1px solid #C8DCF0;padding-top:0.5rem;margin-top:0.3rem;">❓ Le consensus des économistes est-il une garantie de vérité — ou un artefact de la sociologie de la profession ? Comment expliquer que presque tous les économistes soient devenus keynésiens dans les années 1960, puis monétaristes dans les années 1980 ?</div>
+  </div>
+</div>
+<hr>
+</section>
+<section id="les-idées-principales" class="level2">
+<h2 class="anchored" data-anchor-id="les-idées-principales">Les idées principales</h2>
+<section id="la-synthèse-néoclassique" class="level3">
+<h3 class="anchored" data-anchor-id="la-synthèse-néoclassique">La synthèse néoclassique</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Idée centrale</strong> : à court terme, Keynes a raison (chômage involontaire, rôle de la demande). À long terme, les néoclassiques ont raison (retour au plein emploi). La politique économique doit gérer le court terme.</p>
+</div>
+</div>
+</section>
+<section id="la-courbe-de-phillips-1958" class="level3">
+<h3 class="anchored" data-anchor-id="la-courbe-de-phillips-1958">La courbe de Phillips (1958)</h3>
+<p>Relation empirique inverse entre inflation et chômage :</p>
+<ul>
+<li>Quand le chômage baisse, les salaires et les prix montent → arbitrage possible</li>
+<li>Les gouvernements pilotent la demande globale pour trouver le bon compromis</li>
+<li><strong>Consensus des années 1960</strong> : tout le monde se déclare keynésien (même Nixon en 1971)</li>
+</ul>
+</section>
+<section id="la-croissance-tendancielle" class="level3">
+<h3 class="anchored" data-anchor-id="la-croissance-tendancielle">La croissance tendancielle</h3>
+<p>Solow (1956) : la croissance à long terme est déterminée par le progrès technique (facteur exogène). Capital et travail connaissent des rendements décroissants → seul le progrès technique peut soutenir la croissance indéfiniment.</p>
+<hr>
+</section>
+</section>
+<section id="résonances-contemporaines" class="level2">
+<h2 class="anchored" data-anchor-id="résonances-contemporaines">Résonances contemporaines</h2>
+<div style="background:#F0F6FD;border:1px solid #B8D0E8;border-radius:6px;padding:1rem 1.3rem;margin-bottom:1.5rem;">
+  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#2E6DA4;margin-bottom:0.5rem;">🌐 Résonances contemporaines</div>
+  <div style="font-size:0.9rem;color:#1E2E3A;line-height:1.75;">La **courbe de Phillips** semblait morte après la stagflation des années 70. Elle est revenue en 2021–23 : quand les taux de chômage ont atteint des plus bas historiques aux États-Unis et en Europe, l'inflation est effectivement repartie. Mais la relation est moins stable qu'en 1958 — les anticipations, les chocs d'offre et la mondialisation l'ont profondément modifiée. Et le modèle de Solow inspire les **politiques d'innovation** : investir dans la R&amp;D et le capital humain pour entretenir la croissance à long terme.</div>
+</div>
+</section>
+<section id="questions-de-réflexion" class="level2">
+<h2 class="anchored" data-anchor-id="questions-de-réflexion">Questions de réflexion</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><strong>Samuelson et la synthèse</strong> : définissez, expliquez la réconciliation Keynes/néoclassiques et ses limites (stagflation 1973, crise 2008).</li>
+<li><strong>La courbe de Phillips</strong> : expliquez l’arbitrage inflation/chômage. Pourquoi a-t-elle semblé s’effondrer dans les années 1970 ?</li>
+<li>Qu’est-ce que le <strong>théorème de Stolper-Samuelson</strong> et quelles sont ses implications contemporaines pour le débat sur la mondialisation ?</li>
+</ol>
+</div>
+</div>
+<hr>
+<hr>
+<details style="margin-top:0.6rem;margin-bottom:1.5rem;">
+  <summary style="cursor:pointer;font-size:0.82rem;font-weight:600;color:#2E6DA4;padding:0.4rem 0;list-style:none;display:flex;align-items:center;gap:6px;">
+    <span style="background:#EAF1FA;border:1px solid #B8D0E8;border-radius:4px;padding:2px 8px;font-size:0.72rem;">💡 Pistes de réponse</span>
+    <span style="color:#7A8FA0;font-size:0.78rem;font-weight:400;">(cliquer pour révéler — essayez d'abord par vous-même)</span>
+  </summary>
+  <div style="border:1px solid #D0DCE8;border-radius:0 0 6px 6px;border-top:none;padding:1rem 1.1rem;background:white;margin-top:0;">
+    
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ Samuelson et la synthèse…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">Synthèse = keynésianisme pour le court terme (la demande peut être insuffisante, l'État doit intervenir) + néoclassique pour le long terme (les marchés tendent à l'équilibre, les prix s'ajustent). Formalisée dans le modèle IS-LM de Hicks. Limite : elle perd l'incertitude radicale de Keynes — l'IS-LM est un modèle d'équilibre, alors que Keynes insistait sur la *non-convergence* possible. La stagflation de 1973 révèle la faiblesse : si les deux cibles (inflation et chômage) bougent dans le même sens, le modèle ne sait pas quoi faire.</div>
+    </div>
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ Courbe de Phillips — effondrement…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">1958 : relation empirique stable chômage↓ ↔ inflation↑. Années 1960 : les gouvernements l'utilisent comme menu de politique économique. 1968 : Friedman prédit que si les agents *anticipent* l'inflation, ils ajustent leurs salaires → la courbe se déplace vers le haut → plus d'effet réel. 1973–75 : choc pétrolier → chômage ET inflation montent simultanément (stagflation). La courbe est instable — elle dépend des anticipations et des chocs d'offre. Elle reste un outil utile à court terme, si l'on modélise explicitement les anticipations.</div>
+    </div>
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ Stolper-Samuelson et mondialisation…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">Théorème : le libre-échange avantage le facteur de production *abondant* dans chaque pays. Dans les pays riches (capital abondant) : le capital s'enrichit, le travail non qualifié s'appauvrit. Dans les pays pauvres (travail abondant) : le travail s'enrichit. Implication : la mondialisation réduit les inégalités *entre* pays mais les accroît *au sein* des pays riches. C'est exactement ce qu'on observe depuis 1980 — et ce qui explique en partie la montée des mouvements populistes dans les pays développés.</div>
+    </div>
+  </div>
+</details>
+</section>
+<section id="question-flash" class="level2">
+<h2 class="anchored" data-anchor-id="question-flash">Question flash</h2>
+<div style="background:#0D2137;border-radius:8px;padding:1.3rem 1.5rem;margin:1.5rem 0;">
+  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#4A90C4;margin-bottom:0.6rem;">⚡ Question flash — Retrieve Practice</div>
+  <div style="font-size:0.95rem;color:#EAF1F8;line-height:1.7;margin-bottom:0.8rem;">**Question flash :** La courbe de Phillips de 1958 montrait une relation inverse entre chômage et inflation. Pourquoi Friedman prédit-il en 1968 que cette relation ne peut pas tenir à long terme ?</div>
+  <div style="font-size:0.72rem;color:#4A6A85;margin-bottom:0.8rem;">Ch. 10 · Concepts : synthèse néoclassique / courbe de Phillips / modèle de Solow</div>
+  <button id="flash-btn" onclick="(function(){
+    var el=document.getElementById('flash-answer');
+    var btn=document.getElementById('flash-btn');
+    if(el.style.display==='none'){el.style.display='block';btn.textContent='▲ Masquer la réponse';}
+    else{el.style.display='none';btn.textContent='▼ Voir la réponse-modèle';}
+  })()" style="background:#2E6DA4;color:white;border:none;padding:0.5rem 1.1rem;border-radius:5px;cursor:pointer;font-size:0.82rem;font-weight:600;font-family:'Source Sans 3',sans-serif;">▼ Voir la réponse-modèle</button>
+  <div id="flash-answer" style="display:none;margin-top:0.8rem;background:#EAF1FA;border-radius:5px;padding:0.8rem 1rem;font-size:0.88rem;color:#0D2137;line-height:1.7;">Parce que les travailleurs finissent par *anticiper* l'inflation dans leurs demandes salariales. Si l'État utilise l'inflation pour réduire le chômage, les syndicats demandent des hausses de salaires anticipant l'inflation future → les salaires réels ne baissent pas → le chômage revient à son niveau naturel mais avec une inflation plus élevée. La courbe se déplace vers le haut.</div>
+</div>
+</section>
+<section id="carrefour-décisionnel" class="level2">
+<h2 class="anchored" data-anchor-id="carrefour-décisionnel">Carrefour décisionnel</h2>
+<div class="carrefour-wrap" id="carrefour-10">
+  <div class="carrefour-header">
+    <div class="carrefour-icon">⚡</div>
+    <h3 class="carrefour-title anchored">Carrefour — Chapitre 10</h3>
+    <span id="niveau-pill-10" class="chapter-level-pill level-intermediaire" style="display:none"></span>
+  </div>
+
+  <div class="carrefour-scenario">
+    Nous sommes en 1968. La courbe de Phillips semble confirmer que les gouvernements peuvent choisir leur point sur le compromis inflation/chômage. Un économiste de Chicago vous prévient : « Si vous exploitez trop la courbe de Phillips, les agents anticiperont l'inflation — et la courbe se déplacera. » Croyez-vous cette critique ?
+  </div>
+
+  <div id="paths-10" class="carrefour-paths">
+    
+      <button class="carrefour-path" data-chemin="A" onclick="choisirChemin(this)">
+        <span class="path-letter">A</span>
+        <div>
+          <div>Non : la courbe de Phillips est stable — les politiques de demande fonctionnent</div>
+          <span class="path-tag tag-alternatif">Consensus keynésien</span>
+        </div>
+      </button>
+      <button class="carrefour-path" data-chemin="B" onclick="choisirChemin(this)">
+        <span class="path-letter">B</span>
+        <div>
+          <div>Oui : les anticipations adaptatives déplaceront la courbe — le chômage naturel existe</div>
+          <span class="path-tag tag-standard">Anticipation monétariste</span>
+        </div>
+      </button>
+      <button class="carrefour-path" data-chemin="defi" onclick="choisirChemin(this)">
+        <span class="path-letter">C</span>
+        <div>
+          <div>Relever le défi avant de décider</div>
+          <span class="path-tag tag-defi">Parcours renforcé</span>
+        </div>
+      </button>
+  </div>
+
+  <div id="fb-carrefour-10" class="carrefour-feedback"></div>
+
+  <!-- Défis (masqués jusqu'au choix "defi") -->
+  <div id="defis-10" style="display:none; margin-top:1.5rem; border-top:1px solid #D0DCE8; padding-top:1.2rem;">
+    <div style="font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#4A6A85;margin-bottom:1rem;">Trois défis — répondez avant de décider</div>
+    
+    <div class="defi-wrap">
+      <span class="defi-type-badge badge-cognitif">Cognitif</span>
+      <div class="defi-title">La courbe de Phillips</div>
+      <div class="defi-question">La courbe de Phillips originale (1958) montre une relation entre :</div>
+      <div id="defi-d10-1">
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd10-1')" data-fb-bon="<strong>Correct.</strong> Phillips observe empiriquement (données britanniques 1861–1957) une relation inverse : quand le chômage baisse, les salaires (et les prix) montent. Samuelson et Solow popularisent cette relation comme un menu de politique économique. Friedman montrera que cette relation est instable à long terme." data-fb-mal="<strong>Non.</strong> La courbe de Phillips relie chômage et salaires (ou inflation) — réponse C. C'est une régression empirique, pas un modèle théorique. Friedman en montrera les limites : elle ne tient qu'à court terme si les agents n'anticipent pas l'inflation.">
+            <span class="opt-letter">A</span>
+            <span>Taux d'intérêt et inflation</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd10-1')" data-fb-bon="<strong>Correct.</strong> Phillips observe empiriquement (données britanniques 1861–1957) une relation inverse : quand le chômage baisse, les salaires (et les prix) montent. Samuelson et Solow popularisent cette relation comme un menu de politique économique. Friedman montrera que cette relation est instable à long terme." data-fb-mal="<strong>Non.</strong> La courbe de Phillips relie chômage et salaires (ou inflation) — réponse C. C'est une régression empirique, pas un modèle théorique. Friedman en montrera les limites : elle ne tient qu'à court terme si les agents n'anticipent pas l'inflation.">
+            <span class="opt-letter">B</span>
+            <span>Croissance du PIB et chômage (loi d'Okun)</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, true, 'd10-1')" data-fb-bon="<strong>Correct.</strong> Phillips observe empiriquement (données britanniques 1861–1957) une relation inverse : quand le chômage baisse, les salaires (et les prix) montent. Samuelson et Solow popularisent cette relation comme un menu de politique économique. Friedman montrera que cette relation est instable à long terme." data-fb-mal="<strong>Non.</strong> La courbe de Phillips relie chômage et salaires (ou inflation) — réponse C. C'est une régression empirique, pas un modèle théorique. Friedman en montrera les limites : elle ne tient qu'à court terme si les agents n'anticipent pas l'inflation.">
+            <span class="opt-letter">C</span>
+            <span>Taux de chômage et taux de croissance des salaires (proxy d'inflation)</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd10-1')" data-fb-bon="<strong>Correct.</strong> Phillips observe empiriquement (données britanniques 1861–1957) une relation inverse : quand le chômage baisse, les salaires (et les prix) montent. Samuelson et Solow popularisent cette relation comme un menu de politique économique. Friedman montrera que cette relation est instable à long terme." data-fb-mal="<strong>Non.</strong> La courbe de Phillips relie chômage et salaires (ou inflation) — réponse C. C'est une régression empirique, pas un modèle théorique. Friedman en montrera les limites : elle ne tient qu'à court terme si les agents n'anticipent pas l'inflation.">
+            <span class="opt-letter">D</span>
+            <span>Déficit budgétaire et dette publique</span>
+          </button>
+      </div>
+      <div id="fb-d10-1" class="defi-feedback"></div>
+    </div>
+    <div class="defi-wrap">
+      <span class="defi-type-badge badge-pratique">Pratique</span>
+      <div class="defi-title">Modèle de Solow</div>
+      <div class="defi-question">Dans le modèle de Solow, quelle est la seule source de croissance à long terme ?</div>
+      <div id="defi-d10-2">
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd10-2')" data-fb-bon="<strong>Exact.</strong> Capital et travail ont des rendements décroissants : à long terme, leur accumulation seule ne suffit pas. Seul le progrès technique (exogène dans Solow — il « tombe du ciel ») permet une croissance indéfinie. Romer (théorie de la croissance endogène, ch.&nbsp;12) répondra : le progrès technique est le résultat de l'investissement en R&amp;D, pas une manne exogène." data-fb-mal="<strong>Non.</strong> Capital et travail ont des rendements décroissants dans Solow : accumuler plus de capital ou de travailleurs ne suffit pas à long terme. Seul le progrès technique (exogène) peut soutenir la croissance — réponse C. C'est pourquoi Romer voudra l'endogénéiser.">
+            <span class="opt-letter">A</span>
+            <span>L'accumulation du capital physique (investissement)</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd10-2')" data-fb-bon="<strong>Exact.</strong> Capital et travail ont des rendements décroissants : à long terme, leur accumulation seule ne suffit pas. Seul le progrès technique (exogène dans Solow — il « tombe du ciel ») permet une croissance indéfinie. Romer (théorie de la croissance endogène, ch.&nbsp;12) répondra : le progrès technique est le résultat de l'investissement en R&amp;D, pas une manne exogène." data-fb-mal="<strong>Non.</strong> Capital et travail ont des rendements décroissants dans Solow : accumuler plus de capital ou de travailleurs ne suffit pas à long terme. Seul le progrès technique (exogène) peut soutenir la croissance — réponse C. C'est pourquoi Romer voudra l'endogénéiser.">
+            <span class="opt-letter">B</span>
+            <span>La croissance de la population active</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, true, 'd10-2')" data-fb-bon="<strong>Exact.</strong> Capital et travail ont des rendements décroissants : à long terme, leur accumulation seule ne suffit pas. Seul le progrès technique (exogène dans Solow — il « tombe du ciel ») permet une croissance indéfinie. Romer (théorie de la croissance endogène, ch.&nbsp;12) répondra : le progrès technique est le résultat de l'investissement en R&amp;D, pas une manne exogène." data-fb-mal="<strong>Non.</strong> Capital et travail ont des rendements décroissants dans Solow : accumuler plus de capital ou de travailleurs ne suffit pas à long terme. Seul le progrès technique (exogène) peut soutenir la croissance — réponse C. C'est pourquoi Romer voudra l'endogénéiser.">
+            <span class="opt-letter">C</span>
+            <span>Le progrès technique exogène</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd10-2')" data-fb-bon="<strong>Exact.</strong> Capital et travail ont des rendements décroissants : à long terme, leur accumulation seule ne suffit pas. Seul le progrès technique (exogène dans Solow — il « tombe du ciel ») permet une croissance indéfinie. Romer (théorie de la croissance endogène, ch.&nbsp;12) répondra : le progrès technique est le résultat de l'investissement en R&amp;D, pas une manne exogène." data-fb-mal="<strong>Non.</strong> Capital et travail ont des rendements décroissants dans Solow : accumuler plus de capital ou de travailleurs ne suffit pas à long terme. Seul le progrès technique (exogène) peut soutenir la croissance — réponse C. C'est pourquoi Romer voudra l'endogénéiser.">
+            <span class="opt-letter">D</span>
+            <span>L'augmentation des exportations</span>
+          </button>
+      </div>
+      <div id="fb-d10-2" class="defi-feedback"></div>
+    </div>
+    <div class="defi-stars" id="stars-10" style="display:none;">
+      <span class="star-icon" id="st-10-1">☆</span>
+      <span class="star-icon" id="st-10-2">☆</span>
+      <span class="star-icon" id="st-10-3">☆</span>
+      <span style="font-size:.85rem;color:#4A6A85;margin-left:4px;">Défis complétés : <strong id="score-10">0</strong> / 2</span>
+    </div>
+  </div>
+
+  <!-- Bannière continuer -->
+  <div id="banner-10" class="continue-banner" style="display:none; margin-top:1.2rem;">
+    <h3 id="banner-titre-10" class="anchored">Votre verdict</h3>
+    <p id="banner-body-10"></p>
+    <a href="../chapitres/chapitre11.html" class="btn-continue-ch" id="btn-continue-10" style="display:none;">Ch. 11 — Le monétarisme et la NMC →</a>
+  </div>
+</div>
+
+<script>
+(function() {
+  CarrefourEngine.renderNiveauPill('niveau-pill-10');
+
+  var feedbacks = {
+  'A': {cls: 'fb-partiel', html: '<strong>Le consensus de 1968.</strong> Vous avez raison pour la période 1960–1972 : la courbe tient. Mais la stagflation de 1973 (chômage ET inflation simultanés) vous donnera tort. Friedman et Phelps avaient prévu exactement cela : le chômage naturel ne peut pas être durablement réduit par l\'inflation.'},
+  'B': {cls: 'fb-bon', html: '<strong>Vous anticipez Friedman (1968).</strong> La courbe de Phillips augmentée intègre les anticipations : les travailleurs finissent par anticiper l\'inflation dans leurs demandes salariales, éliminant l\'effet sur l\'emploi. Il existe un taux de chômage naturel (NAIRU) que la politique monétaire ne peut pas réduire durablement. Le ch.&nbsp;11 développera tout cela.'},
+  'defi': {cls: 'fb-info', html: ''},
+  };
+  var conclusions = {
+  'A': {titre: 'La stagflation sera votre révélation', body: 'Le ch.&nbsp;11 vous montrera comment 1973 a brisé le consensus keynésien. Le choc pétrolier crée simultanément chômage et inflation — ce que la courbe de Phillips rendait impossible. Friedman avait prévu cela.'},
+  'B': {titre: 'Vous êtes prêt pour Friedman', body: 'Le ch.&nbsp;11 est votre terrain : le monétarisme, les anticipations rationnelles, la critique de Lucas. Vous avez déjà l\'intuition fondamentale — les agents anticipent les politiques économiques et les neutralisent.'},
+  'defi': {titre: 'Verdict éclairé', body: 'Courbe de Phillips et modèle de Solow : deux piliers du consensus des Trente Glorieuses. Le ch.&nbsp;11 vous montrera comment ils s\'effondrent — et ce qui les remplace.'},
+  };
+  var numDefis = 2;
+  var defiScore = 0;
+  var defiDone = {};
+
+  window.choisirChemin = function(btn) {
+    var chemin = btn.getAttribute('data-chemin');
+    document.querySelectorAll('#paths-10 .carrefour-path').forEach(function(b) {
+      b.classList.remove('selected');
+    });
+    btn.classList.add('selected');
+
+    if (chemin === 'defi') {
+      document.getElementById('defis-10').style.display = 'block';
+      document.getElementById('fb-carrefour-10').className = 'carrefour-feedback';
+      document.getElementById('defis-10').scrollIntoView({behavior:'smooth', block:'nearest'});
+      return;
+    }
+
+    var fb = feedbacks[chemin];
+    var el = document.getElementById('fb-carrefour-10');
+    if (fb) {
+      el.className = 'carrefour-feedback show ' + fb.cls;
+      el.innerHTML = fb.html;
+    }
+    afficherConclusion(chemin);
+  };
+
+  window.repondreDefi = function(btn, correct, defiId) {
+    if (defiDone[defiId]) return;
+    defiDone[defiId] = true;
+    var container = document.getElementById('defi-' + defiId);
+    container.querySelectorAll('.defi-option').forEach(function(b) { b.disabled = true; });
+    btn.classList.add(correct ? 'correct' : 'wrong');
+    var fb = document.getElementById('fb-' + defiId);
+    if (fb) {
+      fb.className = 'defi-feedback show ' + (correct ? 'df-bon' : 'df-mal');
+      fb.innerHTML = correct ? btn.getAttribute('data-fb-bon') : btn.getAttribute('data-fb-mal');
+    }
+    defiScore++;
+    var starsBar = document.getElementById('stars-10');
+    starsBar.style.display = 'flex';
+    document.getElementById('score-10').textContent = defiScore;
+    for (var i = 1; i <= defiScore; i++) {
+      var s = document.getElementById('st-10-' + i);
+      if (s) { s.textContent = '★'; s.style.color = '#2E6DA4'; }
+    }
+    if (defiScore >= numDefis) {
+      setTimeout(function() { afficherConclusion('defi'); }, 600);
+    }
+  };
+
+  function afficherConclusion(chemin) {
+    var c = conclusions[chemin] || conclusions[Object.keys(conclusions)[0]];
+    document.getElementById('banner-titre-10').textContent = c.titre;
+    document.getElementById('banner-body-10').innerHTML = c.body;
+    var banner = document.getElementById('banner-10');
+    banner.style.display = 'block';
+    var btn = document.getElementById('btn-continue-10');
+    if (btn) btn.style.display = 'inline-block';
+    banner.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+})();
+</script>
+<div class="chap-nav">
+<p><a href="../chapitres/chapitre9.html">← Ch. 9</a></p>
+<p><a href="../chapitres/chapitre11.html">Ch. 11 — Le monétarisme et la NMC →</a></p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Histoire Économique — Pascaline Vincent, 2026</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Construit avec <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Chapitre 3 — Les Physiocrates – À la recherche de la valeur perdue</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-ff98d69c136e79b123368504bdb7637c.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;family=Source+Sans+3:wght@300;400;600&amp;display=swap" rel="stylesheet">
+<script>
+/* carrefour.js — moteur de navigation adaptative
+   Utilisé par tous les chapitres.
+   Expose: CarrefourEngine, DragDrop, DefiQCM, DefiImmersif */
+
+var CarrefourEngine = (function() {
+  /* ── Niveau depuis localStorage ── */
+  function getNiveau() {
+    var v = (localStorage.getItem('niveau') || '').toLowerCase();
+    if (v.includes('avan')) return 'avance';
+    if (v.includes('but') || v.includes('but')) return 'debutant';
+    return 'intermediaire';
+  }
+
+  /* ── Injecter la pastille niveau ── */
+  function renderNiveauPill(containerId) {
+    var el = document.getElementById(containerId);
+    if (!el) return;
+    var n = getNiveau();
+    var labels = { debutant: 'Niveau débutant', intermediaire: 'Niveau intermédiaire', avance: 'Niveau avancé' };
+    var cls    = { debutant: 'level-debutant',   intermediaire: 'level-intermediaire',   avance: 'level-avance' };
+    el.className = 'chapter-level-pill ' + cls[n];
+    el.textContent = labels[n];
+    el.style.display = 'inline-flex';
+  }
+
+  /* ── Choisir un chemin (afficher feedback + banner) ── */
+  function choisirChemin(btnEl, feedbackId, bannerId, texte, consoliderUrl) {
+    var type = btnEl.getAttribute('data-chemin');
+    // Marque le bouton
+    document.querySelectorAll('.carrefour-path').forEach(function(b) {
+      b.classList.remove('selected');
+    });
+    btnEl.classList.add('selected');
+
+    var fb = document.getElementById(feedbackId);
+    if (fb) {
+      fb.className = 'carrefour-feedback show fb-' + (texte.cls || 'info');
+      fb.innerHTML = texte.html;
+    }
+    if (type === 'consolider' && consoliderUrl) {
+      setTimeout(function() { window.location.href = consoliderUrl; }, 600);
+      return;
+    }
+    // Afficher bannière continuer
+    var ban = document.getElementById(bannerId);
+    if (ban) {
+      ban.style.display = 'block';
+      ban.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }
+
+  /* ── Marquer chapitre lu ── */
+  function marquerLu(chapKey) {
+    var cr = JSON.parse(localStorage.getItem('chapRead') || '[]');
+    if (!cr.includes(chapKey)) { cr.push(chapKey); localStorage.setItem('chapRead', JSON.stringify(cr)); }
+  }
+
+  /* ── Afficher les voix selon avatar ── */
+  function initVoix() {
+    var av = localStorage.getItem('avatar') || 'none';
+    document.querySelectorAll('[data-voix]').forEach(function(el) {
+      el.style.display = (el.getAttribute('data-voix') === av || av === 'none') ? 'block' : 'none';
+    });
+  }
+
+  return { getNiveau: getNiveau, renderNiveauPill: renderNiveauPill, choisirChemin: choisirChemin, marquerLu: marquerLu, initVoix: initVoix };
+})();
+
+/* ── QCM standard ── */
+var DefiQCM = (function() {
+  var done = {};
+  function repondre(btnEl, defiId, estCorrect, feedbacks) {
+    if (done[defiId]) return;
+    done[defiId] = true;
+    var container = document.getElementById('defi-' + defiId);
+    container.querySelectorAll('.defi-option').forEach(function(b) { b.disabled = true; });
+    btnEl.classList.add(estCorrect ? 'correct' : 'wrong');
+    var fb = document.getElementById('fb-' + defiId);
+    if (fb) {
+      var f = estCorrect ? feedbacks.bon : feedbacks.mauvais;
+      fb.className = 'defi-feedback show ' + (estCorrect ? 'df-bon' : 'df-mal');
+      fb.innerHTML = f;
+    }
+    majScore(defiId, estCorrect);
+    return estCorrect;
+  }
+  function majScore(defiId, ok) {
+    var bar = document.getElementById('stars-' + defiId.split('-')[0]);
+    if (!bar) return;
+    // handled per-chapter
+  }
+  return { repondre: repondre };
+})();
+
+/* ── Drag & Drop générique ── */
+var DragDrop = (function() {
+  var currentDrag = null;
+  var slotData = {};
+  var done = false;
+
+  function init(containerId) {
+    slotData = {}; done = false;
+    var c = document.getElementById(containerId);
+    if (!c) return;
+    c.querySelectorAll('.dd-chip').forEach(function(chip) {
+      chip.addEventListener('dragstart', function() {
+        currentDrag = chip.dataset.key;
+        chip.classList.add('dragging');
+      });
+      chip.addEventListener('dragend', function() { chip.classList.remove('dragging'); });
+    });
+    c.querySelectorAll('.dd-slot').forEach(function(slot) {
+      slot.addEventListener('dragover', function(e) { e.preventDefault(); slot.classList.add('over'); });
+      slot.addEventListener('dragleave', function() { slot.classList.remove('over'); });
+      slot.addEventListener('drop', function(e) {
+        e.preventDefault(); slot.classList.remove('over');
+        if (!currentDrag || done) return;
+        // Remove chip from previous slot
+        Object.keys(slotData).forEach(function(sid) {
+          if (slotData[sid] === currentDrag && sid !== slot.id) {
+            var prev = document.getElementById(sid);
+            if (prev) { prev.innerHTML = prev.getAttribute('data-orig') || ''; prev.classList.remove('correct','wrong'); }
+            delete slotData[sid];
+            var prevChip = document.getElementById('chip-' + currentDrag);
+            if (prevChip) prevChip.classList.remove('placed');
+          }
+        });
+        var chipEl = document.getElementById('chip-' + currentDrag);
+        var label  = chipEl ? chipEl.textContent : currentDrag;
+        var orig   = slot.getAttribute('data-orig') || slot.textContent;
+        if (!slot.getAttribute('data-orig')) slot.setAttribute('data-orig', slot.textContent);
+        slot.innerHTML = '<strong>' + label + '</strong><br><span style="font-size:.8rem;color:#7A8FA0;">' + orig + '</span>';
+        slotData[slot.id] = currentDrag;
+        if (chipEl) chipEl.classList.add('placed');
+        currentDrag = null;
+      });
+    });
+  }
+
+  function verifier(containerId, correct, feedbackId) {
+    if (done) return 0;
+    var c = document.getElementById(containerId);
+    var ok = 0;
+    c.querySelectorAll('.dd-slot').forEach(function(slot) {
+      var val = slotData[slot.id];
+      if (!val) return;
+      var isOk = val === correct[slot.id];
+      slot.classList.add(isOk ? 'correct' : 'wrong');
+      if (isOk) ok++;
+    });
+    var total = Object.keys(correct).length;
+    var fb = document.getElementById(feedbackId);
+    if (fb) {
+      if (ok === total) {
+        fb.className = 'defi-feedback show df-bon';
+        fb.innerHTML = '<strong>Parfait ! ' + ok + '/' + total + '</strong> Toutes les associations sont correctes.';
+        done = true;
+      } else {
+        fb.className = 'defi-feedback show df-partiel';
+        fb.innerHTML = '<strong>' + ok + '/' + total + ' corrects.</strong> Certaines associations sont incorrectes — retirez-les et réessayez.';
+        c.querySelectorAll('.dd-slot.wrong').forEach(function(s) { s.classList.remove('wrong'); });
+      }
+    }
+    return done ? ok : 0;
+  }
+
+  return { init: init, verifier: verifier };
+})();
+
+</script>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">À la recherche de la valeur perdue</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Accueil</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-chapitres" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Chapitres</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-chapitres">    
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre1.html">
+ <span class="dropdown-text">Ch. 1 — Pensée antique et médiévale</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre2.html">
+ <span class="dropdown-text">Ch. 2 — Naissance de l’économie politique</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre3.html">
+ <span class="dropdown-text">Ch. 3 — Les Physiocrates</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre4.html">
+ <span class="dropdown-text">Ch. 4 — Les Classiques (I)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre5.html">
+ <span class="dropdown-text">Ch. 5 — Les Classiques (II)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre6.html">
+ <span class="dropdown-text">Ch. 6 — Marx et le socialisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre7.html">
+ <span class="dropdown-text">Ch. 7 — Le marginalisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre8.html">
+ <span class="dropdown-text">Ch. 8 — L’affirmation des néoclassiques</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre9.html">
+ <span class="dropdown-text">Ch. 9 — La révolution keynésienne</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre10.html">
+ <span class="dropdown-text">Ch. 10 — La synthèse de Samuelson</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre11.html">
+ <span class="dropdown-text">Ch. 11 — Le monétarisme</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../chapitres/chapitre12.html">
+ <span class="dropdown-text">Ch. 12 — État des lieux</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../carte-debats.html"> 
+<span class="menu-text">Carte des débats</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../quiz.html"> 
+<span class="menu-text">Quiz</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../carnet.html"> 
+<span class="menu-text">Carnet de bord</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../apropos.html"> 
+<span class="menu-text">À propos</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../profil.html"> 
+<span class="menu-text">Mon profil</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#contexte-économique" id="toc-contexte-économique" class="nav-link active" data-scroll-target="#contexte-économique">Contexte économique</a></li>
+  <li><a href="#les-auteurs" id="toc-les-auteurs" class="nav-link" data-scroll-target="#les-auteurs">Les auteurs</a></li>
+  <li><a href="#les-idées-principales" id="toc-les-idées-principales" class="nav-link" data-scroll-target="#les-idées-principales">Les idées principales</a>
+  <ul class="collapse">
+  <li><a href="#la-physiocratie" id="toc-la-physiocratie" class="nav-link" data-scroll-target="#la-physiocratie">La physiocratie</a></li>
+  <li><a href="#le-tableau-économique" id="toc-le-tableau-économique" class="nav-link" data-scroll-target="#le-tableau-économique">Le Tableau économique</a></li>
+  <li><a href="#laissez-faire-laissez-passer" id="toc-laissez-faire-laissez-passer" class="nav-link" data-scroll-target="#laissez-faire-laissez-passer">Laissez faire, laissez passer</a></li>
+  </ul></li>
+  <li><a href="#résonances-contemporaines" id="toc-résonances-contemporaines" class="nav-link" data-scroll-target="#résonances-contemporaines">Résonances contemporaines</a></li>
+  <li><a href="#questions-de-réflexion" id="toc-questions-de-réflexion" class="nav-link" data-scroll-target="#questions-de-réflexion">Questions de réflexion</a></li>
+  <li><a href="#question-flash" id="toc-question-flash" class="nav-link" data-scroll-target="#question-flash">Question flash</a></li>
+  <li><a href="#carrefour-décisionnel" id="toc-carrefour-décisionnel" class="nav-link" data-scroll-target="#carrefour-décisionnel">Carrefour décisionnel</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Chapitre 3 — Les Physiocrates</h1>
+<p class="subtitle lead">La richesse vient de la terre, XVIIIe siècle</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<script>
+let cr = JSON.parse(localStorage.getItem('chapRead') || []);
+if (!cr.includes('ch3')) { cr.push('ch3'); localStorage.setItem('chapRead', JSON.stringify(cr)); }
+document.addEventListener('DOMContentLoaded', function() {
+  const av = localStorage.getItem('avatar') || 'none';
+  document.querySelectorAll('[data-voix]').forEach(el => {
+    el.style.display = (el.getAttribute('data-voix') === av || av === 'none') ? 'block' : 'none';
+  });
+});
+</script>
+<section id="contexte-économique" class="level2">
+<h2 class="anchored" data-anchor-id="contexte-économique">Contexte économique</h2>
+<ul>
+<li>Le mercantilisme a épuisé ses ressources : les sources d’or américain se tarissent</li>
+<li>États endettés, taux d’intérêt en hausse, banqueroutes récurrentes</li>
+<li>3/4 du revenu national provient de l’agriculture, mais celle-ci connaît les prémices d’un déclin</li>
+<li>Réglementations excessives sur le commerce des grains (« police des grains »)</li>
+<li>L’Angleterre, en libéralisant son commerce du grain, montre une voie alternative</li>
+</ul>
+<div style="background:#EAF1FA;border:1px solid #B8D0E8;border-left:4px solid #1A3A5C;border-radius:0 6px 6px 0;padding:1rem 1.3rem;margin:2rem 0 1.5rem;">
+  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#1A3A5C;margin-bottom:0.6rem;">🔗 Fils du débat</div>
+  <div style="font-size:0.87rem;color:#1E2E3A;line-height:1.7;">
+    <div style="margin-bottom:0.5rem;">**← Ch. 2** Le mercantilisme cherchait la richesse dans l'échange et l'or. Les Physiocrates opèrent un retournement : la vraie richesse est dans la *production*, pas dans la circulation.</div>
+    <div style="margin-bottom:0.6rem;">**→ Ch. 4** Smith hérite du Tableau de Quesnay (l'idée de flux circulaires entre classes) mais élargit la source de richesse du sol à tout le *travail humain*. **→ Ch. 6** Marx reprend la notion de surplus (produit net) mais la déplace dans la fabrique industrielle : ce sont les ouvriers, non les paysans, qui créent la valeur non rémunérée.</div>
+    <div style="font-style:italic;color:#2E6DA4;border-top:1px solid #C8DCF0;padding-top:0.5rem;margin-top:0.3rem;">❓ La comptabilité nationale (PIB, comptes de la nation) est-elle l'héritière directe du Tableau économique de Quesnay ? Qu'a-t-on gardé, qu'a-t-on abandonné ?</div>
+  </div>
+</div>
+<hr>
+</section>
+<section id="les-auteurs" class="level2">
+<h2 class="anchored" data-anchor-id="les-auteurs">Les auteurs</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Pierre Le Pesant de Boisguilbert</strong> (1646–1714)</p>
+<p>Souvent présenté comme le <strong>fondateur du libéralisme économique français</strong>. Dénonce deux erreurs de politique : croire que la richesse vient de l’accumulation d’or, et croire que l’État peut résoudre les problèmes économiques.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Richard Cantillon</strong> (1680–1734)</p>
+<p><em>Essai sur la nature du commerce en général</em> : traite de la production, de la monnaie et du commerce extérieur. Premier traité d’économie systématique.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Vauban</strong> (1633–1707)</p>
+<p>Il existe un <strong>taux d’imposition optimal</strong> — précurseur de la courbe de Laffer.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Vincent de Gournay</strong> (1712–1759)</p>
+<p>Auteur de la formule célèbre : <strong>« Laissez faire, laissez passer »</strong>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>François Quesnay</strong> (1694–1774) ⭐ Auteur central</p>
+<p>Médecin de Louis XV. Développe l’idée d’<strong>ordre naturel</strong> et crée le <strong>Tableau économique</strong> (1758), premier modèle macroéconomique de l’histoire. Il distingue trois classes sociales : la classe productive (agriculteurs), la classe des propriétaires et la classe stérile (artisans et marchands).</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Anne-Robert Jacques Turgot</strong> (1727–1781)</p>
+<p>Cas à part : à la fois théoricien et haut fonctionnaire. Reconnaît l’importance du monde industriel naissant. Ses réformes (suppression des corporations) sont éphémères mais novatrices.</p>
+</div>
+</div>
+<hr>
+<div class="voix-personnage marchand" data-voix="marchand" style="display:none">
+  <span class="voix-label">Votre regard de marchand</span>
+  Les Physiocrates ne vous ménagent pas : pour Quesnay, vous appartenez à la « classe stérile », celle qui ne fait que transformer et échanger sans créer de valeur nouvelle. C'est une position que vous contesterez — et que les Classiques, puis les marginalistes, renverseront. Mais l'intuition physiocratique sur la circulation des richesses entre groupes sociaux est, elle, fondatrice : c'est l'ancêtre de la comptabilité nationale que vous utilisez encore aujourd'hui.
+</div>
+<div class="voix-personnage philosophe" data-voix="philosophe" style="display:none">
+  <span class="voix-label">Votre regard de philosophe</span>
+  La physiocratie vous intéresse d'abord comme système. Quesnay n'est pas seulement économiste : il est médecin, et sa conception de l'économie est une analogie biologique. Le « produit net » circule comme le sang dans un organisme. Cette métaphore organiciste aura une longue vie dans la pensée économique — et vous devrez vous demander si elle éclaire ou si elle mystifie. Notez aussi que l'idée d'« ordre naturel » est une position métaphysique autant qu'économique.
+</div>
+<div class="voix-personnage ouvrier" data-voix="ouvrier" style="display:none">
+  <span class="voix-label">Votre regard d'ouvrier</span>
+  Pour les Physiocrates, les paysans — la classe productive — créent toute la valeur. C'est une reconnaissance du travail agricole inédite à l'époque. Mais attention : ce sont les <em>propriétaires terriens</em> qui perçoivent le produit net. Les paysans produisent, les propriétaires encaissent. Cette structure vous rappellera, quelques décennies plus tard, la logique de la plus-value chez Marx — même si les mécanismes sont différents.
+</div>
+<div class="voix-personnage entrepreneur" data-voix="entrepreneur" style="display:none">
+  <span class="voix-label">Votre regard d'entrepreneur</span>
+  Le « laissez faire, laissez passer » de Gournay est votre devise avant l'heure. Les Physiocrates dénoncent les corporations, les réglementations excessives sur le commerce des grains, les entraves à la circulation des marchandises. Turgot, contrôleur général des finances, tentera de les supprimer — sans succès durable. Deux siècles plus tard, ce débat entre réglementation et liberté des marchés est toujours au cœur de la politique économique.
+</div>
+</section>
+<section id="les-idées-principales" class="level2">
+<h2 class="anchored" data-anchor-id="les-idées-principales">Les idées principales</h2>
+<section id="la-physiocratie" class="level3">
+<h3 class="anchored" data-anchor-id="la-physiocratie">La physiocratie</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Thèse centrale</strong> : seule la terre (agriculture) crée un <strong>produit net</strong> — un surplus supérieur à ce qui a été investi. L’industrie et le commerce ne font que transformer sans créer de valeur nouvelle.</p>
+</div>
+</div>
+</section>
+<section id="le-tableau-économique" class="level3">
+<h3 class="anchored" data-anchor-id="le-tableau-économique">Le Tableau économique</h3>
+<p>Le tableau de Quesnay montre comment le produit net circule entre les trois classes sociales. C’est le premier modèle de <strong>flux économiques circulaires</strong> — ancêtre de la comptabilité nationale.</p>
+</section>
+<section id="laissez-faire-laissez-passer" class="level3">
+<h3 class="anchored" data-anchor-id="laissez-faire-laissez-passer">Laissez faire, laissez passer</h3>
+<p>Contre l’interventionnisme mercantiliste : le marché, s’il est libre, atteint naturellement l’équilibre optimal. L’État doit lever les obstacles réglementaires au commerce des grains.</p>
+<hr>
+</section>
+</section>
+<section id="résonances-contemporaines" class="level2">
+<h2 class="anchored" data-anchor-id="résonances-contemporaines">Résonances contemporaines</h2>
+<div style="background:#F0F6FD;border:1px solid #B8D0E8;border-radius:6px;padding:1rem 1.3rem;margin-bottom:1.5rem;">
+  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#2E6DA4;margin-bottom:0.5rem;">🌐 Résonances contemporaines</div>
+  <div style="font-size:0.9rem;color:#1E2E3A;line-height:1.75;">Les Physiocrates voyaient dans la nature la seule source de valeur réelle. Cette intuition revient dans les débats sur la **comptabilité environnementale** : doit-on intégrer l'épuisement des ressources naturelles dans le PIB ? La notion de **capital naturel** — forêts, sols, océans — est précisément ce que Quesnay appelait le « fonds productif ». Et le laissez-faire physiocratique sur les grains anticipe les débats contemporains sur la **spéculation sur les matières premières agricoles**.</div>
+</div>
+</section>
+<section id="questions-de-réflexion" class="level2">
+<h2 class="anchored" data-anchor-id="questions-de-réflexion">Questions de réflexion</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li><strong>François Quesnay et la physiocratie</strong> : en quoi sa formation de médecin influence-t-elle sa conception de l’économie ?</li>
+<li><strong>Le Tableau économique</strong> : quel est son apport méthodologique ? En quoi préfigure-t-il la comptabilité nationale ?</li>
+<li><strong>Les classes sociales chez les physiocrates</strong> : comparez avec la vision classique puis marxiste.</li>
+</ol>
+</div>
+</div>
+<hr>
+<hr>
+<details style="margin-top:0.6rem;margin-bottom:1.5rem;">
+  <summary style="cursor:pointer;font-size:0.82rem;font-weight:600;color:#2E6DA4;padding:0.4rem 0;list-style:none;display:flex;align-items:center;gap:6px;">
+    <span style="background:#EAF1FA;border:1px solid #B8D0E8;border-radius:4px;padding:2px 8px;font-size:0.72rem;">💡 Pistes de réponse</span>
+    <span style="color:#7A8FA0;font-size:0.78rem;font-weight:400;">(cliquer pour révéler — essayez d'abord par vous-même)</span>
+  </summary>
+  <div style="border:1px solid #D0DCE8;border-radius:0 0 6px 6px;border-top:none;padding:1rem 1.1rem;background:white;margin-top:0;">
+    
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ La formation médicale de Quesnay…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">Analogie biologique : le *produit net* circule dans l'économie comme le sang dans un organisme. Cette métaphore organiciste a des conséquences : l'économie est un *système*, les perturbations se propagent, certains organes sont vitaux (agriculture) et d'autres auxiliaires (commerce). Limites : une économie n'est pas un organisme — les agents ont des intentionnalités.</div>
+    </div>
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ Le Tableau économique et la comptabilité nationale…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">Le Tableau de Quesnay est le premier modèle de *flux intersectoriels*. Leontief (prix Nobel 1973) construit les tableaux entrées-sorties sur le même principe. La comptabilité nationale (PIB, comptes des secteurs) est une généralisation : elle ne privilégie plus l'agriculture mais mesure tous les flux. Ce qu'on a abandonné : l'idée que certains secteurs sont *stériles*.</div>
+    </div>
+    <div style="margin-bottom:0.9rem;">
+      <div style="font-size:0.78rem;font-weight:700;color:#1A3A5C;margin-bottom:0.2rem;">↳ Classes sociales chez les Physiocrates, les Classiques, Marx…</div>
+      <div style="font-size:0.85rem;color:#2A3D50;line-height:1.6;background:#F4F7FA;border-radius:4px;padding:0.5rem 0.75rem;">Physiocrates : productifs (paysans) / propriétaires / stériles (artisans, marchands). Classiques : capitalistes (profit) / propriétaires fonciers (rente) / travailleurs (salaires). Marx : bourgeoisie (capital) / prolétariat (travail). Progression : chez les Physiocrates, le conflit est entre la nature et la stérilité ; chez Ricardo, entre capitalistes et propriétaires fonciers ; chez Marx, entre capital et travail.</div>
+    </div>
+  </div>
+</details>
+</section>
+<section id="question-flash" class="level2">
+<h2 class="anchored" data-anchor-id="question-flash">Question flash</h2>
+<div style="background:#0D2137;border-radius:8px;padding:1.3rem 1.5rem;margin:1.5rem 0;">
+  <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#4A90C4;margin-bottom:0.6rem;">⚡ Question flash — Retrieve Practice</div>
+  <div style="font-size:0.95rem;color:#EAF1F8;line-height:1.7;margin-bottom:0.8rem;">**Question flash :** Expliquez en deux phrases ce que Quesnay entend par « classe stérile » et pourquoi Smith contestera ce terme.</div>
+  <div style="font-size:0.72rem;color:#4A6A85;margin-bottom:0.8rem;">Ch. 3 · Concepts : produit net / Tableau économique / classe stérile</div>
+  <button id="flash-btn" onclick="(function(){
+    var el=document.getElementById('flash-answer');
+    var btn=document.getElementById('flash-btn');
+    if(el.style.display==='none'){el.style.display='block';btn.textContent='▲ Masquer la réponse';}
+    else{el.style.display='none';btn.textContent='▼ Voir la réponse-modèle';}
+  })()" style="background:#2E6DA4;color:white;border:none;padding:0.5rem 1.1rem;border-radius:5px;cursor:pointer;font-size:0.82rem;font-weight:600;font-family:'Source Sans 3',sans-serif;">▼ Voir la réponse-modèle</button>
+  <div id="flash-answer" style="display:none;margin-top:0.8rem;background:#EAF1FA;border-radius:5px;padding:0.8rem 1rem;font-size:0.88rem;color:#0D2137;line-height:1.7;">Pour Quesnay, la classe stérile (artisans, marchands) ne crée pas de produit net — elle transforme et fait circuler sans ajouter de valeur nouvelle. Smith contestera en montrant que la division du travail dans les manufactures est aussi source de richesse : le fabricant d'épingles crée bien de la valeur.</div>
+</div>
+</section>
+<section id="carrefour-décisionnel" class="level2">
+<h2 class="anchored" data-anchor-id="carrefour-décisionnel">Carrefour décisionnel</h2>
+<div class="carrefour-wrap" id="carrefour-3">
+  <div class="carrefour-header">
+    <div class="carrefour-icon">⚡</div>
+    <h3 class="carrefour-title anchored">Carrefour — Chapitre 3</h3>
+    <span id="niveau-pill-3" class="chapter-level-pill level-intermediaire" style="display:none"></span>
+  </div>
+
+  <div class="carrefour-scenario">
+    Quesnay vous présente son Tableau économique (1758). « Seule l'agriculture crée un produit net. Les manufactures et le commerce sont stériles. » Turgot, son disciple, veut supprimer les corporations et libérer le commerce des grains. Quelle est votre réaction ?
+  </div>
+
+  <div id="paths-3" class="carrefour-paths">
+    
+      <button class="carrefour-path" data-chemin="A" onclick="choisirChemin(this)">
+        <span class="path-letter">A</span>
+        <div>
+          <div>La physiocratie est juste : l'agriculture est la seule source de richesse réelle</div>
+          <span class="path-tag tag-alternatif">Lecture physiocratique</span>
+        </div>
+      </button>
+      <button class="carrefour-path" data-chemin="B" onclick="choisirChemin(this)">
+        <span class="path-letter">B</span>
+        <div>
+          <div>Non : le commerce et l'industrie créent aussi de la valeur — la 'classe stérile' est mal nommée</div>
+          <span class="path-tag tag-standard">Anticipation smithienne</span>
+        </div>
+      </button>
+      <button class="carrefour-path" data-chemin="defi" onclick="choisirChemin(this)">
+        <span class="path-letter">C</span>
+        <div>
+          <div>Relever le défi avant de décider</div>
+          <span class="path-tag tag-defi">Parcours renforcé</span>
+        </div>
+      </button>
+  </div>
+
+  <div id="fb-carrefour-3" class="carrefour-feedback"></div>
+
+  <!-- Défis (masqués jusqu'au choix "defi") -->
+  <div id="defis-3" style="display:none; margin-top:1.5rem; border-top:1px solid #D0DCE8; padding-top:1.2rem;">
+    <div style="font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:#4A6A85;margin-bottom:1rem;">Trois défis — répondez avant de décider</div>
+    
+    <div class="defi-wrap">
+      <span class="defi-type-badge badge-cognitif">Cognitif</span>
+      <div class="defi-title">Classes physiocratiques</div>
+      <div class="defi-question">Dans le Tableau économique de Quesnay, quelle classe reçoit le produit net sans l'avoir produit ?</div>
+      <div id="defi-d3-1">
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd3-1')" data-fb-bon="<strong>Correct.</strong> Les paysans <em>produisent</em> le produit net, mais c'est la classe des propriétaires qui le <em>reçoit</em> sous forme de rente. Cette structure — travail productif capté par la propriété — préfigure la critique marxiste de l'exploitation." data-fb-mal="<strong>Non.</strong> C'est la classe des propriétaires fonciers. Les paysans créent le produit net, mais le versent aux propriétaires via la rente. C'est le mécanisme que Ricardo formalisera avec sa théorie de la rente différentielle (ch.&nbsp;4).">
+            <span class="opt-letter">A</span>
+            <span>La classe productive (paysans)</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd3-1')" data-fb-bon="<strong>Correct.</strong> Les paysans <em>produisent</em> le produit net, mais c'est la classe des propriétaires qui le <em>reçoit</em> sous forme de rente. Cette structure — travail productif capté par la propriété — préfigure la critique marxiste de l'exploitation." data-fb-mal="<strong>Non.</strong> C'est la classe des propriétaires fonciers. Les paysans créent le produit net, mais le versent aux propriétaires via la rente. C'est le mécanisme que Ricardo formalisera avec sa théorie de la rente différentielle (ch.&nbsp;4).">
+            <span class="opt-letter">B</span>
+            <span>La classe stérile (artisans, marchands)</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, true, 'd3-1')" data-fb-bon="<strong>Correct.</strong> Les paysans <em>produisent</em> le produit net, mais c'est la classe des propriétaires qui le <em>reçoit</em> sous forme de rente. Cette structure — travail productif capté par la propriété — préfigure la critique marxiste de l'exploitation." data-fb-mal="<strong>Non.</strong> C'est la classe des propriétaires fonciers. Les paysans créent le produit net, mais le versent aux propriétaires via la rente. C'est le mécanisme que Ricardo formalisera avec sa théorie de la rente différentielle (ch.&nbsp;4).">
+            <span class="opt-letter">C</span>
+            <span>La classe des propriétaires fonciers</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd3-1')" data-fb-bon="<strong>Correct.</strong> Les paysans <em>produisent</em> le produit net, mais c'est la classe des propriétaires qui le <em>reçoit</em> sous forme de rente. Cette structure — travail productif capté par la propriété — préfigure la critique marxiste de l'exploitation." data-fb-mal="<strong>Non.</strong> C'est la classe des propriétaires fonciers. Les paysans créent le produit net, mais le versent aux propriétaires via la rente. C'est le mécanisme que Ricardo formalisera avec sa théorie de la rente différentielle (ch.&nbsp;4).">
+            <span class="opt-letter">D</span>
+            <span>La classe des financiers et banquiers</span>
+          </button>
+      </div>
+      <div id="fb-d3-1" class="defi-feedback"></div>
+    </div>
+    <div class="defi-wrap">
+      <span class="defi-type-badge badge-pratique">Pratique</span>
+      <div class="defi-title">Le laissez-faire physiocratique</div>
+      <div class="defi-question">La formule « laissez faire, laissez passer » (attribuée à Gournay) vise principalement à :</div>
+      <div id="defi-d3-2">
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd3-2')" data-fb-bon="<strong>Exact.</strong> Le « laissez-faire » physiocratique est d'abord une critique des structures d'Ancien Régime : guildes, monopoles royaux, taxes intérieures sur les grains. C'est un programme de déréglementation, pas encore une théorie générale du marché libre — celle-ci viendra avec Smith." data-fb-mal="<strong>Incorrect.</strong> La bonne réponse est B. Le laissez-faire vise les entraves concrètes à la circulation des grains et des marchandises : corporations, droits de péage, réglementations. Smith généralisera ce principe à toute l'économie.">
+            <span class="opt-letter">A</span>
+            <span>Autoriser les entreprises à fixer librement les salaires sans aucune règle</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, true, 'd3-2')" data-fb-bon="<strong>Exact.</strong> Le « laissez-faire » physiocratique est d'abord une critique des structures d'Ancien Régime : guildes, monopoles royaux, taxes intérieures sur les grains. C'est un programme de déréglementation, pas encore une théorie générale du marché libre — celle-ci viendra avec Smith." data-fb-mal="<strong>Incorrect.</strong> La bonne réponse est B. Le laissez-faire vise les entraves concrètes à la circulation des grains et des marchandises : corporations, droits de péage, réglementations. Smith généralisera ce principe à toute l'économie.">
+            <span class="opt-letter">B</span>
+            <span>Supprimer les corporations, les droits de douane intérieurs et les réglementations qui freinent le commerce agricole</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd3-2')" data-fb-bon="<strong>Exact.</strong> Le « laissez-faire » physiocratique est d'abord une critique des structures d'Ancien Régime : guildes, monopoles royaux, taxes intérieures sur les grains. C'est un programme de déréglementation, pas encore une théorie générale du marché libre — celle-ci viendra avec Smith." data-fb-mal="<strong>Incorrect.</strong> La bonne réponse est B. Le laissez-faire vise les entraves concrètes à la circulation des grains et des marchandises : corporations, droits de péage, réglementations. Smith généralisera ce principe à toute l'économie.">
+            <span class="opt-letter">C</span>
+            <span>Permettre à l'État d'intervenir librement dans l'économie sans contrôle parlementaire</span>
+          </button>
+          <button class="defi-option" onclick="repondreDefi(this, false, 'd3-2')" data-fb-bon="<strong>Exact.</strong> Le « laissez-faire » physiocratique est d'abord une critique des structures d'Ancien Régime : guildes, monopoles royaux, taxes intérieures sur les grains. C'est un programme de déréglementation, pas encore une théorie générale du marché libre — celle-ci viendra avec Smith." data-fb-mal="<strong>Incorrect.</strong> La bonne réponse est B. Le laissez-faire vise les entraves concrètes à la circulation des grains et des marchandises : corporations, droits de péage, réglementations. Smith généralisera ce principe à toute l'économie.">
+            <span class="opt-letter">D</span>
+            <span>Autoriser les banques à créer de la monnaie sans limite</span>
+          </button>
+      </div>
+      <div id="fb-d3-2" class="defi-feedback"></div>
+    </div>
+    <div class="defi-stars" id="stars-3" style="display:none;">
+      <span class="star-icon" id="st-3-1">☆</span>
+      <span class="star-icon" id="st-3-2">☆</span>
+      <span class="star-icon" id="st-3-3">☆</span>
+      <span style="font-size:.85rem;color:#4A6A85;margin-left:4px;">Défis complétés : <strong id="score-3">0</strong> / 2</span>
+    </div>
+  </div>
+
+  <!-- Bannière continuer -->
+  <div id="banner-3" class="continue-banner" style="display:none; margin-top:1.2rem;">
+    <h3 id="banner-titre-3" class="anchored">Votre verdict</h3>
+    <p id="banner-body-3"></p>
+    <a href="../chapitres/chapitre4.html" class="btn-continue-ch" id="btn-continue-3" style="display:none;">Ch. 4 — Les Classiques (I) →</a>
+  </div>
+</div>
+
+<script>
+(function() {
+  CarrefourEngine.renderNiveauPill('niveau-pill-3');
+
+  var feedbacks = {
+  'A': {cls: 'fb-partiel', html: '<strong>Position cohérente.</strong> Vous restez dans le cadre physiocratique. Mais Smith (ch.&nbsp;4) va vous challenger : si seule la terre crée de la valeur, comment expliquer la prospérité de villes manufacturières comme Birmingham ou Manchester, qui ne cultivent rien ?'},
+  'B': {cls: 'fb-bon', html: '<strong>Vous avez raison avec Smith.</strong> La notion de « classe stérile » est la grande faiblesse des Physiocrates. Adam Smith, les lisant attentivement, montrera que la division du travail dans les manufactures est aussi source de richesse. Mais il leur doit beaucoup : le Tableau économique de Quesnay est l\'ancêtre de la comptabilité nationale.'},
+  'defi': {cls: 'fb-info', html: ''},
+  };
+  var conclusions = {
+  'A': {titre: 'Vous lisez les Classiques avec des lunettes physiocratiques', body: 'Smith va vous surprendre : il emprunte aux Physiocrates (la division fonctionnelle de l\'économie, le flux circulaire) mais élargit la source de la richesse au travail <em>en général</em>. Le ch.&nbsp;4 sera votre mise à jour conceptuelle.'},
+  'B': {titre: 'Vous voyez déjà les limites des Physiocrates', body: 'Votre lecture du ch.&nbsp;4 sera celle d\'un étudiant déjà critique : vous chercherez comment Smith réintègre le commerce et l\'industrie dans la production de richesse. La main invisible est votre prochain concept.'},
+  'defi': {titre: 'Verdict éclairé', body: 'Vous maîtrisez le Tableau et la structure des classes physiocratiques. Le ch.&nbsp;4 vous montrera comment Smith, lecteur admiratif mais critique de Quesnay, généralise la source de richesse du sol à tout le travail humain.'},
+  };
+  var numDefis = 2;
+  var defiScore = 0;
+  var defiDone = {};
+
+  window.choisirChemin = function(btn) {
+    var chemin = btn.getAttribute('data-chemin');
+    document.querySelectorAll('#paths-3 .carrefour-path').forEach(function(b) {
+      b.classList.remove('selected');
+    });
+    btn.classList.add('selected');
+
+    if (chemin === 'defi') {
+      document.getElementById('defis-3').style.display = 'block';
+      document.getElementById('fb-carrefour-3').className = 'carrefour-feedback';
+      document.getElementById('defis-3').scrollIntoView({behavior:'smooth', block:'nearest'});
+      return;
+    }
+
+    var fb = feedbacks[chemin];
+    var el = document.getElementById('fb-carrefour-3');
+    if (fb) {
+      el.className = 'carrefour-feedback show ' + fb.cls;
+      el.innerHTML = fb.html;
+    }
+    afficherConclusion(chemin);
+  };
+
+  window.repondreDefi = function(btn, correct, defiId) {
+    if (defiDone[defiId]) return;
+    defiDone[defiId] = true;
+    var container = document.getElementById('defi-' + defiId);
+    container.querySelectorAll('.defi-option').forEach(function(b) { b.disabled = true; });
+    btn.classList.add(correct ? 'correct' : 'wrong');
+    var fb = document.getElementById('fb-' + defiId);
+    if (fb) {
+      fb.className = 'defi-feedback show ' + (correct ? 'df-bon' : 'df-mal');
+      fb.innerHTML = correct ? btn.getAttribute('data-fb-bon') : btn.getAttribute('data-fb-mal');
+    }
+    defiScore++;
+    var starsBar = document.getElementById('stars-3');
+    starsBar.style.display = 'flex';
+    document.getElementById('score-3').textContent = defiScore;
+    for (var i = 1; i <= defiScore; i++) {
+      var s = document.getElementById('st-3-' + i);
+      if (s) { s.textContent = '★'; s.style.color = '#2E6DA4'; }
+    }
+    if (defiScore >= numDefis) {
+      setTimeout(function() { afficherConclusion('defi'); }, 600);
+    }
+  };
+
+  function afficherConclusion(chemin) {
+    var c = conclusions[chemin] || conclusions[Object.keys(conclusions)[0]];
+    document.getElementById('banner-titre-3').textContent = c.titre;
+    document.getElementById('banner-body-3').innerHTML = c.body;
+    var banner = document.getElementById('banner-3');
+    banner.style.display = 'block';
+    var btn = document.getElementById('btn-continue-3');
+    if (btn) btn.style.display = 'inline-block';
+    banner.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+})();
+</script>
+<div class="chap-nav">
+<p><a href="../chapitres/chapitre2.html">← Ch. 2</a></p>
+<p><a href="../chapitres/chapitre4.html">Ch. 4 — Les Classiques (I) →</a></p>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Histoire Économique — Pascaline Vincent, 2026</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Construit avec <a href="https://quarto.org">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
