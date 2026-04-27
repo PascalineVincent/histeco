@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>À la recherche de la valeur perdue</title>
+<title>À la recherche de la valeur perdue – Oikonomia</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -256,7 +256,7 @@ var DragDrop = (function() {
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">À la recherche de la valeur perdue</span>
+    <span class="navbar-title">Oikonomia</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -329,12 +329,20 @@ var DragDrop = (function() {
 <span class="menu-text">Carte des débats</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./glossaire.html"> 
+<span class="menu-text">Glossaire</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./quiz.html"> 
 <span class="menu-text">Quiz</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./carnet.html"> 
 <span class="menu-text">Carnet de bord</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./bilan-mi-parcours.html"> 
+<span class="menu-text">Bilan mi-parcours</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./apropos.html"> 
@@ -381,7 +389,6 @@ var DragDrop = (function() {
 
 
 <style>
-/* Hero */
 .hero-home {
   background: linear-gradient(160deg, #0D2137 0%, #1A3A5C 55%, #2E6DA4 100%);
   color: #EAF1F8;
@@ -398,92 +405,119 @@ var DragDrop = (function() {
 .hero-home .lead { color: #B8D4EE; font-size: 1rem; max-width: 680px; line-height: 1.75; }
 .hero-home .hero-meta { font-size: 0.8rem; color: #7BA8CC; margin-top: 0.5rem; }
 
-/* Avatar grid */
-.avatar-grid {
-  display: grid; grid-template-columns: repeat(4,1fr); gap: 0.85rem; margin: 1.2rem 0;
+.idx-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem; color: #0D2137;
+  margin: 0 0 0.8rem;
 }
-@media(max-width:700px){ .avatar-grid{grid-template-columns:repeat(2,1fr);} }
-.avatar-card {
+.idx-section-sub {
+  font-size: 0.9rem; color: #4A6A85; margin-bottom: 1rem; line-height: 1.6;
+}
+
+/* Quiz CTA */
+.quiz-cta {
+  background: linear-gradient(135deg, #1A3A5C, #2E6DA4);
+  border-radius: 8px; padding: 1.4rem 1.8rem; margin-bottom: 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+.quiz-cta-label {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: #7BC4E8; margin-bottom: 0.35rem;
+}
+.quiz-cta-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: white; margin-bottom: 0.3rem; }
+.quiz-cta-sub { font-size: 0.85rem; color: #8AAFC8; }
+.quiz-cta-btn {
+  background: white; color: #1A3A5C; font-weight: 700; font-size: 0.95rem;
+  padding: 0.7rem 1.6rem; border-radius: 6px; text-decoration: none;
+  white-space: nowrap; flex-shrink: 0; display: inline-block;
+  transition: background 0.2s;
+}
+.quiz-cta-btn:hover { background: #EAF1FA; color: #1A3A5C; }
+
+/* Avatars */
+.avatar-grid-idx {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.85rem; margin: 1.2rem 0;
+}
+@media (max-width: 700px) { .avatar-grid-idx { grid-template-columns: repeat(2, 1fr); } }
+.av-card {
   border: 1.5px solid #D0DCE8; border-radius: 6px; padding: 1.1rem;
   cursor: pointer; transition: all 0.2s; background: white; text-align: center;
 }
-.avatar-card:hover { border-color:#2E6DA4; background:#EAF1FA; box-shadow:0 2px 12px rgba(46,109,164,.1); }
-.avatar-card.selected { border-color:#1A3A5C; border-width:2px; background:#EAF1FA; }
-.avatar-card strong { display:block; margin-bottom:0.3rem; font-size:0.9rem; color:#0D2137; }
-.avatar-card p { font-size:0.76rem; color:#5A7A95; margin:0; line-height:1.4; }
-.av-init {
-  display:block; width:2.2rem; height:2.2rem; line-height:2.2rem;
-  border-radius:50%; margin:0 auto 0.5rem;
-  font-weight:700; font-size:0.95rem; color:white;
+.av-card:hover { border-color: #2E6DA4; background: #EAF1FA; }
+.av-card.selected { border-color: #1A3A5C; border-width: 2px; background: #EAF1FA; }
+.av-card strong { display: block; margin-bottom: 0.3rem; font-size: 0.9rem; color: #0D2137; }
+.av-card p { font-size: 0.76rem; color: #5A7A95; margin: 0; line-height: 1.4; }
+.av-init-circle {
+  display: block; width: 2.2rem; height: 2.2rem; line-height: 2.2rem;
+  border-radius: 50%; margin: 0 auto 0.5rem;
+  font-weight: 700; font-size: 0.95rem; color: white; text-align: center;
 }
-.avatar-card.marchand .av-init     { background:#B22222; }
-.avatar-card.philosophe .av-init   { background:#1A3A5C; }
-.avatar-card.ouvrier .av-init      { background:#2A7D4F; }
-.avatar-card.entrepreneur .av-init { background:#B8860B; }
+.av-card[data-av="marchand"]     .av-init-circle { background: #B22222; }
+.av-card[data-av="philosophe"]   .av-init-circle { background: #1A3A5C; }
+.av-card[data-av="ouvrier"]      .av-init-circle { background: #2A7D4F; }
+.av-card[data-av="entrepreneur"] .av-init-circle { background: #B8860B; }
+.av-confirm {
+  font-size: 0.88rem; color: #2A3D50; background: #EAF1FA;
+  border-left: 3px solid #2E6DA4; border-radius: 0 5px 5px 0;
+  padding: 0.75rem 1rem; margin: 0.8rem 0 1.5rem; display: none;
+}
 
-/* Chapter tile grid */
+/* Progress */
+.prog-hdr { display: flex; justify-content: space-between; font-size: 0.8rem; color: #7A8FA0; margin-bottom: 0.3rem; }
+.prog-bar { height: 5px; background: #D0DCE8; border-radius: 3px; margin-bottom: 1.5rem; }
+.prog-fill { height: 100%; background: linear-gradient(90deg, #1A3A5C, #4A90C4); border-radius: 3px; transition: width .5s; }
+
+/* Chapter tiles */
 .chap-tile-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 0.85rem;
-  margin: 1.2rem 0 2rem;
+  gap: 0.85rem; margin: 1.2rem 0 2rem;
 }
-@media(max-width:500px){ .chap-tile-grid{grid-template-columns:repeat(2,1fr);} }
-
+@media (max-width: 500px) { .chap-tile-grid { grid-template-columns: repeat(2, 1fr); } }
 .chap-tile {
-  display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
-  text-decoration: none;
-  border: 1.5px solid #D0DCE8; border-radius: 8px;
-  padding: 1.1rem 0.8rem 0.9rem;
-  background: white; text-align: center;
-  transition: all 0.2s; position: relative;
-  min-height: 130px;
+  display: flex; flex-direction: column; align-items: center;
+  text-decoration: none; border: 1.5px solid #D0DCE8; border-radius: 8px;
+  padding: 1.1rem 0.8rem 0.9rem; background: white; text-align: center;
+  transition: all 0.2s; position: relative; min-height: 130px;
 }
 .chap-tile:hover {
   border-color: #2E6DA4; background: #EAF1FA;
-  box-shadow: 0 4px 16px rgba(26,58,92,.12);
-  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(26,58,92,.12); transform: translateY(-2px);
 }
 .chap-tile.done { border-color: #2A7D4F; background: #F0FAF4; }
-.chap-tile.done:hover { background: #E0F5E9; }
-
-.chap-tile-icon {
-  font-size: 2rem; margin-bottom: 0.5rem; line-height: 1;
-}
+.chap-tile-icon { font-size: 2rem; margin-bottom: 0.5rem; line-height: 1; }
 .chap-tile-num {
   font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #2E6DA4; background: #EAF1FA;
-  padding: 0.15rem 0.6rem; border-radius: 20px;
-  margin-bottom: 0.45rem;
+  text-transform: uppercase; color: #2E6DA4; background: #EAF1FA;
+  padding: 0.15rem 0.6rem; border-radius: 20px; margin-bottom: 0.45rem;
 }
-.chap-tile.done .chap-tile-num { background:#E0F5E9; color:#2A7D4F; }
+.chap-tile.done .chap-tile-num { background: #E0F5E9; color: #2A7D4F; }
 .chap-tile-titre {
   font-family: 'Playfair Display', serif;
-  font-size: 0.82rem; font-weight: 600;
-  color: #0D2137; line-height: 1.3;
+  font-size: 0.82rem; font-weight: 600; color: #0D2137; line-height: 1.3;
 }
-.chap-tile-epoque {
-  font-size: 0.7rem; color: #7A8FA0; margin-top: 0.3rem;
-}
+.chap-tile-epoque { font-size: 0.7rem; color: #7A8FA0; margin-top: 0.3rem; }
 .chap-done-badge {
   position: absolute; top: 0.5rem; right: 0.6rem;
   font-size: 0.68rem; color: #2A7D4F; font-weight: 700;
 }
 
-/* Progress bar */
-.prog-hdr { display:flex; justify-content:space-between; font-size:0.8rem; color:#7A8FA0; margin-bottom:0.3rem; }
-.prog-bar { height:5px; background:#D0DCE8; border-radius:3px; margin-bottom:1.5rem; }
-.prog-fill { height:100%; background:linear-gradient(90deg,#1A3A5C,#4A90C4); border-radius:3px; transition:width .5s; }
-
-/* Avatar confirm */
-.av-confirm {
-  font-size:0.88rem; color:#2A3D50; background:#EAF1FA;
-  border-left:3px solid #2E6DA4; border-radius:0 5px 5px 0;
-  padding:0.75rem 1rem; margin:0.8rem 0 1.5rem; display:none;
+/* Links row */
+.idx-links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0 2rem; }
+.idx-link {
+  padding: 0.45rem 1rem; border: 1.5px solid #D0DCE8; border-radius: 20px;
+  text-decoration: none; font-size: 0.85rem; color: #1A3A5C; background: white;
+  font-weight: 600; transition: all 0.18s;
 }
+.idx-link:hover { background: #EAF1FA; border-color: #2E6DA4; }
+.idx-link.primary { background: #1A3A5C; color: white; border-color: #1A3A5C; }
+.idx-link.primary:hover { background: #0D2137; }
+
+.idx-divider { border: none; border-top: 1px solid #D0DCE8; margin: 1.5rem 0; }
 </style>
 
+<!-- HERO -->
 <div class="hero-home">
   <h1>À la recherche de la valeur perdue</h1>
   <p class="lead">
@@ -493,29 +527,42 @@ var DragDrop = (function() {
   <p class="hero-meta">Cours d'histoire économique · Pascaline Vincent · 12 séances · 2026</p>
 </div>
 
-<h2 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#0D2137;" class="anchored">Choisissez votre point de vue</h2>
-<p style="font-size:0.9rem;color:#4A6A85;margin-bottom:0.8rem;">
-  Dans chaque chapitre, un encadré vous proposera de lire la théorie <strong>depuis la position sociale de votre personnage</strong>. Un marchand et un ouvrier ne lisent pas Marx de la même façon.
+<!-- QUIZ CTA -->
+<div class="quiz-cta">
+  <div>
+    <div class="quiz-cta-label">⚡ Première étape recommandée</div>
+    <div class="quiz-cta-title">Passez le test de niveau (5 min)</div>
+    <div class="quiz-cta-sub">7 questions · parcours personnalisé généré automatiquement</div>
+  </div>
+  <a href="quiz.html" class="quiz-cta-btn">Faire le quiz →</a>
+</div>
+
+<!-- AVATAR SECTION -->
+<h2 class="idx-section-title anchored">Choisissez votre point de vue</h2>
+<p class="idx-section-sub">
+  Dans chaque chapitre, un encadré vous proposera de lire la théorie
+  <strong>depuis la position sociale de votre personnage</strong>.
+  Un marchand et un ouvrier ne lisent pas Marx de la même façon.
 </p>
 
-<div class="avatar-grid" id="avatar-grid">
-  <div class="avatar-card marchand" data-av="marchand">
-    <span class="av-init">M</span>
+<div class="avatar-grid-idx" id="avatar-grid">
+  <div class="av-card" data-av="marchand">
+    <span class="av-init-circle">M</span>
     <strong>Le Marchand</strong>
     <p>Prix, monnaie, échanges et équilibres de marché.</p>
   </div>
-  <div class="avatar-card philosophe" data-av="philosophe">
-    <span class="av-init">P</span>
+  <div class="av-card" data-av="philosophe">
+    <span class="av-init-circle">P</span>
     <strong>Le Philosophe</strong>
     <p>Ruptures théoriques, méthode, épistémologie.</p>
   </div>
-  <div class="avatar-card ouvrier" data-av="ouvrier">
-    <span class="av-init">O</span>
+  <div class="av-card" data-av="ouvrier">
+    <span class="av-init-circle">O</span>
     <strong>L'Ouvrier</strong>
     <p>Travail, inégalités, rapports de force.</p>
   </div>
-  <div class="avatar-card entrepreneur" data-av="entrepreneur">
-    <span class="av-init">E</span>
+  <div class="av-card" data-av="entrepreneur">
+    <span class="av-init-circle">E</span>
     <strong>L'Entrepreneur</strong>
     <p>Innovation, croissance, risque, profit.</p>
   </div>
@@ -523,9 +570,10 @@ var DragDrop = (function() {
 
 <div class="av-confirm" id="av-confirm"></div>
 
-<hr style="border:none;border-top:1px solid #D0DCE8;margin:1rem 0 1.5rem;">
+<hr class="idx-divider">
 
-<h2 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#0D2137;" class="anchored">Le parcours en douze chapitres</h2>
+<!-- CHAPTERS -->
+<h2 class="idx-section-title anchored">Le parcours en douze chapitres</h2>
 
 <div class="prog-hdr">
   <span>Chapitres explorés</span>
@@ -533,47 +581,65 @@ var DragDrop = (function() {
 </div>
 <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
 
-<div class="chap-tile-grid" id="chap-tile-grid">
-  <!-- Tiles injected by JS -->
+<div class="chap-tile-grid" id="chap-tile-grid"></div>
+
+<!-- LINKS -->
+<hr class="idx-divider">
+<div class="idx-links">
+  <a href="chapitres/chapitre1.html" class="idx-link primary">Commencer Ch. 1 →</a>
+  <a href="carte-debats.html" class="idx-link">📍 Carte des débats</a>
+  <a href="glossaire.html" class="idx-link">📖 Glossaire</a>
+  <a href="carnet.html" class="idx-link">📓 Carnet de bord</a>
+  <a href="bilan-mi-parcours.html" class="idx-link">🧭 Bilan mi-parcours</a>
+  <a href="apropos.html" class="idx-link">À propos</a>
 </div>
 
+<!-- BIBLIO -->
+<h2 class="idx-section-title anchored">Bibliographie générale</h2>
+<ul style="font-size:0.9rem;color:#2A3D50;line-height:1.9;">
+  <li><strong>Brasseul J.</strong> — <em>Petite histoire des faits économiques</em>, Armand Colin, 2016</li>
+  <li><strong>Daniel J.M.</strong> — <em>Histoire vivante de la pensée économique</em>, Pearson, 2010</li>
+  <li><strong>Goodwin M.</strong> — <em>Economix</em> (BD), 2019</li>
+  <li>Textes originaux : <a href="https://classiques.uqam.ca/" style="color:#2E6DA4;">classiques.uqam.ca</a></li>
+</ul>
+
 <script>
-(function() {
+(function () {
 
 var CHAPS = [
-  { key:'ch1',  num:'01', icon:'🏛️', titre:'Pensée antique & médiévale',        epoque:'Antiquité — Moyen Âge',            href:'chapitres/chapitre1.qmd' },
-  { key:'ch2',  num:'02', icon:'⚓', titre:'Naissance de l\'économie politique', epoque:'XVIe–XVIIe s.',                    href:'chapitres/chapitre2.qmd' },
-  { key:'ch3',  num:'03', icon:'🌾', titre:'Les Physiocrates',                   epoque:'France, XVIIIe s.',                href:'chapitres/chapitre3.qmd' },
-  { key:'ch4',  num:'04', icon:'⚙️', titre:'Les Classiques (I)',                  epoque:'Révolution industrielle',          href:'chapitres/chapitre4.qmd' },
-  { key:'ch5',  num:'05', icon:'📜', titre:'Les Classiques (II)',                 epoque:'XIXe s.',                          href:'chapitres/chapitre5.qmd' },
-  { key:'ch6',  num:'06', icon:'✊', titre:'Marx et le socialisme',               epoque:'XIXe s.',                          href:'chapitres/chapitre6.qmd' },
-  { key:'ch7',  num:'07', icon:'📐', titre:'Le marginalisme',                     epoque:'1870–1900',                        href:'chapitres/chapitre7.qmd' },
-  { key:'ch8',  num:'08', icon:'⚖️', titre:'Les néoclassiques',                   epoque:'Belle Époque',                     href:'chapitres/chapitre8.qmd' },
-  { key:'ch9',  num:'09', icon:'💹', titre:'La révolution keynésienne',           epoque:'1930–1945',                        href:'chapitres/chapitre9.qmd' },
-  { key:'ch10', num:'10', icon:'📊', titre:'La synthèse de Samuelson',            epoque:'Trente Glorieuses',                href:'chapitres/chapitre10.qmd' },
-  { key:'ch11', num:'11', icon:'💰', titre:'Le monétarisme & NMC',               epoque:'1970–2000',                        href:'chapitres/chapitre11.qmd' },
-  { key:'ch12', num:'12', icon:'🌐', titre:'État des lieux',                      epoque:'XXIe s.',                          href:'chapitres/chapitre12.qmd' },
+  { key:'ch1',  num:'01', icon:'🏛️', titre:"Pensée antique &amp; médiévale",        epoque:'Antiquité — Moyen Âge',   href:'chapitres/chapitre1.html' },
+  { key:'ch2',  num:'02', icon:'⚓',  titre:"Naissance de l'économie politique",    epoque:'XVIe–XVIIe s.',           href:'chapitres/chapitre2.html' },
+  { key:'ch3',  num:'03', icon:'🌾', titre:'Les Physiocrates',                      epoque:'France, XVIIIe s.',       href:'chapitres/chapitre3.html' },
+  { key:'ch4',  num:'04', icon:'⚙️', titre:'Les Classiques (I)',                    epoque:'Révolution industrielle', href:'chapitres/chapitre4.html' },
+  { key:'ch5',  num:'05', icon:'📜', titre:'Les Classiques (II)',                   epoque:'XIXe s.',                 href:'chapitres/chapitre5.html' },
+  { key:'ch6',  num:'06', icon:'✊',  titre:'Marx et le socialisme',                epoque:'XIXe s.',                 href:'chapitres/chapitre6.html' },
+  { key:'ch7',  num:'07', icon:'📐', titre:'Le marginalisme',                       epoque:'1870–1900',               href:'chapitres/chapitre7.html' },
+  { key:'ch8',  num:'08', icon:'⚖️', titre:'Les néoclassiques',                    epoque:'Belle Époque',            href:'chapitres/chapitre8.html' },
+  { key:'ch9',  num:'09', icon:'💹', titre:'La révolution keynésienne',             epoque:'1930–1945',               href:'chapitres/chapitre9.html' },
+  { key:'ch10', num:'10', icon:'📊', titre:'La synthèse de Samuelson',              epoque:'Trente Glorieuses',       href:'chapitres/chapitre10.html' },
+  { key:'ch11', num:'11', icon:'💰', titre:'Le monétarisme &amp; NMC',             epoque:'1970–2000',               href:'chapitres/chapitre11.html' },
+  { key:'ch12', num:'12', icon:'🌐', titre:'État des lieux',                        epoque:'XXIe s.',                 href:'chapitres/chapitre12.html' },
 ];
 
 var AV_TEXTS = {
   marchand:     'Vous lisez ce cours à travers les prix, les marchés et les circuits commerciaux. Les débats sur la balance commerciale (ch.2), la loi de Say (ch.5) et la politique monétaire (ch.11) vous parleront particulièrement.',
-  philosophe:   'Vous interrogez les fondements épistémologiques de chaque théorie. L\'école historique allemande (ch.5), la révolution marginaliste (ch.7) et la critique de Lucas (ch.11) seront vos terrains de prédilection.',
-  ouvrier:      'Vous lisez l\'économie depuis la position du travail. Les Poor Laws (ch.5), la plus-value marxiste (ch.6) et l\'histoire du chômage (ch.9) prendront une coloration particulièrement concrète.',
-  entrepreneur: 'Vous repérez ce que les théories disent du profit, du risque et de l\'innovation. Schumpeter (ch.9), la synthèse néoclassique (ch.10) et les débats sur l\'efficacité des politiques (ch.11) vous concernent directement.'
+  philosophe:   "Vous interrogez les fondements épistémologiques de chaque théorie. L'école historique allemande (ch.5), la révolution marginaliste (ch.7) et la critique de Lucas (ch.11) seront vos terrains.",
+  ouvrier:      "Vous lisez l'économie depuis la position du travail. Les Poor Laws (ch.5), la plus-value marxiste (ch.6) et l'histoire du chômage (ch.9) prendront une coloration particulièrement concrète.",
+  entrepreneur: "Vous repérez ce que les théories disent du profit, du risque et de l'innovation. Schumpeter (ch.9), la synthèse néoclassique (ch.10) et les débats sur l'efficacité des politiques (ch.11) vous concernent directement."
 };
 
-/* Avatar */
+/* ── Avatar ── */
 var savedAv = localStorage.getItem('avatar') || '';
 if (savedAv) {
-  var card = document.querySelector('.avatar-card[data-av="' + savedAv + '"]');
-  if (card) card.classList.add('selected');
+  var existing = document.querySelector('.av-card[data-av="' + savedAv + '"]');
+  if (existing) existing.classList.add('selected');
   showAvConfirm(savedAv);
 }
 
-document.querySelectorAll('.avatar-card').forEach(function(card) {
-  card.addEventListener('click', function() {
+document.querySelectorAll('.av-card').forEach(function (card) {
+  card.addEventListener('click', function () {
     var av = card.getAttribute('data-av');
-    document.querySelectorAll('.avatar-card').forEach(function(c) { c.classList.remove('selected'); });
+    document.querySelectorAll('.av-card').forEach(function (c) { c.classList.remove('selected'); });
     card.classList.add('selected');
     localStorage.setItem('avatar', av);
     showAvConfirm(av);
@@ -586,16 +652,16 @@ function showAvConfirm(av) {
   el.innerHTML = '<strong style="color:#1A3A5C;">Profil sélectionné.</strong> ' + (AV_TEXTS[av] || '');
 }
 
-/* Chapter tiles */
+/* ── Chapter tiles ── */
 var chapRead = JSON.parse(localStorage.getItem('chapRead') || '[]');
 var done = chapRead.length;
 document.getElementById('prog-lbl').textContent = done + ' / 12';
-document.getElementById('prog-fill').style.width = Math.round(done/12*100) + '%';
+document.getElementById('prog-fill').style.width = Math.round(done / 12 * 100) + '%';
 
 var grid = document.getElementById('chap-tile-grid');
-grid.innerHTML = CHAPS.map(function(c) {
+grid.innerHTML = CHAPS.map(function (c) {
   var lu = chapRead.indexOf(c.key) > -1;
-  return '<a href="' + c.href + '" class="chap-tile' + (lu?' done':'') + '">'
+  return '<a href="' + c.href + '" class="chap-tile' + (lu ? ' done' : '') + '">'
     + (lu ? '<span class="chap-done-badge">✓ Lu</span>' : '')
     + '<span class="chap-tile-icon">' + c.icon + '</span>'
     + '<span class="chap-tile-num">Ch. ' + c.num + '</span>'
@@ -606,23 +672,8 @@ grid.innerHTML = CHAPS.map(function(c) {
 
 })();
 </script>
-<hr>
-<section id="pour-commencer" class="level2">
-<h2 class="anchored" data-anchor-id="pour-commencer">Pour commencer</h2>
-<p>Deux entrées : le <a href="./quiz.html">quiz de départ</a> pour évaluer votre niveau et recevoir un parcours personnalisé, ou directement le <a href="./chapitres/chapitre1.html">premier chapitre</a> pour avancer dans l’ordre chronologique.</p>
-<p>Le <a href="./carnet.html">carnet de bord</a> est disponible tout au long du parcours pour noter vos réflexions, collecter des citations et répondre aux questions ouvertes.</p>
-</section>
-<section id="bibliographie-générale" class="level2">
-<h2 class="anchored" data-anchor-id="bibliographie-générale">Bibliographie générale</h2>
-<ul>
-<li><strong>Brasseul J.</strong> — <em>Petite histoire des faits économiques</em>, Armand Colin, 2016</li>
-<li><strong>Daniel J.M.</strong> — <em>Histoire vivante de la pensée économique</em>, Pearson, 2010</li>
-<li><strong>Goodwin M.</strong> — <em>Economix</em> (BD), 2019</li>
-<li>Textes originaux : <a href="https://classiques.uqam.ca/">classiques.uqam.ca</a></li>
-</ul>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
