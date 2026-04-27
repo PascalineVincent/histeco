@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quiz — Évaluation de départ – Oikonomia</title>
+<title>Glossaire des concepts – Oikonomia</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -246,7 +246,7 @@ var DragDrop = (function() {
 
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -329,11 +329,11 @@ var DragDrop = (function() {
 <span class="menu-text">Carte des débats</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./glossaire.html"> 
+    <a class="nav-link active" href="./glossaire.html" aria-current="page"> 
 <span class="menu-text">Glossaire</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./quiz.html" aria-current="page"> 
+    <a class="nav-link" href="./quiz.html"> 
 <span class="menu-text">Quiz</span></a>
   </li>  
   <li class="nav-item">
@@ -365,13 +365,15 @@ var DragDrop = (function() {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Quiz — Évaluation de départ</h1>
+<h1 class="title">Glossaire des concepts</h1>
 </div>
 
 
@@ -389,440 +391,313 @@ var DragDrop = (function() {
 
 
 <style>
-.quiz-wrap { max-width: 740px; margin: 0 auto; }
+.glos-wrap { max-width: 860px; margin: 0 auto; }
 
-.tab-nav { display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1.8rem; }
-.tab-btn {
-  padding: 0.55rem 1.2rem;
-  border: 1.5px solid #1A3A5C; background: white; color: #1A3A5C;
-  border-radius: 20px; cursor: pointer;
-  font-weight: 600; font-size: 0.88rem;
-  font-family: 'Source Sans 3', sans-serif;
-  transition: all 0.18s;
-}
-.tab-btn:hover, .tab-btn.active { background: #1A3A5C; color: white; }
-
-.quiz-banner {
-  background: #EAF1FA; border-left: 4px solid #2E6DA4;
-  border-radius: 0 6px 6px 0;
-  padding: 0.9rem 1.2rem; margin-bottom: 1.8rem;
-  font-size: 0.9rem; color: #1E2E3A; line-height: 1.6;
-}
-
-.q-card {
-  background: white; border: 1px solid #D0DCE8;
-  border-radius: 8px; padding: 1.5rem 1.6rem;
-  margin-bottom: 1.4rem;
-  box-shadow: 0 2px 8px rgba(26,58,92,.06);
-}
-.q-card h3 {
-  font-family: 'Playfair Display', serif;
-  color: #0D2137; margin-bottom: 0.6rem; font-size: 1.05rem;
-}
-.q-card p { font-size: 0.95rem; color: #2A3D50; margin-bottom: 1rem; line-height: 1.6; }
-
-.opt {
-  display: block; width: 100%; text-align: left;
-  padding: 0.75rem 1rem; margin-bottom: 0.45rem;
-  border: 1.5px solid #D0DCE8; border-radius: 6px;
-  background: white; cursor: pointer;
-  font-size: 0.9rem; color: #1E2E3A;
-  font-family: 'Source Sans 3', sans-serif;
-  transition: border-color 0.15s, background 0.15s;
-  line-height: 1.45;
-}
-.opt:hover:not([disabled]) { border-color: #2E6DA4; background: #EAF1FA; }
-.opt[disabled] { cursor: default; }
-.opt.is-correct { border-color: #2A7D4F !important; background: #E0F5E9 !important; color: #1A4D30; font-weight: 600; }
-.opt.is-wrong   { border-color: #8B2222 !important; background: #FDF4F4 !important; color: #6B1A1A; }
-
-.fb {
-  border-radius: 6px; padding: 0.75rem 1rem;
-  font-size: 0.87rem; line-height: 1.6;
-  margin-top: 0.6rem; display: none;
-}
-.fb.show { display: block; }
-.fb.fb-ok { background: #E0F5E9; border-left: 3px solid #2A7D4F; color: #1A4D30; }
-.fb.fb-ko { background: #FDF4F4; border-left: 3px solid #8B2222; color: #6B1A1A; }
-
-.q-progress {
-  font-size: 0.78rem; color: #4A6A85;
-  margin-bottom: 1.4rem; display: flex; align-items: center; gap: 10px;
-}
-.q-prog-bar { flex: 1; height: 4px; background: #D0DCE8; border-radius: 2px; }
-.q-prog-fill { height: 100%; background: #2E6DA4; border-radius: 2px; transition: width .35s; }
-
-.score-card {
+.glos-hero {
   background: linear-gradient(135deg, #0D2137, #1A3A5C);
-  border-radius: 10px; padding: 2.2rem 2rem;
-  text-align: center; margin-top: 1.5rem; display: none;
+  border-radius: 8px; padding: 1.4rem 1.8rem; margin-bottom: 2rem; color: #B8D4EE;
 }
-.score-card h2 { font-family:'Playfair Display',serif; font-size:1.8rem; color:#7BC4E8; margin-bottom:0.4rem; }
-.sc-emoji  { font-size: 2.8rem; margin: 0.6rem 0; display: block; }
-.sc-niveau { font-size: 1.05rem; color: #EAF1F8; font-weight: 600; margin-bottom: 0.4rem; }
-.sc-detail { font-size: 0.88rem; color: #8AAFC8; margin-bottom: 1rem; }
+.glos-hero h2 { font-family:'Playfair Display',serif; font-size:1.2rem; color:#EAF1F8; margin-bottom:.4rem; }
+.glos-hero p  { font-size:.88rem; margin:0; line-height:1.6; }
 
-.parcours-box {
-  background: white; border-radius: 7px;
-  padding: 1.1rem 1.3rem; text-align: left; margin: 0.8rem 0 1.2rem;
+/* Search */
+.glos-search-wrap { position:relative; margin-bottom:1.5rem; }
+.glos-search {
+  width:100%; box-sizing:border-box;
+  border:1.5px solid #D0DCE8; border-radius:6px;
+  padding:.7rem 1rem .7rem 2.6rem;
+  font-size:.95rem; font-family:'Source Sans 3',sans-serif;
+  background:#F8FAFD; transition:border-color .2s;
 }
-.pb-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: #2E6DA4; margin-bottom: 0.5rem; }
-.pb-desc  { font-size: 0.87rem; color: #2A3D50; line-height: 1.65; margin-bottom: 0.7rem; }
-.pb-tools { font-size: 0.82rem; color: #4A6A85; }
-.pb-tools span { display: block; margin-bottom: 3px; }
+.glos-search:focus { outline:none; border-color:#2E6DA4; background:white; }
+.glos-search-icon { position:absolute; left:.85rem; top:50%; transform:translateY(-50%); font-size:1rem; color:#4A6A85; }
 
-.btn-start {
-  display: inline-block; background: #4A90C4; color: white;
-  padding: 0.6rem 1.4rem; border-radius: 5px;
-  font-size: 0.9rem; font-weight: 700; text-decoration: none;
-  margin: 0.3rem; transition: background 0.2s;
+/* Letter filters */
+.letter-nav { display:flex; flex-wrap:wrap; gap:.35rem; margin-bottom:1.5rem; }
+.letter-btn {
+  padding:.3rem .65rem; border:1.5px solid #D0DCE8; border-radius:4px;
+  background:white; color:#4A6A85; cursor:pointer; font-size:.8rem; font-weight:600;
+  font-family:'Source Sans 3',sans-serif; transition:all .15s;
 }
-.btn-start:hover { background: #2E6DA4; color: white; }
-.btn-alt {
-  display: inline-block; background: rgba(255,255,255,0.12); color: #EAF1F8;
-  padding: 0.6rem 1.4rem; border-radius: 5px;
-  font-size: 0.9rem; font-weight: 600; text-decoration: none; margin: 0.3rem;
+.letter-btn:hover,.letter-btn.active { background:#1A3A5C; color:white; border-color:#1A3A5C; }
+
+/* Letter group */
+.letter-group { margin-bottom:2rem; }
+.letter-header {
+  font-family:'Playfair Display',serif; font-size:1.6rem; color:#D0DCE8;
+  font-style:italic; border-bottom:2px solid #D0DCE8; padding-bottom:.2rem; margin-bottom:1rem;
 }
+
+/* Concept card */
+.concept-card {
+  border:1px solid #D0DCE8; border-radius:7px; background:white;
+  padding:1.1rem 1.3rem; margin-bottom:.8rem;
+  transition:border-color .15s, box-shadow .15s;
+}
+.concept-card:hover { border-color:#2E6DA4; box-shadow:0 2px 10px rgba(26,58,92,.08); }
+.concept-card.hidden { display:none; }
+
+.concept-term {
+  font-family:'Playfair Display',serif; font-size:1rem; font-weight:600;
+  color:#0D2137; margin-bottom:.35rem;
+}
+.concept-def { font-size:.9rem; color:#2A3D50; line-height:1.7; margin-bottom:.55rem; }
+.concept-meta { display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; }
+.concept-ch {
+  font-size:.7rem; font-weight:700; padding:2px 9px; border-radius:20px;
+  background:#EAF1FA; color:#1A3A5C; text-decoration:none;
+  transition:background .15s;
+}
+.concept-ch:hover { background:#1A3A5C; color:white; }
+.concept-auteur {
+  font-size:.72rem; color:#7A8FA0; font-style:italic;
+}
+.concept-tag {
+  font-size:.68rem; font-weight:700; padding:2px 7px; border-radius:20px;
+}
+.tag-v { background:#FEE2E2; color:#B22222; }
+.tag-d { background:#D1FAE5; color:#2A7D4F; }
+.tag-m { background:#FEF3C7; color:#B8860B; }
+.tag-i { background:#EDE9FE; color:#5B21B6; }
+.tag-e { background:#EAF1FA; color:#1A3A5C; }
+
+.no-result { font-size:.9rem; color:#7A8FA0; font-style:italic; padding:1rem 0; display:none; }
 </style>
 
-<div class="quiz-wrap">
+<div class="glos-wrap">
 
-<div class="tab-nav">
-  <button class="tab-btn active" id="tab-eval">🎯 Évaluation de départ</button>
-  <button class="tab-btn" id="tab-train">🏋️ Entraînement libre</button>
+<div class="glos-hero">
+  <h2 class="anchored">📖 Glossaire des concepts</h2>
+  <p>47 concepts clés de l'histoire économique, de la valeur d'usage à la destruction créatrice. Chaque entrée renvoie au chapitre où le concept est développé.</p>
 </div>
 
-<!-- ══ ÉVALUATION ══ -->
-<div id="section-eval">
-  <div class="quiz-banner">
-    <strong>🧭 7 questions · environ 5 minutes</strong><br>
-    Ce quiz mesure votre niveau et génère un parcours personnalisé. Il n'y a pas de mauvais point de départ.
-  </div>
-
-  <div class="q-progress">
-    <span id="prog-txt">0 / 7 répondues</span>
-    <div class="q-prog-bar"><div class="q-prog-fill" id="prog-fill" style="width:0%"></div></div>
-  </div>
-
-  <div class="q-card" id="qc-1">
-    <h3 class="anchored">Question 1 — La pensée antique</h3>
-    <p>Quelle distinction Aristote établit-il entre valeur d'usage et valeur d'échange ?</p>
-    <button class="opt" data-q="1" data-correct="false">A. La valeur d'usage mesure le prix de marché, la valeur d'échange son utilité pratique</button>
-    <button class="opt" data-q="1" data-correct="true">B. La valeur d'usage est l'utilité pratique, la valeur d'échange est ce contre quoi le bien s'échange</button>
-    <button class="opt" data-q="1" data-correct="false">C. Les deux notions sont identiques chez Aristote</button>
-    <button class="opt" data-q="1" data-correct="false">D. La valeur d'usage concerne les biens de luxe, la valeur d'échange les biens courants</button>
-    <div class="fb" id="fb-1"></div>
-  </div>
-
-  <div class="q-card" id="qc-2">
-    <h3 class="anchored">Question 2 — Le mercantilisme</h3>
-    <p>Quelle est la thèse centrale du mercantilisme en matière de politique économique ?</p>
-    <button class="opt" data-q="2" data-correct="false">A. Laisser le marché réguler librement les échanges</button>
-    <button class="opt" data-q="2" data-correct="false">B. Développer l'agriculture comme unique source de richesse</button>
-    <button class="opt" data-q="2" data-correct="true">C. Maintenir une balance commerciale excédentaire pour accumuler des métaux précieux</button>
-    <button class="opt" data-q="2" data-correct="false">D. Nationaliser les grandes industries stratégiques</button>
-    <div class="fb" id="fb-2"></div>
-  </div>
-
-  <div class="q-card" id="qc-3">
-    <h3 class="anchored">Question 3 — Les Physiocrates</h3>
-    <p>Selon Quesnay, quelle est l'unique source du « produit net » — la richesse réelle ?</p>
-    <button class="opt" data-q="3" data-correct="false">A. Le commerce international</button>
-    <button class="opt" data-q="3" data-correct="false">B. L'industrie manufacturière</button>
-    <button class="opt" data-q="3" data-correct="true">C. L'agriculture et la terre</button>
-    <button class="opt" data-q="3" data-correct="false">D. La finance et le crédit</button>
-    <div class="fb" id="fb-3"></div>
-  </div>
-
-  <div class="q-card" id="qc-4">
-    <h3 class="anchored">Question 4 — Adam Smith</h3>
-    <p>Que désigne la « main invisible » chez Adam Smith ?</p>
-    <button class="opt" data-q="4" data-correct="false">A. L'intervention de l'État pour corriger les défaillances du marché</button>
-    <button class="opt" data-q="4" data-correct="true">B. Le mécanisme par lequel la poursuite de l'intérêt individuel contribue involontairement à l'intérêt général</button>
-    <button class="opt" data-q="4" data-correct="false">C. Le contrôle des prix exercé par les grandes entreprises</button>
-    <button class="opt" data-q="4" data-correct="false">D. La régulation naturelle de la population selon Malthus</button>
-    <div class="fb" id="fb-4"></div>
-  </div>
-
-  <div class="q-card" id="qc-5">
-    <h3 class="anchored">Question 5 — Marx</h3>
-    <p>Qu'est-ce que la « plus-value » selon Karl Marx ?</p>
-    <button class="opt" data-q="5" data-correct="false">A. Le bénéfice légitime du capitaliste pour son risque d'entreprise</button>
-    <button class="opt" data-q="5" data-correct="false">B. La valeur ajoutée par les machines dans le processus productif</button>
-    <button class="opt" data-q="5" data-correct="true">C. La différence entre la valeur produite par le travailleur et le salaire qu'il reçoit, captée par le capitaliste</button>
-    <button class="opt" data-q="5" data-correct="false">D. Le profit commercial réalisé lors de l'échange marchand</button>
-    <div class="fb" id="fb-5"></div>
-  </div>
-
-  <div class="q-card" id="qc-6">
-    <h3 class="anchored">Question 6 — Keynes</h3>
-    <p>Quelle est la loi de Say et comment Keynes la conteste-t-il ?</p>
-    <button class="opt" data-q="6" data-correct="false">A. Say dit que la monnaie crée sa propre valeur ; Keynes dit qu'elle dépend des banques centrales</button>
-    <button class="opt" data-q="6" data-correct="true">B. Say dit que l'offre crée sa propre demande ; Keynes montre qu'une demande insuffisante peut provoquer un chômage durable</button>
-    <button class="opt" data-q="6" data-correct="false">C. Say défend le protectionnisme ; Keynes défend le libre-échange international</button>
-    <button class="opt" data-q="6" data-correct="false">D. Say concerne la démographie ; Keynes l'applique à la macroéconomie</button>
-    <div class="fb" id="fb-6"></div>
-  </div>
-
-  <div class="q-card" id="qc-7">
-    <h3 class="anchored">Question 7 — Le monétarisme</h3>
-    <p>Quelle est la position de Milton Friedman sur la politique budgétaire keynésienne ?</p>
-    <button class="opt" data-q="7" data-correct="false">A. Elle est le principal outil de stabilisation macroéconomique à long terme</button>
-    <button class="opt" data-q="7" data-correct="false">B. Elle doit être utilisée uniquement en cas de guerre ou de catastrophe</button>
-    <button class="opt" data-q="7" data-correct="true">C. Elle est inefficace car l'effet d'éviction annule le multiplicateur et les déficits génèrent de l'inflation</button>
-    <button class="opt" data-q="7" data-correct="false">D. Elle doit financer exclusivement l'éducation et la recherche fondamentale</button>
-    <div class="fb" id="fb-7"></div>
-  </div>
-
-  <div class="score-card" id="score-card">
-    <h2 id="sc-titre" class="anchored">Votre score</h2>
-    <span class="sc-emoji" id="sc-emoji">🎓</span>
-    <div class="sc-niveau" id="sc-niveau"></div>
-    <div class="sc-detail" id="sc-detail"></div>
-    <div class="parcours-box" id="parcours-box">
-      <div class="pb-label" id="pb-label"></div>
-      <div class="pb-desc" id="pb-desc"></div>
-      <div class="pb-tools" id="pb-tools"></div>
-    </div>
-    <a id="btn-commencer" href="chapitres/chapitre1.html" class="btn-start">Commencer →</a>
-    <a href="carte-debats.html" class="btn-alt">📍 Carte des débats</a>
-  </div>
+<div class="glos-search-wrap">
+  <span class="glos-search-icon">🔍</span>
+  <input type="text" class="glos-search" id="glos-search" placeholder="Rechercher un concept, un auteur…" autocomplete="off">
 </div>
 
-<!-- ══ ENTRAÎNEMENT ══ -->
-<div id="section-train" style="display:none;">
-  <div class="quiz-banner" style="border-left-color:#2A7D4F;background:#F0FAF4;">
-    <strong>🏋️ Entraînement libre</strong><br>
-    Questions supplémentaires avec feedback immédiat. Aucun score enregistré.
-  </div>
+<div class="letter-nav" id="letter-nav"></div>
+<div id="no-result" class="no-result">Aucun concept trouvé pour cette recherche.</div>
+<div id="glos-body"></div>
 
-  <div class="q-card">
-    <h3 class="anchored">Le paradoxe eau / diamant</h3>
-    <p>Quel paradoxe Adam Smith soulève-t-il sans le résoudre, et que les marginalistes résoudront en 1871 ?</p>
-    <button class="opt" data-q="t1" data-correct="false">A. Le paradoxe de l'épargne : épargner collectivement appauvrit l'économie</button>
-    <button class="opt" data-q="t1" data-correct="true">B. Le paradoxe eau / diamant : l'eau est très utile mais peu chère, le diamant peu utile mais très cher</button>
-    <button class="opt" data-q="t1" data-correct="false">C. Le paradoxe de la main invisible : comment l'intérêt privé génère-t-il l'intérêt général ?</button>
-    <button class="opt" data-q="t1" data-correct="false">D. Le paradoxe de Malthus : la population croît plus vite que les ressources</button>
-    <div class="fb" id="fb-t1"></div>
-  </div>
-
-  <div class="q-card">
-    <h3 class="anchored">L'optimum de Pareto</h3>
-    <p>Une situation est Pareto-optimale quand :</p>
-    <button class="opt" data-q="t2" data-correct="false">A. Le PIB est à son niveau maximum possible</button>
-    <button class="opt" data-q="t2" data-correct="false">B. Tous les individus ont le même niveau de bien-être</button>
-    <button class="opt" data-q="t2" data-correct="true">C. Il est impossible d'améliorer la situation d'un individu sans détériorer celle d'un autre</button>
-    <button class="opt" data-q="t2" data-correct="false">D. Le budget de l'État est strictement à l'équilibre</button>
-    <div class="fb" id="fb-t2"></div>
-  </div>
-
-  <div class="q-card">
-    <h3 class="anchored">La stagflation des années 1970</h3>
-    <p>Pourquoi la stagflation invalide-t-elle la courbe de Phillips originale ?</p>
-    <button class="opt" data-q="t3" data-correct="false">A. Parce que le chômage a baissé sans que l'inflation ne monte</button>
-    <button class="opt" data-q="t3" data-correct="true">B. Parce que chômage et inflation montent simultanément, alors que la courbe postule une relation inverse</button>
-    <button class="opt" data-q="t3" data-correct="false">C. Parce que les prix du pétrole n'étaient pas intégrés dans la courbe</button>
-    <button class="opt" data-q="t3" data-correct="false">D. Parce que le dollar n'était plus indexé sur l'or depuis 1971</button>
-    <div class="fb" id="fb-t3"></div>
-  </div>
-
-  <div class="q-card">
-    <h3 class="anchored">Elinor Ostrom — Prix Nobel 2009</h3>
-    <p>Pour quel apport Elinor Ostrom a-t-elle reçu le prix Nobel d'économie ?</p>
-    <button class="opt" data-q="t4" data-correct="false">A. Ses travaux sur les inégalités de genre dans le marché du travail</button>
-    <button class="opt" data-q="t4" data-correct="false">B. Sa théorie de la concurrence imparfaite entre grandes firmes</button>
-    <button class="opt" data-q="t4" data-correct="true">C. Ses travaux sur la gouvernance des biens communs gérés collectivement sans État ni marché</button>
-    <button class="opt" data-q="t4" data-correct="false">D. Son analyse de la crise financière de 2008 et du risque systémique</button>
-    <div class="fb" id="fb-t4"></div>
-  </div>
-
-  <div class="q-card">
-    <h3 class="anchored">La critique de Lucas (1976)</h3>
-    <p>Pourquoi la critique de Lucas invalide-t-elle les modèles macroéconomiques keynésiens ?</p>
-    <button class="opt" data-q="t5" data-correct="false">A. Parce que les données économiques sont collectées avec trop de retard</button>
-    <button class="opt" data-q="t5" data-correct="true">B. Parce que les paramètres des modèles changent quand la politique change — les agents adaptent leurs anticipations</button>
-    <button class="opt" data-q="t5" data-correct="false">C. Parce que les modèles sont trop complexes pour être résolus numériquement</button>
-    <button class="opt" data-q="t5" data-correct="false">D. Parce que Keynes n'avait pas tenu compte de l'inflation dans ses équations</button>
-    <div class="fb" id="fb-t5"></div>
-  </div>
 </div>
-
-</div><!-- quiz-wrap -->
 
 <script>
-(function () {
+var CONCEPTS = [
+  /* A */
+  { term:'Aliénation', lettre:'A', auteur:'Marx', ch:6, tag:'v',
+    def:'État dans lequel le travailleur est dépossédé de son produit, de son activité et de son humanité. Dans le capitalisme, le travailleur ne s\'appartient plus — il appartient au processus de production. Marx distingue quatre formes : aliénation du produit, de l\'activité, de l\'espèce, et d\'autrui.' },
+  { term:'Anticipations rationnelles', lettre:'A', auteur:'Lucas / Muth', ch:11, tag:'m',
+    def:'Hypothèse selon laquelle les agents économiques forment leurs prévisions de façon optimale, en utilisant toute l\'information disponible. Ils ne font pas d\'erreurs systématiques. Conséquence : les politiques économiques systématiques sont anticipées et donc neutralisées.' },
+  { term:'Avantages comparatifs', lettre:'A', auteur:'Ricardo', ch:4, tag:'v',
+    def:'Principe selon lequel chaque pays a intérêt à se spécialiser dans la production pour laquelle son désavantage relatif est le plus faible — même s\'il est moins efficace dans tous les secteurs. Fondement théorique du libre-échange international.' },
 
-/* ── Feedback texts ── */
-var FB = {
-  '1': {
-    ok: '✅ Exact. La valeur d\'usage est l\'utilité pratique (boire de l\'eau) ; la valeur d\'échange est ce contre quoi un bien s\'échange sur le marché. Ce paradoxe traverse toute l\'histoire économique jusqu\'aux marginalistes (Ch. 7).',
-    ko: '❌ La valeur d\'usage = utilité pratique ; la valeur d\'échange = rapport marchand. L\'eau a une grande valeur d\'usage mais peu de valeur d\'échange. → Ch. 1'
-  },
-  '2': {
-    ok: '✅ Correct. Pour les mercantilistes : exporter plus qu\'importer → l\'or afflue → la nation s\'enrichit. Smith démolira cette logique en montrant que l\'échange est à somme positive. → Ch. 2',
-    ko: '❌ Le mercantilisme cherche l\'excédent commercial pour accumuler l\'or — pas le libre-marché ni l\'agriculture. → Ch. 2'
-  },
-  '3': {
-    ok: '✅ Correct. Pour Quesnay, seule la terre génère un surplus au-delà de ce qui a été investi. L\'industrie et le commerce sont des classes « stériles ». → Ch. 3',
-    ko: '❌ Pour les Physiocrates, seule l\'agriculture crée de la richesse réelle. Les autres secteurs transforment sans créer. → Ch. 3'
-  },
-  '4': {
-    ok: '✅ Exact. La main invisible : en cherchant son propre intérêt, chaque agent sert involontairement l\'intérêt général via le mécanisme des prix. Aucune coordination centrale n\'est nécessaire. → Ch. 4',
-    ko: '❌ La main invisible = mécanisme spontané de coordination par les prix. L\'intérêt individuel → intérêt général, sans planification étatique. → Ch. 4'
-  },
-  '5': {
-    ok: '✅ Exact. Plus-value = valeur produite − salaire versé. L\'ouvrier travaille plus longtemps que nécessaire pour reproduire son salaire — le surplus (surtravail) est capté par le capitaliste. → Ch. 6',
-    ko: '❌ La plus-value = valeur produite − salaire. C\'est le mécanisme central d\'exploitation chez Marx, fondé sur la théorie de la valeur-travail. → Ch. 6'
-  },
-  '6': {
-    ok: '✅ Correct. Say : toute production distribue des revenus qui reviennent sur les marchés → pas de surproduction durable. Keynes : l\'épargne peut sortir du circuit → chômage durable possible. → Ch. 9',
-    ko: '❌ Loi de Say : l\'offre crée sa propre demande. Keynes montre que l\'épargne peut créer une insuffisance de demande — et un équilibre de sous-emploi. → Ch. 9'
-  },
-  '7': {
-    ok: '✅ Exact. Friedman : (1) l\'effet d\'éviction annule le multiplicateur — l\'État emprunte, les taux montent, l\'investissement privé recule ; (2) financer les déficits par la monnaie génère de l\'inflation. → Ch. 11',
-    ko: '❌ Friedman est sceptique envers la politique budgétaire : effet d\'éviction + risque inflationniste. Il préfère une règle monétaire stable. → Ch. 11'
-  },
-  't1': {
-    ok: '✅ Exact. L\'eau est abondante → sa dernière unité disponible a peu de valeur. Le diamant est rare → sa dernière unité a beaucoup de valeur. Les marginalistes résolvent cela avec l\'utilité marginale. → Ch. 7',
-    ko: '❌ Le paradoxe eau/diamant : grande utilité totale ≠ grand prix. Les marginalistes le résolvent : c\'est l\'utilité de la dernière unité (marginale) qui fixe le prix. → Ch. 7'
-  },
-  't2': {
-    ok: '✅ Exact. L\'optimum de Pareto est un critère d\'efficacité pure — pas d\'équité. Une société très inégalitaire peut être Pareto-optimale. → Ch. 8',
-    ko: '❌ Pareto-optimal = impossible d\'améliorer personne sans nuire à quelqu\'un d\'autre. Critère d\'efficacité, pas d\'égalité. → Ch. 8'
-  },
-  't3': {
-    ok: '✅ Exact. Stagflation = chômage ET inflation montent ensemble — ce que la courbe de Phillips rendait impossible. Friedman l\'avait prévu dès 1968. → Ch. 11',
-    ko: '❌ La stagflation invalide la courbe car chômage et inflation montent simultanément — alors que la courbe postule une relation inverse entre eux. → Ch. 11'
-  },
-  't4': {
-    ok: '✅ Exact. Ostrom démontre que les biens communs (forêts, pêcheries) peuvent être gérés efficacement par les communautés sans privatisation ni État. Elle réfute la « tragédie des communs » de Hardin. → Ch. 12',
-    ko: '❌ Ostrom a travaillé sur la gouvernance collective des biens communs — pas sur les inégalités de genre ni la crise de 2008. → Ch. 12'
-  },
-  't5': {
-    ok: '✅ Exact. Quand la règle de politique change, les comportements changent → les paramètres du modèle ne tiennent plus. Solution : microfondations stables (modèles DSGE). → Ch. 11',
-    ko: '❌ Lucas montre que les agents anticipent les politiques et adaptent leurs comportements, invalidant les paramètres estimés historiquement. → Ch. 11'
-  }
+  /* B */
+  { term:'Balance commerciale', lettre:'B', auteur:'Mercantilistes', ch:2, tag:'m',
+    def:'Différence entre les exportations et les importations d\'un pays. Pour les mercantilistes, un excédent commercial (exporter plus qu\'importer) est le signe de la richesse nationale car il fait affluer les métaux précieux.' },
+  { term:'Baisse tendancielle du taux de profit', lettre:'B', auteur:'Marx', ch:6, tag:'v',
+    def:'Loi selon laquelle le taux de profit tend à baisser à mesure que le capitalisme se développe. Mécanisme : la mécanisation accroît le capital constant (machines) par rapport au capital variable (travail), or seul le travail crée de la valeur. Contre-tendances : exploitation accrue, commerce extérieur.' },
+
+  /* C */
+  { term:'Capital constant / variable', lettre:'C', auteur:'Marx', ch:6, tag:'v',
+    def:'Capital constant = machines, matières premières (ne crée pas de nouvelle valeur, la transfère). Capital variable = salaires (seule source de valeur nouvelle et de plus-value). Cette distinction fonde la théorie de l\'exploitation marxiste.' },
+  { term:'Chrématistique', lettre:'C', auteur:'Aristote', ch:1, tag:'v',
+    def:'Chez Aristote, art d\'acquérir des richesses. Il distingue la chrématistique naturelle (satisfaire les besoins réels, légitime) de la chrématistique mercantile (accumuler de la monnaie sans limite, condamnable). La seconde n\'a pas de fin naturelle.' },
+  { term:'Courbe de Phillips', lettre:'C', auteur:'Phillips / Samuelson', ch:10, tag:'d',
+    def:'Relation empirique inverse entre taux de chômage et taux d\'inflation (ou de croissance des salaires), observée par Phillips sur données britanniques 1861–1957. Utilisée comme menu de politique économique dans les années 1960. Friedman montre en 1968 qu\'elle est instable à long terme car les anticipations la déplacent.' },
+  { term:'Critique de Lucas', lettre:'C', auteur:'Lucas', ch:11, tag:'e',
+    def:'Argument méthodologique (1976) selon lequel les modèles économétriques sont instables : leurs paramètres dépendent du régime de politique économique en vigueur. Changer la règle modifie les comportements — le modèle estimé sur des données passées ne prédit plus rien. Conduit aux modèles DSGE.' },
+
+  /* D */
+  { term:'Demande effective', lettre:'D', auteur:'Keynes / Malthus', ch:9, tag:'d',
+    def:'Volume de production que les entreprises décident de produire en anticipant ce que les consommateurs et investisseurs dépenseront effectivement. Keynes montre qu\'elle peut être structurellement insuffisante — contrairement à ce qu\'affirme la loi de Say — et provoquer un équilibre de sous-emploi durable.' },
+  { term:'Destruction créatrice', lettre:'D', auteur:'Schumpeter', ch:9, tag:'d',
+    def:'Processus par lequel l\'innovation détruit les anciennes structures économiques (entreprises, secteurs, savoir-faire) pour en créer de nouvelles. Moteur du capitalisme selon Schumpeter. Chaque vague technologique (vapeur, électricité, TIC) est une vague de destruction créatrice.' },
+
+  /* E */
+  { term:'École historique allemande', lettre:'E', auteur:'Schmoller / List', ch:5, tag:'e',
+    def:'Courant du XIXe siècle qui refuse les lois économiques universelles et insiste sur l\'enracinement historique et culturel des phénomènes économiques. Fondatrice de la sociologie économique (Weber) et du comparatisme institutionnel. S\'oppose à l\'économie théorique déductive des Classiques.' },
+  { term:'Économies d\'échelle', lettre:'E', auteur:'Marshall / Smith', ch:8, tag:'v',
+    def:'Réduction du coût unitaire de production liée à l\'augmentation des volumes. Internes (propres à une firme) ou externes (avantages partagés dans un district industriel). Marshall y voit la source des agglomérations industrielles — ancêtre des clusters technologiques.' },
+  { term:'Effet d\'éviction', lettre:'E', auteur:'Friedman et al.', ch:11, tag:'d',
+    def:'Phénomène par lequel une augmentation des dépenses publiques financée par emprunt fait monter les taux d\'intérêt, ce qui réduit l\'investissement privé. Argument monétariste contre l\'efficacité de la politique budgétaire keynésienne.' },
+  { term:'Élasticité-prix', lettre:'E', auteur:'Marshall', ch:8, tag:'v',
+    def:'Mesure de la sensibilité de la demande à une variation de prix. Élasticité = % variation de la demande / % variation du prix. Si |e| < 1 : demande inélastique (peu sensible au prix — médicaments, énergie). Si |e| > 1 : demande élastique (très sensible — biens de luxe).' },
+  { term:'État stationnaire', lettre:'E', auteur:'Ricardo / Mill', ch:4, tag:'d',
+    def:'État d\'une économie où la croissance s\'est arrêtée. Chez Ricardo : la baisse des profits liée aux rendements décroissants de la terre conduit inévitablement à la stagnation. Mill y voit non pas une catastrophe mais une opportunité pour améliorer la répartition.' },
+  { term:'Externalité', lettre:'E', auteur:'Pigou / Marshall', ch:8, tag:'d',
+    def:'Effet d\'une activité économique sur des tiers qui n\'est pas reflété dans le prix de marché. Négative (pollution) : le producteur impose un coût non payé à la société. Positive (vaccination) : le bénéfice dépasse ce que le marché rémunère. Justifie la taxe pigouvienne.' },
+
+  /* I */
+  { term:'Incohérence temporelle', lettre:'I', auteur:'Kydland / Prescott', ch:11, tag:'m',
+    def:'Situation où la politique économique optimale à long terme n\'est pas crédible à court terme, car le gouvernement a toujours intérêt à dévier. Exemple : promettre de ne pas renflouer les banques, puis céder quand une grande banque fait faillite. Justifie les règles contraignantes et l\'indépendance des banques centrales.' },
+
+  /* L */
+  { term:'Laissez-faire', lettre:'L', auteur:'Gournay / Smith', ch:3, tag:'v',
+    def:'Principe selon lequel l\'État ne devrait pas intervenir dans l\'économie, et laisser les marchés s\'équilibrer spontanément. Formulé par Gournay (« Laissez faire, laissez passer »), théorisé par Smith. Remis en question par Keynes (défaillances de marché) et Pigou (externalités).' },
+  { term:'Loi de Say', lettre:'L', auteur:'Say', ch:5, tag:'d',
+    def:'« L\'offre crée sa propre demande » : toute production distribue des revenus (salaires, profits, rentes) qui reviennent sur les marchés pour acheter la production. Donc pas de surproduction générale durable possible. Contestée par Malthus, réfutée empiriquement par la Grande Dépression, infirmée théoriquement par Keynes.' },
+  { term:'Loi de la population (Malthus)', lettre:'L', auteur:'Malthus', ch:5, tag:'d',
+    def:'La population tend à croître en progression géométrique (2, 4, 8, 16…) tandis que les subsistances ne croissent qu\'en progression arithmétique (1, 2, 3, 4…). Sans freins préventifs (mariage tardif, abstinence) ou répressifs (guerres, famines), la misère est inévitable.' },
+
+  /* M */
+  { term:'Main invisible', lettre:'M', auteur:'Smith', ch:4, tag:'v',
+    def:'Métaphore smithienne désignant le mécanisme par lequel la poursuite de l\'intérêt individuel conduit, sans intention ni coordination centrale, à servir l\'intérêt général via le système des prix. Fondement théorique du libéralisme économique. N\'implique pas l\'absence de toute institution.' },
+  { term:'Marginalisme', lettre:'M', auteur:'Jevons / Menger / Walras', ch:7, tag:'v',
+    def:'Révolution théorique de 1871 qui fonde la valeur sur l\'utilité subjective de la dernière unité consommée (utilité marginale), et non sur le travail incorporé. Résout le paradoxe eau/diamant. Mathématise l\'économie. Fonde la microéconomie moderne.' },
+  { term:'Multiplicateur keynésien', lettre:'M', auteur:'Keynes / Kahn', ch:9, tag:'d',
+    def:'Mécanisme par lequel une dépense initiale génère une augmentation du revenu national supérieure à cette dépense. k = 1/(1−c), où c est la propension marginale à consommer. Si c = 0,8 → k = 5 : 1€ de dépense publique génère 5€ de PIB supplémentaire.' },
+
+  /* N */
+  { term:'NAIRU', lettre:'N', auteur:'Friedman / Phelps', ch:11, tag:'m',
+    def:'Non-Accelerating Inflation Rate of Unemployment — taux de chômage naturel en dessous duquel toute tentative de réduction par la politique monétaire génère une accélération de l\'inflation. Correspond à l\'équilibre du marché du travail sans tensions inflationnistes.' },
+
+  /* O */
+  { term:'Optimum de Pareto', lettre:'O', auteur:'Pareto', ch:8, tag:'i',
+    def:'Situation dans laquelle il est impossible d\'améliorer la situation d\'un agent sans détériorer celle d\'au moins un autre. Critère d\'efficacité pure — neutre sur la justice : une société très inégalitaire peut être Pareto-optimale. Alternative : critère de Rawls (maximiser le bien-être du plus défavorisé).' },
+
+  /* P */
+  { term:'Physiocratie', lettre:'P', auteur:'Quesnay / Turgot', ch:3, tag:'v',
+    def:'École économique française du XVIIIe siècle affirmant que seule l\'agriculture génère un produit net — un surplus au-delà de ce qui a été investi. L\'industrie et le commerce sont « stériles ». Le Tableau économique (1758) est le premier modèle de flux circulaires entre classes sociales.' },
+  { term:'Plus-value', lettre:'P', auteur:'Marx', ch:6, tag:'v',
+    def:'Différence entre la valeur produite par le travailleur et le salaire qu\'il reçoit. Le travailleur vend sa force de travail à sa valeur de reproduction (salaire), mais travaille au-delà (surtravail). La plus-value est captée par le capitaliste. Fondement de la théorie de l\'exploitation marxiste.' },
+  { term:'Préférence pour la liquidité', lettre:'P', auteur:'Keynes', ch:9, tag:'d',
+    def:'Chez Keynes, désir des agents de détenir de la monnaie liquide plutôt que des actifs financiers, notamment en période d\'incertitude. Quand la préférence pour la liquidité est forte et les taux proches de zéro, la politique monétaire devient inefficace : c\'est la trappe à liquidité.' },
+  { term:'Produit net', lettre:'P', auteur:'Quesnay', ch:3, tag:'v',
+    def:'Surplus créé par l\'agriculture au-delà des inputs utilisés dans la production. Seule la terre peut générer ce produit net selon les Physiocrates — les autres secteurs ne font que transformer sans créer. Ancêtre du concept de valeur ajoutée dans la comptabilité nationale.' },
+  { term:'Progrès technique endogène', lettre:'P', auteur:'Romer / Lucas Jr.', ch:12, tag:'v',
+    def:'Dans les modèles de croissance endogène (Romer, 1990), le progrès technique est le résultat de décisions d\'investissement en R&D et en capital humain — et non une manne exogène comme dans Solow. Le savoir a des externalités positives et des rendements croissants, ce qui justifie les politiques publiques d\'innovation.' },
+
+  /* R */
+  { term:'r > g (Piketty)', lettre:'R', auteur:'Piketty', ch:12, tag:'i',
+    def:'Inégalité formulée par Piketty dans Le Capital au XXIe siècle (2013) : quand le rendement du capital (r) dépasse durablement le taux de croissance économique (g), les patrimoines s\'accumulent plus vite que les revenus du travail. Les inégalités patrimoniales s\'accroissent tendanciellement.' },
+  { term:'Rente différentielle', lettre:'R', auteur:'Ricardo', ch:4, tag:'i',
+    def:'Surplus capté par les propriétaires des terres les plus fertiles. Le prix du blé est fixé par le coût de production sur les terres les moins fertiles (marginales) : les bonnes terres dégagent un différentiel — la rente — sans effort supplémentaire. Ricardo y voit un frein à l\'accumulation du capital.' },
+  { term:'Rendements décroissants', lettre:'R', auteur:'Ricardo / Turgot', ch:4, tag:'v',
+    def:'Loi selon laquelle, à partir d\'un certain seuil, chaque unité supplémentaire d\'un facteur de production apporte une contribution moindre à la production que la précédente. Chez Ricardo : chaque nouvelle terre cultivée est moins fertile → le coût de production agricole monte → la rente différentielle augmente.' },
+
+  /* S */
+  { term:'Stagflation', lettre:'S', auteur:'contexte 1973', ch:11, tag:'m',
+    def:'Situation économique combinant simultanément une forte inflation et un chômage élevé — ce que la courbe de Phillips originale rendait impossible. Apparue après le choc pétrolier de 1973, elle invalide empiriquement le menu keynésien et ouvre la voie au monétarisme de Friedman.' },
+  { term:'Surtravail', lettre:'S', auteur:'Marx', ch:6, tag:'v',
+    def:'Travail effectué au-delà du temps nécessaire pour reproduire la valeur du salaire. Si un ouvrier travaille 10h et que son salaire ne correspond qu\'à 6h, les 4h supplémentaires sont du surtravail — source de la plus-value captée par le capitaliste.' },
+  { term:'Synthèse néoclassique', lettre:'S', auteur:'Samuelson / Hicks', ch:10, tag:'d',
+    def:'Tentative de Samuelson et Hicks de réconcilier Keynes (défaillances à court terme, rôle de l\'État) et les néoclassiques (efficacité des marchés à long terme). Formalisée dans le modèle IS-LM. Dominante dans les années 1950–70. La stagflation de 1973 révèle ses limites.' },
+
+  /* T */
+  { term:'Tableau économique', lettre:'T', auteur:'Quesnay', ch:3, tag:'v',
+    def:'Premier modèle de flux circulaires de l\'économie (Quesnay, 1758). Représente les échanges entre trois classes : productive (paysans), propriétaires fonciers, stérile (artisans/marchands). Ancêtre de la comptabilité nationale et des tableaux entrées-sorties de Leontief.' },
+  { term:'Taxe pigouvienne', lettre:'T', auteur:'Pigou', ch:8, tag:'d',
+    def:'Taxe sur une activité générant des externalités négatives, égale au coût social infligé à la société. Vise à internaliser l\'externalité : le pollueur paie le vrai coût de son activité. La taxe carbone contemporaine est l\'application directe du principe pigouvien.' },
+  { term:'Théorie quantitative de la monnaie', lettre:'T', auteur:'Bodin / Fisher / Friedman', ch:11, tag:'m',
+    def:'Relation MV = PT : masse monétaire × vitesse de circulation = niveau des prix × volume des transactions. Si V est stable, doubler M double P (inflation). Formulée intuitivement par Bodin (1568), mathématisée par Fisher, devenue pilier du monétarisme de Friedman.' },
+  { term:'Trappe à liquidité', lettre:'T', auteur:'Keynes', ch:9, tag:'d',
+    def:'Situation où les taux d\'intérêt sont si bas que les agents préfèrent détenir de la monnaie liquide plutôt que des obligations — la monnaie créée par la banque centrale ne circule pas. La politique monétaire devient inefficace. Seule la politique budgétaire peut relancer l\'économie.' },
+
+  /* U */
+  { term:'Utilité marginale décroissante', lettre:'U', auteur:'Jevons / Menger / Walras', ch:7, tag:'v',
+    def:'Principe selon lequel chaque unité supplémentaire d\'un bien consommée apporte moins de satisfaction que la précédente. La première bouchée est délicieuse, la dixième moins. C\'est l\'utilité de la dernière unité disponible (marginale) qui fixe le prix de marché — et non l\'utilité totale.' },
+
+  /* V */
+  { term:'Valeur d\'usage / valeur d\'échange', lettre:'V', auteur:'Aristote / Smith / Marx', ch:1, tag:'v',
+    def:'Valeur d\'usage : utilité pratique d\'un bien (ce qu\'il permet de faire). Valeur d\'échange : ce contre quoi un bien peut s\'échanger. Le paradoxe eau/diamant illustre leur divergence : l\'eau a une grande valeur d\'usage mais peu de valeur d\'échange, le diamant l\'inverse. Les marginalistes résolvent ce paradoxe avec l\'utilité marginale.' },
+  { term:'Valeur-travail', lettre:'V', auteur:'Smith / Ricardo / Marx', ch:4, tag:'v',
+    def:'Théorie selon laquelle la valeur d\'un bien est déterminée par la quantité de travail socialement nécessaire à sa production. Posée par Smith, radicalisée par Ricardo, retournée en théorie de l\'exploitation par Marx. Abandonnée par les marginalistes au profit de l\'utilité subjective.' },
+
+  /* W */
+  { term:'Welfare economics', lettre:'W', auteur:'Pigou / Pareto', ch:8, tag:'i',
+    def:'Branche de l\'économie qui évalue le bien-être collectif et les conditions sous lesquelles une politique améliore ou détériore ce bien-être. Pareto : critère d\'efficacité (optimum de Pareto). Pigou : critère de bien-être social qui intègre la distribution des revenus et les externalités.' },
+];
+
+/* Build index by letter */
+var byLetter = {};
+CONCEPTS.forEach(function(c) {
+  if (!byLetter[c.lettre]) byLetter[c.lettre] = [];
+  byLetter[c.lettre].push(c);
+});
+
+var CH_LABELS = {
+  1:'Ch.1 — Antiquité',2:'Ch.2 — Mercantilisme',3:'Ch.3 — Physiocrates',
+  4:'Ch.4 — Classiques I',5:'Ch.5 — Classiques II',6:'Ch.6 — Marx',
+  7:'Ch.7 — Marginalisme',8:'Ch.8 — Néoclassiques',9:'Ch.9 — Keynes',
+  10:'Ch.10 — Samuelson',11:'Ch.11 — Monétarisme',12:'Ch.12 — Bilan'
 };
+var TAG_CLS = { v:'tag-v', d:'tag-d', m:'tag-m', i:'tag-i', e:'tag-e' };
+var TAG_LBL = { v:'Valeur', d:'Demande', m:'Monnaie', i:'Inégalités', e:'Méthode' };
 
-/* ── State ── */
-var answered = {};
-var scores   = {};
-var TOTAL    = 7;
+/* Render letter nav */
+var letters = Object.keys(byLetter).sort();
+var nav = document.getElementById('letter-nav');
+var allBtn = document.createElement('button');
+allBtn.className = 'letter-btn active'; allBtn.textContent = 'Tous';
+allBtn.addEventListener('click', function() { filterLetter(null, allBtn); });
+nav.appendChild(allBtn);
+letters.forEach(function(l) {
+  var btn = document.createElement('button');
+  btn.className = 'letter-btn'; btn.textContent = l;
+  btn.addEventListener('click', function() { filterLetter(l, btn); });
+  nav.appendChild(btn);
+});
 
-/* ── Attach all option handlers once DOM is ready ── */
-document.querySelectorAll('.opt').forEach(function (btn) {
-  btn.addEventListener('click', function () {
-    var q       = btn.getAttribute('data-q');
-    var correct = btn.getAttribute('data-correct') === 'true';
-    var isTraining = (q.charAt(0) === 't');
-
-    if (!isTraining && answered[q]) return;
-    if (!isTraining) answered[q] = true;
-
-    /* Disable all sibling options */
-    var card = btn.closest('.q-card');
-    card.querySelectorAll('.opt').forEach(function (b) {
-      b.setAttribute('disabled', 'disabled');
-    });
-
-    /* Mark chosen and reveal correct if needed */
-    btn.classList.add(correct ? 'is-correct' : 'is-wrong');
-    if (!correct) {
-      card.querySelectorAll('.opt').forEach(function (b) {
-        if (b.getAttribute('data-correct') === 'true') b.classList.add('is-correct');
-      });
-    }
-
-    /* Feedback */
-    var fb = document.getElementById('fb-' + q);
-    if (fb && FB[q]) {
-      fb.textContent = correct ? FB[q].ok : FB[q].ko;
-      fb.className   = 'fb show ' + (correct ? 'fb-ok' : 'fb-ko');
-    }
-
-    if (!isTraining) {
-      scores[q] = correct ? 1 : 0;
-      var done = Object.keys(answered).length;
-      document.getElementById('prog-txt').textContent = done + ' / ' + TOTAL + ' répondues';
-      document.getElementById('prog-fill').style.width = Math.round(done / TOTAL * 100) + '%';
-      if (done === TOTAL) setTimeout(showScore, 700);
-    }
+/* Render all concepts */
+var body = document.getElementById('glos-body');
+letters.forEach(function(l) {
+  var group = document.createElement('div');
+  group.className = 'letter-group'; group.setAttribute('data-letter', l);
+  group.innerHTML = '<div class="letter-header">' + l + '</div>';
+  byLetter[l].forEach(function(c) {
+    var card = document.createElement('div');
+    card.className = 'concept-card';
+    card.setAttribute('data-term', c.term.toLowerCase());
+    card.setAttribute('data-auteur', (c.auteur||'').toLowerCase());
+    card.setAttribute('data-letter', l);
+    card.innerHTML =
+      '<div class="concept-term">' + c.term + '</div>' +
+      '<div class="concept-def">' + c.def + '</div>' +
+      '<div class="concept-meta">' +
+        '<a class="concept-ch" href="chapitres/chapitre' + c.ch + '.html">' + CH_LABELS[c.ch] + '</a>' +
+        (c.auteur ? '<span class="concept-auteur">' + c.auteur + '</span>' : '') +
+        '<span class="concept-tag ' + (TAG_CLS[c.tag]||'') + '">' + (TAG_LBL[c.tag]||'') + '</span>' +
+      '</div>';
+    group.appendChild(card);
   });
+  body.appendChild(group);
 });
 
-/* ── Score display ── */
-function showScore() {
-  var total = 0;
-  for (var k in scores) total += scores[k];
+/* Search */
+document.getElementById('glos-search').addEventListener('input', function() {
+  var q = this.value.toLowerCase().trim();
+  var visible = 0;
+  document.querySelectorAll('.concept-card').forEach(function(card) {
+    var match = !q ||
+      card.getAttribute('data-term').includes(q) ||
+      card.getAttribute('data-auteur').includes(q) ||
+      card.querySelector('.concept-def').textContent.toLowerCase().includes(q);
+    card.classList.toggle('hidden', !match);
+    if (match) visible++;
+  });
+  /* Show/hide letter groups */
+  document.querySelectorAll('.letter-group').forEach(function(grp) {
+    var anyVisible = grp.querySelectorAll('.concept-card:not(.hidden)').length > 0;
+    grp.style.display = anyVisible ? '' : 'none';
+  });
+  document.getElementById('no-result').style.display = visible === 0 ? 'block' : 'none';
+  /* Reset letter filter */
+  document.querySelectorAll('.letter-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelector('.letter-btn').classList.add('active');
+});
 
-  var card = document.getElementById('score-card');
-  card.style.display = 'block';
-  setTimeout(function () { card.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50);
-
-  document.getElementById('sc-titre').textContent = 'Score : ' + total + ' / 7';
-
-  var emoji, niveau, detail, parcours;
-
-  if (total <= 2) {
-    emoji   = '🌱';
-    niveau  = 'Niveau débutant — Explorateur·rice';
-    detail  = 'Pas d\'inquiétude : vous avez tout ce qu\'il faut pour construire une compréhension solide en suivant le parcours dans l\'ordre.';
-    parcours = {
-      label: 'Parcours Fondations',
-      desc:  'Suivez l\'ordre chronologique (Ch. 1 → Ch. 12). Dans chaque chapitre, appuyez-vous sur les encadrés « Voix de personnage » et utilisez les pistes de réponse dès la première lecture. La question flash vous sert de repère avant de passer au suivant.',
-      tools: ['💡 Pistes de réponse : révélez-les sans hésiter', '⚡ Question flash : comparez avec la réponse-modèle', '🏺 Artéfacts : les 6 par défaut sont vos repères de cours'],
-      href:  'chapitres/chapitre1.html'
-    };
-  } else if (total <= 5) {
-    emoji   = '🗺️';
-    niveau  = 'Niveau intermédiaire — Voyageur·se averti·e';
-    detail  = 'Bonne base ! L\'enjeu est maintenant de voir les connexions entre les théories, pas seulement les théories elles-mêmes.';
-    parcours = {
-      label: 'Parcours Connexions',
-      desc:  'Commencez par la Carte des débats pour voir qui répond à qui sur 25 siècles. Dans chaque chapitre, concentrez-vous sur les encadrés « Fils du débat ». Tentez les questions flash avant de regarder la réponse. Les carrefours décisionnels sont votre outil principal.',
-      tools: ['🔗 Carte des débats : votre fil conducteur', '⚡ Question flash : répondez avant de regarder', '💭 Questions ouvertes du carnet : commencez à rédiger'],
-      href:  'carte-debats.html'
-    };
-  } else {
-    emoji   = '🎓';
-    niveau  = 'Niveau avancé — Expert·e de la valeur';
-    detail  = 'Excellent niveau ! L\'enjeu est d\'approfondir les controverses non résolues et les voix non-canoniques.';
-    parcours = {
-      label: 'Parcours Controverses',
-      desc:  'Commencez par la Carte des débats, puis abordez chaque chapitre par ses questions de réflexion — sans regarder les pistes. Concentrez-vous sur Ibn Khaldoun (Ch. 1), Rosa Luxemburg (Ch. 6), Joan Robinson (Ch. 9). Les défis immersifs des carrefours sont votre terrain.',
-      tools: ['📍 Carte des débats : porte d\'entrée principale', '🎭 Défis immersifs des carrefours', '❓ Questions de réflexion sans les pistes'],
-      href:  'carte-debats.html'
-    };
-  }
-
-  document.getElementById('sc-emoji').textContent  = emoji;
-  document.getElementById('sc-niveau').textContent = niveau;
-  document.getElementById('sc-detail').textContent = detail;
-  document.getElementById('pb-label').textContent  = '📚 ' + parcours.label;
-  document.getElementById('pb-desc').textContent   = parcours.desc;
-  document.getElementById('pb-tools').innerHTML    =
-    parcours.tools.map(function (t) { return '<span>' + t + '</span>'; }).join('');
-  document.getElementById('btn-commencer').href    = parcours.href;
-
-  localStorage.setItem('niveau',    niveau);
-  localStorage.setItem('quizScore', String(total));
+/* Letter filter */
+function filterLetter(letter, btn) {
+  document.querySelectorAll('.letter-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('glos-search').value = '';
+  document.getElementById('no-result').style.display = 'none';
+  document.querySelectorAll('.concept-card').forEach(function(c) { c.classList.remove('hidden'); });
+  document.querySelectorAll('.letter-group').forEach(function(grp) {
+    grp.style.display = (!letter || grp.getAttribute('data-letter') === letter) ? '' : 'none';
+  });
 }
-
-/* ── Tab switching ── */
-document.getElementById('tab-eval').addEventListener('click', function () {
-  document.getElementById('section-eval').style.display  = 'block';
-  document.getElementById('section-train').style.display = 'none';
-  document.getElementById('tab-eval').classList.add('active');
-  document.getElementById('tab-train').classList.remove('active');
-});
-document.getElementById('tab-train').addEventListener('click', function () {
-  document.getElementById('section-eval').style.display  = 'none';
-  document.getElementById('section-train').style.display = 'block';
-  document.getElementById('tab-train').classList.add('active');
-  document.getElementById('tab-eval').classList.remove('active');
-});
-
-})();
 </script>
 
 

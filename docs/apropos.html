@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>À propos – À la recherche de la valeur perdue</title>
+<title>À propos – Oikonomia</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -256,7 +256,7 @@ var DragDrop = (function() {
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">À la recherche de la valeur perdue</span>
+    <span class="navbar-title">Oikonomia</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -329,12 +329,20 @@ var DragDrop = (function() {
 <span class="menu-text">Carte des débats</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./glossaire.html"> 
+<span class="menu-text">Glossaire</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./quiz.html"> 
 <span class="menu-text">Quiz</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./carnet.html"> 
 <span class="menu-text">Carnet de bord</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./bilan-mi-parcours.html"> 
+<span class="menu-text">Bilan mi-parcours</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./apropos.html" aria-current="page"> 
@@ -361,11 +369,15 @@ var DragDrop = (function() {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
-  <ul>
-  <li><a href="#ce-site" id="toc-ce-site" class="nav-link active" data-scroll-target="#ce-site">Ce site</a></li>
-  <li><a href="#organisation-du-cours" id="toc-organisation-du-cours" class="nav-link" data-scroll-target="#organisation-du-cours">Organisation du cours</a></li>
+  <ul class="collapse">
+  <li><a href="#le-projet-pédagogique" id="toc-le-projet-pédagogique" class="nav-link active" data-scroll-target="#le-projet-pédagogique">Le projet pédagogique</a></li>
+  <li><a href="#structure-du-cours" id="toc-structure-du-cours" class="nav-link" data-scroll-target="#structure-du-cours">Structure du cours</a></li>
+  <li><a href="#évaluation" id="toc-évaluation" class="nav-link" data-scroll-target="#évaluation">Évaluation</a></li>
+  <li><a href="#le-dispositif-pédagogique-numérique" id="toc-le-dispositif-pédagogique-numérique" class="nav-link" data-scroll-target="#le-dispositif-pédagogique-numérique">Le dispositif pédagogique numérique</a></li>
+  <li><a href="#choix-éditoriaux" id="toc-choix-éditoriaux" class="nav-link" data-scroll-target="#choix-éditoriaux">Choix éditoriaux</a></li>
+  <li><a href="#à-propos-de-pascaline-vincent" id="toc-à-propos-de-pascaline-vincent" class="nav-link" data-scroll-target="#à-propos-de-pascaline-vincent">À propos de Pascaline Vincent</a></li>
+  <li><a href="#technique-et-transparence" id="toc-technique-et-transparence" class="nav-link" data-scroll-target="#technique-et-transparence">Technique et transparence</a></li>
   <li><a href="#bibliographie-générale" id="toc-bibliographie-générale" class="nav-link" data-scroll-target="#bibliographie-générale">Bibliographie générale</a></li>
-  <li><a href="#à-propos-de-ce-site" id="toc-à-propos-de-ce-site" class="nav-link" data-scroll-target="#à-propos-de-ce-site">À propos de ce site</a></li>
   </ul>
 </nav>
     </div>
@@ -391,34 +403,161 @@ var DragDrop = (function() {
 </header>
 
 
-<section id="ce-site" class="level2">
-<h2 class="anchored" data-anchor-id="ce-site">Ce site</h2>
-<p>Ce site est le support pédagogique du cours d’<strong>Histoire Économique</strong> dispensé par <strong>Pascaline VINCENT</strong> à l’université.</p>
-<p>Il couvre douze séances de deux heures, de la pensée antique à l’économie du XXI<sup>e</sup> siècle, organisées autour d’un fil narratif : comment la notion de <strong>valeur</strong> a-t-elle évolué au fil des siècles, et qu’est-ce que ces évolutions nous disent de nos sociétés ?</p>
+<style>
+.ap-hero {
+  background: linear-gradient(135deg, #0D2137, #1A3A5C);
+  border-radius: 8px; padding: 2rem 2.2rem; margin-bottom: 2.5rem; color: #B8D4EE;
+}
+.ap-hero h2 {
+  font-family: 'Playfair Display', serif; font-size: 1.6rem;
+  font-style: italic; color: white; margin-bottom: .6rem;
+}
+.ap-hero p { font-size: .93rem; line-height: 1.75; margin: 0; }
+
+.ap-card {
+  border: 1px solid #D0DCE8; border-radius: 7px; background: white;
+  padding: 1.3rem 1.5rem; margin-bottom: 1.2rem;
+}
+.ap-card h3 {
+  font-family: 'Playfair Display', serif; color: #0D2137;
+  font-size: 1.05rem; margin-bottom: .6rem;
+}
+.ap-card p, .ap-card li { font-size: .9rem; color: #2A3D50; line-height: 1.75; }
+
+.seance-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: .75rem; margin: 1rem 0;
+}
+.seance-item {
+  border: 1px solid #D0DCE8; border-radius: 6px; padding: .8rem 1rem;
+  background: #F8FAFD; font-size: .85rem;
+}
+.seance-num {
+  font-size: .68rem; font-weight: 700; color: #2E6DA4;
+  text-transform: uppercase; letter-spacing: .08em; margin-bottom: .25rem;
+}
+.seance-titre { color: #0D2137; font-weight: 600; line-height: 1.35; }
+.seance-ep    { font-size: .74rem; color: #7A8FA0; margin-top: .2rem; }
+
+.choix-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; margin: .8rem 0;
+}
+@media(max-width:550px){ .choix-grid{ grid-template-columns:1fr; } }
+.choix-item {
+  border: 1.5px solid #D0DCE8; border-radius: 6px; padding: .8rem 1rem; background: white;
+}
+.choix-item strong { display: block; color: #0D2137; margin-bottom: .2rem; font-size: .9rem; }
+.choix-item p { font-size: .82rem; color: #5A7A95; margin: 0; line-height: 1.5; }
+
+.ia-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: .72rem; font-weight: 700; padding: 3px 10px;
+  background: #EAF1FA; color: #1A3A5C; border: 1px solid #B8D0E8;
+  border-radius: 20px; margin-bottom: .7rem;
+}
+.bib-item { margin-bottom: .7rem; font-size: .9rem; color: #2A3D50; line-height: 1.6; }
+.bib-item em { color: #1A3A5C; }
+</style>
+
+<div class="ap-hero">
+  <h2 class="anchored">À la recherche de la valeur perdue</h2>
+  <p>Ce site est le support numérique du cours d'histoire économique de <strong style="color:white;">Pascaline Vincent</strong>. Il couvre vingt-cinq siècles de pensée économique autour d'une question centrale : <em>d'où vient la valeur ?</em> — et qui décide.</p>
+</div>
+<section id="le-projet-pédagogique" class="level2">
+<h2 class="anchored" data-anchor-id="le-projet-pédagogique">Le projet pédagogique</h2>
+<p>Ce cours fait un pari inhabituel : raconter l’histoire de la pensée économique non pas comme une succession de découvertes qui s’accumulent, mais comme une <strong>longue conversation</strong> — où chaque école répond à la précédente, hérite de ses angles morts, et crée les conditions de la suivante.</p>
+<p>Smith répond aux Physiocrates. Marx retourne Smith contre lui-même. Les marginalistes dissolvent Marx dans l’utilité subjective. Keynes ressuscite Malthus. Friedman attaque Keynes. Lucas attaque Friedman. Piketty renouvelle Ricardo.</p>
+<p>Ce fil conducteur — la valeur comme question politique autant que théorique — permet de lire deux millénaires et demi de débats économiques comme un seul débat sur une seule question : <strong>qui produit la richesse, qui la capte, et comment le justifie-t-on ?</strong></p>
 </section>
-<section id="organisation-du-cours" class="level2">
-<h2 class="anchored" data-anchor-id="organisation-du-cours">Organisation du cours</h2>
-<p>Le cours comporte 12 séances de 2 heures. Chaque séance correspond à un chapitre.</p>
-<p><strong>Évaluation :</strong></p>
-<ul>
-<li>Deux questions de cours sur 5 points chacune — elles impliquent de rédiger des paragraphes argumentés à partir des questions de réflexion proposées dans chaque chapitre.</li>
-<li>Un QCM sur 10 points — il mobilise la mémorisation des auteurs, dates et concepts clés, accessibles via le quiz de ce site.</li>
-</ul>
+<section id="structure-du-cours" class="level2">
+<h2 class="anchored" data-anchor-id="structure-du-cours">Structure du cours</h2>
+<p>Le cours comporte <strong>12 séances de 2 heures</strong>, organisées chronologiquement.</p>
+<div class="seance-grid">
+  <div class="seance-item"><div class="seance-num">Séance 1</div><div class="seance-titre">Pensée antique &amp; médiévale</div><div class="seance-ep">Antiquité — Moyen Âge</div></div>
+  <div class="seance-item"><div class="seance-num">Séance 2</div><div class="seance-titre">Naissance de l'économie politique</div><div class="seance-ep">XVIe–XVIIe s.</div></div>
+  <div class="seance-item"><div class="seance-num">Séance 3</div><div class="seance-titre">Les Physiocrates</div><div class="seance-ep">France, XVIIIe s.</div></div>
+  <div class="seance-item"><div class="seance-num">Séance 4</div><div class="seance-titre">Les Classiques (I) — Smith &amp; Ricardo</div><div class="seance-ep">Révolution industrielle</div></div>
+  <div class="seance-item"><div class="seance-num">Séance 5</div><div class="seance-titre">Les Classiques (II) — Malthus, Say, Mill</div><div class="seance-ep">XIXe s.</div></div>
+  <div class="seance-item"><div class="seance-num">Séance 6</div><div class="seance-titre">Marx et le socialisme</div><div class="seance-ep">XIXe s.</div></div>
+  <div class="seance-item"><div class="seance-num">Séance 7</div><div class="seance-titre">Le marginalisme</div><div class="seance-ep">1870–1900</div></div>
+  <div class="seance-item"><div class="seance-num">Séance 8</div><div class="seance-titre">Les néoclassiques</div><div class="seance-ep">Belle Époque</div></div>
+  <div class="seance-item"><div class="seance-num">Séance 9</div><div class="seance-titre">La révolution keynésienne</div><div class="seance-ep">1930–1945</div></div>
+  <div class="seance-item"><div class="seance-num">Séance 10</div><div class="seance-titre">La synthèse de Samuelson</div><div class="seance-ep">Trente Glorieuses</div></div>
+  <div class="seance-item"><div class="seance-num">Séance 11</div><div class="seance-titre">Le monétarisme et la NMC</div><div class="seance-ep">1970–2000</div></div>
+  <div class="seance-item"><div class="seance-num">Séance 12</div><div class="seance-titre">État des lieux</div><div class="seance-ep">XXIe s.</div></div>
+</div>
+</section>
+<section id="évaluation" class="level2">
+<h2 class="anchored" data-anchor-id="évaluation">Évaluation</h2>
+<div class="ap-card">
+  <h3 class="anchored">📝 Modalités d'évaluation</h3>
+  <ul>
+    <li><strong>Deux questions de cours (5 pts chacune)</strong> — Elles impliquent de rédiger des paragraphes argumentés à partir des questions de réflexion proposées dans chaque chapitre. Les pistes de réponse disponibles sur ce site sont un point de départ, non une fin.</li>
+    <li><strong>Un QCM (10 pts)</strong> — Il mobilise la mémorisation des auteurs, dates et concepts clés. Le quiz d'entraînement du site couvre l'essentiel du périmètre.</li>
+  </ul>
+  <p style="margin-top:.8rem;font-size:.85rem;color:#4A6A85;">💡 Le carnet de bord, les questions ouvertes et les réponses aux carrefours décisionnels constituent un matériau précieux pour préparer les questions de cours.</p>
+</div>
+</section>
+<section id="le-dispositif-pédagogique-numérique" class="level2">
+<h2 class="anchored" data-anchor-id="le-dispositif-pédagogique-numérique">Le dispositif pédagogique numérique</h2>
+<p>Ce site propose plusieurs outils conçus pour rendre le parcours actif plutôt que passif.</p>
+<div class="choix-grid">
+  <div class="choix-item">
+    <strong>🧭 Voix de personnage</strong>
+    <p>Chaque chapitre peut être lu depuis le point de vue d'un Marchand, d'un Philosophe, d'un Ouvrier ou d'un Entrepreneur. Le choix n'est pas cosmétique : une même théorie économique se lit très différemment selon la position sociale d'où on la regarde.</p>
+  </div>
+  <div class="choix-item">
+    <strong>⚡ Carrefours décisionnels</strong>
+    <p>À la fin de chaque chapitre, un scénario historique situé demande à l'étudiant de prendre position. Le choix détermine le cadrage du chapitre suivant et débloque des défis cognitifs, pratiques et immersifs.</p>
+  </div>
+  <div class="choix-item">
+    <strong>📓 Carnet de bord</strong>
+    <p>Un espace personnel pour noter, collecter des artefacts conceptuels et répondre aux questions ouvertes. Toutes les données restent dans le navigateur — aucune information personnelle n'est transmise.</p>
+  </div>
+  <div class="choix-item">
+    <strong>📍 Carte des débats</strong>
+    <p>Une visualisation interactive de 20 auteurs et de leurs connexions sur 25 siècles. Filtrable par thème (valeur, demande, monnaie, inégalités). Chaque nœud renvoie au chapitre correspondant.</p>
+  </div>
+  <div class="choix-item">
+    <strong>📖 Glossaire</strong>
+    <p>47 concepts clés avec définition, auteur, et lien vers le chapitre. Recherche plein-texte et filtre par lettre. Un outil de révision rapide avant les examens.</p>
+  </div>
+  <div class="choix-item">
+    <strong>📄 Rapport de parcours</strong>
+    <p>En fin de parcours, le profil génère un document PDF récapitulatif : niveau, chapitres lus, artefacts collectés, réponses aux questions ouvertes, pistes de lecture. À remettre éventuellement en guise de portfolio.</p>
+  </div>
+</div>
+</section>
+<section id="choix-éditoriaux" class="level2">
+<h2 class="anchored" data-anchor-id="choix-éditoriaux">Choix éditoriaux</h2>
+<p><strong>Pourquoi 12 chapitres et pas 15 ou 8 ?</strong> Le découpage retenu suit les grandes ruptures paradigmatiques identifiées par les historiens de la pensée économique : physiocratie, valeur-travail classique, révolution marginaliste, keynésianisme, contre-révolution monétariste, hétérodoxies contemporaines. Certaines écoles importantes (l’institutionnalisme américain, la théorie des jeux, l’économie expérimentale de Thaler) sont évoquées mais pas développées — un choix délibéré de profondeur plutôt que d’exhaustivité.</p>
+<p><strong>Pourquoi des voix non-canoniques ?</strong> Ibn Khaldoun (ch.1), Rosa Luxemburg (ch.6), Joan Robinson (ch.9), Elinor Ostrom et Esther Duflo (ch.12) sont intégrés non par militantisme mais par exactitude historique : ces auteurs ont formulé des arguments importants, souvent avant ou mieux que leurs contemporains masculins et occidentaux, et leur exclusion du canon traditionnel relève de biais sociologiques bien documentés.</p>
+<p><strong>Pourquoi des textes originaux ?</strong> Lire Aristote, Marx ou Keynes directement — même sur quelques lignes — est irremplaçable. La paraphrase trahit toujours quelque chose de la texture d’une pensée. Les extraits proposés sont tous libres de droits (domaine public ou Creative Commons).</p>
+</section>
+<section id="à-propos-de-pascaline-vincent" class="level2">
+<h2 class="anchored" data-anchor-id="à-propos-de-pascaline-vincent">À propos de Pascaline Vincent</h2>
+<p>Pascaline Vincent enseigne l’économie et l’histoire économique à l’université.</p>
+<p>Ce cours s’inscrit dans une réflexion plus large sur la pédagogie active en sciences sociales : comment amener des étudiants à ne pas seulement mémoriser des théories, mais à comprendre <em>pourquoi</em> ces théories ont été formulées, <em>contre qui</em> elles étaient dirigées, et <em>ce qu’elles présupposent</em> sur la nature humaine et la société.</p>
+</section>
+<section id="technique-et-transparence" class="level2">
+<h2 class="anchored" data-anchor-id="technique-et-transparence">Technique et transparence</h2>
+<div class="ap-card">
+  <div class="ia-badge">🤖 Transparence sur l'IA</div>
+  <p>Ce site a été construit avec <a href="https://quarto.org" style="color:#2E6DA4;">Quarto</a>, un système de publication scientifique open-source. La structure pédagogique, le contenu des chapitres, les questions de réflexion, les scénarios des carrefours décisionnels et le glossaire sont issus du cours de Pascaline Vincent.</p>
+  <p style="margin-top:.6rem;">La mise en forme numérique, les composants interactifs (quiz, carnet, carte des débats, système de voix de personnage, injection des extraits originaux) ont été réalisés <strong>avec l'assistance de Claude (Anthropic)</strong> — un modèle de langage utilisé comme outil de développement et de structuration, sous supervision humaine constante.</p>
+  <p style="margin-top:.6rem;">Toutes les données de l'étudiant (progression, notes, réponses) restent dans le <code>localStorage</code> de son navigateur. Aucune donnée personnelle n'est collectée ni transmise.</p>
+</div>
 </section>
 <section id="bibliographie-générale" class="level2">
 <h2 class="anchored" data-anchor-id="bibliographie-générale">Bibliographie générale</h2>
-<ul>
-<li><strong>Brasseul J.</strong> — <em>Petite histoire des faits économiques. Des origines à nos jours</em>, Armand Colin, 2016</li>
-<li><strong>Daniel J.M.</strong> — <em>Histoire vivante de la pensée économique : des crises et des hommes</em>, Pearson, 2010</li>
-<li><strong>Goodwin M.</strong> — <em>Economix</em>, 2019</li>
-</ul>
-<p>Textes originaux des classiques : <a href="https://classiques.uqam.ca/">classiques.uqam.ca</a></p>
-</section>
-<section id="à-propos-de-ce-site" class="level2">
-<h2 class="anchored" data-anchor-id="à-propos-de-ce-site">À propos de ce site</h2>
-<p>Ce site a été construit avec <a href="https://quarto.org">Quarto</a>, un système de publication scientifique open-source.</p>
-<p>La structure pédagogique, le contenu des chapitres, les questions de réflexion et les QCM sont issus du cours de Pascaline VINCENT. La mise en forme numérique et les dispositifs interactifs (quiz, carnet de bord, voix de personnage) ont été réalisés <strong>avec l’aide de l’intelligence artificielle</strong>.</p>
-<p>L’objectif de ces dispositifs est de rendre le parcours plus actif : le choix d’un point de vue narratif (marchand, philosophe, ouvrier, entrepreneur) n’est pas un gadget — il vise à montrer qu’une même théorie économique peut être lue de façons radicalement différentes selon la position sociale d’où on la regarde.</p>
+<div style="margin-top:.5rem;">
+  <div class="bib-item">📗 <strong>Brasseul J.</strong> — <em>Petite histoire des faits économiques. Des origines à nos jours</em>, Armand Colin, 2016. Manuel de référence, clair et complet.</div>
+  <div class="bib-item">📘 <strong>Daniel J.M.</strong> — <em>Histoire vivante de la pensée économique : des crises et des hommes</em>, Pearson, 2010. Centré sur les biographies et contextes des auteurs.</div>
+  <div class="bib-item">📙 <strong>Heilbroner R.</strong> — <em>Les Grands Économistes</em>, Seuil, 1971. Le classique de vulgarisation — toujours lisible et stimulant.</div>
+  <div class="bib-item">📕 <strong>Goodwin M.</strong> — <em>Economix</em> (bande dessinée), 2019. Pour entrer dans la matière de façon non linéaire.</div>
+  <div class="bib-item">📗 <strong>Blaug M.</strong> — <em>La Pensée économique : origine et développement</em>, Economica, 1999. La référence académique pour aller plus loin.</div>
+  <div class="bib-item">🌐 Textes originaux des classiques en accès libre : <a href="https://classiques.uqam.ca/" style="color:#2E6DA4;">classiques.uqam.ca</a> · <a href="https://gallica.bnf.fr" style="color:#2E6DA4;">Gallica (BnF)</a> · <a href="https://archive.org" style="color:#2E6DA4;">Archive.org</a></div>
+</div>
 
 
 </section>

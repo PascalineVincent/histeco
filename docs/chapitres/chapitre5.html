@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Ch. 5 — Les Classiques (II) – À la recherche de la valeur perdue</title>
+<title>Ch. 5 — Les Classiques (II) – Oikonomia</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -256,7 +256,7 @@ var DragDrop = (function() {
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
     </a>
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">À la recherche de la valeur perdue</span>
+    <span class="navbar-title">Oikonomia</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -329,12 +329,20 @@ var DragDrop = (function() {
 <span class="menu-text">Carte des débats</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../glossaire.html"> 
+<span class="menu-text">Glossaire</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../quiz.html"> 
 <span class="menu-text">Quiz</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../carnet.html"> 
 <span class="menu-text">Carnet de bord</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../bilan-mi-parcours.html"> 
+<span class="menu-text">Bilan mi-parcours</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../apropos.html"> 
@@ -408,6 +416,7 @@ var DragDrop = (function() {
 <script>
 let cr = JSON.parse(localStorage.getItem('chapRead') || '[]');
 if (!cr.includes('ch5')) { cr.push('ch5'); localStorage.setItem('chapRead', JSON.stringify(cr)); }
+localStorage.setItem('lastChap', JSON.stringify({key:'ch5',num:5,titre:'Les Classiques (II) — Malthus, Say, Mill',court:'Malthus, Say, Mill'}) );
 document.addEventListener('DOMContentLoaded', function() {
   const av = localStorage.getItem('avatar') || 'none';
   document.querySelectorAll('[data-voix]').forEach(el => {
@@ -448,6 +457,26 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 <section id="les-auteurs" class="level2">
 <h2 class="anchored" data-anchor-id="les-auteurs">Les auteurs</h2>
+<div style="background:#F8F4EF;border:1px solid #D4C5A9;border-left:4px solid #1A3A5C;border-radius:0 6px 6px 0;padding:1.1rem 1.4rem;margin:1.2rem 0 1.5rem;">
+  <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#1A3A5C;margin-bottom:.6rem;">📜 Texte original</div>
+  <div style="font-family:Georgia,'Times New Roman',serif;font-size:.95rem;line-height:1.85;color:#2A2A2A;font-style:italic;">
+    « Je dis que le pouvoir multiplicateur de la population est infiniment plus grand que le pouvoir de la terre de produire des subsistances pour l'homme. La population, quand elle n'est pas freinée, s'accroît en progression géométrique. Les subsistances ne s'accroissent qu'en progression arithmétique. Une légère connaissance des nombres suffira pour montrer la grandeur du premier pouvoir comparé au second. »
+  </div>
+  <div style="margin-top:.75rem;font-size:.78rem;color:#5A7A95;">
+    <strong style="font-style:normal;color:#1A3A5C;">Thomas Robert Malthus</strong> — <em>Essai sur le principe de population, ch. I</em> (1798)
+  </div>
+  <div style="font-size:.78rem;color:#4A6A85;margin-top:.7rem;font-style:normal;border-top:1px solid #D0DCE8;padding-top:.5rem;">Malthus écrit cela en réponse à l'optimisme de Condorcet et Godwin, qui croient au perfectionnement indéfini de l'humanité. Ce pessimisme démographique inspirera Darwin (la sélection naturelle) et reste pertinent dans les débats contemporains sur les limites planétaires.</div>
+</div>
+<div style="background:#F8F4EF;border:1px solid #D4C5A9;border-left:4px solid #1A3A5C;border-radius:0 6px 6px 0;padding:1.1rem 1.4rem;margin:1.2rem 0 1.5rem;">
+  <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#1A3A5C;margin-bottom:.6rem;">📜 Texte original</div>
+  <div style="font-family:Georgia,'Times New Roman',serif;font-size:.95rem;line-height:1.85;color:#2A2A2A;font-style:italic;">
+    « Je dis que le pouvoir multiplicateur de la population est infiniment plus grand que le pouvoir de la terre de produire des subsistances pour l'homme. La population, quand elle n'est pas freinée, s'accroît en progression géométrique. Les subsistances ne s'accroissent qu'en progression arithmétique. Une légère connaissance des nombres suffira pour montrer la grandeur du premier pouvoir comparé au second. »
+  </div>
+  <div style="margin-top:.75rem;font-size:.78rem;color:#5A7A95;">
+    <strong style="font-style:normal;color:#1A3A5C;">Thomas Robert Malthus</strong> — <em>Essai sur le principe de population, ch. I</em> (1798)
+  </div>
+  <div style="font-size:.78rem;color:#4A6A85;margin-top:.7rem;font-style:normal;border-top:1px solid #D0DCE8;padding-top:.5rem;">Malthus écrit cela en réponse à l'optimisme de son père, lecteur de Condorcet et Godwin, qui croient au perfectionnement indéfini de l'humanité. Ce pessimisme démographique inspirera Darwin (la sélection naturelle comme réponse à la compétition pour des ressources limitées) et reste pertinent dans les débats contemporains sur les limites planétaires.</div>
+</div>
 <section id="auteurs-anglais" class="level3">
 <h3 class="anchored" data-anchor-id="auteurs-anglais">Auteurs anglais</h3>
 <div class="callout callout-style-default callout-note callout-titled" title="Thomas Robert Malthus (1766–1834)">
@@ -502,6 +531,16 @@ document.addEventListener('DOMContentLoaded', function() {
 </section>
 <section id="la-théorie-de-la-valeur" class="level3">
 <h3 class="anchored" data-anchor-id="la-théorie-de-la-valeur">La théorie de la valeur</h3>
+<div style="background:#F8F4EF;border:1px solid #D4C5A9;border-left:4px solid #1A3A5C;border-radius:0 6px 6px 0;padding:1.1rem 1.4rem;margin:1.2rem 0 1.5rem;">
+  <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#1A3A5C;margin-bottom:.6rem;">📜 Texte original</div>
+  <div style="font-family:Georgia,'Times New Roman',serif;font-size:.95rem;line-height:1.85;color:#2A2A2A;font-style:italic;">
+    « Les lois et les conditions de la production des richesses participent du caractère des vérités physiques. Il n'en est pas de même de la distribution des richesses. Celle-ci est purement une institution humaine. Les choses étant ce qu'elles sont, les hommes peuvent, soit individuellement, soit collectivement, en disposer à leur gré. »
+  </div>
+  <div style="margin-top:.75rem;font-size:.78rem;color:#5A7A95;">
+    <strong style="font-style:normal;color:#1A3A5C;">John Stuart Mill</strong> — <em>Principes d'économie politique, Livre II, Préface</em> (1848)
+  </div>
+  <div style="font-size:.78rem;color:#4A6A85;margin-top:.7rem;font-style:normal;border-top:1px solid #D0DCE8;padding-top:.5rem;">Cette distinction production/distribution est la contribution la plus originale de Mill. Elle fonde le réformisme libéral : on peut redistribuer les richesses sans toucher aux lois naturelles de la production. Marx répondra que cette séparation est illusoire.</div>
+</div>
 <p>Smith oscille entre valeur d’usage et valeur d’échange (paradoxe eau/diamant). Ricardo tente de la fonder sur le travail incorporé, mais tombe dans un raisonnement circulaire : la valeur du blé dépend du travail qu’il permet d’acheter, qui dépend du salaire, qui dépend du prix du blé. La résolution viendra du marginalisme (chapitre 7).</p>
 </section>
 <section id="le-débat-sur-les-poor-laws" class="level3">
@@ -672,7 +711,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div id="banner-5" class="continue-banner" style="display:none; margin-top:1.2rem;">
     <h3 id="banner-titre-5" class="anchored">Votre verdict</h3>
     <p id="banner-body-5"></p>
-    <a href="../chapitres/chapitre6.html" class="btn-continue-ch" id="btn-continue-5" style="display:none;">Ch. 6 — Marx et le socialisme →</a>
+    <a href="chapitre6.html" class="btn-continue-ch" id="btn-continue-5" style="display:none;">Ch. 6 — Marx et le socialisme →</a>
   </div>
 </div>
 

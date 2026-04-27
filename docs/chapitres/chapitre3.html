@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Chapitre 3 — Les Physiocrates – À la recherche de la valeur perdue</title>
+<title>Chapitre 3 — Les Physiocrates – Oikonomia</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -256,7 +256,7 @@ var DragDrop = (function() {
     <a href="../index.html" class="navbar-brand navbar-brand-logo">
     </a>
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">À la recherche de la valeur perdue</span>
+    <span class="navbar-title">Oikonomia</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -329,12 +329,20 @@ var DragDrop = (function() {
 <span class="menu-text">Carte des débats</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../glossaire.html"> 
+<span class="menu-text">Glossaire</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../quiz.html"> 
 <span class="menu-text">Quiz</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../carnet.html"> 
 <span class="menu-text">Carnet de bord</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../bilan-mi-parcours.html"> 
+<span class="menu-text">Bilan mi-parcours</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../apropos.html"> 
@@ -403,6 +411,7 @@ var DragDrop = (function() {
 <script>
 let cr = JSON.parse(localStorage.getItem('chapRead') || []);
 if (!cr.includes('ch3')) { cr.push('ch3'); localStorage.setItem('chapRead', JSON.stringify(cr)); }
+localStorage.setItem('lastChap', JSON.stringify({key:'ch3',num:3,titre:'Les Physiocrates',court:'Quesnay, Turgot'}) );
 document.addEventListener('DOMContentLoaded', function() {
   const av = localStorage.getItem('avatar') || 'none';
   document.querySelectorAll('[data-voix]').forEach(el => {
@@ -553,10 +562,30 @@ Note
 </section>
 <section id="le-tableau-économique" class="level3">
 <h3 class="anchored" data-anchor-id="le-tableau-économique">Le Tableau économique</h3>
+<div style="background:#F8F4EF;border:1px solid #D4C5A9;border-left:4px solid #1A3A5C;border-radius:0 6px 6px 0;padding:1.1rem 1.4rem;margin:1.2rem 0 1.5rem;">
+  <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#1A3A5C;margin-bottom:.6rem;">📜 Texte original</div>
+  <div style="font-family:Georgia,'Times New Roman',serif;font-size:.95rem;line-height:1.85;color:#2A2A2A;font-style:italic;">
+    « Que le souverain et la nation ne perdent jamais de vue que la terre est l'unique source des richesses, et que c'est l'agriculture qui les multiplie. Car c'est l'accroissement des richesses qui assure celui de la population ; les hommes et les richesses font prospérer l'agriculture, étendent le commerce, animent l'industrie, accroissent et perpétuent les richesses. »
+  </div>
+  <div style="margin-top:.75rem;font-size:.78rem;color:#5A7A95;">
+    <strong style="font-style:normal;color:#1A3A5C;">François Quesnay</strong> — <em>Maximes générales du gouvernement économique d'un royaume agricole</em> (1758)
+  </div>
+  <div style="font-size:.78rem;color:#4A6A85;margin-top:.7rem;font-style:normal;border-top:1px solid #D0DCE8;padding-top:.5rem;">Quesnay, médecin de Louis XV, applique ici une métaphore médicale à l'économie : la terre est le cœur productif dont la richesse circule comme le sang. Cette vision sera radicalement contestée par Smith (le travail en général est source de richesse) puis par Marx (le travail salarié seul crée la valeur).</div>
+</div>
 <p>Le tableau de Quesnay montre comment le produit net circule entre les trois classes sociales. C’est le premier modèle de <strong>flux économiques circulaires</strong> — ancêtre de la comptabilité nationale.</p>
 </section>
 <section id="laissez-faire-laissez-passer" class="level3">
 <h3 class="anchored" data-anchor-id="laissez-faire-laissez-passer">Laissez faire, laissez passer</h3>
+<div style="background:#F8F4EF;border:1px solid #D4C5A9;border-left:4px solid #1A3A5C;border-radius:0 6px 6px 0;padding:1.1rem 1.4rem;margin:1.2rem 0 1.5rem;">
+  <div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#1A3A5C;margin-bottom:.6rem;">📜 Texte original</div>
+  <div style="font-family:Georgia,'Times New Roman',serif;font-size:.95rem;line-height:1.85;color:#2A2A2A;font-style:italic;">
+    « Laissez faire et laissez passer, le monde va de lui-même. Les règlements multipliés ne font que gêner l'industrie et le commerce sans les perfectionner. »
+  </div>
+  <div style="margin-top:.75rem;font-size:.78rem;color:#5A7A95;">
+    <strong style="font-style:normal;color:#1A3A5C;">Vincent de Gournay</strong> — <em>Mémoires sur le commerce (rapporté par Turgot)</em> (~1755)
+  </div>
+  <div style="font-size:.78rem;color:#4A6A85;margin-top:.7rem;font-style:normal;border-top:1px solid #D0DCE8;padding-top:.5rem;">Cette formule lapidaire — souvent attribuée à tort à Quesnay — est de Gournay, inspecteur du commerce. Elle résume le programme physiocratique : supprimer les corporations, les monopoles royaux, les taxes intérieures sur le grain. Smith en fera la philosophie de toute son œuvre.</div>
+</div>
 <p>Contre l’interventionnisme mercantiliste : le marché, s’il est libre, atteint naturellement l’équilibre optimal. L’État doit lever les obstacles réglementaires au commerce des grains.</p>
 <hr>
 </section>
@@ -730,7 +759,7 @@ Important
   <div id="banner-3" class="continue-banner" style="display:none; margin-top:1.2rem;">
     <h3 id="banner-titre-3" class="anchored">Votre verdict</h3>
     <p id="banner-body-3"></p>
-    <a href="../chapitres/chapitre4.html" class="btn-continue-ch" id="btn-continue-3" style="display:none;">Ch. 4 — Les Classiques (I) →</a>
+    <a href="chapitre4.html" class="btn-continue-ch" id="btn-continue-3" style="display:none;">Ch. 4 — Les Classiques (I) →</a>
   </div>
 </div>
 

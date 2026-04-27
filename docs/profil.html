@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Mon profil – À la recherche de la valeur perdue</title>
+<title>Mon profil – Oikonomia</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -256,7 +256,7 @@ var DragDrop = (function() {
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">À la recherche de la valeur perdue</span>
+    <span class="navbar-title">Oikonomia</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -329,12 +329,20 @@ var DragDrop = (function() {
 <span class="menu-text">Carte des débats</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./glossaire.html"> 
+<span class="menu-text">Glossaire</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./quiz.html"> 
 <span class="menu-text">Quiz</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./carnet.html"> 
 <span class="menu-text">Carnet de bord</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./bilan-mi-parcours.html"> 
+<span class="menu-text">Bilan mi-parcours</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./apropos.html"> 
@@ -414,7 +422,7 @@ function changeAvatar(type) {
         }).join('')
       + '</div></div>';
   } else {
-    div.innerHTML = '<p>Vous n\'avez pas encore choisi de point de vue. <a href="index.qmd">Retour à l\'accueil</a> pour en sélectionner un.</p>';
+    div.innerHTML = '<p>Vous n\'avez pas encore choisi de point de vue. <a href="index.html">Retour à l\'accueil</a> pour en sélectionner un.</p>';
   }
 })();
 </script>
@@ -426,18 +434,18 @@ function changeAvatar(type) {
 <script>
 (function renderProgression() {
   var chapTitles = [
-    ['ch1','Pensée antique & médiévale','chapitres/chapitre1.qmd'],
-    ['ch2','Naissance de l\'économie politique','chapitres/chapitre2.qmd'],
-    ['ch3','Les Physiocrates','chapitres/chapitre3.qmd'],
-    ['ch4','Les Classiques (I)','chapitres/chapitre4.qmd'],
-    ['ch5','Les Classiques (II)','chapitres/chapitre5.qmd'],
-    ['ch6','Marx et le socialisme','chapitres/chapitre6.qmd'],
-    ['ch7','Le marginalisme','chapitres/chapitre7.qmd'],
-    ['ch8','Les néoclassiques','chapitres/chapitre8.qmd'],
-    ['ch9','La révolution keynésienne','chapitres/chapitre9.qmd'],
-    ['ch10','La synthèse de Samuelson','chapitres/chapitre10.qmd'],
-    ['ch11','Le monétarisme','chapitres/chapitre11.qmd'],
-    ['ch12','État des lieux','chapitres/chapitre12.qmd']
+    ['ch1','Pensée antique & médiévale','chapitres/chapitre1.html'],
+    ['ch2','Naissance de l\'économie politique','chapitres/chapitre2.html'],
+    ['ch3','Les Physiocrates','chapitres/chapitre3.html'],
+    ['ch4','Les Classiques (I)','chapitres/chapitre4.html'],
+    ['ch5','Les Classiques (II)','chapitres/chapitre5.html'],
+    ['ch6','Marx et le socialisme','chapitres/chapitre6.html'],
+    ['ch7','Le marginalisme','chapitres/chapitre7.html'],
+    ['ch8','Les néoclassiques','chapitres/chapitre8.html'],
+    ['ch9','La révolution keynésienne','chapitres/chapitre9.html'],
+    ['ch10','La synthèse de Samuelson','chapitres/chapitre10.html'],
+    ['ch11','Le monétarisme','chapitres/chapitre11.html'],
+    ['ch12','État des lieux','chapitres/chapitre12.html']
   ];
 
   var chapRead = JSON.parse(localStorage.getItem('chapRead') || '[]');
@@ -448,7 +456,7 @@ function changeAvatar(type) {
 
   var html = '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:.4rem; font-size:.88rem;">'
     + '<span style="color:#6c757d;">' + done + ' chapitre' + (done > 1 ? 's' : '') + ' lu' + (done > 1 ? 's' : '') + ' sur 12</span>'
-    + (score !== null ? '<span style="color:#6c757d;">Quiz : ' + score + '/7' + (niveau ? ' — ' + niveau : '') + '</span>' : '<a href="quiz.qmd" style="font-size:.85rem;">Passer le quiz</a>')
+    + (score !== null ? '<span style="color:#6c757d;">Quiz : ' + score + '/7' + (niveau ? ' — ' + niveau : '') + '</span>' : '<a href="quiz.html" style="font-size:.85rem;">Passer le quiz</a>')
     + '</div>'
     + '<div class="progress-barre"><div class="progress-barre-fill" style="width:' + pct + '%"></div></div>'
     + '<table style="width:100%; margin-top:1.2rem; font-size:.88rem; border-collapse:collapse;">'

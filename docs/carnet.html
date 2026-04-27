@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Mon Carnet de Bord – À la recherche de la valeur perdue</title>
+<title>Mon Carnet de Bord – Oikonomia</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -256,7 +256,7 @@ var DragDrop = (function() {
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">À la recherche de la valeur perdue</span>
+    <span class="navbar-title">Oikonomia</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -329,12 +329,20 @@ var DragDrop = (function() {
 <span class="menu-text">Carte des débats</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./glossaire.html"> 
+<span class="menu-text">Glossaire</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./quiz.html"> 
 <span class="menu-text">Quiz</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./carnet.html" aria-current="page"> 
 <span class="menu-text">Carnet de bord</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./bilan-mi-parcours.html"> 
+<span class="menu-text">Bilan mi-parcours</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./apropos.html"> 
@@ -381,275 +389,544 @@ var DragDrop = (function() {
 
 
 <style>
-.carnet-wrap { max-width: 860px; margin: 0 auto; }
+.carnet-wrap { max-width: 880px; margin: 0 auto; }
+
+/* Context banner */
+.ctx-banner {
+  border: 1.5px solid #B8D0E8; border-radius: 8px;
+  background: linear-gradient(135deg, #EAF1FA, #F4F8FD);
+  padding: 1.1rem 1.4rem; margin-bottom: 1.6rem;
+  display: none;
+}
+.ctx-banner.show { display: block; }
+.ctx-top {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: .6rem; margin-bottom: .8rem;
+}
+.ctx-label {
+  font-size: .68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .1em; color: #2E6DA4;
+}
+.ctx-titre {
+  font-family: 'Playfair Display', serif; font-size: 1rem;
+  color: #0D2137; margin: .15rem 0 .5rem;
+}
+.ctx-subtitle { font-size: .82rem; color: #4A6A85; }
+.ctx-link {
+  font-size: .8rem; color: #2E6DA4; text-decoration: none;
+  white-space: nowrap;
+}
+.ctx-link:hover { text-decoration: underline; }
+
+/* Suggested questions */
+.ctx-questions { display: flex; flex-direction: column; gap: .5rem; }
+.ctx-q {
+  background: white; border: 1.5px solid #D0DCE8; border-radius: 6px;
+  padding: .65rem 1rem; cursor: pointer;
+  font-size: .88rem; color: #1E2E3A; text-align: left;
+  font-family: 'Source Sans 3', sans-serif;
+  transition: border-color .18s, background .18s;
+  width: 100%;
+}
+.ctx-q:hover { border-color: #2E6DA4; background: #EAF1FA; }
+.ctx-q-label {
+  font-size: .68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .08em; color: #4A90C4; display: block; margin-bottom: .2rem;
+}
+
+/* Suggested artefact */
+.ctx-art {
+  background: white; border: 1.5px solid #D0DCE8; border-radius: 6px;
+  padding: .75rem 1rem; cursor: pointer;
+  font-size: .88rem; color: #1E2E3A; text-align: left;
+  font-family: 'Source Sans 3', sans-serif;
+  transition: border-color .18s, background .18s;
+  width: 100%; margin-top: .5rem;
+  display: flex; align-items: flex-start; gap: .7rem;
+}
+.ctx-art:hover { border-color: #2A7D4F; background: #F0FAF4; }
+.ctx-art-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 1px; }
 
 /* Tab navigation */
 .tab-nav {
-  display: flex; gap: 0.5rem; flex-wrap: wrap;
-  margin-bottom: 1.5rem; border-bottom: 2px solid #D0DCE8; padding-bottom: 0.8rem;
+  display: flex; gap: .5rem; flex-wrap: wrap;
+  margin-bottom: 1.5rem; border-bottom: 2px solid #D0DCE8; padding-bottom: .8rem;
 }
 .tab-btn {
-  padding: 0.55rem 1.1rem;
-  border: 1.5px solid #1A3A5C;
-  background: white; color: #1A3A5C;
+  padding: .55rem 1.1rem;
+  border: 1.5px solid #1A3A5C; background: white; color: #1A3A5C;
   border-radius: 20px; cursor: pointer;
-  font-weight: 600; font-size: 0.86rem;
-  transition: all 0.18s;
-  font-family: 'Source Sans 3', sans-serif;
+  font-weight: 600; font-size: .86rem;
+  font-family: 'Source Sans 3', sans-serif; transition: all .18s;
 }
 .tab-btn:hover, .tab-btn.active { background: #1A3A5C; color: white; }
 
-/* Sections */
 .tab-section { display: none; }
 .tab-section.active { display: block; }
 
 .section-title {
   font-family: 'Playfair Display', serif;
   font-size: 1.2rem; color: #0D2137;
-  margin: 0 0 1.2rem; padding-bottom: 0.5rem;
+  margin: 0 0 1.2rem; padding-bottom: .5rem;
   border-bottom: 1px solid #D0DCE8;
 }
 
-/* Notes */
-.note-input-wrap { margin-bottom: 1rem; }
-.note-input-wrap label { display: block; font-weight: 600; font-size: 0.85rem; color: #1A3A5C; margin-bottom: 0.3rem; }
+/* Note input */
+.note-input-wrap { margin-bottom: .9rem; }
+.note-input-wrap label { display: block; font-weight: 600; font-size: .85rem; color: #1A3A5C; margin-bottom: .3rem; }
 .note-input-wrap input,
 .note-input-wrap textarea {
   width: 100%; box-sizing: border-box;
   border: 1.5px solid #B8D0E8; border-radius: 6px;
-  padding: 0.65rem 0.9rem; font-size: 0.92rem;
+  padding: .65rem .9rem; font-size: .92rem;
   font-family: Georgia, serif; background: #F8FAFD;
-  transition: border-color 0.2s;
+  transition: border-color .2s;
 }
 .note-input-wrap input:focus,
 .note-input-wrap textarea:focus { outline: none; border-color: #2E6DA4; background: white; }
 .note-input-wrap textarea { min-height: 110px; resize: vertical; }
 
+/* Note cards */
 .note-card {
   background: white; border: 1px solid #D0DCE8; border-radius: 6px;
-  padding: 0.9rem 1.1rem; margin-bottom: 0.7rem; position: relative;
+  padding: .9rem 1.1rem; margin-bottom: .7rem; position: relative;
 }
-.note-meta { font-size: 0.74rem; color: #7A8FA0; margin-bottom: 0.35rem; }
-.note-text { margin: 0; font-size: 0.92rem; white-space: pre-wrap; color: #1E2E3A; }
+.note-meta { font-size: .74rem; color: #7A8FA0; margin-bottom: .35rem; }
+.note-text { margin: 0; font-size: .92rem; white-space: pre-wrap; color: #1E2E3A; }
+.note-ch-badge {
+  display: inline-block; font-size: .66rem; font-weight: 700;
+  padding: 1px 7px; border-radius: 20px; background: #EAF1FA; color: #1A3A5C;
+  margin-left: .4rem;
+}
 .btn-delete {
-  position: absolute; top: 0.65rem; right: 0.75rem;
-  background: none; border: none; cursor: pointer; color: #B8C8D8; font-size: 0.9rem;
+  position: absolute; top: .65rem; right: .75rem;
+  background: none; border: none; cursor: pointer; color: #B8C8D8; font-size: .9rem;
 }
 .btn-delete:hover { color: #8B2222; }
 
 /* Artefacts */
 .arts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 0.85rem; margin-bottom: 1.5rem;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: .85rem; margin-bottom: 1.5rem;
 }
 .art-card {
   background: #F4F7FA; border: 1px solid #D0DCE8; border-radius: 8px;
-  padding: 0.9rem; font-size: 0.86rem; position: relative;
+  padding: .9rem; font-size: .86rem; position: relative;
 }
-.art-card .art-icon { font-size: 1.6rem; margin-bottom: 0.35rem; display: block; }
-.art-card strong { display: block; color: #0D2137; margin-bottom: 0.3rem; }
-.art-card .art-ch { font-size: 0.72rem; color: #4A90C4; margin-top: 0.4rem; display: block; }
+.art-card .art-icon { font-size: 1.6rem; margin-bottom: .35rem; display: block; }
+.art-card strong { display: block; color: #0D2137; margin-bottom: .3rem; }
+.art-card .art-ch { font-size: .72rem; color: #4A90C4; margin-top: .4rem; display: block; }
 .art-card p { margin: 0; color: #4A6A85; line-height: 1.5; }
-.art-card .btn-delete { top: 0.5rem; right: 0.5rem; }
 
-.art-add-wrap {
-  border-top: 1px solid #D0DCE8; padding-top: 1.2rem; margin-top: 0.5rem;
-}
-.art-add-wrap h4 {
-  font-family: 'Playfair Display', serif;
-  font-size: 0.95rem; color: #0D2137; margin: 0 0 0.8rem;
-}
+.art-add-wrap { border-top: 1px solid #D0DCE8; padding-top: 1.2rem; margin-top: .5rem; }
+.art-add-wrap h4 { font-family: 'Playfair Display', serif; font-size: .95rem; color: #0D2137; margin: 0 0 .8rem; }
 
 /* Questions ouvertes */
 .qo-block { margin-bottom: 1.8rem; }
-.qo-block h4 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem; color: #0D2137; margin-bottom: 0.5rem;
-}
+.qo-block h4 { font-family: 'Playfair Display', serif; font-size: 1rem; color: #0D2137; margin-bottom: .5rem; }
 .qo-block textarea {
   width: 100%; box-sizing: border-box;
   border: 1.5px solid #B8D0E8; border-radius: 6px;
-  padding: 0.75rem 0.9rem; font-size: 0.92rem; font-family: Georgia, serif;
-  min-height: 100px; resize: vertical; background: #F8FAFD;
-  transition: border-color 0.2s;
+  padding: .75rem .9rem; font-size: .92rem; font-family: Georgia, serif;
+  min-height: 100px; resize: vertical; background: #F8FAFD; transition: border-color .2s;
 }
 .qo-block textarea:focus { outline: none; border-color: #2E6DA4; background: white; }
 
 /* Progression */
-.prog-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.7rem; margin: 1rem 0 1.5rem;
-}
+.prog-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .7rem; margin: 1rem 0 1.5rem; }
 @media (max-width:600px) { .prog-grid { grid-template-columns: repeat(3, 1fr); } }
-.prog-item {
-  text-align: center; padding: 0.75rem 0.4rem;
-  background: #F4F7FA; border: 1.5px solid #D0DCE8; border-radius: 6px;
-}
+.prog-item { text-align: center; padding: .75rem .4rem; background: #F4F7FA; border: 1.5px solid #D0DCE8; border-radius: 6px; }
 .prog-item.done { border-color: #2A7D4F; background: #E0F5E9; }
 .prog-num { font-size: 1.2rem; font-weight: 700; color: #1A3A5C; }
 .prog-item.done .prog-num { color: #2A7D4F; }
-.prog-label { font-size: 0.72rem; color: #7A8FA0; margin-top: 0.2rem; }
+.prog-label { font-size: .72rem; color: #7A8FA0; margin-top: .2rem; }
+.pistes-box { background: #EAF1FA; border: 1px solid #B8D0E8; border-radius: 6px; padding: 1rem 1.2rem; margin-top: 1rem; }
+.pistes-box h4 { font-size: .9rem; font-weight: 700; color: #1A3A5C; margin: 0 0 .5rem; }
 
-.pistes-box {
-  background: #EAF1FA; border: 1px solid #B8D0E8; border-radius: 6px;
-  padding: 1rem 1.2rem; margin-top: 1rem;
-}
-.pistes-box h4 { font-size: 0.9rem; font-weight: 700; color: #1A3A5C; margin: 0 0 0.5rem; }
-.pistes-box p { font-size: 0.88rem; color: #2A3D50; margin: 0.35rem 0; line-height: 1.6; }
-
-/* Shared button */
+/* Save button */
 .btn-save {
-  display: inline-block; padding: 0.6rem 1.4rem;
-  background: #1A3A5C; color: white; border: none;
-  border-radius: 5px; font-size: 0.9rem; font-weight: 600;
-  cursor: pointer; font-family: 'Source Sans 3', sans-serif;
-  transition: background 0.2s; margin-top: 0.6rem;
+  display: inline-block; padding: .6rem 1.4rem;
+  background: #1A3A5C; color: white; border: none; border-radius: 5px;
+  font-size: .9rem; font-weight: 600; cursor: pointer;
+  font-family: 'Source Sans 3', sans-serif; transition: background .2s; margin-top: .6rem;
 }
 .btn-save:hover { background: #0D2137; }
+
+/* Bilan mi-parcours CTA */
+.bilan-cta {
+  background: linear-gradient(135deg, #0D2137, #1A3A5C);
+  border-radius: 8px; padding: 1.2rem 1.5rem; margin-top: 1.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: .8rem;
+}
+.bilan-cta-text h4 { font-family: 'Playfair Display', serif; color: #7BC4E8; font-size: 1rem; margin-bottom: .2rem; }
+.bilan-cta-text p { font-size: .82rem; color: #8AAFC8; margin: 0; }
+.bilan-cta-btn {
+  background: #4A90C4; color: white; text-decoration: none;
+  padding: .55rem 1.2rem; border-radius: 5px; font-weight: 700; font-size: .88rem;
+  white-space: nowrap; transition: background .2s;
+}
+.bilan-cta-btn:hover { background: #2E6DA4; color: white; }
+
+/* Toast */
 .toast {
   position: fixed; bottom: 1.5rem; right: 1.5rem;
-  background: #1A3A5C; color: white;
-  padding: 0.7rem 1.2rem; border-radius: 6px;
-  font-size: 0.88rem; font-weight: 600;
-  opacity: 0; transition: opacity 0.3s; pointer-events: none;
-  z-index: 9999;
+  background: #1A3A5C; color: white; padding: .7rem 1.2rem;
+  border-radius: 6px; font-size: .88rem; font-weight: 600;
+  opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 9999;
 }
 .toast.show { opacity: 1; }
 </style>
 
 <div class="carnet-wrap">
 
-  <!-- Header -->
-  <div style="background:linear-gradient(135deg,#0D2137,#1A3A5C);border-radius:8px;padding:1.5rem 1.8rem;color:#EAF1FA;margin-bottom:1.8rem;display:flex;align-items:center;gap:1.2rem;">
-    <span style="font-size:2.5rem;">📓</span>
+<!-- Header -->
+<div style="background:linear-gradient(135deg,#0D2137,#1A3A5C);border-radius:8px;padding:1.5rem 1.8rem;color:#EAF1FA;margin-bottom:1.5rem;display:flex;align-items:center;gap:1.2rem;">
+  <span style="font-size:2.5rem;">📓</span>
+  <div>
+    <div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#7BC4E8;font-style:italic;">Mon Carnet de Bord</div>
+    <div style="font-size:.85rem;color:#8AAFC8;margin-top:.2rem;">Notes · Artéfacts · Réflexions · Progression</div>
+  </div>
+</div>
+
+<!-- Context banner (shown when last chapter known) -->
+<div class="ctx-banner" id="ctx-banner">
+  <div class="ctx-top">
     <div>
-      <div style="font-family:'Playfair Display',serif;font-size:1.4rem;color:#7BC4E8;font-style:italic;">Mon Carnet de Bord</div>
-      <div style="font-size:0.85rem;color:#8AAFC8;margin-top:0.2rem;">Notes · Artéfacts · Réflexions · Progression</div>
+      <div class="ctx-label">📖 Vous venez de lire</div>
+      <div class="ctx-titre" id="ctx-titre">—</div>
+      <div class="ctx-subtitle" id="ctx-subtitle">—</div>
     </div>
+    <a class="ctx-link" id="ctx-link" href="#">Retourner au chapitre →</a>
   </div>
+  <div style="font-size:.8rem;font-weight:600;color:#4A6A85;margin-bottom:.5rem;">💡 Questions suggérées pour votre carnet :</div>
+  <div class="ctx-questions" id="ctx-questions"></div>
+  <div style="font-size:.8rem;font-weight:600;color:#4A6A85;margin:.8rem 0 .35rem;">🏺 Artéfact suggéré :</div>
+  <button class="ctx-art" id="ctx-art-btn">
+    <span class="ctx-art-icon" id="ctx-art-icon">📌</span>
+    <div>
+      <div style="font-weight:600;color:#0D2137;font-size:.88rem;" id="ctx-art-titre">—</div>
+      <div style="font-size:.8rem;color:#4A6A85;margin-top:.15rem;" id="ctx-art-desc">—</div>
+      <div style="font-size:.72rem;color:#2A7D4F;margin-top:.3rem;">→ Cliquer pour ajouter à mes artéfacts</div>
+    </div>
+  </button>
+</div>
 
-  <!-- Tabs -->
-  <div class="tab-nav">
-    <button class="tab-btn active" data-tab="notes">📝 Mes notes</button>
-    <button class="tab-btn" data-tab="artefacts">🏺 Artéfacts</button>
-    <button class="tab-btn" data-tab="questions">💭 Questions ouvertes</button>
-    <button class="tab-btn" data-tab="progression">📊 Progression</button>
+<!-- Tabs -->
+<div class="tab-nav">
+  <button class="tab-btn active" data-tab="notes">📝 Mes notes</button>
+  <button class="tab-btn" data-tab="artefacts">🏺 Artéfacts</button>
+  <button class="tab-btn" data-tab="questions">💭 Questions ouvertes</button>
+  <button class="tab-btn" data-tab="progression">📊 Progression</button>
+</div>
+
+<!-- NOTES -->
+<div id="section-notes" class="tab-section active">
+  <div class="section-title">📝 Mes notes personnelles</div>
+  <div class="note-input-wrap">
+    <label>Sujet (optionnel)</label>
+    <input type="text" id="note-sujet" placeholder="Ex : Main invisible, Rente différentielle…">
   </div>
+  <div class="note-input-wrap">
+    <label>Note</label>
+    <textarea id="note-content" placeholder="Résumez un concept, notez une question, citez un passage…"></textarea>
+  </div>
+  <button class="btn-save" id="btn-save-note">💾 Enregistrer</button>
+  <hr style="border:none;border-top:1px solid #D0DCE8;margin:1.4rem 0;">
+  <div id="notes-list"></div>
+</div>
 
-  <!-- NOTES -->
-  <div id="section-notes" class="tab-section active">
-    <div class="section-title">📝 Mes notes personnelles</div>
+<!-- ARTEFACTS -->
+<div id="section-artefacts" class="tab-section">
+  <div class="section-title">🏺 Artéfacts collectés</div>
+  <p style="font-size:.87rem;color:#7A8FA0;margin-bottom:1rem;">Les concepts-clés, citations et schémas à garder en mémoire.</p>
+  <div class="arts-grid" id="arts-grid"></div>
+  <div class="art-add-wrap">
+    <h4 class="anchored">➕ Ajouter un artéfact</h4>
     <div class="note-input-wrap">
-      <label for="note-sujet">Sujet (optionnel)</label>
-      <input type="text" id="note-sujet" placeholder="Ex : Main invisible, Rente différentielle…">
+      <label>Titre</label>
+      <input type="text" id="art-titre" placeholder="Ex : Loi de Say, Utilité marginale…">
     </div>
     <div class="note-input-wrap">
-      <label for="note-content">Note</label>
-      <textarea id="note-content" placeholder="Résumez un concept, notez une question, citez un passage…"></textarea>
+      <label>Description</label>
+      <textarea id="art-content" style="min-height:75px;" placeholder="Citation, définition ou explication…"></textarea>
     </div>
-    <button class="btn-save" id="btn-save-note">💾 Enregistrer</button>
-    <hr style="border:none;border-top:1px solid #D0DCE8;margin:1.4rem 0;">
-    <div id="notes-list"></div>
+    <div class="note-input-wrap">
+      <label>📷 Image (optionnelle)</label>
+      <input type="file" id="art-image" accept="image/*" style="font-size:.85rem;">
+      <div id="art-preview" style="margin-top:.4rem;"></div>
+    </div>
+    <button class="btn-save" id="btn-save-art">➕ Ajouter</button>
+  </div>
+</div>
+
+<!-- QUESTIONS OUVERTES -->
+<div id="section-questions" class="tab-section">
+  <div class="section-title">💭 Questions ouvertes de réflexion</div>
+  <div class="qo-block">
+    <h4 class="anchored">1. Comment la notion de valeur a-t-elle évolué depuis l'Antiquité jusqu'à aujourd'hui ?</h4>
+    <textarea id="qo1" placeholder="Votre réflexion…"></textarea>
+  </div>
+  <div class="qo-block">
+    <h4 class="anchored">2. Le marché est-il toujours le meilleur mécanisme d'allocation des ressources ?</h4>
+    <textarea id="qo2" placeholder="Votre réflexion…"></textarea>
+  </div>
+  <div class="qo-block">
+    <h4 class="anchored">3. En quoi la crise de 2008 remet-elle en question les certitudes des économistes ?</h4>
+    <textarea id="qo3" placeholder="Votre réflexion…"></textarea>
+  </div>
+  <div class="qo-block">
+    <h4 class="anchored">4. Comment les économistes hétérodoxes (Marx, Veblen, Keynes) ont-ils enrichi la discipline ?</h4>
+    <textarea id="qo4" placeholder="Votre réflexion…"></textarea>
+  </div>
+  <button class="btn-save" id="btn-save-qo">💾 Sauvegarder mes réflexions</button>
+</div>
+
+<!-- PROGRESSION -->
+<div id="section-progression" class="tab-section">
+  <div class="section-title">📊 Ma progression</div>
+  <div id="niveau-display" style="margin-bottom:1.2rem;"></div>
+  <div class="prog-grid" id="prog-grid"></div>
+
+  <!-- Bilan mi-parcours CTA -->
+  <div class="bilan-cta" id="bilan-cta" style="display:none;">
+    <div class="bilan-cta-text">
+      <h4 class="anchored">Bilan de mi-parcours disponible</h4>
+      <p>Vous avez terminé les 6 premiers chapitres. Faites le point avant d'aller plus loin.</p>
+    </div>
+    <a href="bilan-mi-parcours.html" class="bilan-cta-btn">Faire le bilan →</a>
   </div>
 
-  <!-- ARTEFACTS -->
-  <div id="section-artefacts" class="tab-section">
-    <div class="section-title">🏺 Artéfacts collectés</div>
-    <p style="font-size:0.87rem;color:#7A8FA0;margin-bottom:1rem;">Les concepts-clés, citations et schémas à garder en mémoire au fil du cours.</p>
-    <div class="arts-grid" id="arts-grid">
-      <!-- Default artefacts injected by JS -->
-    </div>
-    <div class="art-add-wrap">
-      <h4 class="anchored">➕ Ajouter un artéfact</h4>
-      <div class="note-input-wrap">
-        <label>Titre</label>
-        <input type="text" id="art-titre" placeholder="Ex : Loi de Say, Utilité marginale…">
-      </div>
-      <div class="note-input-wrap">
-        <label>Description</label>
-        <textarea id="art-content" style="min-height:75px;" placeholder="Citation, définition ou explication…"></textarea>
-      </div>
-      <div class="note-input-wrap">
-        <label>📷 Image (optionnelle)</label>
-        <input type="file" id="art-image" accept="image/*" style="font-size:0.85rem;">
-        <div id="art-preview" style="margin-top:0.4rem;"></div>
-      </div>
-      <button class="btn-save" id="btn-save-art">➕ Ajouter</button>
-    </div>
+  <div class="pistes-box">
+    <h4 class="anchored">📚 Pistes de lecture</h4>
+    <div id="pistes-content"></div>
   </div>
-
-  <!-- QUESTIONS OUVERTES -->
-  <div id="section-questions" class="tab-section">
-    <div class="section-title">💭 Questions ouvertes de réflexion</div>
-    <div class="qo-block">
-      <h4 class="anchored">1. Comment la notion de valeur a-t-elle évolué depuis l'Antiquité jusqu'à aujourd'hui ?</h4>
-      <textarea id="qo1" placeholder="Votre réflexion…"></textarea>
-    </div>
-    <div class="qo-block">
-      <h4 class="anchored">2. Le marché est-il toujours le meilleur mécanisme d'allocation des ressources ?</h4>
-      <textarea id="qo2" placeholder="Votre réflexion…"></textarea>
-    </div>
-    <div class="qo-block">
-      <h4 class="anchored">3. En quoi la crise de 2008 remet-elle en question les certitudes des économistes ?</h4>
-      <textarea id="qo3" placeholder="Votre réflexion…"></textarea>
-    </div>
-    <div class="qo-block">
-      <h4 class="anchored">4. Comment les économistes hétérodoxes (Marx, Veblen, Keynes) ont-ils enrichi la discipline ?</h4>
-      <textarea id="qo4" placeholder="Votre réflexion…"></textarea>
-    </div>
-    <button class="btn-save" id="btn-save-qo">💾 Sauvegarder mes réflexions</button>
-  </div>
-
-  <!-- PROGRESSION -->
-  <div id="section-progression" class="tab-section">
-    <div class="section-title">📊 Ma progression</div>
-    <div id="niveau-display" style="margin-bottom:1.2rem;"></div>
-    <div class="prog-grid" id="prog-grid"></div>
-    <div class="pistes-box">
-      <h4 class="anchored">📚 Pistes de lecture personnalisées</h4>
-      <div id="pistes-content"></div>
-    </div>
-  </div>
+</div>
 
 </div><!-- carnet-wrap -->
 
 <div class="toast" id="toast"></div>
 
 <script>
-(function() {
+(function () {
 
-/* ── TABS ── */
+/* ══ CONTEXT DATA ══ */
+var CTX = {
+  ch1: {
+    subtitle: 'Aristote · Oresme — valeur, monnaie, juste prix',
+    link: 'chapitres/chapitre1.html',
+    questions: [
+      { label: 'Définition à formuler', texte: 'En vos propres mots : quelle différence entre valeur d\'usage et valeur d\'échange ? Donnez un exemple contemporain.' },
+      { label: 'Tension à noter', texte: 'Aristote condamne l\'accumulation monétaire sans limite. En quoi cette condamnation résonne-t-elle avec un débat économique actuel ?' },
+      { label: 'Question ouverte', texte: 'Oresme dit que la monnaie appartient à la collectivité, pas au prince. Qui joue le rôle du "prince" dans l\'économie contemporaine ?' }
+    ],
+    art: { icon:'💬', titre:'Aristote — valeur d\'usage vs d\'échange', desc:'Valeur d\'usage = utilité pratique. Valeur d\'échange = rapport marchand. Le paradoxe eau/diamant en découle.' }
+  },
+  ch2: {
+    subtitle: 'Mun, Colbert, Bodin — mercantilisme, balance commerciale',
+    link: 'chapitres/chapitre2.html',
+    questions: [
+      { label: 'Définition à formuler', texte: 'Expliquez la logique mercantiliste en une phrase : pourquoi un excédent commercial enrichit-il la nation selon ses partisans ?' },
+      { label: 'Lien actuel', texte: 'Trouvez un exemple de politique économique contemporaine (2020–2026) qui ressemble à du mercantilisme. Justifiez.' },
+      { label: 'Critique', texte: 'Quelle est la principale faille du raisonnement mercantiliste que Smith identifiera au chapitre 4 ?' }
+    ],
+    art: { icon:'⚓', titre:'Mercantilisme — jeu à somme nulle', desc:'Ce que la France gagne au commerce, l\'Angleterre le perd. L\'échange = compétition nationale pour l\'or.' }
+  },
+  ch3: {
+    subtitle: 'Quesnay, Turgot — Tableau économique, produit net',
+    link: 'chapitres/chapitre3.html',
+    questions: [
+      { label: 'Définition à formuler', texte: 'Qu\'est-ce que le « produit net » chez Quesnay ? En quoi diffère-t-il de la notion de valeur ajoutée en comptabilité nationale ?' },
+      { label: 'Tension théorique', texte: 'Les Physiocrates appellent « stérile » la classe des artisans et marchands. Smith leur répondra au chapitre 4. Anticipez son argument.' },
+      { label: 'Héritage', texte: 'En quoi le Tableau économique de Quesnay est-il l\'ancêtre de la comptabilité nationale moderne ?' }
+    ],
+    art: { icon:'🌾', titre:'Quesnay — Tableau économique (1758)', desc:'Seule l\'agriculture crée un produit net. Premier modèle de flux circulaires entre classes sociales.' }
+  },
+  ch4: {
+    subtitle: 'Adam Smith · David Ricardo — main invisible, valeur-travail, avantages comparatifs',
+    link: 'chapitres/chapitre4.html',
+    questions: [
+      { label: 'Définition à formuler', texte: 'Expliquez la « main invisible » de Smith en une phrase. Est-ce une loi économique ou une métaphore ?' },
+      { label: 'Paradoxe à résoudre', texte: 'Pourquoi l\'eau est-elle bon marché et le diamant cher, alors que l\'eau est bien plus utile ? Smith ne résout pas ce paradoxe — qui le fera, et comment ?' },
+      { label: 'Application', texte: 'Donnez un exemple concret d\'avantage comparatif entre deux pays ou deux individus dans l\'économie contemporaine.' }
+    ],
+    art: { icon:'⚙️', titre:'Main invisible (Smith, 1776)', desc:'L\'intérêt individuel → intérêt général via le marché, sans coordination centrale. Fondement du libéralisme.' }
+  },
+  ch5: {
+    subtitle: 'Malthus · Say · Mill — population, débouchés, production vs distribution',
+    link: 'chapitres/chapitre5.html',
+    questions: [
+      { label: 'Débat central', texte: 'Résumez le débat Say-Malthus sur la loi des débouchés. Qui a eu raison empiriquement — et quand ?' },
+      { label: 'Distinction de Mill', texte: 'Mill dit que les lois de production sont naturelles mais les lois de distribution sont sociales. Donnez un exemple qui illustre cette distinction.' },
+      { label: 'Lien Malthus-actualité', texte: 'La loi de population de Malthus a-t-elle été réfutée ? Dans quels contextes reste-t-elle pertinente aujourd\'hui ?' }
+    ],
+    art: { icon:'📜', titre:'Loi de Say — l\'offre crée sa propre demande', desc:'Toute production distribue des revenus qui reviennent sur les marchés. Keynes réfutera cela en 1936.' }
+  },
+  ch6: {
+    subtitle: 'Karl Marx · Rosa Luxemburg — plus-value, aliénation, crises',
+    link: 'chapitres/chapitre6.html',
+    questions: [
+      { label: 'Mécanisme à expliquer', texte: 'Un ouvrier travaille 10h et reçoit l\'équivalent de 6h de travail en salaire. Calculez le taux d\'exploitation selon Marx. Que signifie ce chiffre ?' },
+      { label: 'Aliénation contemporaine', texte: 'Marx décrit l\'aliénation du travailleur industriel. En quoi ce concept s\'applique-t-il (ou ne s\'applique pas) au travail de plateforme (Uber, Deliveroo) ?' },
+      { label: 'Réponse critique', texte: 'Quel argument les marginalistes (chapitre 7) utiliseront-ils pour réfuter la théorie de l\'exploitation de Marx ?' }
+    ],
+    art: { icon:'✊', titre:'Plus-value (Marx, 1867)', desc:'PV = Valeur produite − Salaire versé. Mécanisme d\'exploitation fondé sur la théorie de la valeur-travail.' }
+  },
+  ch7: {
+    subtitle: 'Jevons · Walras · Menger — utilité marginale, équilibre général',
+    link: 'chapitres/chapitre7.html',
+    questions: [
+      { label: 'Résolution d\'un paradoxe', texte: 'Expliquez avec le concept d\'utilité marginale pourquoi l\'eau est bon marché et le diamant cher. Pourquoi Smith ne pouvait-il pas le formuler ainsi ?' },
+      { label: 'Rupture théorique', texte: 'En quoi la révolution marginaliste de 1871 constitue-t-elle une rupture avec la théorie classique de la valeur-travail ? Qu\'efface-t-elle conceptuellement ?' },
+      { label: 'Limites', texte: 'L\'équilibre général de Walras suppose un « commissaire-priseur » qui ajuste les prix. Pourquoi cette hypothèse est-elle irréaliste — et pourquoi le modèle reste-t-il utile malgré tout ?' }
+    ],
+    art: { icon:'📐', titre:'Utilité marginale décroissante (1871)', desc:'C\'est la DERNIÈRE unité disponible d\'un bien qui fixe son prix, pas son utilité totale. Résout le paradoxe eau/diamant.' }
+  },
+  ch8: {
+    subtitle: 'Marshall · Pigou · Pareto — offre-demande, externalités, optimum',
+    link: 'chapitres/chapitre8.html',
+    questions: [
+      { label: 'Application pratique', texte: 'Si le prix du pétrole augmente de 20% et la demande baisse de 4%, quelle est l\'élasticité-prix ? Que signifie ce chiffre pour la politique fiscale ?' },
+      { label: 'Pareto vs Rawls', texte: 'Une situation est Pareto-optimale mais très inégalitaire. Rawls la jugerait-il acceptable ? Quelle alternative propose-t-il ?' },
+      { label: 'Lien contemporain', texte: 'La taxe carbone est une taxe pigouvienne. Expliquez pourquoi — et quelles sont ses limites pratiques (voir le mouvement des Gilets jaunes en France).' }
+    ],
+    art: { icon:'⚖️', titre:'Optimum de Pareto — efficacité sans équité', desc:'On ne peut améliorer personne sans nuire à quelqu\'un. Critère d\'efficacité pur — ne dit rien sur la justice.' }
+  },
+  ch9: {
+    subtitle: 'Keynes · Schumpeter · Joan Robinson — demande effective, multiplicateur',
+    link: 'chapitres/chapitre9.html',
+    questions: [
+      { label: 'Calcul à effectuer', texte: 'Propension marginale à consommer = 0,75. Calculez le multiplicateur keynésien. Que se passe-t-il si l\'État dépense 50 milliards supplémentaires ?' },
+      { label: 'Trappe à liquidité', texte: 'Expliquez pourquoi la politique monétaire peut devenir inefficace. Donnez un exemple empirique entre 1990 et 2020.' },
+      { label: 'Contradiction interne', texte: 'Schumpeter croit au capitalisme par la destruction créatrice. Marx le condamne pour la même raison. Comparez leurs positions sur les crises capitalistes.' }
+    ],
+    art: { icon:'💹', titre:'Multiplicateur keynésien k=1/(1-c)', desc:'1€ de dépense publique génère k€ de PIB. Si c=0,8 → k=5. Fondement de la politique de relance.' }
+  },
+  ch10: {
+    subtitle: 'Samuelson · Solow — synthèse IS-LM, courbe de Phillips, croissance',
+    link: 'chapitres/chapitre10.html',
+    questions: [
+      { label: 'Synthèse à expliquer', texte: 'En quoi la synthèse néoclassique de Samuelson est-elle une réconciliation entre Keynes et les néoclassiques ? Que perd-elle de chaque côté ?' },
+      { label: 'Courbe de Phillips', texte: 'La courbe de Phillips offrait un « menu » aux gouvernements des années 1960. Que signifie cela concrètement ? Pourquoi ce menu a-t-il disparu en 1973 ?' },
+      { label: 'Solow et ses limites', texte: 'Dans le modèle de Solow, quelle est la seule source de croissance à long terme ? Pourquoi Romer (chapitre 12) contestera-t-il cette réponse ?' }
+    ],
+    art: { icon:'📊', titre:'Courbe de Phillips (1958)', desc:'Relation inverse chômage↓ / inflation↑. Menu de politique économique jusqu\'à la stagflation de 1973.' }
+  },
+  ch11: {
+    subtitle: 'Friedman · Lucas · Kydland-Prescott — monétarisme, anticipations, NMC',
+    link: 'chapitres/chapitre11.html',
+    questions: [
+      { label: 'Définition critique', texte: 'Expliquez la critique de Lucas en une phrase. Pourquoi invalide-t-elle les modèles économétriques keynésiens ?' },
+      { label: 'NAIRU', texte: 'Qu\'est-ce que le taux de chômage naturel (NAIRU) selon Friedman ? Peut-on le mesurer précisément — et quelles sont les conséquences si on se trompe ?' },
+      { label: 'Débat contemporain', texte: 'Le retour de l\'inflation en 2021–23 a-t-il donné raison à Friedman ou aux néo-keynésiens ? Argumentez avec des données.' }
+    ],
+    art: { icon:'💰', titre:'NAIRU — taux de chômage naturel (Friedman)', desc:'En dessous du NAIRU, l\'inflation s\'accélère. On ne peut pas le réduire durablement par la politique monétaire.' }
+  },
+  ch12: {
+    subtitle: 'Piketty · Romer · Duflo · Ostrom — inégalités, croissance endogène, biens communs',
+    link: 'chapitres/chapitre12.html',
+    questions: [
+      { label: 'r > g', texte: 'Expliquez la thèse de Piketty : que signifient r et g ? Pourquoi leur écart est-il politiquement problématique ?' },
+      { label: 'Croissance endogène', texte: 'En quoi Romer améliore-t-il le modèle de Solow ? Quelle politique économique en découle ?' },
+      { label: 'Synthèse personnelle', texte: 'Après ce parcours de 12 chapitres, quelle école de pensée vous semble la plus utile pour comprendre l\'économie de 2026 ? Justifiez.' }
+    ],
+    art: { icon:'🌐', titre:'r > g (Piketty, 2013)', desc:'Quand le rendement du capital dépasse la croissance, les inégalités patrimoniales s\'accumulent tendanciellement.' }
+  }
+};
+
+/* ══ INIT CONTEXT BANNER ══ */
+(function initContext() {
+  var raw = localStorage.getItem('lastChap');
+  if (!raw) return;
+  var last;
+  try { last = JSON.parse(raw); } catch(e) { return; }
+
+  var ctx = CTX[last.key];
+  if (!ctx) return;
+
+  document.getElementById('ctx-titre').textContent = last.titre;
+  document.getElementById('ctx-subtitle').textContent = ctx.subtitle;
+  var link = document.getElementById('ctx-link');
+  link.href = ctx.link;
+
+  // Questions
+  var qDiv = document.getElementById('ctx-questions');
+  ctx.questions.forEach(function(q) {
+    var btn = document.createElement('button');
+    btn.className = 'ctx-q';
+    btn.innerHTML = '<span class="ctx-q-label">' + q.label + '</span>' + q.texte;
+    btn.addEventListener('click', function() {
+      document.getElementById('note-sujet').value = q.label + ' — ' + last.court;
+      document.getElementById('note-content').value = q.texte + '\n\n';
+      // Switch to notes tab
+      switchTab('notes');
+      document.getElementById('note-content').focus();
+      toast('Question copiée dans vos notes ✏️');
+    });
+    qDiv.appendChild(btn);
+  });
+
+  // Suggested artefact
+  var art = ctx.art;
+  document.getElementById('ctx-art-icon').textContent = art.icon;
+  document.getElementById('ctx-art-titre').textContent = art.titre;
+  document.getElementById('ctx-art-desc').textContent = art.desc;
+  document.getElementById('ctx-art-btn').addEventListener('click', function() {
+    var arts = JSON.parse(localStorage.getItem('carnetArtefacts') || '[]');
+    // Check if already added
+    var exists = arts.some(function(a) { return a.titre === art.titre; });
+    if (!exists) {
+      arts.push({ titre: art.titre, content: art.desc + ' [' + last.court + ']' });
+      localStorage.setItem('carnetArtefacts', JSON.stringify(arts));
+      renderArts();
+      toast('✅ Artéfact ajouté à votre collection');
+    } else {
+      toast('Cet artéfact est déjà dans votre collection');
+    }
+  });
+
+  document.getElementById('ctx-banner').classList.add('show');
+})();
+
+/* ══ TABS ══ */
 var TABS = ['notes','artefacts','questions','progression'];
+
+function switchTab(tab) {
+  TABS.forEach(function(t) {
+    var s = document.getElementById('section-' + t);
+    if (s) s.className = 'tab-section' + (t === tab ? ' active' : '');
+  });
+  document.querySelectorAll('.tab-btn').forEach(function(b) {
+    b.classList.toggle('active', b.getAttribute('data-tab') === tab);
+  });
+  if (tab === 'progression') loadProgression();
+  if (tab === 'artefacts') renderArts();
+}
+
 document.querySelectorAll('.tab-btn').forEach(function(btn) {
   btn.addEventListener('click', function() {
-    var tab = btn.getAttribute('data-tab');
-    TABS.forEach(function(t) {
-      var s = document.getElementById('section-' + t);
-      if (s) s.className = 'tab-section' + (t === tab ? ' active' : '');
-    });
-    document.querySelectorAll('.tab-btn').forEach(function(b) {
-      b.classList.toggle('active', b.getAttribute('data-tab') === tab);
-    });
-    if (tab === 'progression') loadProgression();
-    if (tab === 'artefacts') renderArts();
+    switchTab(btn.getAttribute('data-tab'));
   });
 });
 
-/* ── TOAST ── */
+/* ══ TOAST ══ */
 function toast(msg) {
   var el = document.getElementById('toast');
   el.textContent = msg;
   el.classList.add('show');
-  setTimeout(function() { el.classList.remove('show'); }, 2200);
+  setTimeout(function() { el.classList.remove('show'); }, 2400);
 }
 
-/* ── NOTES ── */
+/* ══ NOTES ══ */
 document.getElementById('btn-save-note').addEventListener('click', function() {
   var sujet = document.getElementById('note-sujet').value.trim();
   var content = document.getElementById('note-content').value.trim();
   if (!content) return;
+  var raw = localStorage.getItem('lastChap');
+  var chapLabel = '';
+  if (raw) { try { chapLabel = JSON.parse(raw).key; } catch(e){} }
   var notes = JSON.parse(localStorage.getItem('carnetNotes') || '[]');
-  notes.unshift({ sujet: sujet, content: content, date: new Date().toLocaleDateString('fr-FR') });
+  notes.unshift({ sujet: sujet, content: content, date: new Date().toLocaleDateString('fr-FR'), ch: chapLabel });
   localStorage.setItem('carnetNotes', JSON.stringify(notes));
   document.getElementById('note-sujet').value = '';
   document.getElementById('note-content').value = '';
@@ -666,7 +943,10 @@ function renderNotes() {
   }
   list.innerHTML = notes.map(function(n, i) {
     return '<div class="note-card">'
-      + '<div class="note-meta">📅 ' + n.date + (n.sujet ? ' · ' + n.sujet : '') + '</div>'
+      + '<div class="note-meta">📅 ' + n.date
+      + (n.sujet ? ' · ' + n.sujet : '')
+      + (n.ch ? '<span class="note-ch-badge">' + n.ch + '</span>' : '')
+      + '</div>'
       + '<p class="note-text">' + n.content + '</p>'
       + '<button class="btn-delete" data-i="' + i + '">🗑️</button>'
       + '</div>';
@@ -682,12 +962,12 @@ function renderNotes() {
   });
 }
 
-/* ── ARTEFACTS ── */
+/* ══ ARTEFACTS ══ */
 var DEFAULT_ARTS = [
   { icon:'💬', titre:"Citation d'Aristote", content:"L'échange doit s'effectuer de telle sorte que l'acheteur soit libre de son choix.", ch:'Ch.1', fixed:true },
   { icon:'💡', titre:"Main invisible (Smith)", content:"L'intérêt individuel → intérêt général via le marché, sans coordination centrale.", ch:'Ch.4', fixed:true },
   { icon:'⚡', titre:"Plus-value (Marx)", content:"PV = Valeur produite − Salaire versé. Mécanisme d'exploitation au cœur du capitalisme.", ch:'Ch.6', fixed:true },
-  { icon:'📉', titre:"Multiplicateur keynésien", content:"k = 1/(1−c). Un euro de dépense publique génère plus d'un euro de PIB.", ch:'Ch.9', fixed:true },
+  { icon:'📉', titre:"Multiplicateur keynésien", content:"k = 1/(1−c). Un euro de dépense publique génère k euros de PIB supplémentaire.", ch:'Ch.9', fixed:true },
   { icon:'🏛️', titre:"Optimum de Pareto", content:"Impossible d'améliorer une situation sans détériorer celle d'au moins un autre.", ch:'Ch.8', fixed:true },
   { icon:'🔥', titre:"Stagflation 1970s", content:"Chômage + inflation simultanés → invalidation empirique de la courbe de Phillips originale.", ch:'Ch.11', fixed:true },
 ];
@@ -707,14 +987,13 @@ function renderArts() {
   userArts.forEach(function(a, i) {
     html += '<div class="art-card" style="position:relative;">';
     if (a.image) {
-      html += '<img src="' + a.image + '" style="width:100%;max-height:100px;object-fit:cover;border-radius:5px;margin-bottom:0.4rem;">';
+      html += '<img src="' + a.image + '" style="width:100%;max-height:100px;object-fit:cover;border-radius:5px;margin-bottom:.4rem;">';
     } else {
       html += '<span class="art-icon">📌</span>';
     }
     html += '<strong>' + (a.titre || 'Artéfact') + '</strong>';
     if (a.content) html += '<p>' + a.content + '</p>';
-    html += '<button class="btn-delete" data-ai="' + i + '" style="position:absolute;top:0.5rem;right:0.5rem;">🗑️</button>'
-      + '</div>';
+    html += '<button class="btn-delete" data-ai="' + i + '" style="position:absolute;top:.5rem;right:.5rem;">🗑️</button></div>';
   });
   grid.innerHTML = html;
   grid.querySelectorAll('.btn-delete[data-ai]').forEach(function(btn) {
@@ -728,14 +1007,13 @@ function renderArts() {
   });
 }
 
-/* Image preview */
 document.getElementById('art-image').addEventListener('change', function() {
   var file = this.files[0];
   var prev = document.getElementById('art-preview');
   if (!file) { prev.innerHTML = ''; return; }
   var r = new FileReader();
   r.onload = function(e) {
-    prev.innerHTML = '<img src="' + e.target.result + '" style="max-width:100%;max-height:120px;border-radius:5px;border:1px solid #D0DCE8;margin-top:0.3rem;">';
+    prev.innerHTML = '<img src="' + e.target.result + '" style="max-width:100%;max-height:120px;border-radius:5px;border:1px solid #D0DCE8;margin-top:.3rem;">';
   };
   r.readAsDataURL(file);
 });
@@ -745,7 +1023,6 @@ document.getElementById('btn-save-art').addEventListener('click', function() {
   var content = document.getElementById('art-content').value.trim();
   var file = document.getElementById('art-image').files[0];
   if (!titre && !content) return;
-
   function doSave(img) {
     var arts = JSON.parse(localStorage.getItem('carnetArtefacts') || '[]');
     arts.push({ titre: titre, content: content, image: img || null });
@@ -757,17 +1034,14 @@ document.getElementById('btn-save-art').addEventListener('click', function() {
     renderArts();
     toast('✅ Artéfact ajouté');
   }
-
   if (file) {
     var r = new FileReader();
     r.onload = function(e) { doSave(e.target.result); };
     r.readAsDataURL(file);
-  } else {
-    doSave(null);
-  }
+  } else { doSave(null); }
 });
 
-/* ── QUESTIONS OUVERTES ── */
+/* ══ QUESTIONS OUVERTES ══ */
 ['1','2','3','4'].forEach(function(n) {
   var el = document.getElementById('qo' + n);
   if (el) {
@@ -785,47 +1059,18 @@ document.getElementById('btn-save-qo').addEventListener('click', function() {
   toast('✅ Réflexions sauvegardées');
 });
 
-/* ── PROGRESSION ── */
+/* ══ PROGRESSION ══ */
 var CHAP_LABELS = [
   ['ch1','Pensée antique'],['ch2','Mercantilisme'],['ch3','Physiocrates'],
   ['ch4','Classiques I'],['ch5','Classiques II'],['ch6','Marx'],
   ['ch7','Marginalisme'],['ch8','Néoclassiques'],['ch9','Keynes'],
   ['ch10','Samuelson'],['ch11','Monétarisme'],['ch12','Bilan']
 ];
-
 var PISTES = {
-  marchand: [
-    ['<strong>Brasseul J.</strong> — <em>Petite histoire des faits économiques</em>, Armand Colin, 2016.',
-     'Podcast <em>Entendez-vous l\'éco ?</em> (France Culture) — mercantilisme et Physiocrates.'],
-    ['<strong>Kindleberger C.</strong> — <em>Histoire mondiale de la spéculation financière</em>, Valor.',
-     '<strong>Ferguson N.</strong> — <em>L\'Irrésistible Ascension de l\'argent</em>, Saint-Simon.'],
-    ['<strong>Galbraith J.K.</strong> — <em>L\'Argent</em>, Gallimard.',
-     '<strong>Reinhart C. & Rogoff K.</strong> — <em>Cette fois, c\'est différent</em>, Pearson.']
-  ],
-  philosophe: [
-    ['<strong>Heilbroner R.</strong> — <em>Les Grands Économistes</em>, Seuil.',
-     'Podcast <em>La Méthode scientifique</em> (France Culture) — épistémologie.'],
-    ['<strong>Kuhn T.</strong> — <em>La Structure des révolutions scientifiques</em>, Flammarion.',
-     '<strong>Blaug M.</strong> — <em>La Pensée économique</em>, Economica.'],
-    ['<strong>Blaug M.</strong> — <em>La Pensée économique</em>, Economica.',
-     '<strong>Popper K.</strong> — <em>La Logique de la découverte scientifique</em>, Payot.']
-  ],
-  ouvrier: [
-    ['<strong>Goodwin M.</strong> — <em>Economix</em> (BD), 2019.',
-     'Podcast <em>L\'Économie en questions</em> (France Culture).'],
-    ['<strong>Thompson E.P.</strong> — <em>La Formation de la classe ouvrière anglaise</em>, Seuil.',
-     '<strong>Castel R.</strong> — <em>Les Métamorphoses de la question sociale</em>, Fayard.'],
-    ['<strong>Piketty T.</strong> — <em>Le Capital au XXIe siècle</em>, Seuil.',
-     '<strong>Mazzucato M.</strong> — <em>La Valeur de tout</em>, Fayard.']
-  ],
-  entrepreneur: [
-    ['<strong>Brasseul J.</strong> — <em>Petite histoire des faits économiques</em>, Armand Colin.',
-     'Podcast <em>Génération Do It Yourself</em>.'],
-    ['<strong>Schumpeter J.A.</strong> — <em>Capitalisme, Socialisme et Démocratie</em>, Payot.',
-     '<strong>Acemoglu D. & Robinson J.</strong> — <em>Pourquoi les nations échouent</em>, Pearson.'],
-    ['<strong>Tirole J.</strong> — <em>Économie du bien commun</em>, PUF.',
-     '<strong>Christensen C.</strong> — <em>Le Dilemme de l\'innovateur</em>.']
-  ]
+  marchand:     [['<strong>Brasseul J.</strong> — <em>Petite histoire des faits économiques</em>, Armand Colin, 2016.','<strong>Kindleberger C.</strong> — <em>Histoire mondiale de la spéculation financière</em>, Valor.'],['<strong>Brasseul J.</strong> — <em>Petite histoire des faits économiques</em>, Armand Colin, 2016.','<strong>Ferguson N.</strong> — <em>L\'Irrésistible Ascension de l\'argent</em>.'],['<strong>Galbraith J.K.</strong> — <em>L\'Argent</em>, Gallimard.','<strong>Reinhart C. & Rogoff K.</strong> — <em>Cette fois, c\'est différent</em>, Pearson.']],
+  philosophe:   [['<strong>Heilbroner R.</strong> — <em>Les Grands Économistes</em>, Seuil.','<strong>Blaug M.</strong> — <em>La Pensée économique</em>, Economica.'],['<strong>Kuhn T.</strong> — <em>La Structure des révolutions scientifiques</em>, Flammarion.','<strong>Blaug M.</strong> — <em>La Pensée économique</em>, Economica.'],['<strong>Blaug M.</strong> — <em>La Pensée économique</em>, Economica.','<strong>Popper K.</strong> — <em>La Logique de la découverte scientifique</em>, Payot.']],
+  ouvrier:      [['<strong>Goodwin M.</strong> — <em>Economix</em> (BD), 2019.','<strong>Thompson E.P.</strong> — <em>La Formation de la classe ouvrière anglaise</em>, Seuil.'],['<strong>Castel R.</strong> — <em>Les Métamorphoses de la question sociale</em>, Fayard.','<strong>Piketty T.</strong> — <em>Le Capital au XXIe siècle</em>, Seuil.'],['<strong>Piketty T.</strong> — <em>Le Capital au XXIe siècle</em>, Seuil.','<strong>Mazzucato M.</strong> — <em>La Valeur de tout</em>, Fayard.']],
+  entrepreneur: [['<strong>Brasseul J.</strong> — <em>Petite histoire des faits économiques</em>, Armand Colin.','<strong>Schumpeter J.A.</strong> — <em>Capitalisme, Socialisme et Démocratie</em>, Payot.'],['<strong>Schumpeter J.A.</strong> — <em>Capitalisme, Socialisme et Démocratie</em>, Payot.','<strong>Acemoglu D. & Robinson J.</strong> — <em>Pourquoi les nations échouent</em>, Pearson.'],['<strong>Tirole J.</strong> — <em>Économie du bien commun</em>, PUF.','<strong>Christensen C.</strong> — <em>Le Dilemme de l\'innovateur</em>.']]
 };
 
 function loadProgression() {
@@ -835,17 +1080,14 @@ function loadProgression() {
   var score = localStorage.getItem('quizScore');
   var avatar = localStorage.getItem('avatar') || '';
 
-  /* Niveau badge */
+  // Niveau badge
   var nd = document.getElementById('niveau-display');
-  if (niveau) {
-    nd.innerHTML = '<span style="background:#1A3A5C;color:white;padding:0.35rem 1rem;border-radius:20px;font-weight:600;font-size:0.88rem;">'
-      + niveau + '</span>'
-      + (score !== null ? '<span style="color:#7A8FA0;font-size:0.85rem;margin-left:0.8rem;">Score quiz : ' + score + '/7</span>' : '');
-  } else {
-    nd.innerHTML = '<a href="quiz.qmd" style="color:#2E6DA4;font-weight:600;">🎯 Faire le quiz pour obtenir votre niveau</a>';
-  }
+  nd.innerHTML = niveau
+    ? '<span style="background:#1A3A5C;color:white;padding:.35rem 1rem;border-radius:20px;font-weight:600;font-size:.88rem;">' + niveau + '</span>'
+      + (score !== null ? '<span style="color:#7A8FA0;font-size:.85rem;margin-left:.8rem;">Score quiz : ' + score + '/7</span>' : '')
+    : '<a href="quiz.html" style="color:#2E6DA4;font-weight:600;">🎯 Faire le quiz pour obtenir votre niveau</a>';
 
-  /* Progress grid */
+  // Grid
   var grid = document.getElementById('prog-grid');
   grid.innerHTML = CHAP_LABELS.map(function(pair) {
     var k = pair[0], label = pair[1];
@@ -856,20 +1098,25 @@ function loadProgression() {
       + '</div>';
   }).join('');
 
-  /* Pistes */
+  // Bilan mi-parcours CTA
+  var firstSix = ['ch1','ch2','ch3','ch4','ch5','ch6'];
+  var allSixDone = firstSix.every(function(k) { return chapRead.indexOf(k) > -1; });
+  document.getElementById('bilan-cta').style.display = allSixDone ? 'flex' : 'none';
+
+  // Pistes
   var pEl = document.getElementById('pistes-content');
   var av = PISTES[avatar] ? avatar : 'ouvrier';
   var lvl = done < 4 ? 0 : done < 8 ? 1 : 2;
   pEl.innerHTML = PISTES[av][lvl].map(function(p) {
-    return '<p>' + p + '</p>';
+    return '<p style="font-size:.88rem;color:#2A3D50;margin:.35rem 0;line-height:1.6;">' + p + '</p>';
   }).join('');
 }
 
-/* ── INIT ── */
+/* ══ INIT ══ */
 renderNotes();
 renderArts();
 
-})(); // end IIFE
+})();
 </script>
 
 
