@@ -390,6 +390,88 @@ var DragDrop = (function() {
 
 <p>Votre profil est construit à partir de vos choix de navigation : avatar sélectionné, chapitres lus, résultat au quiz.</p>
 <hr>
+<section id="mon-personnage" class="level2">
+<h2 class="anchored" data-anchor-id="mon-personnage">Mon personnage</h2>
+<div id="xp-profil-card"></div>
+<script>
+(function() {
+  var NIVEAUX = [
+    {min:0,star:1},{min:100,star:2},{min:250,star:3},
+    {min:450,star:4},{min:700,star:5},{min:1000,star:6}
+  ];
+  var TITRES = {
+    marchand:     ['Novice du marché','Commerçant·e','Négociant·e','Courtier·ière','Banquier·ière','Magnat·e'],
+    philosophe:   ['Curieux·se','Penseur·se','Dialecticien·ne','Sophiste éclairé·e','Sage économique','Oracle'],
+    ouvrier:      ["Apprenti·e ouvrier·ière",'Compagnon·ne','Artisan·e','Délégué·e',"Militant·e éclairé·e",'Tribun·e'],
+    entrepreneur: ['Stagiaire','Junior','Développeur·se','Directeur·rice',"Entrepreneur·se",'Visionnaire']
+  };
+  var TITRES_D = ["Apprenti·e","Étudiant·e","Analyste","Théoricien·ne","Économiste","Grand Maître"];
+  var EMOJIS = {
+    marchand:     ['🧑‍💼','👨‍💼','🧑‍💼','💼','🏦','🏛️'],
+    philosophe:   ['🤔','📚','🦉','🎓','🧠','✨'],
+    ouvrier:      ['👷','🔧','⚙️','🏭','✊','🌟'],
+    entrepreneur: ['🌱','💡','🚀','📈','🏆','👑']
+  };
+  var avNames = {marchand:'Le Marchand',philosophe:'Le Philosophe',ouvrier:"L'Ouvrier",entrepreneur:"L'Entrepreneur"};
+
+  var xp  = parseInt(localStorage.getItem('xp') || '0', 10);
+  var av  = localStorage.getItem('avatar') || '';
+  var log = JSON.parse(localStorage.getItem('xpLog') || '[]');
+
+  var idx = 0;
+  for (var i = 0; i < NIVEAUX.length; i++) { if (xp >= NIVEAUX[i].min) idx = i; }
+  var next   = NIVEAUX[idx + 1];
+  var pct    = next ? Math.round((xp - NIVEAUX[idx].min) / (next.min - NIVEAUX[idx].min) * 100) : 100;
+  var titres = (av && TITRES[av]) ? TITRES[av] : TITRES_D;
+  var emojis = (av && EMOJIS[av]) ? EMOJIS[av] : Array(6).fill('📖');
+  var stars  = Array(NIVEAUX[idx].star).fill('⭐').join('');
+
+  var logRows = log.slice(-6).reverse().map(function(l) {
+    return '<div style="display:flex;justify-content:space-between;padding:.3rem .6rem;font-size:.82rem;border-bottom:1px solid #1A3A5C;">' +
+      '<span style="color:#A8CADA;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + l.label + '</span>' +
+      '<span style="color:#7BC4E8;font-weight:700;margin-left:8px;">+' + l.montant + ' XP</span></div>';
+  }).join('');
+
+  var niveauGrid = NIVEAUX.map(function(n, i) {
+    return '<div style="text-align:center;flex:1;">' +
+      '<div style="font-size:1.1rem;">' + (i <= idx ? emojis[i] : '⬜') + '</div>' +
+      '<div style="font-size:.6rem;color:' + (i <= idx ? '#7BC4E8' : '#2A4A6A') + ';">Niv.' + (i+1) + '</div>' +
+      '</div>';
+  }).join('');
+
+  document.getElementById('xp-profil-card').innerHTML =
+    '<div style="background:#0D2137;border:1px solid #2E6DA4;border-radius:12px;overflow:hidden;margin-bottom:1.5rem;">' +
+    /* Header */
+    '<div style="background:#0A1A2E;padding:1.4rem 1.6rem;display:flex;align-items:center;gap:1.2rem;">' +
+    '<div style="font-size:3.2rem;line-height:1;">' + emojis[idx] + '</div>' +
+    '<div style="flex:1;">' +
+    '<div style="font-size:.7rem;color:#7BC4E8;letter-spacing:.12em;text-transform:uppercase;font-weight:600;">' + (av ? (avNames[av]||av) : 'Sans profil') + '</div>' +
+    '<div style="font-size:1.4rem;font-weight:700;color:#EAF1F8;font-family:Playfair Display,serif;">' + titres[idx] + '</div>' +
+    '<div style="font-size:1rem;margin-top:.2rem;">' + stars + '</div>' +
+    '</div>' +
+    '<div style="text-align:right;">' +
+    '<div style="font-size:2.2rem;font-weight:700;color:#7BC4E8;line-height:1;">' + xp + '</div>' +
+    '<div style="font-size:.68rem;color:#4A7A9B;text-transform:uppercase;letter-spacing:.1em;">XP total</div>' +
+    '</div></div>' +
+    /* Barre + grille */
+    '<div style="padding:.8rem 1.6rem 1rem;">' +
+    '<div style="display:flex;justify-content:space-between;font-size:.76rem;margin-bottom:.3rem;">' +
+    (next ? '<span style="color:#A8CADA;">Prochain niveau à ' + next.min + ' XP</span>' : '<span style="color:#FFD700;">Niveau maximum !</span>') +
+    '<span style="color:#4A7A9B;">' + pct + '%</span></div>' +
+    '<div style="background:#1A3A5C;border-radius:4px;height:8px;overflow:hidden;">' +
+    '<div style="width:' + pct + '%;height:100%;background:linear-gradient(90deg,#2E6DA4,#7BC4E8);border-radius:4px;transition:width .6s;"></div></div>' +
+    '<div style="display:flex;justify-content:space-between;margin-top:.9rem;">' + niveauGrid + '</div>' +
+    '</div>' +
+    /* Journal */
+    (log.length > 0 ?
+      '<div style="border-top:1px solid #1A3A5C;">' +
+      '<div style="padding:.4rem 1rem .25rem;font-size:.67rem;color:#4A7A9B;text-transform:uppercase;letter-spacing:.1em;background:#0A1A2E;">Journal d\'expérience</div>' +
+      logRows + '</div>' : '') +
+    '</div>';
+})();
+</script>
+<hr>
+</section>
 <section id="mon-point-de-vue" class="level2">
 <h2 class="anchored" data-anchor-id="mon-point-de-vue">Mon point de vue</h2>
 <div id="profil-avatar" style="margin-bottom:2rem;"></div>
@@ -1090,6 +1172,7 @@ function genererRapport() {
 </div>
   </div>
 </footer>
+<script src="assets/personnage-xp.js"></script>
 
 
 
